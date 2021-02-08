@@ -1,0 +1,533 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+
+
+	<ThoughtDef>
+		<defName>VSIE_BondedPetButcheredOpinion</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_ButheredMyBondedPet</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_ButheredMyBondedPet</workerClass>
+		<taleDef>VSIE_BondedPetButchered</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{BUTCHER_nameDef} butchered my bonded pet {VICTIM_nameDef}, I will never forgive {BUTCHER_objective}</label>
+				<baseOpinionOffset>-35</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef>
+		<defName>VSIE_BondedPetButchered</defName>
+		<label>bonded pet butchered</label>
+		<taleClass>VanillaSocialInteractionsExpanded.Tale_AntagonistAndVictimPawns</taleClass>
+		<type>Expirable</type>
+		<usableForArt>false</usableForArt>
+		<maxPerPawn>1</maxPerPawn>
+		<expireDays>200</expireDays>
+	</TaleDef>
+
+	<ThoughtDef>
+		<defName>VSIE_ExposedCorpseOfMyFriendOpinion</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_ExposedCorpseOfMyFriend</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_ExposedCorpseOfMyFriend</workerClass>
+		<taleDef>VSIE_ExposedCorpseOfMyFriend</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{ANTAGONIST_nameDef} dug up and exposed the corpse of my {0} {VICTIM_nameDef}, I will always despise {ANTAGONIST_objective} for this</label>
+				<baseOpinionOffset>-45</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef>
+		<defName>VSIE_ExposedCorpseOfMyFriend</defName>
+		<label>exposed corpse of my friend</label>
+		<taleClass>VanillaSocialInteractionsExpanded.Tale_AntagonistAndVictimPawns</taleClass>
+		<type>Expirable</type>
+		<usableForArt>false</usableForArt>
+		<maxPerPawn>1</maxPerPawn>
+		<expireDays>200</expireDays>
+	</TaleDef>
+
+	<ThoughtDef>
+		<defName>VSIE_IngestedHumanFlesh</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_IngestedHumanFlesh</workerClass>
+		<taleDef>VSIE_IngestedHumanFlesh</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{ANTAGONIST_nameDef} ate human flesh, I will always be afraid of {ANTAGONIST_objective}</label>
+				<baseOpinionOffset>-25</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef>
+		<defName>VSIE_IngestedHumanFlesh</defName>
+		<label>ingested human flesh</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+		<type>Expirable</type>
+		<usableForArt>false</usableForArt>
+		<maxPerPawn>1</maxPerPawn>
+		<expireDays>200</expireDays>
+	</TaleDef>
+
+	<ThoughtDef>
+		<defName>VSIE_BingedFood</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_OnePawn_Situation</workerClass>
+		<taleDef>VSIE_BingedFood</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{ANTAGONIST_nameDef} binged on food. How wasteful</label>
+				<baseOpinionOffset>-10</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef>
+		<defName>VSIE_BingedFood</defName>
+		<label>binged food</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+		<type>Expirable</type>
+		<usableForArt>false</usableForArt>
+		<maxPerPawn>1</maxPerPawn>
+		<expireDays>200</expireDays>
+	</TaleDef>
+
+	<ThoughtDef>
+		<defName>VSIE_BingedDrug</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_OnePawn_Situation</workerClass>
+		<taleDef>VSIE_BingedDrug</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{ANTAGONIST_nameDef} binged on drugs. I don’t need a junkie in my life</label>
+				<baseOpinionOffset>-10</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef>
+		<defName>VSIE_BingedDrug</defName>
+		<label>binged drug</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+		<type>Expirable</type>
+		<usableForArt>false</usableForArt>
+		<maxPerPawn>1</maxPerPawn>
+		<expireDays>200</expireDays>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_HideInRoom</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_OnePawn_Situation</workerClass>
+		<taleDef>VSIE_HideInRoom</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{ANTAGONIST_nameDef} was hiding in {ANTAGONIST_possessive} room. Weirdo</label>
+				<baseOpinionOffset>-5</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef>
+		<defName>VSIE_HideInRoom</defName>
+		<label>was hiding in their room</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+		<type>Expirable</type>
+		<usableForArt>false</usableForArt>
+		<maxPerPawn>1</maxPerPawn>
+		<expireDays>200</expireDays>
+	</TaleDef>
+
+	<ThoughtDef>
+		<defName>VSIE_WanderedInSaddness</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_OnePawn_Situation</workerClass>
+		<taleDef>VSIE_WanderedInSaddness</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{ANTAGONIST_nameDef} wandered in sadness. I feel pity for {ANTAGONIST_objective}</label>
+				<baseOpinionOffset>-5</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+	
+	<TaleDef>
+		<defName>VSIE_WanderedInSaddness</defName>
+		<label>wandered in sadness</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+		<type>Expirable</type>
+		<usableForArt>false</usableForArt>
+		<maxPerPawn>1</maxPerPawn>
+		<expireDays>200</expireDays>
+	</TaleDef>
+
+	<ThoughtDef>
+		<defName>VSIE_WentIntoSadisticRage</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_OnePawn_Situation</workerClass>
+		<taleDef>VSIE_WentIntoSadisticRage</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{ANTAGONIST_nameDef} went into sadistic rage. It’s absolutely disgusting</label>
+				<baseOpinionOffset>-20</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef>
+		<defName>VSIE_WentIntoSadisticRage</defName>
+		<label>went into sadistic rage</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+		<type>Expirable</type>
+		<usableForArt>false</usableForArt>
+		<maxPerPawn>1</maxPerPawn>
+		<expireDays>200</expireDays>
+	</TaleDef>
+
+	<ThoughtDef>
+		<defName>VSIE_ThrewTantrum</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_OnePawn_Situation</workerClass>
+		<taleDef>VSIE_ThrewTantrum</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{ANTAGONIST_nameDef} threw a tantrum. {ANTAGONIST_objective} need to be taught some self control</label>
+				<baseOpinionOffset>-10</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef>
+		<defName>VSIE_ThrewTantrum</defName>
+		<label>threw a tantrum</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+		<type>Expirable</type>
+		<usableForArt>false</usableForArt>
+		<maxPerPawn>1</maxPerPawn>
+		<expireDays>200</expireDays>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_WentBerserk</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_OnePawn_Situation</workerClass>
+		<taleDef>VSIE_WentBerserk</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{ANTAGONIST_nameDef} went berserk. I can never feel safe around {ANTAGONIST_objective}</label>
+				<baseOpinionOffset>-20</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef>
+		<defName>VSIE_WentBerserk</defName>
+		<label>went berserk</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+		<type>Expirable</type>
+		<usableForArt>false</usableForArt>
+		<maxPerPawn>1</maxPerPawn>
+		<expireDays>200</expireDays>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_WentOnFireStartingSpree</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_OnePawn_Situation</workerClass>
+		<taleDef>VSIE_WentOnFireStartingSpree</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{ANTAGONIST_nameDef} went on a fire starting spree. It was so close and everything we know would have turned to ash. How can I forgive that?</label>
+				<baseOpinionOffset>-20</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef>
+		<defName>VSIE_WentOnFireStartingSpree</defName>
+		<label>went on a fire starting spree</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+		<type>Expirable</type>
+		<usableForArt>false</usableForArt>
+		<maxPerPawn>1</maxPerPawn>
+		<expireDays>200</expireDays>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_WentOnMurderousRage</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_OnePawn_Situation</workerClass>
+		<taleDef>VSIE_WentOnMurderousRage</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{ANTAGONIST_nameDef} went on a murderous rage. What if I’m {ANTAGONIST_possessive} next target?</label>
+				<baseOpinionOffset>-85</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef>
+		<defName>VSIE_WentOnMurderousRage</defName>
+		<label>went on murderous rage</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+		<type>Expirable</type>
+		<usableForArt>false</usableForArt>
+		<maxPerPawn>1</maxPerPawn>
+		<expireDays>200</expireDays>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_RanWild</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_OnePawn_Situation</workerClass>
+		<taleDef>VSIE_RanWild</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{ANTAGONIST_nameDef} ran wild. Weirdo</label>
+				<baseOpinionOffset>-10</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef>
+		<defName>VSIE_RanWild</defName>
+		<label>ran wild</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+		<type>Expirable</type>
+		<usableForArt>false</usableForArt>
+		<maxPerPawn>1</maxPerPawn>
+		<expireDays>200</expireDays>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_InsultedMe</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_AntagonistAndVictim_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_AntagonistAndVictim_Situation</workerClass>
+		<taleDef>VSIE_InsultedMe</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{ANTAGONIST_nameDef} insulted me. Words cut deeper than daggers</label>
+				<baseOpinionOffset>-10</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef>
+		<defName>VSIE_InsultedMe</defName>
+		<label>insulted me</label>
+		<taleClass>VanillaSocialInteractionsExpanded.Tale_AntagonistAndVictimPawns</taleClass>
+		<type>Expirable</type>
+		<usableForArt>false</usableForArt>
+		<maxPerPawn>1</maxPerPawn>
+		<expireDays>200</expireDays>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_SlaughteredAnimalInRage</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_OnePawn_Situation</workerClass>
+		<taleDef>VSIE_SlaughteredAnimalInRage</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{ANTAGONIST_nameDef} slaughtered our animal in a blind rage. I despise {ANTAGONIST_objective}</label>
+				<baseOpinionOffset>-10</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef>
+		<defName>VSIE_SlaughteredAnimalInRage</defName>
+		<label>slaughtered an animal in a rage</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+		<type>Expirable</type>
+		<usableForArt>false</usableForArt>
+		<maxPerPawn>1</maxPerPawn>
+		<expireDays>200</expireDays>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_RebuffedMe</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_AntagonistAndVictim_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_AntagonistAndVictim_Situation</workerClass>
+		<taleDef>VSIE_RebuffedMe</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{ANTAGONIST_nameDef} rebuffed me. I thought {ANTAGONIST_objective} were the one</label>
+				<baseOpinionOffset>-10</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef>
+		<defName>VSIE_RebuffedMe</defName>
+		<label>rebuffed me</label>
+		<taleClass>VanillaSocialInteractionsExpanded.Tale_AntagonistAndVictimPawns</taleClass>
+		<type>Expirable</type>
+		<usableForArt>false</usableForArt>
+		<maxPerPawn>1</maxPerPawn>
+		<expireDays>200</expireDays>
+	</TaleDef>
+
+	<ThoughtDef>
+		<defName>VSIE_InducedPrisonerToEscape</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_OnePawn_Situation</workerClass>
+		<taleDef>VSIE_InducedPrisonerToEscape</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{ANTAGONIST_nameDef} broke our prisoners free. It could have ended very badly!</label>
+				<baseOpinionOffset>-10</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef>
+		<defName>VSIE_InducedPrisonerToEscape</defName>
+		<label>induced prisoner to escape</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+		<type>Expirable</type>
+		<usableForArt>false</usableForArt>
+		<maxPerPawn>1</maxPerPawn>
+		<expireDays>200</expireDays>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_TamedThrumbo</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_OnePawn_Situation</workerClass>
+		<taleDef>VSIE_TamedThrumbo</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{ANTAGONIST_nameDef} tamed a thrumbo. What a legendary feat!</label>
+				<baseOpinionOffset>15</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef>
+		<defName>VSIE_TamedThrumbo</defName>
+		<label>tamed a thrumbo</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+		<type>Expirable</type>
+		<usableForArt>false</usableForArt>
+		<maxPerPawn>1</maxPerPawn>
+		<expireDays>200</expireDays>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_WasPreviouslyOurEnemy</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_OnePawn_Situation</workerClass>
+		<taleDef>VSIE_WasPreviouslyOurEnemy</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{ANTAGONIST_nameDef} was previously our enemy. I don't trust {ANTAGONIST_objective}</label>
+				<baseOpinionOffset>-25</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef>
+		<defName>VSIE_WasPreviouslyOurEnemy</defName>
+		<label>was previously our enemy</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+		<type>Expirable</type>
+		<usableForArt>false</usableForArt>
+		<maxPerPawn>1</maxPerPawn>
+		<expireDays>200</expireDays>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_WasBadlyInjured</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_OnePawn_Situation</workerClass>
+		<taleDef>VSIE_WasBadlyInjured</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{ANTAGONIST_nameDef} was badly injured in battle. I admire {ANTAGONIST_possessive} courage</label>
+				<baseOpinionOffset>5</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef>
+		<defName>VSIE_WasBadlyInjured</defName>
+		<label>was badly injured</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+		<type>Expirable</type>
+		<usableForArt>false</usableForArt>
+		<maxPerPawn>1</maxPerPawn>
+		<expireDays>200</expireDays>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_DidNotAttendWedding</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_AntagonistAndVictim_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_AntagonistAndVictim_Situation</workerClass>
+		<taleDef>VSIE_DidNotAttendWedding</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{ANTAGONIST_nameDef} didn't attend our wedding ceremony! Was it so hard to come and just be with me on that day?</label>
+				<baseOpinionOffset>-5</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef>
+		<defName>VSIE_DidNotAttendWedding</defName>
+		<label>didn't attend our wedding ceremony</label>
+		<taleClass>VanillaSocialInteractionsExpanded.Tale_AntagonistAndVictimPawns</taleClass>
+		<type>Expirable</type>
+		<usableForArt>false</usableForArt>
+		<maxPerPawn>1</maxPerPawn>
+		<expireDays>200</expireDays>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_AttendedMyWedding</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_AntagonistAndVictim_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_AntagonistAndVictim_Situation</workerClass>
+		<taleDef>VSIE_AttendedMyWedding</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{ANTAGONIST_nameDef} attended my wedding</label>
+				<baseOpinionOffset>5</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef>
+		<defName>VSIE_AttendedMyWedding</defName>
+		<label>attended my wedding</label>
+		<taleClass>VanillaSocialInteractionsExpanded.Tale_AntagonistAndVictimPawns</taleClass>
+		<type>Expirable</type>
+		<usableForArt>false</usableForArt>
+		<maxPerPawn>1</maxPerPawn>
+		<expireDays>200</expireDays>
+	</TaleDef>
+</Defs>
