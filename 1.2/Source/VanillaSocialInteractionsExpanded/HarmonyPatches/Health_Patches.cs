@@ -56,4 +56,29 @@ namespace VanillaSocialInteractionsExpanded
 			return false;
 		}
 	}
+
+
+	[HarmonyPatch(typeof(TendUtility), "DoTend")]
+	public static class DoTend_Patch
+	{
+		private static void Prefix(Pawn doctor, Pawn patient, Medicine medicine, out bool __state)
+		{
+			if (patient.health.HasHediffsNeedingTend())
+            {
+				__state = true;
+            }
+			else
+            {
+				__state = false;
+            }
+		}
+
+		private static void Postfix(Pawn doctor, Pawn patient, Medicine medicine, bool __state)
+		{
+			if (__state && !patient.health.HasHediffsNeedingTend())
+            {
+				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_SavedMeFromMyWounds, doctor, patient);
+            }
+		}
+	}
 }

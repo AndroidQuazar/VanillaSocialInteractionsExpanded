@@ -53,4 +53,44 @@ namespace VanillaSocialInteractionsExpanded
 			__result = toils;
 		}
 	}
+
+	[HarmonyPatch(typeof(JobDriver_TakeToBed), "MakeNewToils")]
+	public class JobDriver_TakeToBed_MakeNewToils
+	{
+		private static void Postfix(ref IEnumerable<Toil> __result)
+		{
+			List<Toil> toils = __result.ToList();
+			var toil = new Toil();
+			toil.initAction = delegate ()
+			{
+				var actor = toil.actor;
+				var takee = actor.CurJob.targetA.Thing as Pawn;
+				if (actor.CurJobDef.makeTargetPrisoner && takee.IsPrisonerOfColony)
+				{
+					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_ArrestedMe, actor, takee);
+				}
+			};
+			toils.Add(toil);
+			__result = toils;
+		}
+	}
+
+	[HarmonyPatch(typeof(JobDriver_Resurrect), "MakeNewToils")]
+	public class JobDriver_Resurrect_MakeNewToils
+	{
+		private static void Postfix(ref IEnumerable<Toil> __result)
+		{
+			List<Toil> toils = __result.ToList();
+			var toil = new Toil();
+			toil.initAction = delegate ()
+			{
+				var actor = toil.actor;
+				var resurrected = (actor.CurJob.targetA.Thing as Corpse).InnerPawn;
+				Log.Message(actor + " - " + resurrected);
+				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_ResurrectedMe, actor, resurrected);
+			};
+			toils.Insert(toils.Count - 1, toil);
+			__result = toils;
+		}
+	}
 }

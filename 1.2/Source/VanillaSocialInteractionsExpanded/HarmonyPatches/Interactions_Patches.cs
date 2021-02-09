@@ -21,6 +21,11 @@ namespace VanillaSocialInteractionsExpanded
                 {
 					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_InsultedMe, ___pawn, recipient);
 				}
+				else if (intDef == InteractionDefOf.Chitchat || intDef == InteractionDefOf.DeepTalk)
+                {
+					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WeHadNiceChat, ___pawn, recipient);
+					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WeHadNiceChat, recipient, ___pawn);
+				}
 			}
 		}
 	}
@@ -40,6 +45,15 @@ namespace VanillaSocialInteractionsExpanded
 			{
 				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_TamedThrumbo, recruiter);
 			}
+		}
+	}
+
+	[HarmonyPatch(typeof(InteractionWorker_Breakup), "Interacted")]
+	public class Interacted_Patch
+	{
+		private static void Postfix(Pawn initiator, Pawn recipient)
+		{
+			TaleRecorder.RecordTale(VSIE_DefOf.VSIE_InsultedMe, recipient, initiator);
 		}
 	}
 }

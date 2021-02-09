@@ -12,9 +12,11 @@ namespace VanillaSocialInteractionsExpanded
 	[StaticConstructorOnStartup]
 	internal static class HarmonyInit
 	{
+		public static Harmony harmony;
 		static HarmonyInit()
 		{
-			new Harmony("OskarPotocki.VanillaSocialInteractionsExpanded").PatchAll();
+			harmony = new Harmony("OskarPotocki.VanillaSocialInteractionsExpanded");
+			harmony.PatchAll();
 		}
 	}
 

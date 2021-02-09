@@ -530,4 +530,244 @@
 		<maxPerPawn>1</maxPerPawn>
 		<expireDays>200</expireDays>
 	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_RemovedPrisonersOrgans</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_OnePawn_Situation</workerClass>
+		<taleDef>VSIE_RemovedPrisonersOrgans</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{ANTAGONIST_nameDef} removed the prisoner's organs! How can a person be capable of such a thing?</label>
+				<baseOpinionOffset>-10</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef>
+		<defName>VSIE_RemovedPrisonersOrgans</defName>
+		<label>removed the prisoner's organs</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+		<type>Expirable</type>
+		<usableForArt>false</usableForArt>
+		<maxPerPawn>1</maxPerPawn>
+		<expireDays>200</expireDays>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_FailedMedicalOperationAndKilled</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_OnePawn_Situation</workerClass>
+		<taleDef>VSIE_FailedMedicalOperationAndKilled</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{ANTAGONIST_nameDef} failed a medical operation and killed one of us</label>
+				<baseOpinionOffset>-10</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef>
+		<defName>VSIE_FailedMedicalOperationAndKilled</defName>
+		<label>failed a medical operation and killed one of us</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+		<type>Expirable</type>
+		<usableForArt>false</usableForArt>
+		<maxPerPawn>1</maxPerPawn>
+		<expireDays>200</expireDays>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_TamedMe</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_AntagonistAndVictim_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_AntagonistAndVictim_Situation</workerClass>
+		<taleDef>VSIE_TamedMe</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{ANTAGONIST_nameDef} tamed me, I will always be glad of the wonders they've shown me</label>
+				<baseOpinionOffset>25</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef>
+		<defName>VSIE_TamedMe</defName>
+		<label>tamed me</label>
+		<taleClass>VanillaSocialInteractionsExpanded.Tale_AntagonistAndVictimPawns</taleClass>
+		<type>Expirable</type>
+		<usableForArt>false</usableForArt>
+		<maxPerPawn>1</maxPerPawn>
+		<expireDays>200</expireDays>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_ArrestedMe</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_AntagonistAndVictim_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_AntagonistAndVictim_Situation</workerClass>
+		<taleDef>VSIE_ArrestedMe</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{ANTAGONIST_nameDef} arrested me</label>
+				<baseOpinionOffset>-10</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef>
+		<defName>VSIE_ArrestedMe</defName>
+		<label>arrested me</label>
+		<taleClass>VanillaSocialInteractionsExpanded.Tale_AntagonistAndVictimPawns</taleClass>
+		<type>Expirable</type>
+		<usableForArt>false</usableForArt>
+		<maxPerPawn>1</maxPerPawn>
+		<expireDays>200</expireDays>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_ResurrectedMe</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_AntagonistAndVictim_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_AntagonistAndVictim_Situation</workerClass>
+		<taleDef>VSIE_ResurrectedMe</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{ANTAGONIST_nameDef} resurrected me</label>
+				<baseOpinionOffset>25</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef>
+		<defName>VSIE_ResurrectedMe</defName>
+		<label>resurrected me</label>
+		<taleClass>VanillaSocialInteractionsExpanded.Tale_AntagonistAndVictimPawns</taleClass>
+		<type>Expirable</type>
+		<usableForArt>false</usableForArt>
+		<maxPerPawn>1</maxPerPawn>
+		<expireDays>200</expireDays>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_BrokeUpWithMe</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_AntagonistAndVictim_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_AntagonistAndVictim_Situation</workerClass>
+		<taleDef>VSIE_BrokeUpWithMe</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{ANTAGONIST_nameDef} broke up with me. Will I ever find someone else?</label>
+				<baseOpinionOffset>-10</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef>
+		<defName>VSIE_BrokeUpWithMe</defName>
+		<label>resurrected me</label>
+		<taleClass>VanillaSocialInteractionsExpanded.Tale_AntagonistAndVictimPawns</taleClass>
+		<type>Expirable</type>
+		<usableForArt>false</usableForArt>
+		<maxPerPawn>1</maxPerPawn>
+		<expireDays>200</expireDays>
+	</TaleDef>
+
+	<ThoughtDef>
+		<defName>VSIE_WeHadNiceChat</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_AntagonistAndVictim_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_AntagonistAndVictim_Situation</workerClass>
+		<taleDef>VSIE_WeHadNiceChat</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{ANTAGONIST_nameDef} and I had a nice chat. It feels like we can talk about anything</label>
+				<baseOpinionOffset>10</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef>
+		<defName>VSIE_WeHadNiceChat</defName>
+		<label>we had a nice chat</label>
+		<taleClass>VanillaSocialInteractionsExpanded.Tale_AntagonistAndVictimPawns</taleClass>
+		<type>Expirable</type>
+		<usableForArt>false</usableForArt>
+		<maxPerPawn>1</maxPerPawn>
+		<expireDays>200</expireDays>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_WeHadSocialFight</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_AntagonistAndVictim_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_AntagonistAndVictim_Situation</workerClass>
+		<taleDef>VSIE_WeHadSocialFight</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{ANTAGONIST_nameDef} and I had a social fight</label>
+				<baseOpinionOffset>-10</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef>
+		<defName>VSIE_WeHadSocialFight</defName>
+		<label>we had a social fight</label>
+		<taleClass>VanillaSocialInteractionsExpanded.Tale_AntagonistAndVictimPawns</taleClass>
+		<type>Expirable</type>
+		<usableForArt>false</usableForArt>
+		<maxPerPawn>1</maxPerPawn>
+		<expireDays>200</expireDays>
+	</TaleDef>
+
+	<ThoughtDef>
+		<defName>VSIE_SavedMeFromMyWounds</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_AntagonistAndVictim_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_AntagonistAndVictim_Situation</workerClass>
+		<taleDef>VSIE_SavedMeFromMyWounds</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{ANTAGONIST_nameDef} saved me from my wounds. I will always be in {ANTAGONIST_objective} debt</label>
+				<baseOpinionOffset>10</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef>
+		<defName>VSIE_SavedMeFromMyWounds</defName>
+		<label>saved me from my wounds</label>
+		<taleClass>VanillaSocialInteractionsExpanded.Tale_AntagonistAndVictimPawns</taleClass>
+		<type>Expirable</type>
+		<usableForArt>false</usableForArt>
+		<maxPerPawn>1</maxPerPawn>
+		<expireDays>200</expireDays>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_HasBeenMyFriendSinceChildhood</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_AntagonistAndVictim_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_AntagonistAndVictim_Situation</workerClass>
+		<taleDef>VSIE_HasBeenMyFriendSinceChildhood</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{ANTAGONIST_nameDef} has been my friend since childhood, we have so much in common that no one can separate us</label>
+				<baseOpinionOffset>25</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef>
+		<defName>VSIE_HasBeenMyFriendSinceChildhood</defName>
+		<label>has been my friend since childhood</label>
+		<taleClass>VanillaSocialInteractionsExpanded.Tale_AntagonistAndVictimPawns</taleClass>
+		<type>Expirable</type>
+		<usableForArt>false</usableForArt>
+		<maxPerPawn>1</maxPerPawn>
+		<expireDays>200</expireDays>
+	</TaleDef>
 </Defs>

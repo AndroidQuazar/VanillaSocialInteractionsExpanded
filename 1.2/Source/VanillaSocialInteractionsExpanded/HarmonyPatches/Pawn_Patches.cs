@@ -19,6 +19,33 @@ namespace VanillaSocialInteractionsExpanded
 			{
 				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WasPreviouslyOurEnemy, __instance);
 			}
+			if (__instance.IsWildMan() && recruiter != null)
+            {
+				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_TamedMe, recruiter, __instance);
+            }
+		}
+	}
+
+	[HarmonyPatch(typeof(Pawn), "Kill")]
+	public static class Pawn_Kill_Patch
+	{
+		private static void Prefix(Pawn __instance)
+		{
+			if (CheckSurgeryFail_Patch._patient != null)
+            {
+				Log.Message($"{CheckSurgeryFail_Patch._patient}, {CheckSurgeryFail_Patch._surgeon}, __instance == CheckSurgeryFail_Patch._patient: {__instance == CheckSurgeryFail_Patch._patient} " +
+				$"&& CheckSurgeryFail_Patch._surgeon.IsColonist: {CheckSurgeryFail_Patch._surgeon.IsColonist} && __instance.IsColonist: {__instance.IsColonist}");
+			}
+			else
+            {
+				Log.Message("Killing: " + __instance);
+            }
+			if (__instance == CheckSurgeryFail_Patch._patient && CheckSurgeryFail_Patch._surgeon.IsColonist && __instance.IsColonist)
+			{
+				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_FailedMedicalOperationAndKilled, CheckSurgeryFail_Patch._surgeon);
+				CheckSurgeryFail_Patch._patient = null;
+				CheckSurgeryFail_Patch._surgeon = null;
+			}
 		}
 	}
 }

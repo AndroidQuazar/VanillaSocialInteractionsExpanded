@@ -45,6 +45,7 @@
     <Compile Include="HarmonyPatches\Interactions_Patches.cs" />
     <Compile Include="HarmonyPatches\Health_Patches.cs" />
     <Compile Include="HarmonyPatches\Lord_Patches.cs" />
+    <Compile Include="HarmonyPatches\Recipe_Patches.cs" />
     <Compile Include="HarmonyPatches\Thought_Patches.cs" />
     <Compile Include="HarmonyPatches\Pawn_Patches.cs" />
     <Compile Include="HarmonyPatches\MentalBreaks_Patches.cs" />

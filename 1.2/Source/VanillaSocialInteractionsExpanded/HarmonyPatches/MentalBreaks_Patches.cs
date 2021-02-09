@@ -37,6 +37,16 @@ namespace VanillaSocialInteractionsExpanded
 		}
 	}
 
+	[HarmonyPatch(typeof(MentalState_SocialFighting), "PostEnd")]
+	public class PostEnd_Patch
+	{
+		private static void Postfix(MentalState_SocialFighting __instance)
+		{
+			TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WeHadSocialFight, __instance.pawn, __instance.otherPawn);
+			TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WeHadSocialFight, __instance.otherPawn, __instance.pawn);
+		}
+	}
+
 	[HarmonyPatch(typeof(MentalStateHandler), "TryStartMentalState")]
 	public class TryStartMentalState_Patch
 	{
