@@ -12,15 +12,15 @@ namespace VanillaSocialInteractionsExpanded
 	{
         public override string PostProcessLabel(Pawn p, string label)
         {
-			Predicate<Tale_AntagonistAndVictimPawns> validator = delegate (Tale_AntagonistAndVictimPawns t)
+			Predicate<Tale_DoublePawn> validator = delegate (Tale_DoublePawn t)
 			{
-				return p.relations.OpinionOf(t.victimData.pawn) >= 20;
+				return p.relations.OpinionOf(t.firstPawnData.pawn) >= 20;
 			};
-			var tale = VSIE_Utils.GetLatestAntagonistAndVictimTale(def.taleDef, validator);
+			var tale = VSIE_Utils.GetLatestDoublePawnTale(def.taleDef, validator);
 			if (tale != null)
 			{
-				return label.Formatted(tale.victimData.pawn.relations.DirectRelations.Where(x => x.otherPawn == p).OrderBy(y => y.def.opinionOffset).FirstOrDefault()
-					.def.GetGenderSpecificLabel(tale.victimData.pawn), tale.antagonistData.pawn.Named("ANTAGONIST"), tale.victimData.pawn.Named("VICTIM"), p.Named("PAWN"));
+				return label.Formatted(tale.firstPawnData.pawn.relations.DirectRelations.Where(x => x.otherPawn == p).OrderBy(y => y.def.opinionOffset).FirstOrDefault()
+					.def.GetGenderSpecificLabel(tale.firstPawnData.pawn), tale.secondPawnData.pawn.Named("OTHERPAWN"), tale.firstPawnData.pawn.Named("VICTIM"), p.Named("PAWN"));
 			}
 			return base.PostProcessLabel(p, label);
 		}
@@ -34,11 +34,11 @@ namespace VanillaSocialInteractionsExpanded
 			{
 				return false;
 			}
-			Predicate<Tale_AntagonistAndVictimPawns> validator = delegate (Tale_AntagonistAndVictimPawns t)
+			Predicate<Tale_DoublePawn> validator = delegate (Tale_DoublePawn t)
 			{
-				return other == t.antagonistData.pawn && p.relations.OpinionOf(t.victimData.pawn) >= 20;
+				return other == t.secondPawnData.pawn && p.relations.OpinionOf(t.firstPawnData.pawn) >= 20;
 			};
-			var tale = VSIE_Utils.GetLatestAntagonistAndVictimTale(def.taleDef, validator);
+			var tale = VSIE_Utils.GetLatestDoublePawnTale(def.taleDef, validator);
 			if (tale != null)
 			{
 				return true;

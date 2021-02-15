@@ -24,12 +24,16 @@ namespace VanillaSocialInteractionsExpanded
 	[HarmonyPatch(typeof(TaleRecorder), "RecordTale")]
 	public class RecordTale_Patch
 	{
-		private static void Postfix(Tale __result)
+		private static void Postfix(Tale __result, TaleDef def, params object[] args)
 		{
 			if (__result != null)
 			{
-				Log.Message($"Recording new tale: {__result}");
+				Log.Message($"{def.defName} Recording new tale: {__result}");
 			}
+			else
+            {
+				Log.Message("Couldn't create new tale: " + def + " - " + args);
+            }
 		}
 	}
 }

@@ -22,7 +22,7 @@ namespace VanillaSocialInteractionsExpanded
 				Pawn otherPawn = directPawnRelation.otherPawn;
 				if (directPawnRelation.def == PawnRelationDefOf.Bond && !otherPawn.Dead && otherPawn.Spawned && otherPawn.Faction == Faction.OfPlayer)
 				{
-					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_BondedPetButchered, butcher, p);
+					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_BondedPetButchered, p, butcher);
 				}
 			}
 		}

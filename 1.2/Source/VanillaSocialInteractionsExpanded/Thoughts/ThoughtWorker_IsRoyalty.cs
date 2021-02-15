@@ -8,7 +8,7 @@ using Verse;
 
 namespace VanillaSocialInteractionsExpanded
 {
-	public class ThoughtWorker_AntagonistAndVictim_Situation : ThoughtWorker
+	public class ThoughtWorker_IsRoyalty : ThoughtWorker
 	{
 		protected override ThoughtState CurrentSocialStateInternal(Pawn p, Pawn other)
 		{
@@ -20,18 +20,25 @@ namespace VanillaSocialInteractionsExpanded
 			{
 				return false;
 			}
-
-			Predicate<Tale_AntagonistAndVictimPawns> validator = delegate (Tale_AntagonistAndVictimPawns t)
-			{
-				return p == t.victimData.pawn && other == t.antagonistData.pawn;
-			};
-
-			var tale = VSIE_Utils.GetLatestAntagonistAndVictimTale(this.def.taleDef, validator);			
-			if (tale != null)
+			if (IsRoyalty(p, other) && Rand.ChanceSeeded(0.1f, p.thingIDNumber))
             {
 				return true;
             }
 			return false;
 		}
+
+		public bool IsRoyalty(Pawn pawn, Pawn other)
+        {
+			var pawnTitle = pawn.royalty.MostSeniorTitle;
+			var otherTitle = other.royalty.MostSeniorTitle;
+			if (otherTitle != null)
+            {
+				if (pawnTitle is null || otherTitle.def.seniority > pawnTitle.def.seniority)
+				{
+					return true;
+				}
+			}
+			return false;
+        }
 	}
 }

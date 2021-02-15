@@ -9,23 +9,24 @@ using Verse;
 
 namespace VanillaSocialInteractionsExpanded
 {
-	public class Thought_AntagonistAndVictim_Situation : Thought_SituationalSocial
+	public class Thought_TriplePawn_Situation : Thought_SituationalSocial
 	{
 		public override string LabelCap
 		{
 			get
 			{
-				Predicate<Tale_AntagonistAndVictimPawns> validator = delegate (Tale_AntagonistAndVictimPawns t)
+				Predicate<Tale_TriplePawn> validator = delegate (Tale_TriplePawn t)
 				{
-					return pawn == t.victimData.pawn && otherPawn == t.antagonistData.pawn;
+					return pawn == t.firstPawnData.pawn && otherPawn == t.secondPawnData.pawn;
 				};
-				Tale_AntagonistAndVictimPawns latestTale = VSIE_Utils.GetLatestAntagonistAndVictimTale(def.taleDef, validator);
+				Tale_TriplePawn latestTale = VSIE_Utils.GetLatestTriplePawnTale(def.taleDef, validator);
 				if (latestTale != null)
 				{
-					return base.CurStage.label.Formatted(pawn.Named("VICTIM"), otherPawn.Named("ANTAGONIST")).CapitalizeFirst();
+					return base.CurStage.label.Formatted(pawn.Named("PAWN"), otherPawn.Named("SECONDPAWN"), latestTale.thirdPawnData.pawn.Named("THIRDPAWN")).CapitalizeFirst();
 				}
 				return base.LabelCap;
 			}
+
 		}
 		public override float OpinionOffset()
 		{
@@ -33,11 +34,11 @@ namespace VanillaSocialInteractionsExpanded
 			{
 				return 0f;
 			}
-			Predicate<Tale_AntagonistAndVictimPawns> validator = delegate (Tale_AntagonistAndVictimPawns t)
+			Predicate<Tale_TriplePawn> validator = delegate (Tale_TriplePawn t)
 			{
-				return pawn == t.victimData.pawn && otherPawn == t.antagonistData.pawn;
+				return pawn == t.firstPawnData.pawn && otherPawn == t.secondPawnData.pawn;
 			};
-			Tale_AntagonistAndVictimPawns latestTale = VSIE_Utils.GetLatestAntagonistAndVictimTale(def.taleDef, validator);
+			Tale_TriplePawn latestTale = VSIE_Utils.GetLatestTriplePawnTale(def.taleDef, validator);
 
 			if (latestTale != null)
 			{

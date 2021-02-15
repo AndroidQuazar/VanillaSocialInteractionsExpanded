@@ -19,12 +19,12 @@ namespace VanillaSocialInteractionsExpanded
             {
 				if (intDef == InteractionDefOf.Insult)
                 {
-					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_InsultedMe, ___pawn, recipient);
+					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_InsultedMe, recipient, ___pawn);
 				}
 				else if (intDef == InteractionDefOf.Chitchat || intDef == InteractionDefOf.DeepTalk)
                 {
-					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WeHadNiceChat, ___pawn, recipient);
 					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WeHadNiceChat, recipient, ___pawn);
+					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WeHadNiceChat, ___pawn, recipient);
 				}
 			}
 		}
@@ -53,7 +53,7 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Postfix(Pawn initiator, Pawn recipient)
 		{
-			TaleRecorder.RecordTale(VSIE_DefOf.VSIE_InsultedMe, recipient, initiator);
+			TaleRecorder.RecordTale(VSIE_DefOf.VSIE_BrokeUpWithMe, recipient, initiator);
 		}
 	}
 }

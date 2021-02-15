@@ -17,11 +17,11 @@ namespace VanillaSocialInteractionsExpanded
 			{
 				return 0f;
 			}
-			Predicate<Tale_AntagonistAndVictimPawns> validator = delegate (Tale_AntagonistAndVictimPawns tale)
+			Predicate<Tale_DoublePawn> validator = delegate (Tale_DoublePawn tale)
 			{
-				return tale.victimData.pawn.relations.GetDirectRelation(PawnRelationDefOf.Bond, pawn) != null && tale.antagonistData.pawn == otherPawn;
+				return tale.firstPawnData.pawn.relations.GetDirectRelation(PawnRelationDefOf.Bond, pawn) != null && tale.secondPawnData.pawn == otherPawn;
 			};
-			Tale latestTale = VSIE_Utils.GetLatestAntagonistAndVictimTale(def.taleDef, validator);
+			Tale latestTale = VSIE_Utils.GetLatestDoublePawnTale(def.taleDef, validator);
 			if (latestTale != null)
 			{
 				float num = 1f;

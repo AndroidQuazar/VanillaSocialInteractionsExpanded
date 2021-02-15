@@ -21,7 +21,7 @@ namespace VanillaSocialInteractionsExpanded
 		{
 			if (newThought.def == ThoughtDefOf.RebuffedMyRomanceAttempt)
             {
-				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_RebuffedMe, otherPawn, __instance.pawn);
+				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_RebuffedMe, __instance.pawn, otherPawn);
             }
 		}
 	}

@@ -29,11 +29,11 @@ namespace VanillaSocialInteractionsExpanded
             {
 				if (pawn != __instance.firstPawn)
                 {
-					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_AttendedMyWedding, pawn, __instance.firstPawn);
+					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_AttendedMyWedding, __instance.firstPawn, pawn);
 				}
 				else if (pawn != __instance.secondPawn)
                 {
-					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_AttendedMyWedding, pawn, __instance.secondPawn);
+					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_AttendedMyWedding, __instance.secondPawn, pawn);
 				}
 			}
 			foreach (var pawn in __instance.lord.Map.mapPawns.AllPawns.Where(x => x.IsColonist))
@@ -42,11 +42,11 @@ namespace VanillaSocialInteractionsExpanded
                 {
 					if (attendedWedding.Contains(__instance.firstPawn))
                     {
-						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_DidNotAttendWedding, pawn, __instance.firstPawn);
+						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_DidNotAttendWedding, __instance.firstPawn, pawn);
 					}
 					if (attendedWedding.Contains(__instance.secondPawn))
 					{
-						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_DidNotAttendWedding, pawn, __instance.secondPawn);
+						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_DidNotAttendWedding, __instance.secondPawn, pawn);
 					}
 				}
             }

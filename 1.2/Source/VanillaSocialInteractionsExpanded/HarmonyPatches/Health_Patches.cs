@@ -13,14 +13,14 @@ namespace VanillaSocialInteractionsExpanded
 	[HarmonyPatch(typeof(Pawn_HealthTracker), "MakeDowned")]
 	public static class MakeDowned_Patch
 	{
-		private static void Prefix(Pawn ___pawn)
+		private static void Prefix(Pawn ___pawn, DamageInfo? dinfo, Hediff hediff)
 		{
 			if (InCombat(___pawn))
 			{
 				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WasBadlyInjured, ___pawn);
 			}
+			Pawn_Kill_Patch.TryRecordSavedMeFromRaiders(___pawn, dinfo);
 		}
-
 
 		public static HashSet<JobDef> combatJobs = new HashSet<JobDef>
 													{
@@ -75,9 +75,16 @@ namespace VanillaSocialInteractionsExpanded
 
 		private static void Postfix(Pawn doctor, Pawn patient, Medicine medicine, bool __state)
 		{
-			if (__state && !patient.health.HasHediffsNeedingTend())
+			if (__state && !patient.health.HasHediffsNeedingTend() && doctor != null)
             {
-				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_SavedMeFromMyWounds, doctor, patient);
+				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_SavedMeFromMyWounds, patient, doctor);
+				foreach (var pawn in patient.relations.PotentiallyRelatedPawns)
+                {
+					if (pawn.relations.OpinionOf(patient) >= 20f)
+                    {
+
+                    }
+                }
             }
 		}
 	}

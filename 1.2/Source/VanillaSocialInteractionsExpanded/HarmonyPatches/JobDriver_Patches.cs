@@ -20,7 +20,7 @@ namespace VanillaSocialInteractionsExpanded
 			toil.initAction = delegate ()
 			{
 				var actor = toil.actor;
-				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_ExposedCorpseOfMyFriend, actor, (actor.CurJob.GetTarget(TargetIndex.A).Thing as Corpse).InnerPawn);
+				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_ExposedCorpseOfMyFriend, (actor.CurJob.GetTarget(TargetIndex.A).Thing as Corpse).InnerPawn, actor);
 			};
 			toils.Add(toil);
 			__result = toils;
@@ -67,7 +67,7 @@ namespace VanillaSocialInteractionsExpanded
 				var takee = actor.CurJob.targetA.Thing as Pawn;
 				if (actor.CurJobDef.makeTargetPrisoner && takee.IsPrisonerOfColony)
 				{
-					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_ArrestedMe, actor, takee);
+					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_ArrestedMe, takee, actor);
 				}
 			};
 			toils.Add(toil);
@@ -87,7 +87,7 @@ namespace VanillaSocialInteractionsExpanded
 				var actor = toil.actor;
 				var resurrected = (actor.CurJob.targetA.Thing as Corpse).InnerPawn;
 				Log.Message(actor + " - " + resurrected);
-				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_ResurrectedMe, actor, resurrected);
+				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_ResurrectedMe, resurrected, actor);
 			};
 			toils.Insert(toils.Count - 1, toil);
 			__result = toils;

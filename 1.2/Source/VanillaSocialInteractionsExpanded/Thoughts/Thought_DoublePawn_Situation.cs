@@ -9,17 +9,17 @@ using Verse;
 
 namespace VanillaSocialInteractionsExpanded
 {
-	public class Thought_OnePawn_Situation : Thought_SituationalSocial
+	public class Thought_DoublePawn_Situation : Thought_SituationalSocial
 	{
 		public override string LabelCap
 		{
 			get
 			{
-				Predicate<Tale> validator = delegate (Tale tale)
+				Predicate<Tale_DoublePawn> validator = delegate (Tale_DoublePawn t)
 				{
-					return tale.DominantPawn == otherPawn;
+					return pawn == t.firstPawnData.pawn && otherPawn == t.secondPawnData.pawn;
 				};
-				Tale latestTale = VSIE_Utils.GetLatestTale(def.taleDef, validator);
+				Tale_DoublePawn latestTale = VSIE_Utils.GetLatestDoublePawnTale(def.taleDef, validator);
 				if (latestTale != null)
 				{
 					return base.CurStage.label.Formatted(pawn.Named("PAWN"), otherPawn.Named("OTHERPAWN")).CapitalizeFirst();
@@ -33,11 +33,12 @@ namespace VanillaSocialInteractionsExpanded
 			{
 				return 0f;
 			}
-			Predicate<Tale> validator = delegate (Tale tale)
+			Predicate<Tale_DoublePawn> validator = delegate (Tale_DoublePawn t)
 			{
-				return tale.DominantPawn == otherPawn;
+				return pawn == t.firstPawnData.pawn && otherPawn == t.secondPawnData.pawn;
 			};
-			Tale latestTale = VSIE_Utils.GetLatestTale(def.taleDef, validator);
+			Tale_DoublePawn latestTale = VSIE_Utils.GetLatestDoublePawnTale(def.taleDef, validator);
+
 			if (latestTale != null)
 			{
 				float num = 1f;

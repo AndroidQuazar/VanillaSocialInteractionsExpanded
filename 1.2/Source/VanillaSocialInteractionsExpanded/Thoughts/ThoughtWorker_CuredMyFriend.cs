@@ -9,34 +9,34 @@ using Verse;
 
 namespace VanillaSocialInteractionsExpanded
 {
-	public class Thought_ExposedCorpseOfMyFriend : Thought_SituationalSocial
+	public class ThoughtWorker_CuredMyFriend : ThoughtWorker
 	{
-        public override float OpinionOffset()
+        protected override ThoughtState CurrentSocialStateInternal(Pawn p, Pawn other)
         {
-            if (ThoughtUtility.ThoughtNullified(pawn, def))
+            if (!other.RaceProps.Humanlike)
             {
-                return 0f;
+                return false;
             }
-            Predicate<Tale_DoublePawn> validator = delegate (Tale_DoublePawn tale)
+            if (!RelationsUtility.PawnsKnowEachOther(p, other))
             {
-                return otherPawn == tale.secondPawnData?.pawn && OpinionOf(tale.firstPawnData.pawn) >= 20;
+                return false;
+            }
+
+            Predicate<Tale_TriplePawn> validator = delegate (Tale_TriplePawn t)
+            {
+                if (t.firstPawnData is null) Log.Error(t + " hasn't firstPawnData, this shouldn't happen.");
+                if (t.secondPawnData is null) Log.Error(t + " hasn't secondPawnData, this shouldn't happen.");
+                return p == t.firstPawnData.pawn && other == t.secondPawnData.pawn && OpinionOf(p, t.thirdPawnData.pawn) >= 20;
             };
-            Tale latestTale = VSIE_Utils.GetLatestDoublePawnTale(def.taleDef, validator);
-            if (latestTale != null)
+            var tale = VSIE_Utils.GetLatestTriplePawnTale(this.def.taleDef, validator);
+            if (tale != null)
             {
-                float num = 1f;
-                if (latestTale.def.type == TaleType.Expirable)
-                {
-                    float value = (float)latestTale.AgeTicks / (latestTale.def.expireDays * 60000f);
-                    num = Mathf.InverseLerp(1f, def.lerpOpinionToZeroAfterDurationPct, value);
-                }
-                var value2 = base.CurStage.baseOpinionOffset * num;
-                return value2;
+                return true;
             }
-            return 0f;
+            return false;
         }
 
-		public int OpinionOf(Pawn other)
+		public int OpinionOf(Pawn pawn, Pawn other)
 		{
 			if (!other.RaceProps.Humanlike || pawn == other)
 			{

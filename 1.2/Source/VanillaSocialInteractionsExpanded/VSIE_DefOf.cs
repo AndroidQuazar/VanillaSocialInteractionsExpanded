@@ -38,10 +38,13 @@ namespace VanillaSocialInteractionsExpanded
         public static TaleDef VSIE_TamedMe;
         public static TaleDef VSIE_ArrestedMe;
         public static TaleDef VSIE_ResurrectedMe;
+        public static TaleDef VSIE_BrokeUpWithMe;
         public static TaleDef VSIE_WeHadNiceChat;
         public static TaleDef VSIE_WeHadSocialFight;
         public static TaleDef VSIE_SavedMeFromMyWounds;
         public static TaleDef VSIE_HasBeenMyFriendSinceChildhood;
+        public static TaleDef VSIE_SavedMeFromRaiders;
+        public static TaleDef VSIE_StoleMyLover;
 
         public static MentalStateDef SadisticRage;
         public static MentalStateDef BedroomTantrum;

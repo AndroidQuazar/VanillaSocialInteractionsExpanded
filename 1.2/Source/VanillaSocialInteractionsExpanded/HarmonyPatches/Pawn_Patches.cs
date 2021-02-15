@@ -10,6 +10,28 @@ using Verse.AI;
 
 namespace VanillaSocialInteractionsExpanded
 {
+	[HarmonyPatch(typeof(Pawn), "SpawnSetup")]
+	public static class SpawnSetup_Patch
+	{
+		private static void Postfix(Pawn __instance, Map map, bool respawningAfterLoad)
+		{
+			if (!respawningAfterLoad)
+            {
+				var pawnAge = __instance.ageTracker.AgeChronologicalYearsFloat;
+				foreach (var relPawn in __instance.relations.PotentiallyRelatedPawns)
+				{
+					var relPawnAge = relPawn.ageTracker.AgeChronologicalYearsFloat;
+					if (__instance.relations.OpinionOf(relPawn) >= 30 && relPawn.relations.OpinionOf(__instance) >= 30 && new FloatRange(-5f, 5f).Includes(pawnAge - relPawnAge))
+					{
+						Log.Message(__instance + " - " + relPawn + " - SUCCESS" + " - " + VSIE_DefOf.VSIE_HasBeenMyFriendSinceChildhood);
+						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_HasBeenMyFriendSinceChildhood, __instance, relPawn);
+						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_HasBeenMyFriendSinceChildhood, relPawn, __instance);
+					}
+				}
+			}
+		}
+	}
+
 	[HarmonyPatch(typeof(Pawn), "SetFaction")]
 	public static class SetFaction_Patch
 	{
@@ -21,7 +43,7 @@ namespace VanillaSocialInteractionsExpanded
 			}
 			if (__instance.IsWildMan() && recruiter != null)
             {
-				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_TamedMe, recruiter, __instance);
+				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_TamedMe, __instance, recruiter);
             }
 		}
 	}
@@ -29,7 +51,7 @@ namespace VanillaSocialInteractionsExpanded
 	[HarmonyPatch(typeof(Pawn), "Kill")]
 	public static class Pawn_Kill_Patch
 	{
-		private static void Prefix(Pawn __instance)
+		private static void Prefix(Pawn __instance, DamageInfo? dinfo, Hediff exactCulprit = null)
 		{
 			if (CheckSurgeryFail_Patch._patient != null)
             {
@@ -45,6 +67,20 @@ namespace VanillaSocialInteractionsExpanded
 				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_FailedMedicalOperationAndKilled, CheckSurgeryFail_Patch._surgeon);
 				CheckSurgeryFail_Patch._patient = null;
 				CheckSurgeryFail_Patch._surgeon = null;
+			}
+
+			if (dinfo.HasValue)
+			{
+				TryRecordSavedMeFromRaiders(__instance, dinfo);
+			}
+		}
+
+		public static void TryRecordSavedMeFromRaiders(Pawn assaulter, DamageInfo? dinfo)
+        {
+			Pawn target = assaulter.mindState.enemyTarget as Pawn;
+			if (target != null && target?.mindState?.meleeThreat == assaulter && dinfo.Value.Instigator != null && dinfo.Value.Instigator is Pawn saviour && target != saviour)
+			{
+				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_SavedMeFromRaiders, target, saviour, assaulter);
 			}
 		}
 	}

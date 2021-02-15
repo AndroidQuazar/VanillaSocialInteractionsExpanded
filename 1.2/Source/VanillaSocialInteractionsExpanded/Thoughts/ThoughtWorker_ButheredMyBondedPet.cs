@@ -12,14 +12,14 @@ namespace VanillaSocialInteractionsExpanded
 	{
         public override string PostProcessLabel(Pawn p, string label)
         {
-			Predicate<Tale_AntagonistAndVictimPawns> validator = delegate (Tale_AntagonistAndVictimPawns t)
+			Predicate<Tale_DoublePawn> validator = delegate (Tale_DoublePawn t)
 			{
-				return t.victimData.pawn.relations.GetDirectRelation(PawnRelationDefOf.Bond, p) != null;
+				return t.firstPawnData.pawn.relations.GetDirectRelation(PawnRelationDefOf.Bond, p) != null;
 			};
-			var tale = VSIE_Utils.GetLatestAntagonistAndVictimTale(def.taleDef, validator);
+			var tale = VSIE_Utils.GetLatestDoublePawnTale(def.taleDef, validator);
 			if (tale != null)
 			{
-				return label.Formatted(tale.antagonistData.pawn.Named("BUTCHER"), tale.victimData.pawn.Named("VICTIM"), p.Named("PAWN"));
+				return label.Formatted(tale.secondPawnData.pawn.Named("BUTCHER"), tale.firstPawnData.pawn.Named("VICTIM"), p.Named("PAWN"));
 			}
 			return base.PostProcessLabel(p, label);
 		}
@@ -33,11 +33,11 @@ namespace VanillaSocialInteractionsExpanded
 			{
 				return false;
 			}
-			Predicate<Tale_AntagonistAndVictimPawns> validator = delegate (Tale_AntagonistAndVictimPawns t)
+			Predicate<Tale_DoublePawn> validator = delegate (Tale_DoublePawn t)
 			{
-				return t.victimData.pawn.relations.GetDirectRelation(PawnRelationDefOf.Bond, p) != null && t.antagonistData.pawn == other;
+				return t.firstPawnData.pawn.relations.GetDirectRelation(PawnRelationDefOf.Bond, p) != null && t.secondPawnData.pawn == other;
 			};
-			var tale = VSIE_Utils.GetLatestAntagonistAndVictimTale(def.taleDef, validator);
+			var tale = VSIE_Utils.GetLatestDoublePawnTale(def.taleDef, validator);
 			if (tale != null)
             {
 				return true;

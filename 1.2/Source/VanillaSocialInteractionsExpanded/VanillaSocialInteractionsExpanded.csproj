@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HarmonyPatches\FoodPatches.cs" />
+    <Compile Include="HarmonyPatches\Relations_Patches.cs" />
     <Compile Include="HarmonyPatches\Interactions_Patches.cs" />
     <Compile Include="HarmonyPatches\Health_Patches.cs" />
     <Compile Include="HarmonyPatches\Lord_Patches.cs" />
@@ -51,11 +52,19 @@
     <Compile Include="HarmonyPatches\MentalBreaks_Patches.cs" />
     <Compile Include="HarmonyPatches\JobDriver_Patches.cs" />
     <Compile Include="HarmonyPatches\ButcherProducts_Patch.cs" />
-    <Compile Include="Tales\Tale_AntagonistAndVictimPawns.cs" />
-    <Compile Include="Thoughts\ThoughtWorker_AntagonistAndVictim_Situation.cs" />
+    <Compile Include="Tales\Tale_TriplePawn.cs" />
+    <Compile Include="Thoughts\ThoughtWorker_IsRoyalty.cs" />
+    <Compile Include="Thoughts\ThoughtWorker_StoleMyLover.cs" />
+    <Compile Include="Thoughts\ThoughtWorker_CuredMyFriend.cs" />
+    <Compile Include="Thoughts\ThoughtWorker_TriplePawn_Situation.cs" />
+    <Compile Include="Thoughts\ThoughtWorker_DoublePawn_Situation.cs" />
     <Compile Include="Thoughts\ThoughtWorker_OnePawn_Situation.cs" />
     <Compile Include="Thoughts\ThoughtWorker_IngestedHumanFlesh.cs" />
-    <Compile Include="Thoughts\Thought_AntagonistAndVictim_Situation.cs" />
+    <Compile Include="Thoughts\Thought_IsRoyalty.cs" />
+    <Compile Include="Thoughts\Thought_StoleMyLover.cs" />
+    <Compile Include="Thoughts\Thought_CuredMyFriend.cs" />
+    <Compile Include="Thoughts\Thought_TriplePawn_Situation.cs" />
+    <Compile Include="Thoughts\Thought_DoublePawn_Situation.cs" />
     <Compile Include="Thoughts\Thought_OnePawn_Situation.cs" />
     <Compile Include="Thoughts\Thought_ButheredMyBondedPet.cs" />
     <Compile Include="Thoughts\Thought_ExposedCorpseOfMyFriend.cs" />
