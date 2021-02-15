@@ -19,7 +19,10 @@ namespace VanillaSocialInteractionsExpanded
             {
 				if (IsHumanlikeMeat(__instance.def))
 				{
-					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_IngestedHumanFlesh, ingester);
+					if (Rand.Chance(0.1f))
+					{
+						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_IngestedHumanFlesh, ingester);
+					}
 					return;
 				}
 				else
@@ -31,7 +34,10 @@ namespace VanillaSocialInteractionsExpanded
                         {
 							if (IsHumanlikeMeat(compIngredients.ingredients[i]))
                             {
-								TaleRecorder.RecordTale(VSIE_DefOf.VSIE_IngestedHumanFlesh, ingester);
+								if (Rand.Chance(0.1f))
+								{
+									TaleRecorder.RecordTale(VSIE_DefOf.VSIE_IngestedHumanFlesh, ingester);
+								}
 								return;
 							}
                         }

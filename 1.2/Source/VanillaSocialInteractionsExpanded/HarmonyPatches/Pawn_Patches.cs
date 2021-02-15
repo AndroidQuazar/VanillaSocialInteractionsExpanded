@@ -23,9 +23,11 @@ namespace VanillaSocialInteractionsExpanded
 					var relPawnAge = relPawn.ageTracker.AgeChronologicalYearsFloat;
 					if (__instance.relations.OpinionOf(relPawn) >= 30 && relPawn.relations.OpinionOf(__instance) >= 30 && new FloatRange(-5f, 5f).Includes(pawnAge - relPawnAge))
 					{
-						Log.Message(__instance + " - " + relPawn + " - SUCCESS" + " - " + VSIE_DefOf.VSIE_HasBeenMyFriendSinceChildhood);
-						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_HasBeenMyFriendSinceChildhood, __instance, relPawn);
-						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_HasBeenMyFriendSinceChildhood, relPawn, __instance);
+						if (Rand.ChanceSeeded(0.1f, __instance.thingIDNumber))
+						{
+							TaleRecorder.RecordTale(VSIE_DefOf.VSIE_HasBeenMyFriendSinceChildhood, __instance, relPawn);
+							TaleRecorder.RecordTale(VSIE_DefOf.VSIE_HasBeenMyFriendSinceChildhood, relPawn, __instance);
+						}
 					}
 				}
 			}
@@ -39,12 +41,18 @@ namespace VanillaSocialInteractionsExpanded
 		{
 			if (newFaction != __instance.Faction && __instance.Faction.HostileTo(newFaction))
 			{
-				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WasPreviouslyOurEnemy, __instance);
+				if (Rand.Chance(0.1f))
+				{
+					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WasPreviouslyOurEnemy, __instance);
+				}
 			}
 			if (__instance.IsWildMan() && recruiter != null)
             {
-				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_TamedMe, __instance, recruiter);
-            }
+				if (Rand.Chance(0.1f))
+				{
+					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_TamedMe, __instance, recruiter);
+				}
+			}
 		}
 	}
 
@@ -53,18 +61,21 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Prefix(Pawn __instance, DamageInfo? dinfo, Hediff exactCulprit = null)
 		{
-			if (CheckSurgeryFail_Patch._patient != null)
-            {
-				Log.Message($"{CheckSurgeryFail_Patch._patient}, {CheckSurgeryFail_Patch._surgeon}, __instance == CheckSurgeryFail_Patch._patient: {__instance == CheckSurgeryFail_Patch._patient} " +
-				$"&& CheckSurgeryFail_Patch._surgeon.IsColonist: {CheckSurgeryFail_Patch._surgeon.IsColonist} && __instance.IsColonist: {__instance.IsColonist}");
-			}
-			else
-            {
-				Log.Message("Killing: " + __instance);
-            }
+			//if (CheckSurgeryFail_Patch._patient != null)
+            //{
+			//	Log.Message($"{CheckSurgeryFail_Patch._patient}, {CheckSurgeryFail_Patch._surgeon}, __instance == CheckSurgeryFail_Patch._patient: {__instance == CheckSurgeryFail_Patch._patient} " +
+			//	$"&& CheckSurgeryFail_Patch._surgeon.IsColonist: {CheckSurgeryFail_Patch._surgeon.IsColonist} && __instance.IsColonist: {__instance.IsColonist}");
+			//}
+			//else
+            //{
+			//	Log.Message("Killing: " + __instance);
+            //}
 			if (__instance == CheckSurgeryFail_Patch._patient && CheckSurgeryFail_Patch._surgeon.IsColonist && __instance.IsColonist)
 			{
-				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_FailedMedicalOperationAndKilled, CheckSurgeryFail_Patch._surgeon);
+				if (Rand.Chance(0.1f))
+				{
+					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_FailedMedicalOperationAndKilled, CheckSurgeryFail_Patch._surgeon);
+				}
 				CheckSurgeryFail_Patch._patient = null;
 				CheckSurgeryFail_Patch._surgeon = null;
 			}
@@ -80,7 +91,10 @@ namespace VanillaSocialInteractionsExpanded
 			Pawn target = assaulter.mindState.enemyTarget as Pawn;
 			if (target != null && target?.mindState?.meleeThreat == assaulter && dinfo.Value.Instigator != null && dinfo.Value.Instigator is Pawn saviour && target != saviour)
 			{
-				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_SavedMeFromRaiders, target, saviour, assaulter);
+				if (Rand.Chance(0.1f))
+				{
+					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_SavedMeFromRaiders, target, saviour, assaulter);
+				}
 			}
 		}
 	}

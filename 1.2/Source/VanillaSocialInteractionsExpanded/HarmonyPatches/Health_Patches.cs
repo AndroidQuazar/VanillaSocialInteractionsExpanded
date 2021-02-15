@@ -17,7 +17,10 @@ namespace VanillaSocialInteractionsExpanded
 		{
 			if (InCombat(___pawn))
 			{
-				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WasBadlyInjured, ___pawn);
+				if (Rand.Chance(0.1f))
+                {
+					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WasBadlyInjured, ___pawn);
+                }
 			}
 			Pawn_Kill_Patch.TryRecordSavedMeFromRaiders(___pawn, dinfo);
 		}
@@ -77,13 +80,19 @@ namespace VanillaSocialInteractionsExpanded
 		{
 			if (__state && !patient.health.HasHediffsNeedingTend() && doctor != null)
             {
-				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_SavedMeFromMyWounds, patient, doctor);
+				if (Rand.Chance(0.1f))
+				{
+					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_SavedMeFromMyWounds, patient, doctor);
+				}
 				foreach (var pawn in patient.relations.PotentiallyRelatedPawns)
                 {
 					if (pawn.relations.OpinionOf(patient) >= 20f)
                     {
-
-                    }
+						if (Rand.Chance(0.1f))
+						{
+							TaleRecorder.RecordTale(VSIE_DefOf.VSIE_CuredMyFriend, pawn, doctor, patient);
+						}
+					}
                 }
             }
 		}

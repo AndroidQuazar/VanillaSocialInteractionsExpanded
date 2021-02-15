@@ -20,7 +20,10 @@ namespace VanillaSocialInteractionsExpanded
 			toil.initAction = delegate ()
 			{
 				var actor = toil.actor;
-				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_ExposedCorpseOfMyFriend, (actor.CurJob.GetTarget(TargetIndex.A).Thing as Corpse).InnerPawn, actor);
+				if (Rand.Chance(0.1f))
+				{
+					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_ExposedCorpseOfMyFriend, (actor.CurJob.GetTarget(TargetIndex.A).Thing as Corpse).InnerPawn, actor);
+				}
 			};
 			toils.Add(toil);
 			__result = toils;
@@ -41,12 +44,18 @@ namespace VanillaSocialInteractionsExpanded
                 {
 					if (actor.CurJob.GetTarget(TargetIndex.A).Thing.def.IsDrug)
                     {
-						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_BingedDrug, actor);
+						if (Rand.Chance(0.1f))
+						{
+							TaleRecorder.RecordTale(VSIE_DefOf.VSIE_BingedDrug, actor);
+						}
 					}
 					else
                     {
-						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_BingedFood, actor);
-                    }
+						if (Rand.Chance(0.1f))
+						{
+							TaleRecorder.RecordTale(VSIE_DefOf.VSIE_BingedFood, actor);
+						}
+					}
 				}
 			};
 			toils.Add(toil);
@@ -67,7 +76,10 @@ namespace VanillaSocialInteractionsExpanded
 				var takee = actor.CurJob.targetA.Thing as Pawn;
 				if (actor.CurJobDef.makeTargetPrisoner && takee.IsPrisonerOfColony)
 				{
-					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_ArrestedMe, takee, actor);
+					if (Rand.Chance(0.1f))
+					{
+						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_ArrestedMe, takee, actor);
+					}
 				}
 			};
 			toils.Add(toil);
@@ -84,10 +96,12 @@ namespace VanillaSocialInteractionsExpanded
 			var toil = new Toil();
 			toil.initAction = delegate ()
 			{
-				var actor = toil.actor;
-				var resurrected = (actor.CurJob.targetA.Thing as Corpse).InnerPawn;
-				Log.Message(actor + " - " + resurrected);
-				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_ResurrectedMe, resurrected, actor);
+				if (Rand.Chance(0.1f))
+				{
+					var actor = toil.actor;
+					var resurrected = (actor.CurJob.targetA.Thing as Corpse).InnerPawn;
+					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_ResurrectedMe, resurrected, actor);
+				}
 			};
 			toils.Insert(toils.Count - 1, toil);
 			__result = toils;

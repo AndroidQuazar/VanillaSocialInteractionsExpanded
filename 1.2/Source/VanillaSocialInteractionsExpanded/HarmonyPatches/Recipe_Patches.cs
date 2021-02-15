@@ -45,7 +45,10 @@ namespace VanillaSocialInteractionsExpanded
 		{
 			if (victim != null && victim == Recipe_Patch._pawn)
             {
-				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_RemovedPrisonersOrgans, Recipe_Patch._billDoer);
+				if (Rand.Chance(0.1f))
+				{
+					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_RemovedPrisonersOrgans, Recipe_Patch._billDoer);
+				}
 				Recipe_Patch._pawn = null;
 				Recipe_Patch._billDoer = null;
 			}

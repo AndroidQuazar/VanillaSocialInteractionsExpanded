@@ -15,7 +15,10 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Postfix(Pawn pawn, string reason, bool causedByMood)
         {
-			TaleRecorder.RecordTale(VSIE_DefOf.VSIE_RanWild, pawn);
+			if (Rand.Chance(0.1f))
+			{
+				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_RanWild, pawn);
+			}
 		}
 	}
 
@@ -24,7 +27,10 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Postfix(Pawn ___pawn)
 		{
-			TaleRecorder.RecordTale(VSIE_DefOf.VSIE_SlaughteredAnimalInRage, ___pawn);
+			if (Rand.Chance(0.1f))
+			{
+				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_SlaughteredAnimalInRage, ___pawn);
+			}
 		}
 	}
 
@@ -33,7 +39,10 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Postfix(Pawn ___pawn)
 		{
-			TaleRecorder.RecordTale(VSIE_DefOf.VSIE_InducedPrisonerToEscape, ___pawn);
+			if (Rand.Chance(0.1f))
+			{
+				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_InducedPrisonerToEscape, ___pawn);
+			}
 		}
 	}
 
@@ -42,8 +51,11 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Postfix(MentalState_SocialFighting __instance)
 		{
-			TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WeHadSocialFight, __instance.pawn, __instance.otherPawn);
-			TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WeHadSocialFight, __instance.otherPawn, __instance.pawn);
+			if (Rand.Chance(0.1f))
+            {
+				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WeHadSocialFight, __instance.pawn, __instance.otherPawn);
+				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WeHadSocialFight, __instance.otherPawn, __instance.pawn);
+			}
 		}
 	}
 
@@ -56,31 +68,52 @@ namespace VanillaSocialInteractionsExpanded
             {
 				if (stateDef == MentalStateDefOf.Wander_OwnRoom)
                 {
-					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_HideInRoom, ___pawn);
+					if (Rand.Chance(0.1f))
+					{
+						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_HideInRoom, ___pawn);
+					}
 				}
 				else if (stateDef == MentalStateDefOf.Wander_Sad)
                 {
-					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WanderedInSaddness, ___pawn);
+					if (Rand.Chance(0.1f))
+					{
+						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WanderedInSaddness, ___pawn);
+					}
 				}
 				else if (stateDef == VSIE_DefOf.SadisticRage)
                 {
-					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WentIntoSadisticRage, ___pawn);
+					if (Rand.Chance(0.1f))
+					{
+						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WentIntoSadisticRage, ___pawn);
+					}
 				}
 				else if (stateDef == VSIE_DefOf.Tantrum || stateDef == VSIE_DefOf.BedroomTantrum || stateDef == VSIE_DefOf.TargetedTantrum)
 				{
-					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_ThrewTantrum, ___pawn);
+					if (Rand.Chance(0.1f))
+					{
+						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_ThrewTantrum, ___pawn);
+					}
 				}
 				else if (stateDef == MentalStateDefOf.Berserk)
 				{
-					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WentBerserk, ___pawn);
+					if (Rand.Chance(0.1f))
+					{
+						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WentBerserk, ___pawn);
+					}
 				}
 				else if (stateDef == VSIE_DefOf.FireStartingSpree)
 				{
-					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WentOnFireStartingSpree, ___pawn);
+					if (Rand.Chance(0.1f))
+					{
+						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WentOnFireStartingSpree, ___pawn);
+					}
 				}
 				else if (stateDef == VSIE_DefOf.MurderousRage)
 				{
-					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WentOnMurderousRage, ___pawn);
+					if (Rand.Chance(0.1f))
+					{
+						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WentOnMurderousRage, ___pawn);
+					}
 				}
 			}
 		}

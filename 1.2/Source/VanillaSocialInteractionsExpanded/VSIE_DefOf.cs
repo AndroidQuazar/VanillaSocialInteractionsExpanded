@@ -45,6 +45,7 @@ namespace VanillaSocialInteractionsExpanded
         public static TaleDef VSIE_HasBeenMyFriendSinceChildhood;
         public static TaleDef VSIE_SavedMeFromRaiders;
         public static TaleDef VSIE_StoleMyLover;
+        public static TaleDef VSIE_CuredMyFriend;
 
         public static MentalStateDef SadisticRage;
         public static MentalStateDef BedroomTantrum;

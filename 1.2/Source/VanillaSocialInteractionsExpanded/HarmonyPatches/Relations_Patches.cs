@@ -20,12 +20,18 @@ namespace VanillaSocialInteractionsExpanded
 				var exLover1 = ___pawn.GetSpouseOrLoverOrFiance();
 				if (exLover1 != null && !exLover1.Dead && exLover1 != otherPawn)
                 {
-					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_StoleMyLover, exLover1, ___pawn, otherPawn);
-                }
+					if (Rand.Chance(0.1f))
+					{
+						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_StoleMyLover, exLover1, ___pawn, otherPawn);
+					}
+				}
 				var exLover2 = otherPawn.GetSpouseOrLoverOrFiance();
 				if (exLover2 != null && !exLover2.Dead && exLover2 != ___pawn)
 				{
-					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_StoleMyLover, exLover2, ___pawn, otherPawn);
+					if (Rand.Chance(0.1f))
+					{
+						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_StoleMyLover, exLover2, ___pawn, otherPawn);
+					}
 				}
 			}
 		}

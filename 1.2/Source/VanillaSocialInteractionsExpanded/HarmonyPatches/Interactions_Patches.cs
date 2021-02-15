@@ -19,12 +19,18 @@ namespace VanillaSocialInteractionsExpanded
             {
 				if (intDef == InteractionDefOf.Insult)
                 {
-					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_InsultedMe, recipient, ___pawn);
+					if (Rand.Chance(0.1f))
+					{
+						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_InsultedMe, recipient, ___pawn);
+					}
 				}
 				else if (intDef == InteractionDefOf.Chitchat || intDef == InteractionDefOf.DeepTalk)
                 {
-					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WeHadNiceChat, recipient, ___pawn);
-					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WeHadNiceChat, ___pawn, recipient);
+					if (Rand.Chance(0.1f))
+					{
+						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WeHadNiceChat, recipient, ___pawn);
+						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WeHadNiceChat, ___pawn, recipient);
+					}
 				}
 			}
 		}
@@ -43,7 +49,10 @@ namespace VanillaSocialInteractionsExpanded
 		{
 			if (recruitee.def == ThingDefOf.Thrumbo)
 			{
-				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_TamedThrumbo, recruiter);
+				if (Rand.Chance(0.1f))
+				{
+					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_TamedThrumbo, recruiter);
+				}
 			}
 		}
 	}
@@ -53,7 +62,10 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Postfix(Pawn initiator, Pawn recipient)
 		{
-			TaleRecorder.RecordTale(VSIE_DefOf.VSIE_BrokeUpWithMe, recipient, initiator);
+			if (Rand.Chance(0.1f))
+			{
+				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_BrokeUpWithMe, recipient, initiator);
+			}
 		}
 	}
 }
