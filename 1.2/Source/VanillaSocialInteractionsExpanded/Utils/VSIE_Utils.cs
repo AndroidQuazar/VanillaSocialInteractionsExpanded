@@ -8,8 +8,34 @@ using Verse;
 
 namespace VanillaSocialInteractionsExpanded
 {
+	[StaticConstructorOnStartup]
     public static class VSIE_Utils
     {
+		static VSIE_Utils()
+        {
+			foreach (var aspirationDef in DefDatabase<AspirationDef>.AllDefs)
+            {
+				if (!aspirationDef.beginLetterContinue.NullOrEmpty())
+                {
+					aspirationDef.inspirationDef.beginLetter += aspirationDef.beginLetterContinue;
+				}
+			}
+		}
+		public static SocialInteractionsManager SocialInteractionsManager
+		{
+			get
+			{
+				if (sManager is null)
+				{
+					sManager = Current.Game.GetComponent<SocialInteractionsManager>();
+					return sManager;
+				}
+				return sManager;
+			}
+		}
+
+		private static SocialInteractionsManager sManager;
+
 		public static List<TaleDef> blacklistedTales = new List<TaleDef>
 		{
 			VSIE_DefOf.VSIE_ExposedCorpseOfMyFriend

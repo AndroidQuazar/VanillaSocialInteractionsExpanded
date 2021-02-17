@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using Verse;
@@ -66,6 +67,10 @@ namespace VanillaSocialInteractionsExpanded
 		{
 			_patient = patient;
 			_surgeon = surgeon;
+			if (surgeon.InspirationDef == VSIE_DefOf.Inspired_Surgery)
+            {
+				VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(surgeon);
+            }
 		}
 
 		private static void Postfix(Pawn surgeon, Pawn patient, List<Thing> ingredients, BodyPartRecord part, Bill bill)
@@ -74,4 +79,71 @@ namespace VanillaSocialInteractionsExpanded
 			_surgeon = null;
 		}
 	}
+
+	[HarmonyPatch(typeof(GenRecipe), "MakeRecipeProducts")]
+	public static class MakeRecipeProducts_Patch
+	{
+		private static void Postfix(IEnumerable<Thing> __result, RecipeDef recipeDef, Pawn worker, List<Thing> ingredients, Thing dominantIngredient, IBillGiver billGiver)
+		{
+			if (worker.InspirationDef == VSIE_DefOf.VSIE_Inspired_Cooking)
+            {
+				foreach (var thing in __result)
+                {
+					if (thing.def.ingestible?.ingestEffect == EffecterDefOf.EatMeat)
+                    {
+						VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(worker);
+                    }
+                }
+            }
+		}
+	}
+
+
+	//[HarmonyPatch(typeof(QualityUtility), "GenerateQualityCreatedByPawn", new Type[]
+	//{
+	//		typeof(Pawn),
+	//		typeof(SkillDef)
+	//}, new ArgumentType[]
+	//{
+	//		0,
+	//		0
+	//})]
+	//public static class GenerateQualityCreatedByPawn_Patch
+	//{
+	//	private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions, MethodBase original)
+	//	{
+	//		FieldInfo mindStateInfo = AccessTools.Field(typeof(Pawn), "mindState");
+	//		FieldInfo inspirationHandlerInfo = AccessTools.Field(typeof(Pawn_MindState), "inspirationHandler");
+	//		FieldInfo inspired_CreativityInfo = AccessTools.Field(typeof(InspirationDefOf), "Inspired_Creativity");
+	//		MethodInfo notifyProgressInfo = AccessTools.Method(typeof(GenerateQualityCreatedByPawn_Patch), "Notify_Progress", null, null);
+	//		var codes = instructions.ToList();
+	//		bool found = false;
+	//	
+	//		for (var i = 0; i < codes.Count; i++)
+	//		{
+	//			if (!found && codes[i].OperandIs(mindStateInfo) && codes[i + 1].OperandIs(inspirationHandlerInfo) && codes[i + 2].OperandIs(inspired_CreativityInfo))
+	//			{
+	//				found = true;
+	//				//yield return new CodeInstruction(OpCodes.Ldloc_0, null);
+	//				yield return new CodeInstruction(OpCodes.Call, notifyProgressInfo);
+	//				yield return codes[i];
+	//				yield return new CodeInstruction(OpCodes.Ldarg_0, null);
+	//			}
+	//			else
+	//			{
+	//				yield return codes[i];
+	//			}
+	//		}
+	//		yield break;
+	//	}
+	//
+	//	public static QualityCategory Notify_Progress(Pawn pawn, QualityCategory level)
+	//	{
+	//		if (pawn.InspirationDef == VSIE_DefOf.Inspired_Creativity && (level == QualityCategory.Masterwork || level == QualityCategory.Legendary))
+	//		{
+	//			VSIE_Utils.SocialInteractionsManager.Notify_Progress(pawn);
+	//		}
+	//		return level;
+	//	}
+	//}
 }

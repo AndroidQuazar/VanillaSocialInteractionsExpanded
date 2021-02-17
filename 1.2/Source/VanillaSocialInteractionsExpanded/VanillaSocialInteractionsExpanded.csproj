@@ -41,12 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Defs\AspirationDef.cs" />
     <Compile Include="HarmonyPatches\FoodPatches.cs" />
+    <Compile Include="HarmonyPatches\Inspiration_Patches.cs" />
+    <Compile Include="HarmonyPatches\JobGiver_Patches.cs" />
+    <Compile Include="HarmonyPatches\Skill_Patches.cs" />
+    <Compile Include="HarmonyPatches\Need_Patches.cs" />
     <Compile Include="HarmonyPatches\Relations_Patches.cs" />
     <Compile Include="HarmonyPatches\Interactions_Patches.cs" />
     <Compile Include="HarmonyPatches\Health_Patches.cs" />
     <Compile Include="HarmonyPatches\Lord_Patches.cs" />
     <Compile Include="HarmonyPatches\Recipe_Patches.cs" />
+    <Compile Include="HarmonyPatches\Misc_Patches.cs" />
     <Compile Include="HarmonyPatches\Thought_Patches.cs" />
     <Compile Include="HarmonyPatches\Pawn_Patches.cs" />
     <Compile Include="HarmonyPatches\MentalBreaks_Patches.cs" />
@@ -70,6 +76,7 @@
     <Compile Include="Thoughts\Thought_ExposedCorpseOfMyFriend.cs" />
     <Compile Include="Thoughts\ThoughtWorker_ExposedCorpseOfMyFriend.cs" />
     <Compile Include="Thoughts\ThoughtWorker_ButheredMyBondedPet.cs" />
+    <Compile Include="SocialInteractionsManager.cs" />
     <Compile Include="Utils\VSIE_Utils.cs" />
     <Compile Include="VSIE_DefOf.cs" />
     <Compile Include="HarmonyPatches\HarmonyInit.cs" />

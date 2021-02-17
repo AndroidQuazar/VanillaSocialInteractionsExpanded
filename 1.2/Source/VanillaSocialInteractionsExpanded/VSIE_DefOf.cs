@@ -47,6 +47,27 @@ namespace VanillaSocialInteractionsExpanded
         public static TaleDef VSIE_StoleMyLover;
         public static TaleDef VSIE_CuredMyFriend;
 
+        public static ThoughtDef VSIE_InspirationSatisfied;
+        public static ThoughtDef VSIE_InspirationNotSatisfied;
+
+        public static InspirationDef Frenzy_Work;
+        public static InspirationDef Frenzy_Go;
+        public static InspirationDef Frenzy_Shoot;
+        public static InspirationDef Inspired_Trade;
+        public static InspirationDef Inspired_Recruitment;
+        public static InspirationDef Inspired_Taming;
+        public static InspirationDef Inspired_Surgery;
+        public static InspirationDef Inspired_Creativity;
+
+        public static InspirationDef VSIE_Flirting_Frenzy;
+        public static InspirationDef VSIE_Inspired_Cooking;
+        public static InspirationDef VSIE_Inspired_Mining;
+        public static InspirationDef VSIE_Inspired_Planting;
+        public static InspirationDef VSIE_Inspired_Research;
+        public static InspirationDef VSIE_Learning_Frenzy;
+        public static InspirationDef VSIE_Party_Frenzy;
+        public static InspirationDef VSIE_Melee_Frenzy;
+
         public static MentalStateDef SadisticRage;
         public static MentalStateDef BedroomTantrum;
         public static MentalStateDef Tantrum;

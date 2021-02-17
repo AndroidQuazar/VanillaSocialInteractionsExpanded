@@ -83,6 +83,12 @@ namespace VanillaSocialInteractionsExpanded
 			if (dinfo.HasValue)
 			{
 				TryRecordSavedMeFromRaiders(__instance, dinfo);
+				TryRecordMeleeAspiration(dinfo);
+			}
+
+			if (__instance.RaceProps.Animal && __instance.Faction is null && dinfo.Value.Instigator is Pawn killer && killer.InspirationDef == VSIE_DefOf.Frenzy_Shoot)
+            {
+				VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(killer);
 			}
 		}
 
@@ -96,6 +102,15 @@ namespace VanillaSocialInteractionsExpanded
 					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_SavedMeFromRaiders, target, saviour, assaulter);
 				}
 			}
+		}
+
+		public static void TryRecordMeleeAspiration(DamageInfo? dinfo)
+        {
+			if (dinfo.Value.Instigator != null && dinfo.Value.Instigator is Pawn assaulter && assaulter.InspirationDef == VSIE_DefOf.VSIE_Melee_Frenzy 
+				&& (dinfo.Value.Weapon == null || dinfo.Value.Weapon == ThingDefOf.Human || dinfo.Value.Weapon.IsMeleeWeapon))
+            {
+				VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(assaulter);
+            }
 		}
 	}
 }

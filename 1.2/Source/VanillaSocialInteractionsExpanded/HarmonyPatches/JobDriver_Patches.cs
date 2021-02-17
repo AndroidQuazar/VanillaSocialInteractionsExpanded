@@ -107,4 +107,70 @@ namespace VanillaSocialInteractionsExpanded
 			__result = toils;
 		}
 	}
+
+	[HarmonyPatch(typeof(JobDriver_Lovin), "MakeNewToils")]
+	public class JobDriver_Lovin_MakeNewToils
+	{
+		private static void Postfix(ref IEnumerable<Toil> __result)
+		{
+			List<Toil> toils = __result.ToList();
+			var toil = new Toil();
+			toil.initAction = delegate ()
+			{
+				var actor = toil.actor;
+				if (actor.InspirationDef == VSIE_DefOf.VSIE_Flirting_Frenzy)
+                {
+					VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(actor);
+                }
+			};
+			toils.Insert(toils.Count - 1, toil);
+			__result = toils;
+		}
+	}
+
+	[HarmonyPatch(typeof(JoyUtility), "JoyTickCheckEnd")]
+	public class JoyUtility_JoyTickCheckEnd
+	{
+		private static void Prefix(Pawn pawn, ref float extraJoyGainFactor)
+		{
+			if (pawn.InspirationDef == VSIE_DefOf.VSIE_Party_Frenzy && pawn.CurJobDef == JobDefOf.SocialRelax)
+            {
+				extraJoyGainFactor *= 2f;
+			}
+		}
+	}
+
+
+	[HarmonyPatch(typeof(ToilEffects), "WithEffect", new Type[] {typeof(Toil), typeof(Func<EffecterDef>), typeof(Func<LocalTargetInfo>)})]
+	[HarmonyPatch()]
+	public static class WithEffect_Patch
+	{
+		private static void Postfix(this Toil __result)
+		{
+			__result.AddFinishAction(delegate
+			{
+				var actor = __result.actor;
+				if (actor.InspirationDef == VSIE_DefOf.Frenzy_Work && actor.mindState.lastJobTag == JobTag.MiscWork)
+                {
+					VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(actor);
+                }
+			});
+		}
+	}
+	[HarmonyPatch(typeof(ToilEffects))]
+	[HarmonyPatch("WithProgressBar")]
+	public static class WithProgressBar_Patch
+	{
+		private static void Postfix(this Toil __result)
+		{
+			__result.AddFinishAction(delegate
+			{
+				var actor = __result.actor;
+				if (actor.InspirationDef == VSIE_DefOf.Frenzy_Work && actor.mindState.lastJobTag == JobTag.MiscWork)
+				{
+					VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(actor);
+				}
+			});
+		}
+	}
 }

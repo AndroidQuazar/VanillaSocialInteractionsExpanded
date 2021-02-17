@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+  <VSIE.WorkFrenzyBeginLetterContinue>\n\n[PAWN_pronoun] would like to do some work.</VSIE.WorkFrenzyBeginLetterContinue>
+  <VSIE.GoFrenzyBeginLetterContinue>\n\n[PAWN_pronoun] would like to join a caravan and venture into the world.</VSIE.GoFrenzyBeginLetterContinue>
+  <VSIE.ShootingFrenzyBeginLetterContinue>\n\n[PAWN_pronoun] would like to go on a hunt.</VSIE.ShootingFrenzyBeginLetterContinue>
+  <VSIE.InspiredTradeBeginLetterContinue>\n\n[PAWN_pronoun] would like to close a trade.</VSIE.InspiredTradeBeginLetterContinue>
+  <VSIE.InspiredRecruitmentBeginLetterContinue>\n\n[PAWN_pronoun] would like to recruit a prisoner.</VSIE.InspiredRecruitmentBeginLetterContinue>
+  <VSIE.InspiredTamingBeginLetterContinue>\n\n[PAWN_pronoun] would like to try and tame an animal.</VSIE.InspiredTamingBeginLetterContinue>
+  <VSIE.InspiredSurgeryBeginLetterContinue>\n\n[PAWN_pronoun] would like to perform a surgery.</VSIE.InspiredSurgeryBeginLetterContinue>
+  <VSIE.InspiredCreativityBeginLetterContinue>\n\n[PAWN_pronoun] would like to create a masterwork or legendary item.</VSIE.InspiredCreativityBeginLetterContinue>
+
+</LanguageData>

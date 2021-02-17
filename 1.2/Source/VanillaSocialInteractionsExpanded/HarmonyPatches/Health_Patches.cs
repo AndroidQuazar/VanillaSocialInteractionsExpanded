@@ -22,7 +22,11 @@ namespace VanillaSocialInteractionsExpanded
 					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WasBadlyInjured, ___pawn);
                 }
 			}
-			Pawn_Kill_Patch.TryRecordSavedMeFromRaiders(___pawn, dinfo);
+			if (dinfo.HasValue)
+            {
+				Pawn_Kill_Patch.TryRecordSavedMeFromRaiders(___pawn, dinfo);
+				Pawn_Kill_Patch.TryRecordMeleeAspiration(dinfo);
+			}
 		}
 
 		public static HashSet<JobDef> combatJobs = new HashSet<JobDef>

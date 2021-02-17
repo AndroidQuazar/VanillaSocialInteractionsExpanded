@@ -3,6 +3,8 @@ using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using Verse;
@@ -36,6 +38,57 @@ namespace VanillaSocialInteractionsExpanded
 		}
 	}
 
+	[HarmonyPatch(typeof(InteractionWorker_RomanceAttempt), "SuccessChance")]
+	public class SuccessChance_Patch
+	{
+		private static void Postfix(ref float __result, Pawn initiator, Pawn recipient)
+		{
+			if (initiator.InspirationDef == VSIE_DefOf.VSIE_Flirting_Frenzy)
+            {
+				__result *= 2f;
+            }
+		}
+	}
+
+	[HarmonyPatch(typeof(InteractionWorker_RecruitAttempt), "Interacted")]
+	public class InteractionWorker_RecruitAttempt_Interacted_Patch
+	{
+		private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+		{
+			FieldInfo mindStateInfo = AccessTools.Field(typeof(Pawn), "mindState");
+			FieldInfo inspirationHandlerInfo = AccessTools.Field(typeof(Pawn_MindState), "inspirationHandler");
+			FieldInfo inspired_TamingInfo = AccessTools.Field(typeof(InspirationDefOf), "Inspired_Taming");
+
+			var codes = instructions.ToList();
+			bool found = false;
+			for (var i = 0; i < codes.Count; i++)
+			{
+				if (!found && codes[i].OperandIs(mindStateInfo) && codes[i + 1].OperandIs(inspirationHandlerInfo) && codes[i + 2].OperandIs(inspired_TamingInfo))
+				{
+					found = true;
+					Log.Message($"{i} - codes[i]: {codes[i]}, codes[i + 1]: {codes[i + 1]}, codes[i + 2]: {codes[i + 2]}, codes[i + 3]: {codes[i + 3]}");
+					yield return new CodeInstruction(OpCodes.Ldarg_1, null);
+					yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(InteractionWorker_RecruitAttempt_Interacted_Patch), "Notify_Progress", null, null));
+					yield return codes[i];
+				}
+				else
+				{
+					yield return codes[i];
+				}
+			}
+			yield break;
+		}
+
+		public static void Notify_Progress(Pawn pawn)
+		{
+			if (pawn.InspirationDef == VSIE_DefOf.Inspired_Taming)
+			{
+				VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(pawn);
+			}
+		}
+	}
+
+
 	[HarmonyPatch(typeof(InteractionWorker_RecruitAttempt), "DoRecruit", new Type[] 
 	{
 		typeof(Pawn), typeof(Pawn), typeof(float), typeof(string), typeof(string), typeof(bool), typeof(bool)
@@ -45,6 +98,13 @@ namespace VanillaSocialInteractionsExpanded
 	})]
 	public class DoRecruit_Patch
 	{
+		private static void Prefix(Pawn recruiter, Pawn recruitee)
+        {
+			if (recruitee.IsPrisoner && recruiter?.InspirationDef == VSIE_DefOf.Inspired_Recruitment)
+            {
+				VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(recruiter);
+            }
+        }
 		private static void Postfix(Pawn recruiter, Pawn recruitee)
 		{
 			if (recruitee.def == ThingDefOf.Thrumbo)
