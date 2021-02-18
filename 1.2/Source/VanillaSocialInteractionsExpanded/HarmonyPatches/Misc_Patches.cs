@@ -92,4 +92,29 @@ namespace VanillaSocialInteractionsExpanded
             }
         }
     }
+
+    [HarmonyPatch(typeof(Mineable), "TrySpawnYield")]
+    public static class MineableYield_Patch
+    {
+        private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+        {
+            List<CodeInstruction> instructionList = instructions.ToList();
+            bool firstPass = false;
+            for (int i = 0; i < instructionList.Count; i++)
+            {
+                CodeInstruction instruction = instructionList[i];
+
+                if (instruction.opcode == OpCodes.Stloc_1 && !firstPass)
+                {
+                    firstPass = true;
+                    yield return new CodeInstruction(opcode: OpCodes.Ldarg_S, operand: 4);
+                    yield return new CodeInstruction(opcode: OpCodes.Call, operand: AccessTools.Method(typeof(MineableYield_Patch), nameof(MineableYield_Patch.InspiredYieldRate)));
+                }
+
+                yield return instruction;
+            }
+        }
+
+        private static int InspiredYieldRate(int num, Pawn pawn) => pawn.InspirationDef == VSIE_DefOf.VSIE_Inspired_Mining ? num * 2 : num;
+    }
 }
