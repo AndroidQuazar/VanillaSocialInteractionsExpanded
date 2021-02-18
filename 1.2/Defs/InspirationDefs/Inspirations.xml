@@ -244,4 +244,27 @@
 	<thoughtDefFail>VSIE_InspirationNotSatisfied</thoughtDefFail>
   </VanillaSocialInteractionsExpanded.AspirationDef>
 
+  <InspirationDef>
+    <defName>VSIE_Melee_Frenzy</defName>
+    <label>melee frenzy</label>
+    <baseDurationDays>8</baseDurationDays>
+    <beginLetter>[PAWN_pronoun] will land all their melee hits for the next 8 days.\n\n[PAWN_pronoun] would like to go defeat an enemy in melee combat.</beginLetter>
+    <beginLetterDef>PositiveEvent</beginLetterDef>
+    <endMessage>{0} is no longer inspired (melee frenzy).</endMessage>
+    <baseInspectLine>Inspired: Melee frenzy</baseInspectLine>
+    <requiredCapacities>
+      <li>Moving</li>
+      <li>Talking</li>
+    </requiredCapacities>
+  </InspirationDef>
+  
+  <VanillaSocialInteractionsExpanded.AspirationDef>
+    <defName>VSIE_Melee_Frenzy</defName>
+    <label>Melee frenzy</label>
+	<inspirationDef>VSIE_Melee_Frenzy</inspirationDef>
+	<workCount>1</workCount>
+	<thoughtDefSuccess>VSIE_InspirationSatisfied</thoughtDefSuccess>
+	<thoughtDefFail>VSIE_InspirationNotSatisfied</thoughtDefFail>
+  </VanillaSocialInteractionsExpanded.AspirationDef>
+  
 </Defs>
