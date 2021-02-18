@@ -173,4 +173,16 @@ namespace VanillaSocialInteractionsExpanded
 			});
 		}
 	}
+
+	[HarmonyPatch(typeof(StatExtension), nameof(StatExtension.GetStatValue))]
+	public static class GetStatValue_Patch
+    {
+		private static void Postfix(Thing thing, StatDef stat, bool applyPostProcess, ref float __result)
+        {
+			if (thing is Pawn pawn && stat == StatDefOf.ResearchSpeed && pawn.InspirationDef == VSIE_DefOf.VSIE_Inspired_Research)
+            {
+				__result *= 5;
+            }
+        }
+    }
 }

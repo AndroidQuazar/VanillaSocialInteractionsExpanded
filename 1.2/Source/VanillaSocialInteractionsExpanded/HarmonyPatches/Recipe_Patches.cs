@@ -99,51 +99,35 @@ namespace VanillaSocialInteractionsExpanded
 	}
 
 
-	//[HarmonyPatch(typeof(QualityUtility), "GenerateQualityCreatedByPawn", new Type[]
-	//{
-	//		typeof(Pawn),
-	//		typeof(SkillDef)
-	//}, new ArgumentType[]
-	//{
-	//		0,
-	//		0
-	//})]
-	//public static class GenerateQualityCreatedByPawn_Patch
-	//{
-	//	private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions, MethodBase original)
-	//	{
-	//		FieldInfo mindStateInfo = AccessTools.Field(typeof(Pawn), "mindState");
-	//		FieldInfo inspirationHandlerInfo = AccessTools.Field(typeof(Pawn_MindState), "inspirationHandler");
-	//		FieldInfo inspired_CreativityInfo = AccessTools.Field(typeof(InspirationDefOf), "Inspired_Creativity");
-	//		MethodInfo notifyProgressInfo = AccessTools.Method(typeof(GenerateQualityCreatedByPawn_Patch), "Notify_Progress", null, null);
-	//		var codes = instructions.ToList();
-	//		bool found = false;
-	//	
-	//		for (var i = 0; i < codes.Count; i++)
-	//		{
-	//			if (!found && codes[i].OperandIs(mindStateInfo) && codes[i + 1].OperandIs(inspirationHandlerInfo) && codes[i + 2].OperandIs(inspired_CreativityInfo))
-	//			{
-	//				found = true;
-	//				//yield return new CodeInstruction(OpCodes.Ldloc_0, null);
-	//				yield return new CodeInstruction(OpCodes.Call, notifyProgressInfo);
-	//				yield return codes[i];
-	//				yield return new CodeInstruction(OpCodes.Ldarg_0, null);
-	//			}
-	//			else
-	//			{
-	//				yield return codes[i];
-	//			}
-	//		}
-	//		yield break;
-	//	}
-	//
-	//	public static QualityCategory Notify_Progress(Pawn pawn, QualityCategory level)
-	//	{
-	//		if (pawn.InspirationDef == VSIE_DefOf.Inspired_Creativity && (level == QualityCategory.Masterwork || level == QualityCategory.Legendary))
-	//		{
-	//			VSIE_Utils.SocialInteractionsManager.Notify_Progress(pawn);
-	//		}
-	//		return level;
-	//	}
-	//}
+    [HarmonyPatch(typeof(QualityUtility), "GenerateQualityCreatedByPawn", new Type[] { typeof(Pawn), typeof(SkillDef) })]
+    public static class GenerateQualityCreatedByPawn_Patch
+    {
+        private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions, ILGenerator ilg)
+        {
+			List<CodeInstruction> instructionList = instructions.ToList();
+
+			for (int i = 0; i < instructionList.Count; i++)
+            {
+				CodeInstruction instruction = instructionList[i];
+
+				if (instruction.opcode == OpCodes.Ldfld && instruction.LoadsField(AccessTools.Field(typeof(Pawn), nameof(Pawn.mindState))))
+                {
+					yield return new CodeInstruction(opcode: OpCodes.Pop);
+					yield return new CodeInstruction(opcode: OpCodes.Dup);
+					yield return new CodeInstruction(opcode: OpCodes.Ldarg_0);
+					yield return new CodeInstruction(opcode: OpCodes.Call, operand: AccessTools.Method(typeof(GenerateQualityCreatedByPawn_Patch), nameof(GenerateQualityCreatedByPawn_Patch.Notify_Progress)));
+					yield return new CodeInstruction(opcode: OpCodes.Ldarg_0);
+                }
+				yield return instruction;
+            }
+        }
+
+        public static void Notify_Progress(QualityCategory level, Pawn pawn)
+        {
+            if (pawn.InspirationDef == VSIE_DefOf.Inspired_Creativity && (level == QualityCategory.Masterwork || level == QualityCategory.Legendary))
+            {
+                VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(pawn);
+            }
+        }
+    }
 }

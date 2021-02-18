@@ -58,6 +58,7 @@
     <Compile Include="HarmonyPatches\MentalBreaks_Patches.cs" />
     <Compile Include="HarmonyPatches\JobDriver_Patches.cs" />
     <Compile Include="HarmonyPatches\ButcherProducts_Patch.cs" />
+    <Compile Include="HarmonyPatches\WorkGiver_Patches.cs" />
     <Compile Include="Tales\Tale_TriplePawn.cs" />
     <Compile Include="Thoughts\ThoughtWorker_IsRoyalty.cs" />
     <Compile Include="Thoughts\ThoughtWorker_StoleMyLover.cs" />
