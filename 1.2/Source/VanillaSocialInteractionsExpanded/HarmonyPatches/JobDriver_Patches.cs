@@ -96,11 +96,16 @@ namespace VanillaSocialInteractionsExpanded
 			var toil = new Toil();
 			toil.initAction = delegate ()
 			{
+				var actor = toil.actor;
+				var resurrected = (actor.CurJob.targetA.Thing as Corpse).InnerPawn;
 				if (Rand.Chance(0.1f))
 				{
-					var actor = toil.actor;
-					var resurrected = (actor.CurJob.targetA.Thing as Corpse).InnerPawn;
 					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_ResurrectedMe, resurrected, actor);
+				}
+
+				if (Rand.Chance(0.1f))
+                {
+					VSIE_Utils.TryDevelopNewTrait(resurrected, "VSIE.TraitChangePawnResurrected");
 				}
 			};
 			toils.Insert(toils.Count - 1, toil);
@@ -121,6 +126,26 @@ namespace VanillaSocialInteractionsExpanded
 				if (actor.InspirationDef == VSIE_DefOf.VSIE_Flirting_Frenzy)
                 {
 					VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(actor);
+                }
+			};
+			toils.Insert(toils.Count - 1, toil);
+			__result = toils;
+		}
+	}
+
+	[HarmonyPatch(typeof(JobDriver_BestowingCeremony), "MakeNewToils")]
+	public class JobDriver_BestowingCeremony_MakeNewToils
+	{
+		private static void Postfix(ref IEnumerable<Toil> __result)
+		{
+			List<Toil> toils = __result.ToList();
+			var toil = new Toil();
+			toil.initAction = delegate ()
+			{
+				var actor = toil.actor;
+				if (Rand.Chance(0.1f))
+                {
+					VSIE_Utils.TryDevelopNewTrait(actor, "VSIE.BestowingCeremony");
                 }
 			};
 			toils.Insert(toils.Count - 1, toil);
@@ -179,7 +204,7 @@ namespace VanillaSocialInteractionsExpanded
     {
 		private static void Postfix(Thing thing, StatDef stat, bool applyPostProcess, ref float __result)
         {
-			if (thing is Pawn pawn && stat == StatDefOf.ResearchSpeed && pawn.InspirationDef == VSIE_DefOf.VSIE_Inspired_Research)
+			if (stat == StatDefOf.ResearchSpeed && thing is Pawn pawn && pawn.InspirationDef == VSIE_DefOf.VSIE_Inspired_Research)
             {
 				__result *= 5;
             }

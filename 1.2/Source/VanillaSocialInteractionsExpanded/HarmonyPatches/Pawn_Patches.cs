@@ -34,6 +34,18 @@ namespace VanillaSocialInteractionsExpanded
 		}
 	}
 
+	[HarmonyPatch(typeof(Pawn_AgeTracker), "BirthdayBiological")]
+	public static class BirthdayBiological_Patch
+	{
+		private static void Postfix(Pawn ___pawn)
+		{
+			if (Rand.Chance(0.1f))
+            {
+				VSIE_Utils.TryDevelopNewTrait(___pawn, "VSIE.BirthdayEvent");
+            }
+		}
+	}
+
 	[HarmonyPatch(typeof(Pawn), "SetFaction")]
 	public static class SetFaction_Patch
 	{
@@ -47,7 +59,7 @@ namespace VanillaSocialInteractionsExpanded
 				}
 			}
 			if (__instance.IsWildMan() && recruiter != null)
-            {
+			{
 				if (Rand.Chance(0.1f))
 				{
 					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_TamedMe, __instance, recruiter);

@@ -22,6 +22,33 @@ namespace VanillaSocialInteractionsExpanded
 		}
 	}
 
+	[HarmonyPatch(typeof(MentalBreakWorker_Catatonic), "TryStart")]
+	public class MentalBreakWorker_Catatonic_Patch
+	{
+		private static void Postfix(Pawn pawn, string reason, bool causedByMood)
+		{
+			if (Rand.Chance(0.1f))
+			{
+				VSIE_Utils.TryDevelopNewTrait(pawn, "VSIE.TraitChangePawnHasCatatonicBreakdown");
+			}
+		}
+	}
+
+	[HarmonyPatch(typeof(MentalState), "RecoverFromState")]
+	public class RecoverFromState_Patch
+	{
+		private static void Prefix(MentalState __instance)
+		{
+			if (__instance.def.IsExtreme)
+            {
+				if (Rand.Chance(0.1f))
+				{
+					VSIE_Utils.TryDevelopNewTrait(__instance.pawn, "VSIE.CatarhisAfterMentalBreak");
+				}
+			}
+		}
+	}
+
 	[HarmonyPatch(typeof(MentalState_Slaughterer), "Notify_SlaughteredAnimal")]
 	public class Notify_SlaughteredAnimal_Patch
 	{

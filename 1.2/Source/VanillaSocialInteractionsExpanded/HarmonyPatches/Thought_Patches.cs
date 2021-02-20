@@ -28,4 +28,25 @@ namespace VanillaSocialInteractionsExpanded
 			}
 		}
 	}
+
+	[HarmonyPatch(typeof(IndividualThoughtToAdd), "Add")]
+	public static class IndividualThoughtToAdd_Patch
+	{
+		public static void Postfix(IndividualThoughtToAdd __instance)
+		{
+			foreach (var relation in DefDatabase<PawnRelationDef>.AllDefs)
+            {
+				if (relation.opinionOffset >= 20)
+                {
+					if (relation.diedThought == __instance.thought.def || relation.diedThoughtFemale == __instance.thought.def)
+                    {
+						if (Rand.Chance(0.1f))
+                        {
+							VSIE_Utils.TryDevelopNewTrait(__instance.addTo, "VSIE.TraitChangeFamilyMemberDied");
+                        }
+                    }
+				}
+			}
+        }
+	}
 }

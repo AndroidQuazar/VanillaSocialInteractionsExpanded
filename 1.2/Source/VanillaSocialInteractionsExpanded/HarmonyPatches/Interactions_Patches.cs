@@ -100,6 +100,14 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Prefix(Pawn recruiter, Pawn recruitee)
         {
+			if (recruitee.IsPrisoner && recruiter != null)
+			{
+				if (Rand.Chance(0.1f))
+				{
+					VSIE_Utils.TryDevelopNewTrait(recruitee, "VSIE.TraitChangePrisonerRecruitedText");
+				}
+			}
+
 			if (recruitee.IsPrisoner && recruiter?.InspirationDef == VSIE_DefOf.Inspired_Recruitment)
             {
 				VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(recruiter);

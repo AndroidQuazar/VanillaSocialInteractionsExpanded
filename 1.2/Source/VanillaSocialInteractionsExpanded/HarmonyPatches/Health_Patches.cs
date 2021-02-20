@@ -64,6 +64,24 @@ namespace VanillaSocialInteractionsExpanded
 		}
 	}
 
+	[HarmonyPatch(typeof(ImmunityRecord), "ImmunityTick")]
+	public static class ImmunityTick_Patch
+	{
+		public static Dictionary<Pawn, int> checkedPawns = new Dictionary<Pawn, int>();
+		private static void Postfix(ImmunityRecord __instance, Pawn pawn, bool sick, Hediff diseaseInstance)
+		{
+			if (__instance.hediffDef.lethalSeverity == 1f && __instance.immunity == 1f)
+            {
+				if (checkedPawns.TryGetValue(pawn, out int checkedTicks) && Find.TickManager.TicksGame < checkedTicks + 60000) return;
+				if (Rand.Chance(0.1f))
+                {
+					VSIE_Utils.TryDevelopNewTrait(pawn, "VSIE.RecoveredAfterDeadlyDisease");
+                }
+				checkedPawns[pawn] = Find.TickManager.TicksGame;
+            }
+		}
+	}
+
 
 	[HarmonyPatch(typeof(TendUtility), "DoTend")]
 	public static class DoTend_Patch

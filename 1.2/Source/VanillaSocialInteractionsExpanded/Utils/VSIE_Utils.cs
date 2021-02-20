@@ -36,6 +36,15 @@ namespace VanillaSocialInteractionsExpanded
 
 		private static SocialInteractionsManager sManager;
 
+		public static void TryDevelopNewTrait(Pawn pawn, string letterText)
+        {
+			var manager = VSIE_Utils.SocialInteractionsManager;
+			if (!manager.pawnsWithAdditionalTrait.Contains(pawn))
+			{
+				manager.TryDevelopNewTrait(pawn, letterText);
+			}
+		}
+
 		public static List<TaleDef> blacklistedTales = new List<TaleDef>
 		{
 			VSIE_DefOf.VSIE_ExposedCorpseOfMyFriend
