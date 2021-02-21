@@ -36,4 +36,25 @@ namespace VanillaSocialInteractionsExpanded
             }
 		}
 	}
+
+	[HarmonyPatch(typeof(Pawn_RelationsTracker), "AddDirectRelation")]
+	public class Pawn_RelationsTracker_AddDirectRelation_Patchfff
+	{
+		private static void Postfix(Pawn ___pawn, PawnRelationDef def, Pawn otherPawn)
+		{
+			Log.Message($"{___pawn} developed {def.defName} relationship with {otherPawn}");
+		}
+	}
+	
+	[HarmonyPatch(typeof(Pawn_RelationsTracker), "TryRemoveDirectRelation")]
+	public class TryRemoveDirectRelation_Patch
+	{
+		private static void Postfix(bool __result, Pawn ___pawn, PawnRelationDef def, Pawn otherPawn)
+		{
+			if (__result)
+            {
+				Log.Message($"{___pawn} abandoned {def.defName} relationship with {otherPawn}");
+            }
+		}
+	}
 }

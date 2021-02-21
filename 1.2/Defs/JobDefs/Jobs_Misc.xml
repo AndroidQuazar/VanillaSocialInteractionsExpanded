@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <JobDef>
+    <defName>VSIE_VentToFriend</defName>
+    <driverClass>VanillaSocialInteractionsExpanded.JobDriver_VentToFriend</driverClass>
+    <reportString>venting to TargetA.</reportString>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+  
+    <JobDef>
+    <defName>VSIE_StandAndHearVenting</defName>
+    <driverClass>VanillaSocialInteractionsExpanded.JobDriver_StandAndHearVenting</driverClass>
+    <reportString>hearing venting from TargetA.</reportString>
+  </JobDef>
+</Defs>

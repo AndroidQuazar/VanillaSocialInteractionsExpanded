@@ -33,6 +33,16 @@ namespace VanillaSocialInteractionsExpanded
 						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WeHadNiceChat, recipient, ___pawn);
 						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WeHadNiceChat, ___pawn, recipient);
 					}
+					if (___pawn.relations.GetFirstDirectRelationPawn(VSIE_DefOf.VSIE_BestFriend) is null && recipient.relations.GetFirstDirectRelationPawn(VSIE_DefOf.VSIE_BestFriend) is null)
+                    {
+						var recipientOpinionOf = recipient.relations.OpinionOf(___pawn);
+						var ___pawnOpinionOf = ___pawn.relations.OpinionOf(recipient);
+
+						if (recipientOpinionOf >= 80 && ___pawnOpinionOf >= 80 && !recipient.relations.DirectRelationExists(VSIE_DefOf.VSIE_BestFriend, ___pawn))
+						{
+							recipient.relations.AddDirectRelation(VSIE_DefOf.VSIE_BestFriend, ___pawn);
+						}
+					}
 				}
 			}
 		}

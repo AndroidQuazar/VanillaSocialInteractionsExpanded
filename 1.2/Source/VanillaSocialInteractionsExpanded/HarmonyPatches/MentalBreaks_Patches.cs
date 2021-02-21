@@ -89,6 +89,27 @@ namespace VanillaSocialInteractionsExpanded
 	[HarmonyPatch(typeof(MentalStateHandler), "TryStartMentalState")]
 	public class TryStartMentalState_Patch
 	{
+		private static bool Prefix(MentalStateHandler __instance, Pawn ___pawn, bool __result, MentalStateDef stateDef, string reason = null, bool forceWake = false, bool causedByMood = false, Pawn otherPawn = null, bool transitionSilently = false)
+        {
+			if (causedByMood)
+            {
+				var friendsToVent = VSIE_Utils.GetFriendsFor(___pawn);
+				if (friendsToVent.Any())
+                {
+					friendsToVent = friendsToVent.Where(x => x.Map == ___pawn.Map && x.Position.DistanceTo(___pawn.Position) <= 30);
+					if (friendsToVent.Any())
+                    {
+						var friendToVent = friendsToVent.RandomElementByWeight(x => x.relations.OpinionOf(___pawn));
+						var job = JobMaker.MakeJob(VSIE_DefOf.VSIE_VentToFriend, friendToVent);
+						___pawn.jobs.TryTakeOrderedJob(job);
+						Log.Message(___pawn + " venting to " + friendToVent);
+						__result = false;
+						return false;
+                    }
+				}
+			}
+			return true;
+        }
 		private static void Postfix(MentalStateHandler __instance, Pawn ___pawn, bool __result, MentalStateDef stateDef, string reason = null, bool forceWake = false, bool causedByMood = false, Pawn otherPawn = null, bool transitionSilently = false)
 		{
 			if (__result)

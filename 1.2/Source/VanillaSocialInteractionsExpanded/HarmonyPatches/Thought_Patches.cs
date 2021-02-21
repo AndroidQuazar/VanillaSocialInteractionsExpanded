@@ -19,6 +19,7 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Postfix(MemoryThoughtHandler __instance, Thought_Memory newThought, Pawn otherPawn)
 		{
+			Log.Message(__instance.pawn + " gaining thought " + newThought.def);
 			if (newThought.def == ThoughtDefOf.RebuffedMyRomanceAttempt)
             {
 				if (Rand.Chance(0.1f))

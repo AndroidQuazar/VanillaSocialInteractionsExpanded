@@ -75,6 +75,10 @@ namespace VanillaSocialInteractionsExpanded
         public static MentalStateDef FireStartingSpree;
         public static MentalStateDef MurderousRage;
 
+        public static PawnRelationDef VSIE_BestFriend;
+        public static InteractionDef VSIE_Vent;
+        public static JobDef VSIE_VentToFriend;
+        public static JobDef VSIE_StandAndHearVenting;
 
     }
 }

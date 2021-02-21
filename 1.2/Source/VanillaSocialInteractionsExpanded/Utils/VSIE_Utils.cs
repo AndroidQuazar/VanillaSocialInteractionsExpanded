@@ -36,6 +36,22 @@ namespace VanillaSocialInteractionsExpanded
 
 		private static SocialInteractionsManager sManager;
 
+		public static IEnumerable<Pawn> GetFriendsFor(Pawn pawn)
+        {
+			var bestFriend = pawn.relations.GetFirstDirectRelationPawn(VSIE_DefOf.VSIE_BestFriend);
+			if (bestFriend != null)
+            {
+				yield return bestFriend;
+            }
+			foreach (var otherPawn in pawn.relations.PotentiallyRelatedPawns)
+            {
+				if (otherPawn.relations.OpinionOf(pawn) >= 20 && pawn.relations.OpinionOf(otherPawn) >= 20)
+                {
+					yield return otherPawn;
+                }
+            }
+			
+        }
 		public static void TryDevelopNewTrait(Pawn pawn, string letterText)
         {
 			var manager = VSIE_Utils.SocialInteractionsManager;
