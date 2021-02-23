@@ -20,4 +20,7 @@
   <VSIE.BirthdayEvent>{PAWN_nameDef} took a moment to reflect upon themself on their birthday, which resulted in developing the {0} trait.\n\n{1}.</VSIE.BirthdayEvent>
   <VSIE.BestowingCeremony>Possibly the greatest moment in {PAWN_nameDef}’s life, a bestowing ceremony, allowed them to develop the {0} trait.\n\n{1}.</VSIE.BestowingCeremony>
 
+  <VSIE.Discord>DISCORD PLACEHOLDER MESSAGE</VSIE.Discord>
+
+
 </LanguageData>

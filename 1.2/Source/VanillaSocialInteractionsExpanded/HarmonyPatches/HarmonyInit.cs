@@ -57,4 +57,29 @@ namespace VanillaSocialInteractionsExpanded
             }
 		}
 	}
+
+	[HarmonyPatch(typeof(Pawn_InteractionsTracker), "TryInteractWith")]
+	public class TryInteractWith_Patch2
+	{
+		private static void Postfix(bool __result, Pawn ___pawn, Pawn recipient, InteractionDef intDef)
+		{
+			if (__result)
+			{
+				Log.Message($"{___pawn} is interacting ({intDef.defName}) with {recipient}");
+			}
+		}
+	}
+
+	[HarmonyPatch(typeof(MemoryThoughtHandler), "TryGainMemory", new Type[]
+	{
+		typeof(Thought_Memory),
+		typeof(Pawn)
+	})]
+	public static class TryGainMemory_Patch2
+	{
+		private static void Postfix(MemoryThoughtHandler __instance, Thought_Memory newThought, Pawn otherPawn)
+		{
+			Log.Message(__instance.pawn + " is gaining thought " + newThought.def);
+		}
+	}
 }

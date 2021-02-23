@@ -62,21 +62,111 @@ namespace VanillaSocialInteractionsExpanded
             Scribe_Defs.Look(ref inspirationDef, "inspirationDef");
         }
     }
+
+    public class TeachingTopic : IExposable
+    {
+        public TeachingTopic()
+        {
+
+        }
+        public TeachingTopic(Pawn pupil, SkillDef skillDef)
+        {
+            this.pupil = pupil;
+            this.skillDef = skillDef;
+        }
+
+        public Pawn pupil;
+        public SkillDef skillDef;
+
+        public void ExposeData()
+        {
+            Scribe_References.Look(ref pupil, "pupil");
+            Scribe_Defs.Look(ref skillDef, "skillDef");
+        }
+    }
+
+    public class WorkTime : IExposable
+    {
+        public int workTick;
+        public int lastTick;
+
+        public void ExposeData()
+        {
+            Scribe_Values.Look(ref workTick, "workTick");
+            Scribe_Values.Look(ref lastTick, "lastTick");
+        }
+    }
+    public class Workers : IExposable
+    {
+        public Workers()
+        {
+
+        }
+        public Dictionary<Pawn, WorkTime> workersWithWorkingTicks = new Dictionary<Pawn, WorkTime>();
+
+        public bool TryCauseGroupFights(Pawn initiator)
+        {
+            if (initiator.CurJobDef != JobDefOf.SocialFight && initiator.mindState.lastJobTag == JobTag.MiscWork && initiator.needs.mood.CurLevelPercentage < 0.3f && !initiator.WorkTagIsDisabled(WorkTags.Violent))
+            {
+                if (!InteractionUtility.TryGetRandomVerbForSocialFight(initiator, out Verb verb))
+                {
+                    return false;
+                }
+
+                var candidates = workersWithWorkingTicks.Where(x => x.Key.needs.mood.CurInstantLevelPercentage < 0.3f && x.Value.workTick > 3000).Select(x => x.Key).ToList();
+                if (candidates.Any())
+                {
+                    var firstPawn = candidates.OrderBy(x => x.Position.DistanceTo(initiator.Position)).First();
+                    Job job = JobMaker.MakeJob(JobDefOf.SocialFight, firstPawn);
+                    job.maxNumMeleeAttacks = 1;
+                    job.verbToUse = verb;
+                    initiator.jobs.TryTakeOrderedJob(job);
+                    Messages.Message("VSIE.Discord".Translate(), initiator, MessageTypeDefOf.NegativeEvent);
+                    var manager = VSIE_Utils.SocialInteractionsManager;
+
+                    if (manager.angryWorkers is null)
+                    {
+                        manager.angryWorkers = new Dictionary<Pawn, int>();
+                    }
+                    manager.angryWorkers[initiator] = Find.TickManager.TicksGame;
+                    foreach (var worker in candidates)
+                    {
+                        manager.angryWorkers[worker] = Find.TickManager.TicksGame;
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }
+        public void ExposeData()
+        {
+            Scribe_Collections.Look(ref workersWithWorkingTicks, "workersWithWorkingTicks", LookMode.Reference, LookMode.Deep, ref pawnsKeys, ref intValues);
+        }
+        private List<Pawn> pawnsKeys;
+        private List<WorkTime> intValues;
+    }
     public class SocialInteractionsManager : GameComponent
     {
         private Dictionary<Pawn, Aspiration> activeAspirations = new Dictionary<Pawn, Aspiration>();
         public HashSet<Pawn> pawnsWithAdditionalTrait = new HashSet<Pawn>();
+        public Dictionary<Pawn, TeachingTopic> teachersWithPupils = new Dictionary<Pawn, TeachingTopic>();
+        public Dictionary<Pawn, Workers> pawnsWithWorkers = new Dictionary<Pawn, Workers>();
+        public Dictionary<Pawn, int> angryWorkers = new Dictionary<Pawn, int>();
         public SocialInteractionsManager()
-		{
-		}
+        {
+        }
 
-		public SocialInteractionsManager(Game game)
-		{
-
-		}
-        public void PreInit()
+        public SocialInteractionsManager(Game game)
         {
 
+        }
+        public void PreInit()
+        {
+            if (activeAspirations is null) activeAspirations = new Dictionary<Pawn, Aspiration>();
+            if (pawnsWithAdditionalTrait is null) pawnsWithAdditionalTrait = new HashSet<Pawn>();
+            if (teachersWithPupils is null) teachersWithPupils = new Dictionary<Pawn, TeachingTopic>();
+            if (pawnsWithWorkers is null) pawnsWithWorkers = new Dictionary<Pawn, Workers>();
+            if (angryWorkers is null) angryWorkers = new Dictionary<Pawn, int>();
         }
         public override void StartedNewGame()
         {
@@ -90,6 +180,62 @@ namespace VanillaSocialInteractionsExpanded
             base.LoadedGame();
         }
 
+        public override void GameComponentTick()
+        {
+            base.GameComponentTick();
+            if (pawnsWithWorkers != null)
+            {
+                var keysToRemove = new List<Pawn>();
+                foreach (var worker in pawnsWithWorkers)
+                {
+                    if (worker.Value.TryCauseGroupFights(worker.Key))
+                    {
+                        keysToRemove.Add(worker.Key);
+                    }
+                }
+
+                foreach (var pawn in keysToRemove)
+                {
+                    pawnsWithWorkers.Remove(pawn);
+                }
+            }
+        }
+
+        public void WorkerTick(Pawn pawn)
+        {
+            if (pawn.IsHashIntervalTick(60))
+            {
+                if (!this.pawnsWithWorkers.TryGetValue(pawn, out Workers workers))
+                {
+                    workers = new Workers();
+                    this.pawnsWithWorkers[pawn] = workers;
+                    workers.workersWithWorkingTicks = new Dictionary<Pawn, WorkTime>();
+                }
+                var nearestWorkers = pawn.Map.mapPawns.SpawnedPawnsInFaction(pawn.Faction).Where(x => x != pawn && x.RaceProps.Humanlike && x.Position.DistanceTo(pawn.Position) < 10);
+                foreach (var worker in nearestWorkers)
+                {
+                    if (workers.workersWithWorkingTicks.ContainsKey(worker))
+                    {
+                        if (Find.TickManager.TicksGame > workers.workersWithWorkingTicks[worker].lastTick + 10000)
+                        {
+                            Log.Message("Resetting work time count for " + worker);
+                            workers.workersWithWorkingTicks[worker].workTick = 0;
+                        }
+                        else
+                        {
+                            workers.workersWithWorkingTicks[worker].workTick += 60;
+                        }
+                    }
+                    else
+                    {
+                        var workTime = new WorkTime();
+                        workTime.workTick = 0;
+                        workers.workersWithWorkingTicks[worker] = workTime;
+                    }
+                    workers.workersWithWorkingTicks[worker].lastTick = Find.TickManager.TicksGame;
+                }
+            }
+        }
         public void Notify_AspirationProgress(Pawn pawn)
         {
             if (activeAspirations.TryGetValue(pawn, out var aspiration))
@@ -99,7 +245,6 @@ namespace VanillaSocialInteractionsExpanded
                     aspiration.Notify_Progress(out bool finished);
                     if (finished)
                     {
-                        Log.Message(pawn + " aspiration is done: " + aspiration.inspirationDef);
                         aspiration.OnComplete();
                         activeAspirations.Remove(pawn);
                     }
@@ -135,7 +280,6 @@ namespace VanillaSocialInteractionsExpanded
         {
             if (activeAspirations.TryGetValue(pawn, out var aspiration) && inspirationDef == aspiration.inspirationDef)
             {
-                Log.Message(pawn + " aspiration is expired: " + aspiration.inspirationDef);
                 aspiration.OnExpired();
                 activeAspirations.Remove(pawn);
             }
@@ -143,32 +287,22 @@ namespace VanillaSocialInteractionsExpanded
 
         public void TryDevelopNewTrait(Pawn pawn, string letterTextKey)
         {
-            Log.Message(" - TryDevelopNewTrait - var traits = DefDatabase<TraitDef>.AllDefsListForReading; - 1", true);
             var traits = DefDatabase<TraitDef>.AllDefsListForReading;
-            Log.Message(" - TryDevelopNewTrait - var traitsCount = traits.Count; - 2", true);
             var traitsCount = traits.Count;
             for (var i = 0; i <= traitsCount; i++)
             {
-                Log.Message(" - TryDevelopNewTrait - TraitDef newTraitDef = DefDatabase<TraitDef>.AllDefsListForReading.RandomElementByWeight((TraitDef tr) => tr.GetGenderSpecificCommonality(pawn.gender)); - 3", true);
                 TraitDef newTraitDef = DefDatabase<TraitDef>.AllDefsListForReading.RandomElementByWeight((TraitDef tr) => tr.GetGenderSpecificCommonality(pawn.gender));
-                Log.Message(" - TryDevelopNewTrait - int degree = RandomTraitDegree(newTraitDef); - 4", true);
                 int degree = RandomTraitDegree(newTraitDef);
-                Log.Message(" - TryDevelopNewTrait - if (TraitIsAllowed(pawn, newTraitDef, degree)) - 5", true);
                 if (TraitIsAllowed(pawn, newTraitDef, degree))
                 {
-                    Log.Message(" - TryDevelopNewTrait - Trait trait2 = new Trait(newTraitDef, degree); - 6", true);
                     Trait trait = new Trait(newTraitDef, degree);
-                    Log.Message(" - TryDevelopNewTrait - if (pawn.mindState == null || pawn.mindState.mentalBreaker == null || !((pawn.mindState.mentalBreaker.BreakThresholdMinor + trait2.OffsetOfStat(StatDefOf.MentalBreakThreshold)) * trait2.MultiplierOfStat(StatDefOf.MentalBreakThreshold) > 0.5f)) - 7", true);
                     if (pawn.mindState == null || pawn.mindState.mentalBreaker == null || !((pawn.mindState.mentalBreaker.BreakThresholdMinor + trait.OffsetOfStat(StatDefOf.MentalBreakThreshold)) * trait.MultiplierOfStat(StatDefOf.MentalBreakThreshold) > 0.5f))
                     {
-                        Log.Message(" - TryDevelopNewTrait - pawn.story.traits.GainTrait(trait2); - 8", true);
                         pawn.story.traits.GainTrait(trait);
-                        Log.Message(" - TryDevelopNewTrait - pawnsWithAdditionalTrait.Add(pawn); - 9", true);
                         pawnsWithAdditionalTrait.Add(pawn);
                         var traitName = trait.CurrentData.GetLabelFor(pawn);
                         var traitDesc = trait.CurrentData.description.Formatted(pawn.Named("PAWN")).AdjustedFor(pawn).Resolve();
                         Find.LetterStack.ReceiveLetter("VSIE.TraitChangeTitle".Translate(traitName, pawn.Named("PAWN")), letterTextKey.Translate(traitName, traitDesc, pawn.Named("PAWN")), LetterDefOf.NeutralEvent, pawn);
-                        Log.Message(" - TryDevelopNewTrait - return; - 10", true);
                         return;
                     }
                 }
@@ -193,7 +327,7 @@ namespace VanillaSocialInteractionsExpanded
                 p.IsDisabled(pawn.story.DisabledWorkTagsBackstoryAndTraits, pawn.GetDisabledWorkTypes(permanentOnly: true))))
                 || pawn.story.childhood.DisallowsTrait(newTraitDef, degree) && (pawn.story.adulthood == null || pawn.story.adulthood.DisallowsTrait(newTraitDef, degree)))
             {
-                    return false;
+                return false;
             }
             return true;
         }
@@ -203,9 +337,21 @@ namespace VanillaSocialInteractionsExpanded
             base.ExposeData();
             Scribe_Collections.Look(ref activeAspirations, "activeAspirations", LookMode.Reference, LookMode.Deep, ref pawnKeys, ref aspirationValues);
             Scribe_Collections.Look(ref pawnsWithAdditionalTrait, "pawnsWithAdditionalTrait", LookMode.Reference);
+            Scribe_Collections.Look(ref teachersWithPupils, "teachersWithPupils", LookMode.Reference, LookMode.Deep, ref pawnKeys2, ref teachingValues);
+            Scribe_Collections.Look(ref pawnsWithWorkers, "pawnsWithWorkers", LookMode.Reference, LookMode.Deep, ref pawnKeys3, ref workerValues);
+            Scribe_Collections.Look(ref angryWorkers, "angryWorkers", LookMode.Reference, LookMode.Value, ref pawnKeys4, ref intValues);
         }
 
         private List<Pawn> pawnKeys;
         private List<Aspiration> aspirationValues;
+
+        private List<Pawn> pawnKeys2;
+        private List<TeachingTopic> teachingValues;
+
+        private List<Pawn> pawnKeys3;
+        private List<Workers> workerValues;
+
+        private List<Pawn> pawnKeys4;
+        private List<int> intValues;
     }
 }

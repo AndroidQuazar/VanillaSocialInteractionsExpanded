@@ -79,6 +79,5 @@ namespace VanillaSocialInteractionsExpanded
         public static InteractionDef VSIE_Vent;
         public static JobDef VSIE_VentToFriend;
         public static JobDef VSIE_StandAndHearVenting;
-
     }
 }

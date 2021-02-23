@@ -15,7 +15,6 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		public override float RandomSelectionWeight(Pawn initiator, Pawn recipient)
 		{
-			Log.Message("InteractionWorker_Vent: " + initiator + " - " + recipient);
 			return 0f;
 		}
 	}

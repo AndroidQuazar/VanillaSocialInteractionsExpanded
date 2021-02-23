@@ -172,12 +172,21 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Postfix(this Toil __result)
 		{
+			var socialManager = VSIE_Utils.SocialInteractionsManager;
+			__result.AddPreTickAction(delegate
+			{
+				var actor = __result.actor;
+				if (actor.RaceProps.Humanlike && actor.Faction != null)
+				{
+					socialManager.WorkerTick(actor);
+				}
+			});
 			__result.AddFinishAction(delegate
 			{
 				var actor = __result.actor;
 				if (actor.InspirationDef == VSIE_DefOf.Frenzy_Work && actor.mindState.lastJobTag == JobTag.MiscWork)
                 {
-					VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(actor);
+					socialManager.Notify_AspirationProgress(actor);
                 }
 			});
 		}
@@ -188,26 +197,23 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Postfix(this Toil __result)
 		{
+			var socialManager = VSIE_Utils.SocialInteractionsManager;
+			__result.AddPreTickAction(delegate
+			{
+				var actor = __result.actor;
+				if (actor.RaceProps.Humanlike && actor.Faction != null)
+                {
+					socialManager.WorkerTick(actor);
+				}
+			});
 			__result.AddFinishAction(delegate
 			{
 				var actor = __result.actor;
 				if (actor.InspirationDef == VSIE_DefOf.Frenzy_Work && actor.mindState.lastJobTag == JobTag.MiscWork)
 				{
-					VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(actor);
+					socialManager.Notify_AspirationProgress(actor);
 				}
 			});
 		}
 	}
-
-	[HarmonyPatch(typeof(StatExtension), nameof(StatExtension.GetStatValue))]
-	public static class GetStatValue_Patch
-    {
-		private static void Postfix(Thing thing, StatDef stat, bool applyPostProcess, ref float __result)
-        {
-			if (stat == StatDefOf.ResearchSpeed && thing is Pawn pawn && pawn.InspirationDef == VSIE_DefOf.VSIE_Inspired_Research)
-            {
-				__result *= 5;
-            }
-        }
-    }
 }
