@@ -39,6 +39,7 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Prefix(MentalState __instance)
 		{
+			Log.Message($"{__instance.pawn} is recovering from {__instance.def}");
 			if (__instance.def.IsExtreme)
             {
 				if (Rand.Chance(0.1f))
@@ -82,6 +83,24 @@ namespace VanillaSocialInteractionsExpanded
             {
 				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WeHadSocialFight, __instance.pawn, __instance.otherPawn);
 				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WeHadSocialFight, __instance.otherPawn, __instance.pawn);
+			}
+		}
+	}
+
+	[HarmonyPatch(typeof(MentalState_SocialFighting), "IsOtherPawnSocialFightingWithMe", MethodType.Getter)]
+	public class IsOtherPawnSocialFightingWithMe_Patch
+	{
+		private static void Postfix(MentalState_SocialFighting __instance, ref bool __result)
+		{
+			if (!__result && __instance.otherPawn.InMentalState)
+			{
+				var socialManager = VSIE_Utils.SocialInteractionsManager;
+				if (socialManager.angryWorkers != null 
+					&& socialManager.angryWorkers.TryGetValue(__instance.pawn, out int lastTick) && lastTick + (GenDate.TicksPerHour * 12) > Find.TickManager.TicksGame
+					&& socialManager.angryWorkers.TryGetValue(__instance.otherPawn, out int lastTick2) && lastTick2 + (GenDate.TicksPerHour * 12) > Find.TickManager.TicksGame)
+                {
+					__result = true;
+                }
 			}
 		}
 	}

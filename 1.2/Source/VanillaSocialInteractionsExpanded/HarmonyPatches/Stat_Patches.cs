@@ -21,11 +21,22 @@ namespace VanillaSocialInteractionsExpanded
             }
             else if (stat == StatDefOf.WorkSpeedGlobal && thing is Pawn pawn2)
             {
-                var pawns = pawn2.Map.mapPawns.SpawnedPawnsInFaction(pawn2.Faction).Where(x => x != pawn2 && x.RaceProps.Humanlike && x.CurJobDef == pawn2.CurJobDef && x.Position.DistanceTo(pawn2.Position) < 10);
-                var pawnCount = pawns.Count();
-                if (pawnCount > 0)
+                var pawnCurJob = pawn2.jobs?.curJob?.def;
+                var pawnPosition = pawn2.Position;
+                var pawns = pawn2.Map.mapPawns.SpawnedPawnsInFaction(pawn2.Faction);
+                var nearestPawnCount = 0;
+                var totalPawnCount = pawns.Count;
+                for (var i = 0; i < totalPawnCount; i++)
                 {
-                    var bonus = pawnCount * 0.1f;
+                    var x = pawns[i];
+                    if (x != pawn2 && x.jobs?.curJob?.def == pawnCurJob && x.RaceProps.Humanlike && x.Position.DistanceTo(pawnPosition) < 10)
+                    {
+                        nearestPawnCount++;
+                    }
+                }
+                if (nearestPawnCount > 0)
+                {
+                    var bonus = nearestPawnCount * 0.1f;
                     var oldResult = __result;
                     __result += bonus;
                     //Log.Message($"{pawn2} gets bonus to work due to other pawns in the same room: {pawns.Count()}, bonus: {bonus}, old result: {oldResult}, new result: {__result}");

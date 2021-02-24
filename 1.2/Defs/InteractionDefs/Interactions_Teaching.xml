@@ -8,6 +8,7 @@
 		<symbol>Things/Mote/SpeechSymbols/Chitchat</symbol>
 		<logRulesInitiator>
 			<rulesStrings>
+				<li>r_logentry-&gt;</li>
 			</rulesStrings>
 		</logRulesInitiator>
 	</InteractionDef>

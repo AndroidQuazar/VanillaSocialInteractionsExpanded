@@ -106,24 +106,17 @@ namespace VanillaSocialInteractionsExpanded
 
         public bool TryCauseGroupFights(Pawn initiator)
         {
-            if (initiator.CurJobDef != JobDefOf.SocialFight && initiator.mindState.lastJobTag == JobTag.MiscWork && initiator.needs.mood.CurLevelPercentage < 0.3f && !initiator.WorkTagIsDisabled(WorkTags.Violent))
+            if (initiator.CurJobDef != JobDefOf.SocialFight && SocialInteractionsManager.jobTags.Contains(initiator.mindState.lastJobTag) 
+                && initiator.needs.mood.CurLevelPercentage < 0.3f && !initiator.WorkTagIsDisabled(WorkTags.Violent))
             {
                 if (!InteractionUtility.TryGetRandomVerbForSocialFight(initiator, out Verb verb))
                 {
                     return false;
                 }
-
-                var candidates = workersWithWorkingTicks.Where(x => x.Key.needs.mood.CurInstantLevelPercentage < 0.3f && x.Value.workTick > 3000).Select(x => x.Key).ToList();
+                var candidates = workersWithWorkingTicks.Where(x => x.Key.needs.mood.CurInstantLevelPercentage < 0.3f && x.Value.workTick > 3000 && initiator.relations.OpinionOf(x.Key) < 0).Select(x => x.Key).ToList();
                 if (candidates.Any())
                 {
-                    var firstPawn = candidates.OrderBy(x => x.Position.DistanceTo(initiator.Position)).First();
-                    Job job = JobMaker.MakeJob(JobDefOf.SocialFight, firstPawn);
-                    job.maxNumMeleeAttacks = 1;
-                    job.verbToUse = verb;
-                    initiator.jobs.TryTakeOrderedJob(job);
-                    Messages.Message("VSIE.Discord".Translate(), initiator, MessageTypeDefOf.NegativeEvent);
                     var manager = VSIE_Utils.SocialInteractionsManager;
-
                     if (manager.angryWorkers is null)
                     {
                         manager.angryWorkers = new Dictionary<Pawn, int>();
@@ -133,10 +126,73 @@ namespace VanillaSocialInteractionsExpanded
                     {
                         manager.angryWorkers[worker] = Find.TickManager.TicksGame;
                     }
+                    var nearestWorkers = initiator.Map.mapPawns.SpawnedPawnsInFaction(initiator.Faction).Where(x => x != initiator && x.RaceProps.Humanlike 
+                        && SocialInteractionsManager.jobTags.Contains(x.mindState.lastJobTag) && x.needs.mood.CurLevelPercentage < 0.3f && !x.WorkTagIsDisabled(WorkTags.Violent)
+                        && x.Position.DistanceTo(initiator.Position) < 10).ToHashSet();
+
+                    foreach (var worker in nearestWorkers)
+                    {
+                        manager.angryWorkers[worker] = Find.TickManager.TicksGame;
+                    }
+                    var angryWorkers = manager.angryWorkers.Keys.Where(x => x != initiator && x.Position.DistanceTo(initiator.Position) <= 10);
+                    nearestWorkers.AddRange(candidates);
+                    nearestWorkers.AddRange(angryWorkers);
+
+                    var fighters = new HashSet<Pawn>();
+                    var firstPawn = candidates.OrderBy(x => x.Position.DistanceTo(initiator.Position)).First();
+                    initiator.interactions.StartSocialFight(firstPawn);
+                    fighters.Add(initiator);
+                    fighters.Add(firstPawn);
+                    Log.Message($"{initiator} is starting a group fight with candidates of {nearestWorkers.Count}");
+                    foreach (var pawn in nearestWorkers)
+                    {
+                        if (!pawn.InMentalState)
+                        {
+                            var candidatesToFight = angryWorkers.Where(x => x != pawn);
+                            if (candidatesToFight.Any() && candidatesToFight.TryRandomElementByWeight(x => DistanceScore(x.Position.DistanceTo(pawn.Position)), out Pawn victim))
+                            {
+                                fighters.Add(pawn);
+                                fighters.Add(victim);
+                                pawn.interactions.StartSocialFight(victim);
+                            }
+                            else
+                            {
+                                Log.Message($"{pawn} doesn't have any candidates to fight");
+                            }
+                        }
+                        else
+                        {
+                            Log.Message($"{pawn} is taking part in a group fight");
+                        }
+                    }
+
+                    Messages.Message("VSIE.Discord".Translate(), fighters.ToList(), MessageTypeDefOf.NegativeEvent);
                     return true;
                 }
             }
             return false;
+        }
+
+        private static readonly SimpleCurve DistanceFactor = new SimpleCurve
+        {
+            new CurvePoint(30f, 0f),
+            new CurvePoint(20f, 0.1f),
+            new CurvePoint(15f, 0.2f),
+            new CurvePoint(10f, 0.6f),
+            new CurvePoint(9f, 0.7f),
+            new CurvePoint(8f, 0.8f),
+            new CurvePoint(7f, 0.85f),
+            new CurvePoint(6f, 0.9f),
+            new CurvePoint(5f, 0.91f),
+            new CurvePoint(4f, 0.93f),
+            new CurvePoint(3f, 0.95f),
+            new CurvePoint(2f, 0.97f),
+            new CurvePoint(1f, 0.99f),
+            new CurvePoint(0f, 1f)
+        };
+        private float DistanceScore(float distance)
+        {
+            return DistanceFactor.Evaluate(distance);
         }
         public void ExposeData()
         {
@@ -188,7 +244,7 @@ namespace VanillaSocialInteractionsExpanded
                 var keysToRemove = new List<Pawn>();
                 foreach (var worker in pawnsWithWorkers)
                 {
-                    if (worker.Value.TryCauseGroupFights(worker.Key))
+                    if (worker.Key.IsHashIntervalTick(300) && Rand.Chance(0.1f) && worker.Value.TryCauseGroupFights(worker.Key))
                     {
                         keysToRemove.Add(worker.Key);
                     }
@@ -201,9 +257,12 @@ namespace VanillaSocialInteractionsExpanded
             }
         }
 
+        public static HashSet<JobTag> jobTags = new HashSet<JobTag> { JobTag.Misc, JobTag.MiscWork, JobTag.Fieldwork };
+
+        private static int workerTickRate = 60;
         public void WorkerTick(Pawn pawn)
         {
-            if (pawn.IsHashIntervalTick(60))
+            if (pawn.IsHashIntervalTick(workerTickRate))
             {
                 if (!this.pawnsWithWorkers.TryGetValue(pawn, out Workers workers))
                 {
@@ -211,19 +270,20 @@ namespace VanillaSocialInteractionsExpanded
                     this.pawnsWithWorkers[pawn] = workers;
                     workers.workersWithWorkingTicks = new Dictionary<Pawn, WorkTime>();
                 }
-                var nearestWorkers = pawn.Map.mapPawns.SpawnedPawnsInFaction(pawn.Faction).Where(x => x != pawn && x.RaceProps.Humanlike && x.Position.DistanceTo(pawn.Position) < 10);
+                var nearestWorkers = pawn.Map.mapPawns.SpawnedPawnsInFaction(pawn.Faction).Where(x => x != pawn && jobTags.Contains(x.mindState.lastJobTag) && x.RaceProps.Humanlike && x.Position.DistanceTo(pawn.Position) < 10);
                 foreach (var worker in nearestWorkers)
                 {
+                    //Log.Message($"Nearest worker: {worker}, {worker.CurJob}, {worker.CurJobDef}, {worker.mindState.lastJobTag}");
                     if (workers.workersWithWorkingTicks.ContainsKey(worker))
                     {
                         if (Find.TickManager.TicksGame > workers.workersWithWorkingTicks[worker].lastTick + 10000)
                         {
-                            Log.Message("Resetting work time count for " + worker);
+                            Log.Message("Resetting work time count for " + worker + ", workers.workersWithWorkingTicks[worker].lastTick: " + workers.workersWithWorkingTicks[worker].lastTick + " - Find.TickManager.TicksGame: " + Find.TickManager.TicksGame);
                             workers.workersWithWorkingTicks[worker].workTick = 0;
                         }
                         else
                         {
-                            workers.workersWithWorkingTicks[worker].workTick += 60;
+                            workers.workersWithWorkingTicks[worker].workTick += workerTickRate;
                         }
                     }
                     else
