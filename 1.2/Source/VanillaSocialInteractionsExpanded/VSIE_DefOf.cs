@@ -82,5 +82,11 @@ namespace VanillaSocialInteractionsExpanded
         public static JobDef VSIE_TakingBeer;
         public static JobDef VSIE_TalkToSecondPawn;
         public static ThoughtDef VSIE_HadNiceChatWithBeer;
+        public static ThoughtDef VSIE_AttendedBingeParty;
+        public static GatheringDef VSIE_BingeParty;
+        public static GatheringDef VSIE_GrabbingBeer;
+        public static ThoughtDef VSIE_AttendedOutdoorParty;
+        public static GatheringDef VSIE_OutdoorParty;
+        public static JobDef BuildSnowman;
     }
 }

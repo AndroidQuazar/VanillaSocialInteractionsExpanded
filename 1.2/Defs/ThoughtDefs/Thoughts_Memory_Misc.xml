@@ -39,4 +39,30 @@
       </li>
     </stages>
   </ThoughtDef>
+  
+  <ThoughtDef>
+    <defName>VSIE_AttendedBingeParty</defName>
+    <durationDays>10</durationDays>
+    <stackLimit>10</stackLimit>
+    <stages>
+      <li>
+        <label>Attended binge party</label>
+        <description>I had a great time at the binge party.</description>
+        <baseMoodEffect>12</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+  <ThoughtDef>
+    <defName>VSIE_AttendedOutdoorParty</defName>
+    <durationDays>10</durationDays>
+    <stackLimit>10</stackLimit>
+    <stages>
+      <li>
+        <label>Attended outdoor party</label>
+        <description>I had a great time outside!</description>
+        <baseMoodEffect>8</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
 </Defs>

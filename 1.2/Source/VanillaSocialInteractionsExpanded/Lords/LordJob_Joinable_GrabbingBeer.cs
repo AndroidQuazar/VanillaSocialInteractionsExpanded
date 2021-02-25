@@ -142,36 +142,6 @@ namespace VanillaSocialInteractionsExpanded
                 }
             }
         }
-
-        private bool ShouldAfterPartyBeCalledOff()
-        {
-            Log.Message("LordJob_Joinable_GrabbingBeer : LordJob_Joinable_Gathering - ShouldAfterPartyBeCalledOff - if (organizer.Destroyed || secondPawn.Destroyed) - 42", true);
-            if (organizer.Destroyed || secondPawn.Destroyed)
-            {
-                Log.Message("LordJob_Joinable_GrabbingBeer : LordJob_Joinable_Gathering - ShouldAfterPartyBeCalledOff - return true; - 43", true);
-                return true;
-            }
-            Log.Message("LordJob_Joinable_GrabbingBeer : LordJob_Joinable_Gathering - ShouldAfterPartyBeCalledOff - if (organizer.Downed || secondPawn.Downed) - 44", true);
-            if (organizer.Downed || secondPawn.Downed)
-            {
-                Log.Message("LordJob_Joinable_GrabbingBeer : LordJob_Joinable_Gathering - ShouldAfterPartyBeCalledOff - return true; - 45", true);
-                return true;
-            }
-            Log.Message("LordJob_Joinable_GrabbingBeer : LordJob_Joinable_Gathering - ShouldAfterPartyBeCalledOff - if (spot.GetDangerFor(organizer, base.Map) != Danger.None || spot.GetDangerFor(secondPawn, base.Map) != Danger.None) - 46", true);
-            if (spot.GetDangerFor(organizer, base.Map) != Danger.None || spot.GetDangerFor(secondPawn, base.Map) != Danger.None)
-            {
-                Log.Message("LordJob_Joinable_GrabbingBeer : LordJob_Joinable_Gathering - ShouldAfterPartyBeCalledOff - return true; - 47", true);
-                return true;
-            }
-            Log.Message("LordJob_Joinable_GrabbingBeer : LordJob_Joinable_Gathering - ShouldAfterPartyBeCalledOff - if (!GatheringsUtility.AcceptableGameConditionsToContinueGathering(base.Map)) - 48", true);
-            if (!GatheringsUtility.AcceptableGameConditionsToContinueGathering(base.Map))
-            {
-                Log.Message("LordJob_Joinable_GrabbingBeer : LordJob_Joinable_Gathering - ShouldAfterPartyBeCalledOff - return true; - 49", true);
-                return true;
-            }
-            return false;
-        }
-
         public override float VoluntaryJoinPriorityFor(Pawn p)
         {
             if (p == organizer || p == secondPawn)
@@ -185,16 +155,10 @@ namespace VanillaSocialInteractionsExpanded
         {
             Scribe_References.Look(ref secondPawn, "secondPawn");
             Scribe_Values.Look(ref spot, "spot");
-        }
-
-        private void AddGrabbingBeerThoughts()
-        {
-            Log.Message("LordJob_Joinable_GrabbingBeer : LordJob_Joinable_Gathering - AddGrabbingBeerThoughts - List<Pawn> ownedPawns = lord.ownedPawns; - 56", true);
-            List<Pawn> ownedPawns = lord.ownedPawns;
-            for (int i = 0; i < ownedPawns.Count; i++)
+            Scribe_Values.Look(ref durationTicks, "durationTicks", 0);
+            if (Scribe.mode == LoadSaveMode.PostLoadInit && gatheringDef == null)
             {
-                Log.Message("LordJob_Joinable_GrabbingBeer : LordJob_Joinable_Gathering - AddGrabbingBeerThoughts - ownedPawns[i].needs.mood.thoughts.memories.TryGainMemory(ThoughtDefOf.AttendedWedding); - 57", true);
-                ownedPawns[i].needs.mood.thoughts.memories.TryGainMemory(ThoughtDefOf.AttendedWedding);
+                gatheringDef = VSIE_DefOf.VSIE_GrabbingBeer;
             }
         }
     }

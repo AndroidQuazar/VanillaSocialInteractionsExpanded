@@ -2,6 +2,124 @@
 <Defs>
 
 	<DutyDef>
+		<defName>VSIE_OutdoorParty</defName>
+		<label>outdoor party</label>
+		<hook>MediumPriority</hook>
+		<thinkNode Class="ThinkNode_Priority">
+			<subNodes>
+				<li Class="ThinkNode_ConditionalInGatheringArea">
+					<subNodes>
+						<!-- Stand where you are and be socially active -->
+						<li Class="ThinkNode_ConditionalRandom">
+							<chance>0.35</chance>
+							<subNodes>
+								<li Class="JobGiver_StandAndBeSociallyActive">
+									<ticksRange>350~750</ticksRange>
+								</li>
+							</subNodes>
+						</li>
+
+						<!-- Get joy -->
+						<li Class="ThinkNode_ConditionalRandom">
+							<chance>0.1</chance>
+							<subNodes>
+								<li Class="JobGiver_GetJoyInGatheringArea" />
+							</subNodes>
+						</li>
+
+						<li Class="ThinkNode_ConditionalRandom">
+							<chance>0.1</chance>
+							<subNodes>
+								<li Class="VanillaSocialInteractionsExpanded.JobGiver_BuildSnowman" />
+							</subNodes>
+						</li>
+						
+						<li Class="VanillaSocialInteractionsExpanded.JobGiver_BuildCampfire" />
+						
+						<!--
+						<li Class="ThinkNode_ConditionalRandom">
+							<chance>0.1</chance>
+							<subNodes>
+								<li Class="VanillaSocialInteractionsExpanded.JobGiver_BuildCampfire" />
+							</subNodes>
+						</li>
+						-->
+						
+						<li Class="ThinkNode_ForbidOutsideFlagRadius">
+							<maxDistToSquadFlag>16</maxDistToSquadFlag>
+							<subNodes>
+								<li Class="JobGiver_Work" />
+							</subNodes>
+						</li>
+						
+						<!-- Wander -->
+						<li Class="JobGiver_WanderInGatheringArea">
+							<ticksBetweenWandersRange>50~250</ticksBetweenWandersRange>
+						</li>
+						
+					</subNodes>
+				</li>
+
+				<!-- Reach the party area -->
+				<li Class="JobGiver_WanderInGatheringArea">
+					<ticksBetweenWandersRange>50~250</ticksBetweenWandersRange>
+					<locomotionUrgency>Jog</locomotionUrgency>
+				</li>
+			</subNodes>
+		</thinkNode>
+	</DutyDef>
+
+	<DutyDef>
+		<defName>VSIE_BingeParty</defName>
+		<label>binge party</label>
+		<hook>MediumPriority</hook>
+		<thinkNode Class="ThinkNode_Priority">
+			<subNodes>
+				<li Class="ThinkNode_ConditionalInGatheringArea">
+					<subNodes>
+						<!-- Eat -->
+						<li Class="ThinkNode_ConditionalRandom">
+							<chance>0.05</chance>
+							<subNodes>
+								<li Class="VanillaSocialInteractionsExpanded.JobGiver_EatDrinkAndTakeDrugsInGatheringArea" />
+							</subNodes>
+						</li>
+
+						<!-- Stand where you are and be socially active -->
+						<li Class="ThinkNode_ConditionalRandom">
+							<chance>0.35</chance>
+							<subNodes>
+								<li Class="JobGiver_StandAndBeSociallyActive">
+									<ticksRange>350~750</ticksRange>
+								</li>
+							</subNodes>
+						</li>
+
+						<!-- Get joy -->
+						<li Class="ThinkNode_ConditionalRandom">
+							<chance>0.1</chance>
+							<subNodes>
+								<li Class="JobGiver_GetJoyInGatheringArea" />
+							</subNodes>
+						</li>
+
+						<!-- Wander -->
+						<li Class="JobGiver_WanderInGatheringArea">
+							<ticksBetweenWandersRange>50~250</ticksBetweenWandersRange>
+						</li>
+					</subNodes>
+				</li>
+
+				<!-- Reach the party area -->
+				<li Class="JobGiver_WanderInGatheringArea">
+					<ticksBetweenWandersRange>50~250</ticksBetweenWandersRange>
+					<locomotionUrgency>Jog</locomotionUrgency>
+				</li>
+			</subNodes>
+		</thinkNode>
+	</DutyDef>
+
+	<DutyDef>
 		<defName>VSIE_GrabbingBeer</defName>
 		<label>grabbing beer</label>
 		<hook>MediumPriority</hook>
