@@ -18,11 +18,11 @@ namespace VanillaSocialInteractionsExpanded
         private int durationTicks;
         public override bool AllowStartNewGatherings => false;
 
-        protected virtual ThoughtDef AttendeeThought => ThoughtDefOf.AttendedParty;
+        protected virtual ThoughtDef AttendeeThought => VSIE_DefOf.VSIE_HadNiceChatWithBeer;
 
         protected virtual TaleDef AttendeeTale => TaleDefOf.AttendedParty;
 
-        protected virtual ThoughtDef OrganizerThought => ThoughtDefOf.AttendedParty;
+        protected virtual ThoughtDef OrganizerThought => VSIE_DefOf.VSIE_HadNiceChatWithBeer;
 
         protected virtual TaleDef OrganizerTale => TaleDefOf.AttendedParty;
 

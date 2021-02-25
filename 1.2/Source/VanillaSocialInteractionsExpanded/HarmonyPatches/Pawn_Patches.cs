@@ -98,7 +98,7 @@ namespace VanillaSocialInteractionsExpanded
 				TryRecordMeleeAspiration(dinfo);
 			}
 
-			if (__instance.RaceProps.Animal && __instance.Faction is null && dinfo.Value.Instigator is Pawn killer && killer.InspirationDef == VSIE_DefOf.Frenzy_Shoot)
+			if (dinfo.HasValue && __instance.RaceProps.Animal && __instance.Faction is null && dinfo.Value.Instigator is Pawn killer && killer.InspirationDef == VSIE_DefOf.Frenzy_Shoot)
             {
 				VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(killer);
 			}

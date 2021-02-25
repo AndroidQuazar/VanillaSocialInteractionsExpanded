@@ -26,4 +26,17 @@
       </li>
     </stages>
   </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>VSIE_HadNiceChatWithBeer</defName>
+    <durationDays>3</durationDays>
+    <stackLimit>10</stackLimit>
+    <stages>
+      <li>
+        <label>had a nice chat with a beer</label>
+        <description>I enjoyed the little chit chat and a cold one in my hand.</description>
+        <baseMoodEffect>5</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
 </Defs>
