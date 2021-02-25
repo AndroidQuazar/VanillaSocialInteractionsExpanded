@@ -12,4 +12,10 @@
     <driverClass>VanillaSocialInteractionsExpanded.JobDriver_StandAndHearVenting</driverClass>
     <reportString>hearing venting from TargetA.</reportString>
   </JobDef>
+  
+    <JobDef>
+    <defName>VSIE_TakingBeer</defName>
+    <driverClass>VanillaSocialInteractionsExpanded.JobDriver_TakeBeerToCell</driverClass>
+    <reportString>taking TargetA.</reportString>
+  </JobDef>
 </Defs>

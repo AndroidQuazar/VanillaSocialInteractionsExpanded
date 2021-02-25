@@ -36,7 +36,6 @@ namespace VanillaSocialInteractionsExpanded
 	public class JobDriver_VentToFriend : JobDriver
 	{
 		private Pawn Friend => (Pawn)job.GetTarget(TargetIndex.A).Thing;
-
 		private int ventDuration;
 		private int curDuration;
 		public override bool TryMakePreToilReservations(bool errorOnFailed)

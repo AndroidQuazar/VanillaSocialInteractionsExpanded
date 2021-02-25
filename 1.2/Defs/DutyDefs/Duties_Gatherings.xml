@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <DutyDef>
+    <defName>VSIE_GrabbingBeer</defName>
+    <label>grabbing beer</label>
+    <hook>MediumPriority</hook>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>
+        <li Class="ThinkNode_ConditionalInGatheringArea">
+          <subNodes>
+            <!-- Eat -->
+            <li Class="ThinkNode_ConditionalRandom">
+              <chance>0.05</chance>
+              <subNodes>
+                <li Class="VanillaSocialInteractionsExpanded.JobGiver_DrinkAlcoholInGatheringArea" />
+              </subNodes>
+            </li>
+            
+            <!-- Stand where you are and be socially active -->
+            <li Class="ThinkNode_ConditionalRandom">
+              <chance>0.35</chance>
+              <subNodes>
+                <li Class="JobGiver_StandAndBeSociallyActive">
+                  <ticksRange>350~750</ticksRange>
+                </li>
+              </subNodes>
+            </li>
+            
+            <!-- Get joy -->
+            <li Class="ThinkNode_ConditionalRandom">
+              <chance>0.1</chance>
+              <subNodes>
+                <li Class="JobGiver_GetJoyInGatheringArea" />
+              </subNodes>
+            </li>
+			<li Class="VanillaSocialInteractionsExpanded.JobGiver_TakeAlcohol"></li>
+            <!-- Wander -->
+            <li Class="JobGiver_WanderInGatheringArea">
+              <ticksBetweenWandersRange>50~250</ticksBetweenWandersRange>
+            </li>
+          </subNodes>
+        </li>
+		
+        <li Class="VanillaSocialInteractionsExpanded.JobGiver_TakeAlcohol"></li>
+        <li Class="JobGiver_WanderInGatheringArea">
+          <ticksBetweenWandersRange>50~250</ticksBetweenWandersRange>
+          <locomotionUrgency>Jog</locomotionUrgency>
+        </li>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+  
+</Defs>

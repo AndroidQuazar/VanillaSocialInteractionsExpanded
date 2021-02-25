@@ -63,7 +63,12 @@
     <Compile Include="Interactions\InteractionWorker_Discord.cs" />
     <Compile Include="Interactions\InteractionWorker_Vent.cs" />
     <Compile Include="Interactions\InteractionWorker_Teaching.cs" />
+    <Compile Include="Jobs\JobDriver_TakeBeerToCell.cs" />
+    <Compile Include="Jobs\JobGiver_DrinkAlcoholInGatheringArea.cs" />
+    <Compile Include="Jobs\JobGiver_TakeAlcohol.cs" />
     <Compile Include="Jobs\JobDriver_VentToFriend.cs" />
+    <Compile Include="Lords\GatheringWorker_GrabbingBeer.cs" />
+    <Compile Include="Lords\LordJob_Joinable_GrabbingBeer.cs" />
     <Compile Include="PawnRelationWorkers\PawnRelationWorker_BestFriend.cs" />
     <Compile Include="Tales\Tale_TriplePawn.cs" />
     <Compile Include="Thoughts\ThoughtWorker_OpinionOfMyBestFriend.cs" />

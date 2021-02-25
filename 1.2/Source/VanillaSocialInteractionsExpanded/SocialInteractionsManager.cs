@@ -106,14 +106,14 @@ namespace VanillaSocialInteractionsExpanded
 
         public bool TryCauseGroupFights(Pawn initiator)
         {
-            if (initiator.CurJobDef != JobDefOf.SocialFight && SocialInteractionsManager.jobTags.Contains(initiator.mindState.lastJobTag) 
+            if (initiator.Map != null && initiator.CurJobDef != JobDefOf.SocialFight && VSIE_Utils.workTags.Contains(initiator.mindState.lastJobTag)
                 && initiator.needs.mood.CurLevelPercentage < 0.3f && !initiator.WorkTagIsDisabled(WorkTags.Violent))
             {
                 if (!InteractionUtility.TryGetRandomVerbForSocialFight(initiator, out Verb verb))
                 {
                     return false;
                 }
-                var candidates = workersWithWorkingTicks.Where(x => x.Key.needs.mood.CurInstantLevelPercentage < 0.3f && x.Value.workTick > 3000 && initiator.relations.OpinionOf(x.Key) < 0).Select(x => x.Key).ToList();
+                var candidates = workersWithWorkingTicks.Where(x => x.Key != null && x.Key.needs.mood.CurInstantLevelPercentage < 0.3f && x.Value.workTick > 3000 && initiator.relations.OpinionOf(x.Key) < 0).Select(x => x.Key).ToList();
                 if (candidates.Any())
                 {
                     var manager = VSIE_Utils.SocialInteractionsManager;
@@ -124,10 +124,14 @@ namespace VanillaSocialInteractionsExpanded
                     manager.angryWorkers[initiator] = Find.TickManager.TicksGame;
                     foreach (var worker in candidates)
                     {
+                        Log.Message("TEst1");
                         manager.angryWorkers[worker] = Find.TickManager.TicksGame;
                     }
-                    var nearestWorkers = initiator.Map.mapPawns.SpawnedPawnsInFaction(initiator.Faction).Where(x => x != initiator && x.RaceProps.Humanlike 
-                        && SocialInteractionsManager.jobTags.Contains(x.mindState.lastJobTag) && x.needs.mood.CurLevelPercentage < 0.3f && !x.WorkTagIsDisabled(WorkTags.Violent)
+
+                    Log.Message("TEst2");
+
+                    var nearestWorkers = initiator.Map.mapPawns.SpawnedPawnsInFaction(initiator.Faction).Where(x => x != initiator && x != null && x.RaceProps.Humanlike
+                        && x.mindState != null && VSIE_Utils.workTags.Contains(x.mindState.lastJobTag) && x.needs?.mood?.CurLevelPercentage < 0.3f && !x.WorkTagIsDisabled(WorkTags.Violent)
                         && x.Position.DistanceTo(initiator.Position) < 10).ToHashSet();
 
                     foreach (var worker in nearestWorkers)
@@ -257,8 +261,6 @@ namespace VanillaSocialInteractionsExpanded
             }
         }
 
-        public static HashSet<JobTag> jobTags = new HashSet<JobTag> { JobTag.Misc, JobTag.MiscWork, JobTag.Fieldwork };
-
         private static int workerTickRate = 60;
         public void WorkerTick(Pawn pawn)
         {
@@ -270,7 +272,7 @@ namespace VanillaSocialInteractionsExpanded
                     this.pawnsWithWorkers[pawn] = workers;
                     workers.workersWithWorkingTicks = new Dictionary<Pawn, WorkTime>();
                 }
-                var nearestWorkers = pawn.Map.mapPawns.SpawnedPawnsInFaction(pawn.Faction).Where(x => x != pawn && jobTags.Contains(x.mindState.lastJobTag) && x.RaceProps.Humanlike && x.Position.DistanceTo(pawn.Position) < 10);
+                var nearestWorkers = pawn.Map.mapPawns.SpawnedPawnsInFaction(pawn.Faction).Where(x => x != pawn && VSIE_Utils.workTags.Contains(x.mindState.lastJobTag) && x.RaceProps.Humanlike && x.Position.DistanceTo(pawn.Position) < 10);
                 foreach (var worker in nearestWorkers)
                 {
                     //Log.Message($"Nearest worker: {worker}, {worker.CurJob}, {worker.CurJobDef}, {worker.mindState.lastJobTag}");
@@ -347,26 +349,29 @@ namespace VanillaSocialInteractionsExpanded
 
         public void TryDevelopNewTrait(Pawn pawn, string letterTextKey)
         {
-            var traits = DefDatabase<TraitDef>.AllDefsListForReading;
-            var traitsCount = traits.Count;
-            for (var i = 0; i <= traitsCount; i++)
+            if (pawn.RaceProps.Humanlike)
             {
-                TraitDef newTraitDef = DefDatabase<TraitDef>.AllDefsListForReading.RandomElementByWeight((TraitDef tr) => tr.GetGenderSpecificCommonality(pawn.gender));
-                int degree = RandomTraitDegree(newTraitDef);
-                if (TraitIsAllowed(pawn, newTraitDef, degree))
+                var traits = DefDatabase<TraitDef>.AllDefsListForReading;
+                var traitsCount = traits.Count;
+                for (var i = 0; i <= traitsCount; i++)
                 {
-                    Trait trait = new Trait(newTraitDef, degree);
-                    if (pawn.mindState == null || pawn.mindState.mentalBreaker == null || !((pawn.mindState.mentalBreaker.BreakThresholdMinor + trait.OffsetOfStat(StatDefOf.MentalBreakThreshold)) * trait.MultiplierOfStat(StatDefOf.MentalBreakThreshold) > 0.5f))
+                    TraitDef newTraitDef = DefDatabase<TraitDef>.AllDefsListForReading.RandomElementByWeight((TraitDef tr) => tr.GetGenderSpecificCommonality(pawn.gender));
+                    int degree = RandomTraitDegree(newTraitDef);
+                    if (TraitIsAllowed(pawn, newTraitDef, degree))
                     {
-                        pawn.story.traits.GainTrait(trait);
-                        pawnsWithAdditionalTrait.Add(pawn);
-                        var traitName = trait.CurrentData.GetLabelFor(pawn);
-                        var traitDesc = trait.CurrentData.description.Formatted(pawn.Named("PAWN")).AdjustedFor(pawn).Resolve();
-                        Find.LetterStack.ReceiveLetter("VSIE.TraitChangeTitle".Translate(traitName, pawn.Named("PAWN")), letterTextKey.Translate(traitName, traitDesc, pawn.Named("PAWN")), LetterDefOf.NeutralEvent, pawn);
-                        return;
+                        Trait trait = new Trait(newTraitDef, degree);
+                        if (pawn.mindState == null || pawn.mindState.mentalBreaker == null || !((pawn.mindState.mentalBreaker.BreakThresholdMinor + trait.OffsetOfStat(StatDefOf.MentalBreakThreshold)) * trait.MultiplierOfStat(StatDefOf.MentalBreakThreshold) > 0.5f))
+                        {
+                            pawn.story.traits.GainTrait(trait);
+                            pawnsWithAdditionalTrait.Add(pawn);
+                            var traitName = trait.CurrentData.GetLabelFor(pawn);
+                            var traitDesc = trait.CurrentData.description.Formatted(pawn.Named("PAWN")).AdjustedFor(pawn).Resolve();
+                            Find.LetterStack.ReceiveLetter("VSIE.TraitChangeTitle".Translate(traitName, pawn.Named("PAWN")), letterTextKey.Translate(traitName, traitDesc, pawn.Named("PAWN")), LetterDefOf.NeutralEvent, pawn);
+                            return;
+                        }
                     }
+                    traits.Remove(newTraitDef);
                 }
-                traits.Remove(newTraitDef);
             }
         }
         private int RandomTraitDegree(TraitDef traitDef)

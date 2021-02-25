@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Verse;
+using Verse.AI;
 
 namespace VanillaSocialInteractionsExpanded
 {
@@ -33,6 +34,50 @@ namespace VanillaSocialInteractionsExpanded
 				return sManager;
 			}
 		}
+
+		public static bool DrugValidator(Pawn pawn, Thing drug)
+		{
+			if (drug is null)
+            {
+				return false;
+            }
+			if (!drug.def.IsDrug)
+			{
+				return false;
+			}
+			if (drug.Spawned)
+			{
+				if (drug.IsForbidden(pawn))
+				{
+					return false;
+				}
+				if (!pawn.CanReserve(drug))
+				{
+					return false;
+				}
+				if (!drug.IsSociallyProper(pawn))
+				{
+					return false;
+				}
+				if (drug.def.ingestible.drugCategory != DrugCategory.Social)
+				{
+					return false;
+				}
+			}
+			CompDrug compDrug = drug.TryGetComp<CompDrug>();
+			if (compDrug == null || compDrug.Props.chemical == null)
+			{
+				return false;
+			}
+			if (pawn.drugs != null && !pawn.drugs.CurrentPolicy[drug.def].allowedForAddiction && pawn.story != null
+				&& pawn.story.traits.DegreeOfTrait(TraitDefOf.DrugDesire) <= 0)
+			{
+				return false;
+			}
+			return true;
+		}
+
+		public static HashSet<JobTag> workTags = new HashSet<JobTag> { JobTag.Misc, JobTag.MiscWork, JobTag.Fieldwork };
 
 		private static SocialInteractionsManager sManager;
 
