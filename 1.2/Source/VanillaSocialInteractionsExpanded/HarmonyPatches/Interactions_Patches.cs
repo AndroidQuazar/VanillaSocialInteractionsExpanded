@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Verse;
 using Verse.AI;
+using Verse.AI.Group;
 
 namespace VanillaSocialInteractionsExpanded
 {
@@ -54,10 +55,68 @@ namespace VanillaSocialInteractionsExpanded
 		private static void Postfix(ref float __result, Pawn initiator, Pawn recipient)
 		{
 			if (initiator.InspirationDef == VSIE_DefOf.VSIE_Flirting_Frenzy)
-            {
+			{
 				__result *= 2f;
-            }
+			}
 		}
+	}
+
+
+	[HarmonyPatch(typeof(Pawn_InteractionsTracker), "TryInteractRandomly")]
+	public class TryInteractRandomly_Patch
+	{
+		private static bool Prefix(Pawn_InteractionsTracker __instance, Pawn ___pawn, ref bool __result)
+		{
+			Pawn p = GetSpecifiedTalkerFor(___pawn);
+			if (p != null)
+            {
+				if (__instance.InteractedTooRecentlyToInteract())
+				{
+					__result = false;
+					return false;
+				}
+				if (!InteractionUtility.CanInitiateRandomInteraction(___pawn))
+				{
+					__result = false;
+					return false;
+				}
+				List<InteractionDef> allDefsListForReading = DefDatabase<InteractionDef>.AllDefsListForReading;
+				if (p != ___pawn && __instance.CanInteractNowWith(p) && InteractionUtility.CanReceiveRandomInteraction(p) && !___pawn.HostileTo(p) 
+					&& allDefsListForReading.TryRandomElementByWeight((InteractionDef x) => (!__instance.CanInteractNowWith(p, x)) ? 0f : x.Worker.RandomSelectionWeight(___pawn, p), out InteractionDef result))
+				{
+					if (__instance.TryInteractWith(p, result))
+					{
+						__result = true;
+						return false;
+					}
+					Log.Error(string.Concat(___pawn, " failed to interact with ", p));
+				}
+				__result = false;
+				return false;
+			}
+			return true;
+		}
+
+		private static Pawn GetSpecifiedTalkerFor(Pawn pawn)
+        {
+			var lord = pawn.GetLord();
+			if (lord != null && lord.LordJob is LordJob_Joinable_GrabbingBeer lordJob)
+            {
+				if (pawn == lordJob.Organizer)
+                {
+					return lordJob.secondPawn;
+                }
+				else
+                {
+					return lordJob.Organizer;
+                }
+            }
+			if (pawn.CurJobDef == VSIE_DefOf.VSIE_TalkToSecondPawn)
+            {
+				return pawn.CurJob.targetA.Thing as Pawn;
+            }
+			return null;
+        }
 	}
 
 	[HarmonyPatch(typeof(InteractionWorker_RecruitAttempt), "Interacted")]

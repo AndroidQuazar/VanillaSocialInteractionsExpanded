@@ -55,10 +55,12 @@ namespace VanillaSocialInteractionsExpanded
 
         public override bool TryExecute(Map map, Pawn organizer = null)
         {
+            Pawn companion = null;
             if (organizer == null)
             {
-                organizer = FindOrganizer(map);
+                organizer = FindOrganizerCustom(map, out companion);
             }
+
             if (organizer == null)
             {
                 return false;
@@ -73,7 +75,6 @@ namespace VanillaSocialInteractionsExpanded
                 Log.Message("GatheringWorker_GrabbingBeer : GatheringWorker - CanExecute - return false; - 11", true);
                 return false;
             }
-            var companion = FindCompanion(organizer);
             if (organizer is null || companion is null || !EnoughDrinks(organizer))
             {
                 Log.Message("GatheringWorker_GrabbingBeer : GatheringWorker - CanExecute - return false; - 13", true);
@@ -87,16 +88,44 @@ namespace VanillaSocialInteractionsExpanded
             SendLetter(spot, organizer);
             return true;
         }
-        protected override Pawn FindOrganizer(Map map)
+        private Pawn FindOrganizerCustom(Map map, out Pawn companion)
         {
-            var organizer = GatheringsUtility.FindRandomGatheringOrganizer(Faction.OfPlayer, map, def);
-            Log.Message($"organizer: {organizer}");
+            var organizer = FindRandomGatheringOrganizer(Faction.OfPlayer, map, def, out companion);
+            if (organizer is null)
+            {
+                companion = null;
+                return null;
+            }
             return organizer;
+        }
+
+        public Pawn FindRandomGatheringOrganizer(Faction faction, Map map, GatheringDef gatheringDef, out Pawn companion)
+        {
+            Predicate<Pawn> v = (Pawn organizer) => organizer.RaceProps.Humanlike && !organizer.InBed() && !organizer.InMentalState && organizer.GetLord() == null 
+            && GatheringsUtility.ShouldPawnKeepGathering(organizer, gatheringDef) && !organizer.Drafted && (gatheringDef.requiredTitleAny == null || gatheringDef.requiredTitleAny.Count == 0 
+            || (organizer.royalty != null && organizer.royalty.AllTitlesInEffectForReading.Any((RoyalTitle t) => gatheringDef.requiredTitleAny.Contains(t.def)))) 
+            && organizer.health.hediffSet.hediffs.Any(hediff => hediff is Hediff_Alcohol)
+            && organizer.Map.mapPawns.SpawnedPawnsInFaction(organizer.Faction).Any(companionCandidate => companionCandidate != organizer && companionCandidate.RaceProps.Humanlike
+            && !VSIE_Utils.workTags.Contains(companionCandidate.mindState.lastJobTag) && companionCandidate.relations.OpinionOf(organizer) >= 20 && organizer.relations.OpinionOf(companionCandidate) >= 20
+            && !companionCandidate.health.hediffSet.hediffs.Any(hediff => hediff is Hediff_Alcohol));
+            
+            if ((from x in map.mapPawns.SpawnedPawnsInFaction(faction)
+                 where v(x)
+                 select x).TryRandomElement(out Pawn result))
+            {
+                companion = FindCompanion(result);
+                return result;
+            }
+            companion = null;
+            return null;
         }
 
         private Pawn FindCompanion(Pawn organizer)
         {
-            var candidates = organizer.Map.mapPawns.SpawnedPawnsInFaction(organizer.Faction).Where(x => x != organizer && x.RaceProps.Humanlike); ;//.Where(x => !VSIE_Utils.workTags.Contains(x.mindState.lastJobTag) && x.relations.OpinionOf(organizer) >= 20 && organizer.relations.OpinionOf(x) >= 20);
+
+            var candidates = organizer.Map.mapPawns.SpawnedPawnsInFaction(organizer.Faction).Where(x => x != organizer && x.RaceProps.Humanlike 
+            && !VSIE_Utils.workTags.Contains(x.mindState.lastJobTag) && x.relations.OpinionOf(organizer) >= 20 && organizer.relations.OpinionOf(x) >= 20
+            && !x.health.hediffSet.hediffs.Any(y => y is Hediff_Alcohol));
             if (candidates.Any() && candidates.TryRandomElementByWeight(x => organizer.relations.OpinionOf(x), out var companion))
             {
                 Log.Message("GatheringWorker_GrabbingBeer : GatheringWorker - FindCompanion - return candidates.RandomElementByWeight(x => organizer.relations.OpinionOf(x)); - 30", true);

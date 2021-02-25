@@ -63,7 +63,7 @@ namespace VanillaSocialInteractionsExpanded
 				Pawn friend = Friend;
 				pawn.rotationTracker.FaceTarget(friend);
 				Map map = pawn.Map;
-				if (InteractionUtility.IsGoodPositionForInteraction(pawn, friend) && pawn.Position.InHorDistOf(friend.Position, Mathf.CeilToInt(3f)) 
+				if (InteractionUtility.IsGoodPositionForInteraction(pawn, friend) && pawn.Position.InHorDistOf(friend.Position, Mathf.CeilToInt(3f))
 				&& (!pawn.pather.Moving || pawn.pather.nextCell.GetDoor(map) == null))
 				{
 					pawn.pather.StopDead();
@@ -92,7 +92,6 @@ namespace VanillaSocialInteractionsExpanded
 
 				if (curDuration >= ventDuration)
 				{
-					Log.Message("ended: curDuration: " + curDuration);
 					pawn.jobs.EndCurrentJob(JobCondition.Succeeded);
 				}
 			};
@@ -103,10 +102,10 @@ namespace VanillaSocialInteractionsExpanded
 		}
 
 		private void DoVentingTick()
-        {
+		{
 			Pawn friend = Friend;
 			if (friend.CurJobDef != VSIE_DefOf.VSIE_StandAndHearVenting)
-            {
+			{
 				Job job = JobMaker.MakeJob(VSIE_DefOf.VSIE_StandAndHearVenting, pawn);
 				friend.jobs.TryTakeOrderedJob(job);
 				friend.pather.StopDead();
@@ -116,15 +115,15 @@ namespace VanillaSocialInteractionsExpanded
 			if (pawn.IsHashIntervalTick(320))
 			{
 				pawn.interactions.TryInteractWith(friend, VSIE_DefOf.VSIE_Vent);
-				Log.Message(pawn + " vented to " + friend);
 			}
 		}
 
-        public override void ExposeData()
-        {
-            base.ExposeData();
+		public override void ExposeData()
+		{
+			base.ExposeData();
 			Scribe_Values.Look(ref curDuration, "curDuration");
 			Scribe_Values.Look(ref ventDuration, "ventDuration");
-        }
-    }
+		}
+	}
 }
+

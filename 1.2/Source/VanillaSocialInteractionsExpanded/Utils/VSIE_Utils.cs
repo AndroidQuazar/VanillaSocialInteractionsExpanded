@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Verse;
 using Verse.AI;
+using Verse.AI.Group;
 
 namespace VanillaSocialInteractionsExpanded
 {
@@ -35,6 +36,22 @@ namespace VanillaSocialInteractionsExpanded
 			}
 		}
 
+		public static Pawn GetSecondPawnToTalk(Pawn pawn)
+		{
+			var lord = pawn.GetLord();
+			if (lord != null && lord.LordJob is LordJob_Joinable_GrabbingBeer lordJob)
+			{
+				if (pawn == lordJob.Organizer)
+				{
+					return lordJob.secondPawn;
+				}
+				else
+				{
+					return lordJob.Organizer;
+				}
+			}
+			return null;
+		}
 		public static bool DrugValidator(Pawn pawn, Thing drug)
 		{
 			if (drug is null)

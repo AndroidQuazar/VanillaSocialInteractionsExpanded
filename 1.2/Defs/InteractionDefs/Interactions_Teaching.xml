@@ -17,7 +17,6 @@
 		<defName>VSIE_Teaching_Shooting</defName>
 		<rulePack>
 			<rulesStrings>
-				<li>sent-&gt;[sentence].</li>
 				<li>r_logentry->[INITIATOR_nameDef] and [RECIPIENT_nameDef] [talkedabout] [TalkTopicLight].</li>
 				<li>r_logentry->[INITIATOR_nameDef] [talkedabout] [TalkTopicLight] with [RECIPIENT_nameDef].</li>
 				<li>r_logentry(p=0.8)->[INITIATOR_nameDef] [commentedabout] [TalkTopicLight] to [RECIPIENT_nameDef].</li>
@@ -44,7 +43,6 @@
 		<defName>VSIE_Teaching_Melee</defName>
 		<rulePack>
 			<rulesStrings>
-				<li>sent-&gt;[sentence].</li>
 				<li>r_logentry->[INITIATOR_nameDef] and [RECIPIENT_nameDef] [talkedabout] [TalkTopicLight].</li>
 				<li>r_logentry->[INITIATOR_nameDef] [talkedabout] [TalkTopicLight] with [RECIPIENT_nameDef].</li>
 				<li>r_logentry(p=0.8)->[INITIATOR_nameDef] [commentedabout] [TalkTopicLight] to [RECIPIENT_nameDef].</li>
@@ -70,7 +68,6 @@
 		<defName>VSIE_Teaching_Construction</defName>
 		<rulePack>
 			<rulesStrings>
-				<li>sent-&gt;[sentence].</li>
 				<li>r_logentry->[INITIATOR_nameDef] and [RECIPIENT_nameDef] [talkedabout] [TalkTopicLight].</li>
 				<li>r_logentry->[INITIATOR_nameDef] [talkedabout] [TalkTopicLight] with [RECIPIENT_nameDef].</li>
 				<li>r_logentry(p=0.8)->[INITIATOR_nameDef] [commentedabout] [TalkTopicLight] to [RECIPIENT_nameDef].</li>
@@ -96,7 +93,6 @@
 		<defName>VSIE_Teaching_Mining</defName>
 		<rulePack>
 			<rulesStrings>
-				<li>sent-&gt;[sentence].</li>
 				<li>r_logentry->[INITIATOR_nameDef] and [RECIPIENT_nameDef] [talkedabout] [TalkTopicLight].</li>
 				<li>r_logentry->[INITIATOR_nameDef] [talkedabout] [TalkTopicLight] with [RECIPIENT_nameDef].</li>
 				<li>r_logentry(p=0.8)->[INITIATOR_nameDef] [commentedabout] [TalkTopicLight] to [RECIPIENT_nameDef].</li>
@@ -122,7 +118,6 @@
 		<defName>VSIE_Teaching_Cooking</defName>
 		<rulePack>
 			<rulesStrings>
-				<li>sent-&gt;[sentence].</li>
 				<li>r_logentry->[INITIATOR_nameDef] and [RECIPIENT_nameDef] [talkedabout] [TalkTopicLight].</li>
 				<li>r_logentry->[INITIATOR_nameDef] [talkedabout] [TalkTopicLight] with [RECIPIENT_nameDef].</li>
 				<li>r_logentry(p=0.8)->[INITIATOR_nameDef] [commentedabout] [TalkTopicLight] to [RECIPIENT_nameDef].</li>
@@ -148,7 +143,6 @@
 		<defName>VSIE_Teaching_Animals</defName>
 		<rulePack>
 			<rulesStrings>
-				<li>sent-&gt;[sentence].</li>
 				<li>r_logentry->[INITIATOR_nameDef] and [RECIPIENT_nameDef] [talkedabout] [TalkTopicLight].</li>
 				<li>r_logentry->[INITIATOR_nameDef] [talkedabout] [TalkTopicLight] with [RECIPIENT_nameDef].</li>
 				<li>r_logentry(p=0.8)->[INITIATOR_nameDef] [commentedabout] [TalkTopicLight] to [RECIPIENT_nameDef].</li>
@@ -174,7 +168,6 @@
 		<defName>VSIE_Teaching_Plants</defName>
 		<rulePack>
 			<rulesStrings>
-				<li>sent-&gt;[sentence].</li>
 				<li>r_logentry->[INITIATOR_nameDef] and [RECIPIENT_nameDef] [talkedabout] [TalkTopicLight].</li>
 				<li>r_logentry->[INITIATOR_nameDef] [talkedabout] [TalkTopicLight] with [RECIPIENT_nameDef].</li>
 				<li>r_logentry(p=0.8)->[INITIATOR_nameDef] [commentedabout] [TalkTopicLight] to [RECIPIENT_nameDef].</li>
@@ -200,7 +193,6 @@
 		<defName>VSIE_Teaching_Crafting</defName>
 		<rulePack>
 			<rulesStrings>
-				<li>sent-&gt;[sentence].</li>
 				<li>r_logentry->[INITIATOR_nameDef] and [RECIPIENT_nameDef] [talkedabout] [TalkTopicLight].</li>
 				<li>r_logentry->[INITIATOR_nameDef] [talkedabout] [TalkTopicLight] with [RECIPIENT_nameDef].</li>
 				<li>r_logentry(p=0.8)->[INITIATOR_nameDef] [commentedabout] [TalkTopicLight] to [RECIPIENT_nameDef].</li>
@@ -226,7 +218,6 @@
 		<defName>VSIE_Teaching_Medicine</defName>
 		<rulePack>
 			<rulesStrings>
-				<li>sent-&gt;[sentence].</li>
 				<li>r_logentry->[INITIATOR_nameDef] and [RECIPIENT_nameDef] [talkedabout] [TalkTopicLight].</li>
 				<li>r_logentry->[INITIATOR_nameDef] [talkedabout] [TalkTopicLight] with [RECIPIENT_nameDef].</li>
 				<li>r_logentry(p=0.8)->[INITIATOR_nameDef] [commentedabout] [TalkTopicLight] to [RECIPIENT_nameDef].</li>
@@ -252,7 +243,6 @@
 		<defName>VSIE_Teaching_Artistic</defName>
 		<rulePack>
 			<rulesStrings>
-				<li>sent-&gt;[sentence].</li>
 				<li>r_logentry->[INITIATOR_nameDef] and [RECIPIENT_nameDef] [talkedabout] [TalkTopicLight].</li>
 				<li>r_logentry->[INITIATOR_nameDef] [talkedabout] [TalkTopicLight] with [RECIPIENT_nameDef].</li>
 				<li>r_logentry(p=0.8)->[INITIATOR_nameDef] [commentedabout] [TalkTopicLight] to [RECIPIENT_nameDef].</li>
@@ -278,7 +268,6 @@
 		<defName>VSIE_Teaching_Social</defName>
 		<rulePack>
 			<rulesStrings>
-				<li>sent-&gt;[sentence].</li>
 				<li>r_logentry->[INITIATOR_nameDef] and [RECIPIENT_nameDef] [talkedabout] [TalkTopicLight].</li>
 				<li>r_logentry->[INITIATOR_nameDef] [talkedabout] [TalkTopicLight] with [RECIPIENT_nameDef].</li>
 				<li>r_logentry(p=0.8)->[INITIATOR_nameDef] [commentedabout] [TalkTopicLight] to [RECIPIENT_nameDef].</li>
@@ -304,7 +293,6 @@
 		<defName>VSIE_Teaching_Intellectual</defName>
 		<rulePack>
 			<rulesStrings>
-				<li>sent-&gt;[sentence].</li>
 				<li>r_logentry->[INITIATOR_nameDef] and [RECIPIENT_nameDef] [talkedabout] [TalkTopicLight].</li>
 				<li>r_logentry->[INITIATOR_nameDef] [talkedabout] [TalkTopicLight] with [RECIPIENT_nameDef].</li>
 				<li>r_logentry(p=0.8)->[INITIATOR_nameDef] [commentedabout] [TalkTopicLight] to [RECIPIENT_nameDef].</li>

@@ -11,27 +11,32 @@ using Verse.Grammar;
 
 namespace VanillaSocialInteractionsExpanded
 {
-    public class JobGiver_TakeAlcohol : ThinkNode_JobGiver
+    public class JobGiver_TakeABeer : ThinkNode_JobGiver
     {
         protected override Job TryGiveJob(Pawn pawn)
         {
-            var carriedThing = pawn.carryTracker.CarriedThing;
-            if (VSIE_Utils.DrugValidator(pawn, carriedThing))
+            var alcohol = pawn.health.hediffSet.hediffs.FirstOrDefault(x => x is Hediff_Alcohol);
+            if (alcohol != null && alcohol.Severity > 0.1f)
             {
-                Log.Message("JobGiver_TakeAlcohol : ThinkNode_JobGiver - TryGiveJob - return null; - 3", true);
                 return null;
             }
-
-            var things = pawn.Map.listerThings.ThingsInGroup(ThingRequestGroup.Drug).Where(x => VSIE_Utils.DrugValidator(pawn, x)).ToList();
-            Thing drug = GenClosest.ClosestThing_Global_Reachable(pawn.Position, pawn.Map, things, PathEndMode.OnCell, TraverseParms.For(pawn), 9999f, null);
-            if (drug != null && GatheringsUtility.TryFindRandomCellInGatheringArea(pawn, out IntVec3 result))
+            Thing drug = pawn.inventory.innerContainer.FirstOrDefault(x => VSIE_Utils.DrugValidator(pawn, x));
+            if (drug is null)
             {
-                Log.Message("JobGiver_TakeAlcohol : ThinkNode_JobGiver - TryGiveJob - Job job = JobMaker.MakeJob(VSIE_DefOf.VSIE_TakingBeer, drug, result); - 7", true);
-                Job job = JobMaker.MakeJob(VSIE_DefOf.VSIE_TakingBeer, drug, result);
-                job.count = 1;
-                return job;
+                var things = pawn.Map.listerThings.ThingsInGroup(ThingRequestGroup.Drug).Where(x => VSIE_Utils.DrugValidator(pawn, x)).ToList();
+                drug = GenClosest.ClosestThing_Global_Reachable(pawn.Position, pawn.Map, things, PathEndMode.OnCell, TraverseParms.For(pawn), 9999f, null);
+            }
+            if (drug != null)
+            {
+                if (GatheringsUtility.TryFindRandomCellInGatheringArea(pawn, out IntVec3 result))
+                {
+                    Job job = JobMaker.MakeJob(VSIE_DefOf.VSIE_TakingBeer, drug, result);
+                    job.count = 1;
+                    return job;
+                }
             }
             return null;
         }
     }
 }
+

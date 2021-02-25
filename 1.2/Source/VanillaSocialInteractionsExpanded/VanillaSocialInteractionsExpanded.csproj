@@ -64,7 +64,9 @@
     <Compile Include="Interactions\InteractionWorker_Vent.cs" />
     <Compile Include="Interactions\InteractionWorker_Teaching.cs" />
     <Compile Include="Jobs\JobDriver_TakeBeerToCell.cs" />
-    <Compile Include="Jobs\JobGiver_DrinkAlcoholInGatheringArea.cs" />
+    <Compile Include="Jobs\JobDriver_TalkToSecondPawn.cs" />
+    <Compile Include="Jobs\JobGiver_WanderAroundSecondPawn.cs" />
+    <Compile Include="Jobs\JobGiver_TalkToSecondPawn.cs" />
     <Compile Include="Jobs\JobGiver_TakeAlcohol.cs" />
     <Compile Include="Jobs\JobDriver_VentToFriend.cs" />
     <Compile Include="Lords\GatheringWorker_GrabbingBeer.cs" />

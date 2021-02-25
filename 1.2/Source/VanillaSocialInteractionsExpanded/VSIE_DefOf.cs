@@ -80,5 +80,6 @@ namespace VanillaSocialInteractionsExpanded
         public static JobDef VSIE_VentToFriend;
         public static JobDef VSIE_StandAndHearVenting;
         public static JobDef VSIE_TakingBeer;
+        public static JobDef VSIE_TalkToSecondPawn;
     }
 }
