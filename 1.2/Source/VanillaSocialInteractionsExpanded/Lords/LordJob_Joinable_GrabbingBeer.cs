@@ -74,6 +74,7 @@ namespace VanillaSocialInteractionsExpanded
             LordToil_End lordToil_End = new LordToil_End();
             Log.Message("LordJob_Joinable_GrabbingBeer : LordJob_Joinable_Gathering - CreateGraph - stateGraph.AddToil(lordToil_End); - 11", true);
             stateGraph.AddToil(lordToil_End);
+
             //Transition transition = new Transition(party, lordToil_End);
             //transition.AddTrigger(new Trigger_TickCondition(() => ShouldBeCalledOff()));
             //transition.AddTrigger(new Trigger_PawnKilled());
@@ -84,6 +85,7 @@ namespace VanillaSocialInteractionsExpanded
             //}));
             //transition.AddPreAction(new TransitionAction_Message(gatheringDef.calledOffMessage, MessageTypeDefOf.NegativeEvent, new TargetInfo(spot, base.Map)));
             //stateGraph.AddTransition(transition);
+
             Log.Message("LordJob_Joinable_GrabbingBeer : LordJob_Joinable_Gathering - CreateGraph - timeoutTrigger = GetTimeoutTrigger(); - 20", true);
             timeoutTrigger = GetTimeoutTrigger();
             Log.Message("LordJob_Joinable_GrabbingBeer : LordJob_Joinable_Gathering - CreateGraph - Transition transition2 = new Transition(party, lordToil_End); - 21", true);

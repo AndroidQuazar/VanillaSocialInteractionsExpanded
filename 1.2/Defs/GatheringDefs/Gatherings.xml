@@ -1,45 +1,69 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-  <GatheringDef>
-    <defName>VSIE_GrabbingBeer</defName>
-    <label>grabbing beer</label>
-    <randomSelectionWeight>1</randomSelectionWeight>
-    <duty>VSIE_GrabbingBeer</duty>
-    <workerClass>VanillaSocialInteractionsExpanded.GatheringWorker_GrabbingBeer</workerClass>
-    <letterTitle>Party</letterTitle>
-    <letterText>{ORGANIZER_labelShort} is throwing a party! Everyone who goes will gain recreation and social energy, and a lasting positive mood boost.</letterText>
-    <calledOffMessage>The party has been called off.</calledOffMessage>
-    <finishedMessage>The party has finished.</finishedMessage>
-    <gatherSpotDefs>
-      <li>PartySpot</li>
-    </gatherSpotDefs>
-  </GatheringDef>
-  
-  <GatheringDef>
-    <defName>VSIE_BingeParty</defName>
-    <label>binge party</label>
-    <randomSelectionWeight>1</randomSelectionWeight>
-    <letterTitle>Binge party</letterTitle>
-    <letterText>{ORGANIZER_labelShort} suggests throwing a feast after the last stockpile check to boost morale. Be warned - Feasts can last up to 48h. Colonists will binge on food and drugs until it is over. Simply draft your colonists to stop them taking part in the feast.</letterText>
-    <calledOffMessage>The feast has been called off.</calledOffMessage>
-    <finishedMessage>The feast has finished.</finishedMessage>
-    <duty>VSIE_BingeParty</duty>
-    <workerClass>VanillaSocialInteractionsExpanded.GatheringWorker_BingeParty</workerClass>
-    <gatherSpotDefs>
-      <li>PartySpot</li>
-    </gatherSpotDefs>
-  </GatheringDef>
-  
-  <GatheringDef>
-    <defName>VSIE_OutdoorParty</defName>
-    <label>outdoor party</label>
-    <randomSelectionWeight>1</randomSelectionWeight>
-    <letterTitle>Outdoor party</letterTitle>
-    <letterText>{ORGANIZER_labelShort} suggests throwing a feast after the last stockpile check to boost morale. Be warned - Feasts can last up to 48h. Colonists will binge on food and drugs until it is over. Simply draft your colonists to stop them taking part in the feast.</letterText>
-    <calledOffMessage>The feast has been called off.</calledOffMessage>
-    <finishedMessage>The feast has finished.</finishedMessage>
-    <duty>VSIE_OutdoorParty</duty>
-    <workerClass>VanillaSocialInteractionsExpanded.GatheringWorker_OutdoorParty</workerClass>
-  </GatheringDef>
+	<GatheringDef>
+		<defName>VSIE_GrabbingBeer</defName>
+		<label>grabbing beer</label>
+		<randomSelectionWeight>1</randomSelectionWeight>
+		<duty>VSIE_GrabbingBeer</duty>
+		<workerClass>VanillaSocialInteractionsExpanded.GatheringWorker_GrabbingBeer</workerClass>
+		<letterTitle>Beer party</letterTitle>
+		<letterText>{ORGANIZER_labelShort} is grabbing a beer with a companion.</letterText>
+		<calledOffMessage>The party has been called off.</calledOffMessage>
+		<finishedMessage>The party has finished.</finishedMessage>
+		<gatherSpotDefs>
+			<li>PartySpot</li>
+		</gatherSpotDefs>
+	</GatheringDef>
+
+	<GatheringDef>
+		<defName>VSIE_BingeParty</defName>
+		<label>binge party</label>
+		<randomSelectionWeight>1</randomSelectionWeight>
+		<letterTitle>Binge party</letterTitle>
+		<letterText>{ORGANIZER_labelShort} suggests throwing a feast after the last stockpile check to boost morale. Be warned - Feasts can last up to 48h. Colonists will binge on food and drugs until it is over. Simply draft your colonists to stop them taking part in the feast.</letterText>
+		<calledOffMessage>The feast has been called off.</calledOffMessage>
+		<finishedMessage>The feast has finished.</finishedMessage>
+		<duty>VSIE_BingeParty</duty>
+		<workerClass>VanillaSocialInteractionsExpanded.GatheringWorker_BingeParty</workerClass>
+		<gatherSpotDefs>
+			<li>PartySpot</li>
+		</gatherSpotDefs>
+	</GatheringDef>
+
+	<GatheringDef>
+		<defName>VSIE_OutdoorParty</defName>
+		<label>outdoor party</label>
+		<randomSelectionWeight>1</randomSelectionWeight>
+		<letterTitle>Outdoor party</letterTitle>
+		<letterText>{ORGANIZER_labelShort} suggests throwing a feast after the last stockpile check to boost morale. Be warned - Feasts can last up to 48h. Colonists will binge on food and drugs until it is over. Simply draft your colonists to stop them taking part in the feast.</letterText>
+		<calledOffMessage>The feast has been called off.</calledOffMessage>
+		<finishedMessage>The feast has finished.</finishedMessage>
+		<duty>VSIE_OutdoorParty</duty>
+		<workerClass>VanillaSocialInteractionsExpanded.GatheringWorker_OutdoorParty</workerClass>
+	</GatheringDef>
+
+	<GatheringDef>
+		<defName>VSIE_Funeral</defName>
+		<label>funeral</label>
+		<randomSelectionWeight>1</randomSelectionWeight>
+		<letterTitle>Funeral</letterTitle>
+		<letterText>Colonists gather over the {DEADPAWN_labelShort}'s grave to honor {DEADPAWN_possessive} memory.</letterText>
+		<calledOffMessage>The feast has been called off.</calledOffMessage>
+		<finishedMessage>The feast has finished.</finishedMessage>
+		<duty>VSIE_Funeral</duty>
+		<workerClass>VanillaSocialInteractionsExpanded.GatheringWorker_Funeral</workerClass>
+	</GatheringDef>
+
+	<GatheringDef>
+		<defName>VSIE_BirthdayParty</defName>
+		<label>birthday</label>
+		<randomSelectionWeight>10</randomSelectionWeight>
+		<letterTitle>Birthday party</letterTitle>
+		<letterText>{ORGANIZER_labelShort} is throwing a party! Everyone who goes will gain recreation and social energy, and a lasting positive mood boost.</letterText>
+		<calledOffMessage>The party has been called off.</calledOffMessage>
+		<finishedMessage>The party has finished.</finishedMessage>
+		<duty>Party</duty>
+		<workerClass>VanillaSocialInteractionsExpanded.GatheringWorker_BirthdayParty</workerClass>
+	</GatheringDef>
 </Defs>

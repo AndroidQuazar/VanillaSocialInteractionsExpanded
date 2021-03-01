@@ -8,9 +8,8 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		protected override LordJob CreateLordJob(IntVec3 spot, Pawn organizer)
 		{
-			return new LordJob_Joinable_BingeParty(spot, organizer, VSIE_DefOf.VSIE_OutdoorParty);
+			return new LordJob_Joinable_OutdoorParty(spot, organizer, VSIE_DefOf.VSIE_OutdoorParty);
 		}
-
         public override bool CanExecute(Map map, Pawn organizer = null)
         {
 			if (GenLocalDate.HourInteger(map) >= 20 || GenLocalDate.HourInteger(map) <= 5)

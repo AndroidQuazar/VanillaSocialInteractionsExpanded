@@ -39,10 +39,17 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Postfix(Pawn ___pawn)
 		{
-			if (Rand.Chance(0.1f))
+			if (___pawn.RaceProps.Humanlike)
             {
-				VSIE_Utils.TryDevelopNewTrait(___pawn, "VSIE.BirthdayEvent");
-            }
+				if (Rand.Chance(0.1f))
+				{
+					VSIE_Utils.TryDevelopNewTrait(___pawn, "VSIE.BirthdayEvent");
+				}
+				if (___pawn.Faction.IsPlayer)
+                {
+					VSIE_Utils.SocialInteractionsManager.birthdays[___pawn] = Find.TickManager.TicksGame;
+				}
+			}
 		}
 	}
 

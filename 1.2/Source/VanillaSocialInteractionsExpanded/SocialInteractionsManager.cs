@@ -212,6 +212,8 @@ namespace VanillaSocialInteractionsExpanded
         public Dictionary<Pawn, TeachingTopic> teachersWithPupils = new Dictionary<Pawn, TeachingTopic>();
         public Dictionary<Pawn, Workers> pawnsWithWorkers = new Dictionary<Pawn, Workers>();
         public Dictionary<Pawn, int> angryWorkers = new Dictionary<Pawn, int>();
+        public HashSet<Pawn> honoredDeadPawns = new HashSet<Pawn>();
+        public Dictionary<Pawn, int> birthdays = new Dictionary<Pawn, int>();
         public SocialInteractionsManager()
         {
         }
@@ -227,6 +229,8 @@ namespace VanillaSocialInteractionsExpanded
             if (teachersWithPupils is null) teachersWithPupils = new Dictionary<Pawn, TeachingTopic>();
             if (pawnsWithWorkers is null) pawnsWithWorkers = new Dictionary<Pawn, Workers>();
             if (angryWorkers is null) angryWorkers = new Dictionary<Pawn, int>();
+            if (honoredDeadPawns is null) honoredDeadPawns = new HashSet<Pawn>();
+            if (birthdays is null) birthdays = new Dictionary<Pawn, int>();
         }
         public override void StartedNewGame()
         {
@@ -405,6 +409,8 @@ namespace VanillaSocialInteractionsExpanded
             Scribe_Collections.Look(ref teachersWithPupils, "teachersWithPupils", LookMode.Reference, LookMode.Deep, ref pawnKeys2, ref teachingValues);
             Scribe_Collections.Look(ref pawnsWithWorkers, "pawnsWithWorkers", LookMode.Reference, LookMode.Deep, ref pawnKeys3, ref workerValues);
             Scribe_Collections.Look(ref angryWorkers, "angryWorkers", LookMode.Reference, LookMode.Value, ref pawnKeys4, ref intValues);
+            Scribe_Collections.Look(ref birthdays, "birthdays", LookMode.Reference, LookMode.Value, ref pawnKeys5, ref intValues2);
+
         }
 
         private List<Pawn> pawnKeys;
@@ -418,5 +424,8 @@ namespace VanillaSocialInteractionsExpanded
 
         private List<Pawn> pawnKeys4;
         private List<int> intValues;
+
+        private List<Pawn> pawnKeys5;
+        private List<int> intValues2;
     }
 }

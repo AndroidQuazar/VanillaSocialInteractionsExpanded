@@ -88,5 +88,11 @@ namespace VanillaSocialInteractionsExpanded
         public static ThoughtDef VSIE_AttendedOutdoorParty;
         public static GatheringDef VSIE_OutdoorParty;
         public static JobDef BuildSnowman;
+        public static ThoughtDef VSIE_GotSomeClosure;
+        public static GatheringDef VSIE_Funeral;
+        public static JobDef VSIE_HonorPawn;
+        public static ThoughtDef VSIE_AttendedBirthdayParty;
+        public static ThoughtDef VSIE_HadBirthdayParty;
+        public static GatheringDef VSIE_BirthdayParty;
     }
 }

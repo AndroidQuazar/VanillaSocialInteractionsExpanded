@@ -2,6 +2,17 @@
 <Defs>
 
 	<DutyDef>
+		<defName>VSIE_Funeral</defName>
+		<label>funeral</label>
+		<hook>MediumPriority</hook>
+		<thinkNode Class="ThinkNode_Priority">
+			<subNodes>
+				<li Class="VanillaSocialInteractionsExpanded.JobGiver_HonorPawn"/>
+			</subNodes>
+		</thinkNode>
+	</DutyDef>
+
+	<DutyDef>
 		<defName>VSIE_OutdoorParty</defName>
 		<label>outdoor party</label>
 		<hook>MediumPriority</hook>
@@ -33,9 +44,9 @@
 								<li Class="VanillaSocialInteractionsExpanded.JobGiver_BuildSnowman" />
 							</subNodes>
 						</li>
-						
+
 						<li Class="VanillaSocialInteractionsExpanded.JobGiver_BuildCampfire" />
-						
+
 						<!--
 						<li Class="ThinkNode_ConditionalRandom">
 							<chance>0.1</chance>
@@ -44,19 +55,19 @@
 							</subNodes>
 						</li>
 						-->
-						
+
 						<li Class="ThinkNode_ForbidOutsideFlagRadius">
 							<maxDistToSquadFlag>16</maxDistToSquadFlag>
 							<subNodes>
 								<li Class="JobGiver_Work" />
 							</subNodes>
 						</li>
-						
+
 						<!-- Wander -->
 						<li Class="JobGiver_WanderInGatheringArea">
 							<ticksBetweenWandersRange>50~250</ticksBetweenWandersRange>
 						</li>
-						
+
 					</subNodes>
 				</li>
 

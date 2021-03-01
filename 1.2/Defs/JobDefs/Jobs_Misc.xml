@@ -24,4 +24,10 @@
 		<driverClass>VanillaSocialInteractionsExpanded.JobDriver_TalkToSecondPawn</driverClass>
 		<reportString>talking to TargetA.</reportString>
 	</JobDef>
+	
+	<JobDef>
+		<defName>VSIE_HonorPawn</defName>
+		<driverClass>VanillaSocialInteractionsExpanded.JobDriver_StandSilentlyFaceTarget</driverClass>
+		<reportString>honoring TargetA.</reportString>
+	</JobDef>
 </Defs>
