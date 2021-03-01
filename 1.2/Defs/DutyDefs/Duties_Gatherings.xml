@@ -2,6 +2,29 @@
 <Defs>
 
 	<DutyDef>
+		<defName>VSIE_GoingForAWalk</defName>
+		<label>going for a walk</label>
+		<hook>MediumPriority</hook>
+		<thinkNode Class="ThinkNode_Priority">
+			<subNodes>
+				<li Class="VanillaSocialInteractionsExpanded.JobGiver_WalkOutside"/>
+				<li Class="ThinkNode_ConditionalRandom">
+					<chance>0.35</chance>
+					<subNodes>
+						<li Class="VanillaSocialInteractionsExpanded.JobGiver_TalkToSecondPawn">
+							<ticksRange>350~750</ticksRange>
+						</li>
+					</subNodes>
+				</li>
+				<li Class="VanillaSocialInteractionsExpanded.JobGiver_WanderAroundSecondPawn">
+					<ticksBetweenWandersRange>50~250</ticksBetweenWandersRange>
+					<wanderRadius>2</wanderRadius>
+				</li>
+			</subNodes>
+		</thinkNode>
+	</DutyDef>
+
+	<DutyDef>
 		<defName>VSIE_Funeral</defName>
 		<label>funeral</label>
 		<hook>MediumPriority</hook>

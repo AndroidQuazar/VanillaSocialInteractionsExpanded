@@ -2,17 +2,30 @@
 <Defs>
 
 	<GatheringDef>
+		<defName>VSIE_GoingForAWalk</defName>
+		<label>going for a walk</label>
+		<randomSelectionWeight>1</randomSelectionWeight>
+		<duty>VSIE_GoingForAWalk</duty>
+		<workerClass>VanillaSocialInteractionsExpanded.GatheringWorker_GoingForAWalk</workerClass>
+		<letterTitle>Going for a walk</letterTitle>
+		<letterText>{ORGANIZER_labelShort} is going for a walk with {COMPANION_labelShort}.</letterText>
+		<calledOffMessage>The party has been called off.</calledOffMessage>
+		<finishedMessage>The party has finished.</finishedMessage>
+		<gatherSpotDefs>
+		</gatherSpotDefs>
+	</GatheringDef>
+	
+	<GatheringDef>
 		<defName>VSIE_GrabbingBeer</defName>
 		<label>grabbing beer</label>
 		<randomSelectionWeight>1</randomSelectionWeight>
 		<duty>VSIE_GrabbingBeer</duty>
 		<workerClass>VanillaSocialInteractionsExpanded.GatheringWorker_GrabbingBeer</workerClass>
 		<letterTitle>Beer party</letterTitle>
-		<letterText>{ORGANIZER_labelShort} is grabbing a beer with a companion.</letterText>
+		<letterText>{ORGANIZER_labelShort} is grabbing a beer with {COMPANION_labelShort}.</letterText>
 		<calledOffMessage>The party has been called off.</calledOffMessage>
 		<finishedMessage>The party has finished.</finishedMessage>
 		<gatherSpotDefs>
-			<li>PartySpot</li>
 		</gatherSpotDefs>
 	</GatheringDef>
 

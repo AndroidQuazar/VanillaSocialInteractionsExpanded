@@ -12,12 +12,12 @@ using Verse.Grammar;
 
 namespace VanillaSocialInteractionsExpanded
 {
-	public class JobGiver_TalkToSecondPawn : ThinkNode_JobGiver
+	public class JobGiver_WalkOutside : ThinkNode_JobGiver
 	{
 		public IntRange ticksRange = new IntRange(300, 600);
 		public override ThinkNode DeepCopy(bool resolve = true)
 		{
-			JobGiver_TalkToSecondPawn obj = (JobGiver_TalkToSecondPawn)base.DeepCopy(resolve);
+			JobGiver_WalkOutside obj = (JobGiver_WalkOutside)base.DeepCopy(resolve);
 			obj.ticksRange = ticksRange;
 			return obj;
 		}
@@ -27,13 +27,14 @@ namespace VanillaSocialInteractionsExpanded
 			Pawn target = VSIE_Utils.GetSecondPawnToTalk(pawn);
 			if (target != null)
             {
-				if (target.Position.DistanceTo(pawn.Position) > 5)
+				if (target.CurJobDef == VSIE_DefOf.VSIE_GotoWith)
                 {
-					return JobMaker.MakeJob(JobDefOf.Goto, target);
-                }
-                else
-                {
-					Job job = JobMaker.MakeJob(VSIE_DefOf.VSIE_TalkToSecondPawn, target);
+					return JobMaker.MakeJob(VSIE_DefOf.VSIE_Follow, target);
+				}
+				else if (RCellFinder.TryFindRandomSpotJustOutsideColony(pawn.Position, pawn.Map, pawn, out var result, (IntVec3 cell) => 
+					!cell.Roofed(pawn.Map) && pawn.Position.DistanceTo(cell) > 50 && pawn.Rotation.FacingCell.DistanceTo(cell) < pawn.Position.DistanceTo(cell)))
+				{
+					Job job = JobMaker.MakeJob(VSIE_DefOf.VSIE_GotoWith, target, result);
 					job.expiryInterval = ticksRange.RandomInRange;
 					return job;
 				}

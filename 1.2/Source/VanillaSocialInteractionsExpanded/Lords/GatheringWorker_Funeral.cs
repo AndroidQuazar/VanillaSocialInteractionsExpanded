@@ -37,15 +37,9 @@ namespace VanillaSocialInteractionsExpanded
 
         protected override void SendLetter(IntVec3 spot, Pawn organizer)
         {
-            SendLetterCustom(spot, organizer);
-        }
-
-        private void SendLetterCustom(IntVec3 spot, Pawn organizer)
-        {
             var pawnToHonor = FindPawnToHonor(organizer.Map, out var grave);
             Find.LetterStack.ReceiveLetter(def.letterTitle, def.letterText.Formatted(pawnToHonor.Named("DEADPAWN")), LetterDefOf.PositiveEvent, new TargetInfo(spot, organizer.Map));
         }
-
         private Pawn FindPawnToHonor(Map map, out Building_Grave grave)
         {
             var graves = map.listerThings.AllThings.OfType<Building_Grave>().Where(g => g.Corpse != null

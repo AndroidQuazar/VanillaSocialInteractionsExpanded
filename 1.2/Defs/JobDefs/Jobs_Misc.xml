@@ -30,4 +30,18 @@
 		<driverClass>VanillaSocialInteractionsExpanded.JobDriver_StandSilentlyFaceTarget</driverClass>
 		<reportString>honoring TargetA.</reportString>
 	</JobDef>
+	
+	<JobDef>
+    <defName>VSIE_GotoWith</defName>
+    <driverClass>VanillaSocialInteractionsExpanded.JobDriver_GotoTalking</driverClass>
+    <reportString>1 walking with TargetA.</reportString>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+
+  <JobDef>
+    <defName>VSIE_Follow</defName>
+    <driverClass>VanillaSocialInteractionsExpanded.JobDriver_FollowTalking</driverClass>
+    <reportString>2 walking with TargetA.</reportString>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
 </Defs>

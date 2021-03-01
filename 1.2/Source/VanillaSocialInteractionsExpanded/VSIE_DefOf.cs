@@ -94,5 +94,9 @@ namespace VanillaSocialInteractionsExpanded
         public static ThoughtDef VSIE_AttendedBirthdayParty;
         public static ThoughtDef VSIE_HadBirthdayParty;
         public static GatheringDef VSIE_BirthdayParty;
+
+        public static GatheringDef VSIE_GoingForAWalk;
+        public static JobDef VSIE_GotoWith;
+        public static JobDef VSIE_Follow;
     }
 }

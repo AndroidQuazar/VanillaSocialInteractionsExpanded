@@ -100,7 +100,7 @@ namespace VanillaSocialInteractionsExpanded
 		private static Pawn GetSpecifiedTalkerFor(Pawn pawn)
         {
 			var lord = pawn.GetLord();
-			if (lord != null && lord.LordJob is LordJob_Joinable_GrabbingBeer lordJob)
+			if (lord != null && lord.LordJob is LordJob_Joinable_DoublePawn lordJob)
             {
 				if (pawn == lordJob.Organizer)
                 {
