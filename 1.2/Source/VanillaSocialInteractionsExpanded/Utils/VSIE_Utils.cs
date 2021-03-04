@@ -36,7 +36,7 @@ namespace VanillaSocialInteractionsExpanded
 			}
 		}
 
-		public static Pawn GetSecondPawnToTalk(Pawn pawn)
+		public static Pawn GetCompanion(Pawn pawn)
 		{
 			var lord = pawn.GetLord();
 			if (lord != null && lord.LordJob is LordJob_Joinable_DoublePawn lordJob)

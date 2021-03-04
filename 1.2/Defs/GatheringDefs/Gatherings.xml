@@ -1,5 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
+	<GatheringDef>
+		<defName>VSIE_BuildingSnowmen</defName>
+		<label>building snowmen</label>
+		<randomSelectionWeight>1</randomSelectionWeight>
+		<duty>VSIE_BuildingSnowmen</duty>
+		<workerClass>VanillaSocialInteractionsExpanded.GatheringWorker_BuildingSnowmen</workerClass>
+		<letterTitle>Building snowmen</letterTitle>
+		<letterText>{ORGANIZER_labelShort} is building snowmen with {COMPANION_labelShort}.</letterText>
+		<calledOffMessage>The party has been called off.</calledOffMessage>
+		<finishedMessage>The party has finished.</finishedMessage>
+		<gatherSpotDefs>
+		</gatherSpotDefs>
+	</GatheringDef>
+
+	<GatheringDef>
+		<defName>VSIE_ViewingArtTogether</defName>
+		<label>viewing art together</label>
+		<randomSelectionWeight>1</randomSelectionWeight>
+		<duty>VSIE_ViewingArtTogether</duty>
+		<workerClass>VanillaSocialInteractionsExpanded.GatheringWorker_ViewingArtTogether</workerClass>
+		<letterTitle>Viewing art</letterTitle>
+		<letterText>{ORGANIZER_labelShort} is viewing art with {COMPANION_labelShort}.</letterText>
+		<calledOffMessage>The party has been called off.</calledOffMessage>
+		<finishedMessage>The party has finished.</finishedMessage>
+		<gatherSpotDefs>
+		</gatherSpotDefs>
+	</GatheringDef>
+
+	<GatheringDef>
+		<defName>VSIE_Skygazing</defName>
+		<label>skygazing</label>
+		<randomSelectionWeight>1</randomSelectionWeight>
+		<duty>VSIE_Skygazing</duty>
+		<workerClass>VanillaSocialInteractionsExpanded.GatheringWorker_Skygazing</workerClass>
+		<letterTitle>Skygazing</letterTitle>
+		<letterText>{ORGANIZER_labelShort} is skygazing with {COMPANION_labelShort}.</letterText>
+		<calledOffMessage>The party has been called off.</calledOffMessage>
+		<finishedMessage>The party has finished.</finishedMessage>
+		<gatherSpotDefs>
+		</gatherSpotDefs>
+	</GatheringDef>
 
 	<GatheringDef>
 		<defName>VSIE_GoingForAWalk</defName>
@@ -14,7 +55,7 @@
 		<gatherSpotDefs>
 		</gatherSpotDefs>
 	</GatheringDef>
-	
+
 	<GatheringDef>
 		<defName>VSIE_GrabbingBeer</defName>
 		<label>grabbing beer</label>
@@ -54,6 +95,8 @@
 		<finishedMessage>The feast has finished.</finishedMessage>
 		<duty>VSIE_OutdoorParty</duty>
 		<workerClass>VanillaSocialInteractionsExpanded.GatheringWorker_OutdoorParty</workerClass>
+		<gatherSpotDefs>
+		</gatherSpotDefs>
 	</GatheringDef>
 
 	<GatheringDef>
@@ -66,6 +109,8 @@
 		<finishedMessage>The feast has finished.</finishedMessage>
 		<duty>VSIE_Funeral</duty>
 		<workerClass>VanillaSocialInteractionsExpanded.GatheringWorker_Funeral</workerClass>
+		<gatherSpotDefs>
+		</gatherSpotDefs>
 	</GatheringDef>
 
 	<GatheringDef>
@@ -78,5 +123,8 @@
 		<finishedMessage>The party has finished.</finishedMessage>
 		<duty>Party</duty>
 		<workerClass>VanillaSocialInteractionsExpanded.GatheringWorker_BirthdayParty</workerClass>
+		<gatherSpotDefs>
+		</gatherSpotDefs>
 	</GatheringDef>
+
 </Defs>

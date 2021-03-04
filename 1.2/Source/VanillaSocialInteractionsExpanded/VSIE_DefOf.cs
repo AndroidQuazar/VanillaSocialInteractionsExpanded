@@ -98,5 +98,21 @@ namespace VanillaSocialInteractionsExpanded
         public static GatheringDef VSIE_GoingForAWalk;
         public static JobDef VSIE_GotoWith;
         public static JobDef VSIE_Follow;
+
+        public static ThoughtDef VSIE_JealouslyMyPartnerWalkedWithSomeoneElse;
+        public static GatheringDef VSIE_Skygazing;
+        public static ThoughtDef VSIE_JealouslyMyPartnerSkygazedWithSomeoneElse;
+        public static JobDef VSIE_Skygaze;
+
+        public static GatheringDef VSIE_ViewingArtTogether;
+        public static ThoughtDef VSIE_JealouslyMyPartnerViewedArtWithSomeoneElse;
+        public static JobDef VSIE_ViewArtTogether;
+
+
+        public static GatheringDef VSIE_BuildingSnowmen;
+        public static ThoughtDef VSIE_JealouslyMyPartnerBuiltSnowmenWithSomeoneElse;
+        public static JobDef VSIE_BuildSnowmanTogether;
+        public static JobDef VSIE_GotoTalkToSecondPawn;
     }
+
 }

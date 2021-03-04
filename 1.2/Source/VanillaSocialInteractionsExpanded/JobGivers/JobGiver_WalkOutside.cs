@@ -24,7 +24,7 @@ namespace VanillaSocialInteractionsExpanded
 
 		protected override Job TryGiveJob(Pawn pawn)
 		{
-			Pawn target = VSIE_Utils.GetSecondPawnToTalk(pawn);
+			Pawn target = VSIE_Utils.GetCompanion(pawn);
 			if (target != null)
             {
 				if (target.CurJobDef == VSIE_DefOf.VSIE_GotoWith)

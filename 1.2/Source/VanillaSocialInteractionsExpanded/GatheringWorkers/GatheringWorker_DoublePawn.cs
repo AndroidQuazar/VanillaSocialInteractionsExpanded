@@ -14,30 +14,41 @@ namespace VanillaSocialInteractionsExpanded
 {
     public class GatheringWorker_DoublePawn : GatheringWorker
     {
+
         public override bool CanExecute(Map map, Pawn organizer = null)
         {
             if (organizer == null)
             {
                 organizer = FindOrganizerCustom(map, out var companion);
-                if (organizer is null || companion is null)
+                if (organizer is null)
                 {
+                    Log.Message($"{this.def.defName} - organizer isn't found");
+                    return false;
+                }
+                else if (companion is null)
+                {
+                    Log.Message($"{this.def.defName} - companion isn't found");
                     return false;
                 }
             }
-            if (organizer == null)
-            {
-                return false;
-            }
             if (!TryFindGatherSpot(organizer, out IntVec3 _))
             {
+                Log.Message($"{this.def.defName} - unable to find gather spot");
                 return false;
             }
             if (!GatheringsUtility.PawnCanStartOrContinueGathering(organizer))
             {
+                Log.Message($"{this.def.defName} - {organizer} can't start or continue gathering");
                 return false;
             }
-            if (organizer is null || FindCompanion(organizer, this.def) is null || !ConditionsMeet(organizer))
+            else if (FindCompanion(organizer, this.def) is null)
             {
+                Log.Message($"{this.def.defName} - can't find a companion for {organizer}");
+                return false;
+            }
+            else if (!ConditionsMeet(organizer))
+            {
+                Log.Message($"{this.def.defName} - outside conditions aren't meet");
                 return false;
             }
             return true;
@@ -76,7 +87,8 @@ namespace VanillaSocialInteractionsExpanded
 
         protected virtual void SendLetterCustom(IntVec3 spot, Pawn organizer, Pawn companion)
         {
-            Find.LetterStack.ReceiveLetter(def.letterTitle, def.letterText.Formatted(organizer.Named("ORGANIZER"), companion.Named("COMPANION")), LetterDefOf.PositiveEvent, new TargetInfo(spot, organizer.Map));
+            Find.LetterStack.ReceiveLetter(def.letterTitle, def.letterText.Formatted(organizer.Named("ORGANIZER"), companion.Named("COMPANION")), LetterDefOf.PositiveEvent,
+                new List<Pawn> { organizer, companion });
         }
         private Pawn FindOrganizerCustom(Map map, out Pawn companion)
         {
@@ -98,7 +110,7 @@ namespace VanillaSocialInteractionsExpanded
         }
         public Pawn FindRandomGatheringOrganizer(Faction faction, Map map, GatheringDef gatheringDef, out Pawn companion)
         {
-            Predicate<Pawn> v = (Pawn organizer) => BasePawnValidator(organizer, gatheringDef) && MemberValidator(organizer) && FindCompanion(organizer, gatheringDef) != null;
+            Predicate<Pawn> v = (Pawn organizer) => BasePawnValidator(organizer, gatheringDef) && MemberValidator(organizer);// && FindCompanion(organizer, gatheringDef) != null;
             if (map.mapPawns.SpawnedPawnsInFaction(faction).Where(x => v(x)).TryRandomElement(out Pawn result))
             {
                 companion = FindCompanion(result, gatheringDef);
@@ -111,14 +123,11 @@ namespace VanillaSocialInteractionsExpanded
         protected Pawn FindCompanion(Pawn organizer, GatheringDef gatheringDef)
         {
             var candidates = organizer.Map.mapPawns.SpawnedPawnsInFaction(organizer.Faction).Where(candidate => candidate != organizer && BasePawnValidator(candidate, gatheringDef)
-            && MemberValidator(candidate) && PawnsCanGatherTogether(organizer, candidate));
-
+                && MemberValidator(candidate) && PawnsCanGatherTogether(organizer, candidate));
             if (candidates.Any() && candidates.TryRandomElementByWeight(x => SortCandidatesBy(organizer, x), out var companion))
             {
-                Log.Message("Companion is found: " + companion);
                 return companion;
             }
-            Log.Message("Companion is not found");
             return null;
         }
 

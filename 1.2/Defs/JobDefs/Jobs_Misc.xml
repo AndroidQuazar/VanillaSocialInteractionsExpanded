@@ -24,24 +24,56 @@
 		<driverClass>VanillaSocialInteractionsExpanded.JobDriver_TalkToSecondPawn</driverClass>
 		<reportString>talking to TargetA.</reportString>
 	</JobDef>
-	
+
 	<JobDef>
 		<defName>VSIE_HonorPawn</defName>
 		<driverClass>VanillaSocialInteractionsExpanded.JobDriver_StandSilentlyFaceTarget</driverClass>
 		<reportString>honoring TargetA.</reportString>
 	</JobDef>
+
+	<JobDef>
+		<defName>VSIE_Skygaze</defName>
+		<driverClass>VanillaSocialInteractionsExpanded.JobDriver_SkygazeTalking</driverClass>
+		<reportString>skygazing with TargetB.</reportString>
+		<joyDuration>4000</joyDuration>
+		<joyKind>Meditative</joyKind>
+	</JobDef>
+
+	<JobDef>
+		<defName>VSIE_ViewArtTogether</defName>
+		<driverClass>VanillaSocialInteractionsExpanded.JobDriver_ViewArtTogether</driverClass>
+		<reportString>viewing art with TargetB.</reportString>
+		<joyDuration>4000</joyDuration>
+		<joyKind>Meditative</joyKind>
+	</JobDef>
+
+	<JobDef>
+		<defName>VSIE_BuildSnowmanTogether</defName>
+		<driverClass>VanillaSocialInteractionsExpanded.JobDriver_BuildSnowmanTogether</driverClass>
+		<reportString>building snowman with TargetB.</reportString>
+		<joyDuration>8000</joyDuration>
+		<joyKind>Meditative</joyKind>
+		<taleOnCompletion>BuiltSnowman</taleOnCompletion>
+	</JobDef>
+
+	<JobDef>
+		<defName>VSIE_GotoWith</defName>
+		<driverClass>VanillaSocialInteractionsExpanded.JobDriver_GotoTalking</driverClass>
+		<reportString>walking with TargetB.</reportString>
+		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+	</JobDef>
 	
 	<JobDef>
-    <defName>VSIE_GotoWith</defName>
-    <driverClass>VanillaSocialInteractionsExpanded.JobDriver_GotoTalking</driverClass>
-    <reportString>1 walking with TargetA.</reportString>
-    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
-  </JobDef>
+		<defName>VSIE_GotoTalkToSecondPawn</defName>
+		<driverClass>VanillaSocialInteractionsExpanded.JobDriver_GoToTalkToSecondPawn</driverClass>
+		<reportString>talking to Target.</reportString>
+		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+	</JobDef>
 
-  <JobDef>
-    <defName>VSIE_Follow</defName>
-    <driverClass>VanillaSocialInteractionsExpanded.JobDriver_FollowTalking</driverClass>
-    <reportString>2 walking with TargetA.</reportString>
-    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
-  </JobDef>
+	<JobDef>
+		<defName>VSIE_Follow</defName>
+		<driverClass>VanillaSocialInteractionsExpanded.JobDriver_FollowTalking</driverClass>
+		<reportString>walking with TargetA.</reportString>
+		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+	</JobDef>
 </Defs>

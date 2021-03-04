@@ -15,6 +15,7 @@ namespace VanillaSocialInteractionsExpanded
 		{
 			get
 			{
+
 				DirectPawnRelation directPawnRelation = pawn.relations.DirectRelations.FirstOrDefault(x => x.def == VSIE_DefOf.VSIE_BestFriend);
 				string text = base.CurStage.label.Formatted(directPawnRelation.def.GetGenderSpecificLabel(directPawnRelation.otherPawn), directPawnRelation.otherPawn.LabelShort, directPawnRelation.otherPawn).CapitalizeFirst();
 				if (def.Worker != null)

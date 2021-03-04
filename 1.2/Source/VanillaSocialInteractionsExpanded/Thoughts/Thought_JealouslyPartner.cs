@@ -9,26 +9,16 @@ using Verse;
 
 namespace VanillaSocialInteractionsExpanded
 {
-	public class Thought_StoleMyLover : Thought_SituationalSocial
+	public class Thought_JealouslyPartner : Thought_MemorySocial
 	{
 		public override string LabelCap
 		{
 			get
 			{
-
-				Predicate<Tale_TriplePawn> validator = delegate (Tale_TriplePawn t)
-				{
-					return pawn == t.firstPawnData.pawn && otherPawn == t.secondPawnData.pawn;
-				};
-				Tale_TriplePawn latestTale = VSIE_Utils.GetLatestTriplePawnTale(def.taleDef, validator);
-				if (latestTale != null)
-				{
-					return base.CurStage.label.Formatted(pawn.relations.DirectRelations.Where(x => x.otherPawn == latestTale.thirdPawnData.pawn).OrderBy(y => y.def.importance).FirstOrDefault()
-						.def.GetGenderSpecificLabel(latestTale.firstPawnData.pawn), latestTale.secondPawnData.pawn.Named("SECONDPAWN"), latestTale.thirdPawnData.pawn.Named("THIRDPAWN"), pawn.Named("PAWN"));
-				}
 				return base.LabelCap;
 			}
 		}
+
 		public override float OpinionOffset()
 		{
 			if (ThoughtUtility.ThoughtNullified(pawn, def))

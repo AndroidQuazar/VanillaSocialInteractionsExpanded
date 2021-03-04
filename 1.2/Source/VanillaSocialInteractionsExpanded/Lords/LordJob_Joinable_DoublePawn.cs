@@ -18,7 +18,6 @@ namespace VanillaSocialInteractionsExpanded
         private int durationTicks;
         public override bool AllowStartNewGatherings => false;
         protected virtual ThoughtDef AttendeeThought => null;
-
         protected virtual TaleDef AttendeeTale => TaleDefOf.AttendedParty;
 
         protected virtual ThoughtDef OrganizerThought => null;
@@ -92,7 +91,7 @@ namespace VanillaSocialInteractionsExpanded
             return new Trigger_TicksPassed(durationTicks);
         }
 
-        private void ApplyOutcome(LordToil_Party toil)
+        protected virtual void ApplyOutcome(LordToil_Party toil)
         {
             List<Pawn> ownedPawns = lord.ownedPawns;
             LordToilData_Party lordToilData_Party = (LordToilData_Party)toil.data;

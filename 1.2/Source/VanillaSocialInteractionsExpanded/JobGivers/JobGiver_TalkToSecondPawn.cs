@@ -24,17 +24,20 @@ namespace VanillaSocialInteractionsExpanded
 
 		protected override Job TryGiveJob(Pawn pawn)
 		{
-			Pawn target = VSIE_Utils.GetSecondPawnToTalk(pawn);
+			Pawn target = VSIE_Utils.GetCompanion(pawn);
 			if (target != null)
             {
 				if (target.Position.DistanceTo(pawn.Position) > 5)
                 {
-					return JobMaker.MakeJob(JobDefOf.Goto, target);
-                }
+					var job = JobMaker.MakeJob(VSIE_DefOf.VSIE_GotoTalkToSecondPawn, target); 
+					Log.Message($"{pawn} gets {job}");
+					return job;
+				}
                 else
                 {
 					Job job = JobMaker.MakeJob(VSIE_DefOf.VSIE_TalkToSecondPawn, target);
 					job.expiryInterval = ticksRange.RandomInRange;
+					Log.Message($"{pawn} gets {job}");
 					return job;
 				}
 			}

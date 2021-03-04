@@ -32,5 +32,68 @@
       </li>
     </stages>
   </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>VSIE_JealouslyMyPartnerWalkedWithSomeoneElse</defName>
+    <thoughtClass>VanillaSocialInteractionsExpanded.Thought_JealouslyPartner</thoughtClass>
+    <stackLimitForSameOtherPawn>10</stackLimitForSameOtherPawn>
+    <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+	<durationDays>3</durationDays>
+    <stages>
+      <li>
+        <label>Jealously {0} </label>
+		<description>ddd.</description>
+        <baseOpinionOffset>-5</baseOpinionOffset>
+		<baseMoodEffect>-5</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
   
+  <ThoughtDef>
+    <defName>VSIE_JealouslyMyPartnerSkygazedWithSomeoneElse</defName>
+    <thoughtClass>VanillaSocialInteractionsExpanded.Thought_JealouslyPartner</thoughtClass>
+    <stackLimitForSameOtherPawn>10</stackLimitForSameOtherPawn>
+    <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+	<durationDays>3</durationDays>
+    <stages>
+      <li>
+        <label>Jealously {0} </label>
+		<description>ddd.</description>
+        <baseOpinionOffset>-5</baseOpinionOffset>
+		<baseMoodEffect>-5</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+  <ThoughtDef>
+    <defName>VSIE_JealouslyMyPartnerViewedArtWithSomeoneElse</defName>
+    <thoughtClass>VanillaSocialInteractionsExpanded.Thought_JealouslyPartner</thoughtClass>
+    <stackLimitForSameOtherPawn>10</stackLimitForSameOtherPawn>
+    <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+	<durationDays>3</durationDays>
+    <stages>
+      <li>
+        <label>Jealously {0} </label>
+		<description>ddd.</description>
+        <baseOpinionOffset>-5</baseOpinionOffset>
+		<baseMoodEffect>-5</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+  <ThoughtDef>
+    <defName>VSIE_JealouslyMyPartnerBuiltSnowmenWithSomeoneElse</defName>
+    <thoughtClass>VanillaSocialInteractionsExpanded.Thought_JealouslyPartner</thoughtClass>
+    <stackLimitForSameOtherPawn>10</stackLimitForSameOtherPawn>
+    <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+	<durationDays>3</durationDays>
+    <stages>
+      <li>
+        <label>Jealously {0} </label>
+		<description>ddd.</description>
+        <baseOpinionOffset>-5</baseOpinionOffset>
+		<baseMoodEffect>-5</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
 </Defs>
