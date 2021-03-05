@@ -113,6 +113,15 @@ namespace VanillaSocialInteractionsExpanded
         public static ThoughtDef VSIE_JealouslyMyPartnerBuiltSnowmenWithSomeoneElse;
         public static JobDef VSIE_BuildSnowmanTogether;
         public static JobDef VSIE_GotoTalkToSecondPawn;
+
+        public static ThoughtDef VSIE_CrushingDefeat;
+        public static ThoughtDef VSIE_CloseDefeat;
+        public static ThoughtDef VSIE_PyrrhicVictory;
+        public static ThoughtDef VSIE_CloseVictory;
+        public static ThoughtDef VSIE_DecisiveVictory;
+        public static ThoughtDef VSIE_GotSomeLovin;
+        public static JobDef VSIE_OneStandLovin;
+
     }
 
 }

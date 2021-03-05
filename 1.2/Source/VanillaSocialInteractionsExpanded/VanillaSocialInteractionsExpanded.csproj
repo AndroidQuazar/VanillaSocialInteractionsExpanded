@@ -45,6 +45,7 @@
     <Compile Include="GatheringWorkers\GatheringWorker_BuildingSnowmen.cs" />
     <Compile Include="HarmonyPatches\FoodPatches.cs" />
     <Compile Include="HarmonyPatches\Inspiration_Patches.cs" />
+    <Compile Include="HarmonyPatches\Raid_Patches.cs" />
     <Compile Include="HarmonyPatches\Stat_Patches.cs" />
     <Compile Include="HarmonyPatches\JobGiver_Patches.cs" />
     <Compile Include="HarmonyPatches\Skill_Patches.cs" />
@@ -61,11 +62,13 @@
     <Compile Include="HarmonyPatches\JobDriver_Patches.cs" />
     <Compile Include="HarmonyPatches\ButcherProducts_Patch.cs" />
     <Compile Include="HarmonyPatches\WorkGiver_Patches.cs" />
+    <Compile Include="Incidents\IncidentWorker_OneNightStand.cs" />
     <Compile Include="Interactions\InteractionWorker_Discord.cs" />
     <Compile Include="Interactions\InteractionWorker_Vent.cs" />
     <Compile Include="Interactions\InteractionWorker_Teaching.cs" />
     <Compile Include="JobDrivers\JobDriver_BuildSnowmanTogether.cs" />
     <Compile Include="JobDrivers\JobDriver_GoToTalkToSecondPawn.cs" />
+    <Compile Include="JobDrivers\JobDriver_LovinOneNightStand.cs" />
     <Compile Include="JobDrivers\JobDriver_ViewArtTogether.cs" />
     <Compile Include="JobDrivers\JobDriver_SkygazeTalking.cs" />
     <Compile Include="JobDrivers\JobDriver_GotoTalking.cs" />
@@ -108,6 +111,8 @@
     <Compile Include="Lords\LordJob_Joinable_DoublePawn.cs" />
     <Compile Include="PawnRelationWorkers\PawnRelationWorker_BestFriend.cs" />
     <Compile Include="Tales\Tale_TriplePawn.cs" />
+    <Compile Include="Thoughts\ThoughtWorker_GoodEnvironment.cs" />
+    <Compile Include="Thoughts\ThoughtWorker_HostileEnvironment.cs" />
     <Compile Include="Thoughts\ThoughtWorker_OpinionOfMyBestFriend.cs" />
     <Compile Include="Thoughts\ThoughtWorker_IsRoyalty.cs" />
     <Compile Include="Thoughts\ThoughtWorker_StoleMyLover.cs" />
@@ -116,6 +121,8 @@
     <Compile Include="Thoughts\ThoughtWorker_DoublePawn_Situation.cs" />
     <Compile Include="Thoughts\ThoughtWorker_OnePawn_Situation.cs" />
     <Compile Include="Thoughts\ThoughtWorker_IngestedHumanFlesh.cs" />
+    <Compile Include="Thoughts\Thought_GoodEnvironment.cs" />
+    <Compile Include="Thoughts\Thought_HostileEnvironment.cs" />
     <Compile Include="Thoughts\Thought_JealouslyRival.cs" />
     <Compile Include="Thoughts\Thought_OpinionOfMyBestFriend.cs" />
     <Compile Include="Thoughts\Thought_IsRoyalty.cs" />
@@ -143,8 +150,6 @@
       <Version>2.0.4</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MentalStates\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

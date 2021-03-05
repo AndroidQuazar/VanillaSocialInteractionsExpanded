@@ -36,6 +36,23 @@ namespace VanillaSocialInteractionsExpanded
 			}
 		}
 
+		public static float AverageOpinionOf(Pawn pawn)
+		{
+			var allOpinions = new List<float>();
+			var pawns = pawn.Map.mapPawns.SpawnedPawnsInFaction(pawn.Faction).Where(x => x != pawn && pawn.RaceProps.Humanlike);
+			foreach (var otherPawn in pawns)
+			{
+				if (pawn.relations != null)
+				{
+					allOpinions.Add(otherPawn.relations.OpinionOf(pawn));
+				}
+			}
+			if (allOpinions.Any())
+            {
+				return allOpinions.Average();
+            }
+			return 0f;
+		}
 		public static Pawn GetCompanion(Pawn pawn)
 		{
 			var lord = pawn.GetLord();

@@ -15,7 +15,7 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Postfix(Pawn __instance, Map map, bool respawningAfterLoad)
 		{
-			if (!respawningAfterLoad)
+			if (!respawningAfterLoad && __instance.ageTracker != null && __instance.relations != null)
             {
 				var pawnAge = __instance.ageTracker.AgeChronologicalYearsFloat;
 				foreach (var relPawn in __instance.relations.PotentiallyRelatedPawns)

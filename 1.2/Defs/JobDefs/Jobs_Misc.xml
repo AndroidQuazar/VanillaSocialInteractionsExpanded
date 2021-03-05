@@ -76,4 +76,11 @@
 		<reportString>walking with TargetA.</reportString>
 		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
 	</JobDef>
+	
+  <JobDef>
+    <defName>VSIE_OneStandLovin</defName>
+    <driverClass>VanillaSocialInteractionsExpanded.JobDriver_LovinOneNightStand</driverClass>
+    <reportString>lovin'.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
 </Defs>

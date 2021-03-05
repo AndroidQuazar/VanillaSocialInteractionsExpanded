@@ -24,10 +24,12 @@ namespace VanillaSocialInteractionsExpanded
             {
                 return false;
             }
-            //if (pawn.Map.snowGrid.TotalDepth < 200f)
-            //{
-            //    return false;
-            //}
+
+            if (pawn.Map.snowGrid.TotalDepth < 200f)
+            {
+                return false;
+            }
+
             cell = TryFindSnowmanBuildCell(pawn);
             if (!cell.IsValid)
             {

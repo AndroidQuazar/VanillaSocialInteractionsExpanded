@@ -96,4 +96,28 @@
       </li>
     </stages>
   </ThoughtDef>
+  
+  <ThoughtDef>
+    <defName>VSIE_HostileEnvironment</defName>
+    <thoughtClass>VanillaSocialInteractionsExpanded.Thought_HostileEnvironment</thoughtClass>
+	<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_HostileEnvironment</workerClass>
+	<stages>
+      <li>
+        <label>Bad reputation</label>
+		<description>I'm not having fun here. Nobody seems to respect me!</description>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+  <ThoughtDef>
+    <defName>VSIE_GoodEnvironment</defName>
+    <thoughtClass>VanillaSocialInteractionsExpanded.Thought_GoodEnvironment</thoughtClass>
+	<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_GoodEnvironment</workerClass>
+	<stages>
+      <li>
+        <label>Good environment</label>
+		<description>I'm not having fun here. Nobody seems to respect me!</description>
+      </li>
+    </stages>
+  </ThoughtDef>
 </Defs>
