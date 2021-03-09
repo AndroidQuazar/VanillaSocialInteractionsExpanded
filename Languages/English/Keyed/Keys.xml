@@ -19,7 +19,7 @@
   <VSIE.RecoveredAfterDeadlyDisease>The time {PAWN_nameDef} spent fighting the deadly illness was enough time for a self-reflection, as [PAWN_pronoun] has developed the {0} trait.\n\n{1}.</VSIE.RecoveredAfterDeadlyDisease>
   <VSIE.BirthdayEvent>{PAWN_nameDef} took a moment to reflect upon themself on their birthday, which resulted in developing the {0} trait.\n\n{1}.</VSIE.BirthdayEvent>
   <VSIE.BestowingCeremony>Possibly the greatest moment in {PAWN_nameDef}’s life, a bestowing ceremony, allowed them to develop the {0} trait.\n\n{1}.</VSIE.BestowingCeremony>
-  <VSIE.ToughtRaidEvent>After recent events and the difficult raid the colony faced, {PAWN_nameDef} reflected upon themself and developed the 0} trait.\n\n{1}.</VSIE.ToughtRaidEvent>
+  <VSIE.ToughtRaidEvent>After recent events and the difficult raid the colony faced, {PAWN_nameDef} reflected upon themself and developed the {0} trait.\n\n{1}.</VSIE.ToughtRaidEvent>
 
   <VSIE.Discord>A group social fight has broke out.</VSIE.Discord>
   <VSIE.OneNightStandTitle>One night stand</VSIE.OneNightStandTitle>
