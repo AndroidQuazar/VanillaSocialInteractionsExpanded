@@ -42,7 +42,7 @@
 		<stages>
 			<li>
 				<label>Jealously {0} </label>
-				<description>ddd.</description>
+				<description>I'm jealous. My partner went on a date with someone else!</description>
 				<baseOpinionOffset>-5</baseOpinionOffset>
 				<baseMoodEffect>-5</baseMoodEffect>
 			</li>
@@ -58,7 +58,7 @@
 		<stages>
 			<li>
 				<label>Jealously {0} </label>
-				<description>ddd.</description>
+				<description>I'm jealous. My partner went on a date with someone else!</description>
 				<baseOpinionOffset>-5</baseOpinionOffset>
 				<baseMoodEffect>-5</baseMoodEffect>
 			</li>
@@ -74,7 +74,7 @@
 		<stages>
 			<li>
 				<label>Jealously {0} </label>
-				<description>ddd.</description>
+				<description>I'm jealous. My partner went on a date with someone else!</description>
 				<baseOpinionOffset>-5</baseOpinionOffset>
 				<baseMoodEffect>-5</baseMoodEffect>
 			</li>
@@ -90,7 +90,7 @@
 		<stages>
 			<li>
 				<label>Jealously {0} </label>
-				<description>ddd.</description>
+				<description>I'm jealous. My partner went on a date with someone else!</description>
 				<baseOpinionOffset>-5</baseOpinionOffset>
 				<baseMoodEffect>-5</baseMoodEffect>
 			</li>
@@ -119,8 +119,8 @@
 		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_SocialEnvironment</workerClass>
 		<stages>
 			<li>
-				<label>Good environment</label>
-				<description>I'm not having fun here. Nobody seems to respect me!</description>
+				<label>Good reputation</label>
+				<description>I am liked and respected here. These people need me.</description>
 			</li>
 			<li>
 				<label>Bad reputation</label>
