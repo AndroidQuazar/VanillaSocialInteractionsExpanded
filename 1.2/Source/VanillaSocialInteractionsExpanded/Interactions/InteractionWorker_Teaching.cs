@@ -35,7 +35,7 @@ namespace VanillaSocialInteractionsExpanded
 			if (skillDef != null)
             {
 				VSIE_Utils.SocialInteractionsManager.teachersWithPupils[initiator] = new TeachingTopic(recipient, skillDef);
-				return 1f * OpinionFactorCurve.Evaluate(initiator.relations.OpinionOf(recipient));
+				return 0.1f * OpinionFactorCurve.Evaluate(initiator.relations.OpinionOf(recipient));
             }
 			return 0f;
 		}

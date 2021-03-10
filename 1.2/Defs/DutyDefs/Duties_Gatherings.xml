@@ -1,5 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
+
+	<DutyDef>
+		<defName>VSIE_MovieNight</defName>
+		<label>movie night</label>
+		<hook>MediumPriority</hook>
+		<thinkNode Class="ThinkNode_Priority">
+			<subNodes>
+
+				<li Class="VanillaSocialInteractionsExpanded.JobGiver_GotoTalkToSecondPawn"/>
+
+				<li Class="ThinkNode_ConditionalRandom">
+					<chance>0.35</chance>
+					<subNodes>
+						<li Class="VanillaSocialInteractionsExpanded.JobGiver_TalkToSecondPawn">
+							<ticksRange>350~750</ticksRange>
+						</li>
+					</subNodes>
+				</li>
+
+				<li Class="VanillaSocialInteractionsExpanded.JobGiver_WatchTelevisionTogether"/>
+
+				<li Class="VanillaSocialInteractionsExpanded.JobGiver_WanderAroundSecondPawn">
+					<ticksBetweenWandersRange>50~250</ticksBetweenWandersRange>
+					<wanderRadius>2</wanderRadius>
+				</li>
+			</subNodes>
+		</thinkNode>
+	</DutyDef>
+	
 	<DutyDef>
 		<defName>VSIE_BuildingSnowmen</defName>
 		<label>building snowmen</label>

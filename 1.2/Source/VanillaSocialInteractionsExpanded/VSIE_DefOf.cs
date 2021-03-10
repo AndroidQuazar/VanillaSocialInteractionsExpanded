@@ -112,6 +112,11 @@ namespace VanillaSocialInteractionsExpanded
         public static GatheringDef VSIE_BuildingSnowmen;
         public static ThoughtDef VSIE_JealouslyMyPartnerBuiltSnowmenWithSomeoneElse;
         public static JobDef VSIE_BuildSnowmanTogether;
+
+        public static GatheringDef VSIE_MovieNight;
+        public static ThoughtDef VSIE_JealouslyMyPartnerWatchedTVWithSomeoneElse;
+        public static JobDef VSIE_WatchTelevisionTogether;
+
         public static JobDef VSIE_GotoTalkToSecondPawn;
 
         public static ThoughtDef VSIE_CrushingDefeat;

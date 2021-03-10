@@ -62,7 +62,7 @@
 		<reportString>walking with TargetB.</reportString>
 		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
 	</JobDef>
-	
+
 	<JobDef>
 		<defName>VSIE_GotoTalkToSecondPawn</defName>
 		<driverClass>VanillaSocialInteractionsExpanded.JobDriver_GoToTalkToSecondPawn</driverClass>
@@ -76,11 +76,22 @@
 		<reportString>walking with TargetA.</reportString>
 		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
 	</JobDef>
+
+	<JobDef>
+		<defName>VSIE_OneStandLovin</defName>
+		<driverClass>VanillaSocialInteractionsExpanded.JobDriver_LovinOneNightStand</driverClass>
+		<reportString>lovin'.</reportString>
+		<casualInterruptible>false</casualInterruptible>
+	</JobDef>
+
+	<JobDef>
+		<defName>VSIE_WatchTelevisionTogether</defName>
+		<driverClass>JobDriver_WatchTelevision</driverClass>
+		<reportString>watching television.</reportString>
+		<joyDuration>4000</joyDuration>
+		<joyMaxParticipants>8</joyMaxParticipants>
+		<joyKind>Television</joyKind>
+		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+	</JobDef>
 	
-  <JobDef>
-    <defName>VSIE_OneStandLovin</defName>
-    <driverClass>VanillaSocialInteractionsExpanded.JobDriver_LovinOneNightStand</driverClass>
-    <reportString>lovin'.</reportString>
-    <casualInterruptible>false</casualInterruptible>
-  </JobDef>
 </Defs>
