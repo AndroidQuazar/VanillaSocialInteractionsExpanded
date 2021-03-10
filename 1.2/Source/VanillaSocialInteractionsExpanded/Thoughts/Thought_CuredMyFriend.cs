@@ -22,7 +22,7 @@ namespace VanillaSocialInteractionsExpanded
 				Tale_TriplePawn latestTale = VSIE_Utils.GetLatestTriplePawnTale(def.taleDef, validator);
 				if (latestTale != null)
 				{
-					return base.CurStage.label.Formatted(latestTale.secondPawnData.pawn.relations.DirectRelations.Where(x => x.otherPawn == pawn).OrderBy(y => y.def.opinionOffset).FirstOrDefault()
+					return base.CurStage.label.Formatted(pawn.relations.DirectRelations.Where(x => x.otherPawn == latestTale.thirdPawnData.pawn).OrderBy(y => y.def.opinionOffset).FirstOrDefault()
 						.def.GetGenderSpecificLabel(latestTale.firstPawnData.pawn), latestTale.secondPawnData.pawn.Named("SECONDPAWN"), latestTale.thirdPawnData.pawn.Named("THIRDPAWN"), pawn.Named("PAWN"));
 				}
 				return base.LabelCap;
