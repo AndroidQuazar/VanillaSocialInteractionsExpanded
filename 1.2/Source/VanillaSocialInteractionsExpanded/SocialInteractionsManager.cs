@@ -501,7 +501,7 @@ namespace VanillaSocialInteractionsExpanded
 
         public void TryDevelopNewTrait(Pawn pawn, string letterTextKey)
         {
-            if (pawn.RaceProps.Humanlike)
+            if (pawn.RaceProps.Humanlike && pawn.Faction == Faction.OfPlayer && !pawn.Dead)
             {
                 var traits = DefDatabase<TraitDef>.AllDefsListForReading;
                 var traitsCount = traits.Count;

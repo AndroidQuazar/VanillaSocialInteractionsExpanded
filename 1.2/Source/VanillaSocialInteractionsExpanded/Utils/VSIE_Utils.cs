@@ -10,6 +10,28 @@ using Verse.AI.Group;
 
 namespace VanillaSocialInteractionsExpanded
 {
+	public class FloatValueCache
+	{
+		public FloatValueCache(float value)
+		{
+			this.value = value;
+		}
+		public float value;
+		public float Value
+		{
+			get
+			{
+				return value;
+			}
+			set
+			{
+				this.value = value;
+				updateTick = Find.TickManager.TicksGame;
+			}
+		}
+		public int updateTick;
+	}
+
 	[StaticConstructorOnStartup]
     public static class VSIE_Utils
     {
@@ -36,10 +58,33 @@ namespace VanillaSocialInteractionsExpanded
 			}
 		}
 
-		public static float AverageOpinionOf(Pawn pawn)
+		private static Dictionary<Pawn, FloatValueCache> averageOpinionOfCache = new Dictionary<Pawn, FloatValueCache>();
+
+		public static float GetAverageOpinionOf(Pawn pawn)
+		{
+			if (averageOpinionOfCache.TryGetValue(pawn, out FloatValueCache floatValueCache))
+			{
+				var averageOpinionOf = floatValueCache.value;
+				if (Find.TickManager.TicksGame > floatValueCache.updateTick + 3600)
+				{
+					averageOpinionOf = AverageOpinionOf(pawn);
+					floatValueCache.Value = averageOpinionOf;
+				}
+				return averageOpinionOf;
+			}
+			else
+			{
+				var averageOpinionOf = AverageOpinionOf(pawn);
+				averageOpinionOfCache[pawn] = new FloatValueCache(averageOpinionOf);
+				return averageOpinionOf;
+			}
+		}
+
+		private static float AverageOpinionOf(Pawn pawn)
 		{
 			var allOpinions = new List<float>();
-			var pawns = pawn.Map.mapPawns.SpawnedPawnsInFaction(pawn.Faction).Where(x => x != pawn && pawn.RaceProps.Humanlike);
+			var pawns = pawn.Map.mapPawns.SpawnedPawnsInFaction(pawn.Faction).Where(x => x != pawn && pawn.RaceProps.Humanlike).ToHashSet();
+			pawns.AddRange(pawn.relations.PotentiallyRelatedPawns);
 			foreach (var otherPawn in pawns)
 			{
 				if (pawn.relations != null)

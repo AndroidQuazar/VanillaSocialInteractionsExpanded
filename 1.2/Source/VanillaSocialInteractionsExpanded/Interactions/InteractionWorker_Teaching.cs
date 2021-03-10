@@ -27,7 +27,7 @@ namespace VanillaSocialInteractionsExpanded
 		};
 		public override float RandomSelectionWeight(Pawn initiator, Pawn recipient)
 		{
-			if (initiator.relations.OpinionOf(recipient) < 0)
+			if (initiator.relations.OpinionOf(recipient) < 0 || initiator.IsPrisoner && initiator.RecruitDifficulty(recipient.Faction) > 10)
             {
 				return 0f;
             }
@@ -35,7 +35,7 @@ namespace VanillaSocialInteractionsExpanded
 			if (skillDef != null)
             {
 				VSIE_Utils.SocialInteractionsManager.teachersWithPupils[initiator] = new TeachingTopic(recipient, skillDef);
-				return 110.7f * OpinionFactorCurve.Evaluate(initiator.relations.OpinionOf(recipient));
+				return 1f * OpinionFactorCurve.Evaluate(initiator.relations.OpinionOf(recipient));
             }
 			return 0f;
 		}
@@ -43,7 +43,7 @@ namespace VanillaSocialInteractionsExpanded
 		private SkillDef GetSkillDefToTeach(Pawn teacher, Pawn pupil)
         {
 			var pupilsSkills = pupil.skills.skills.Where(x => !x.TotallyDisabled);
-			var relevantTeacherSkills = teacher.skills.skills.Where(x => !x.TotallyDisabled && pupilsSkills.FirstOrDefault(y => x.def == y.def && x.Level > y.Level) != null);
+			var relevantTeacherSkills = teacher.skills.skills.Where(x => !x.TotallyDisabled && pupilsSkills.FirstOrDefault(y => x.def == y.def && x.Level > y.Level + 3) != null);
 			if (relevantTeacherSkills.Any())
             {
 				return relevantTeacherSkills.RandomElementByWeight(x => x.Level).def;

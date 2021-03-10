@@ -9,11 +9,15 @@ using Verse;
 
 namespace VanillaSocialInteractionsExpanded
 {
-	public class Thought_HostileEnvironment : Thought_Situational
+	public class Thought_SocialEnvironment : Thought_Situational
     {
         public override float MoodOffset()
         {
-            var averageOpinionOf = VSIE_Utils.AverageOpinionOf(pawn);
+            var averageOpinionOf = VSIE_Utils.GetAverageOpinionOf(pawn);
+            if (averageOpinionOf >= 10)
+            {
+                return averageOpinionOf / 10f;
+            }
             if (averageOpinionOf < 0)
             {
                 return averageOpinionOf / 5f;

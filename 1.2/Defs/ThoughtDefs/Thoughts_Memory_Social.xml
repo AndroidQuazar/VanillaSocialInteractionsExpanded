@@ -1,123 +1,117 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-  <ThoughtDef>
-    <defName>VSIE_SharingBurden</defName>
-    <thoughtClass>Thought_MemorySocial</thoughtClass>
-    <stackLimitForSameOtherPawn>10</stackLimitForSameOtherPawn>
-    <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
-	<durationDays>3</durationDays>
-    <stages>
-      <li>
-        <label>sharing the burden</label>
-		<description>It felt good to finally unbottle my feelings to a friend.</description>
-        <baseOpinionOffset>5</baseOpinionOffset>
-		<baseMoodEffect>20</baseMoodEffect>
-      </li>
-    </stages>
-  </ThoughtDef>
+	<ThoughtDef>
+		<defName>VSIE_SharingBurden</defName>
+		<thoughtClass>Thought_MemorySocial</thoughtClass>
+		<stackLimitForSameOtherPawn>10</stackLimitForSameOtherPawn>
+		<stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+		<durationDays>3</durationDays>
+		<stages>
+			<li>
+				<label>sharing the burden</label>
+				<description>It felt good to finally unbottle my feelings to a friend.</description>
+				<baseOpinionOffset>5</baseOpinionOffset>
+				<baseMoodEffect>20</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
 
-  <ThoughtDef>
-    <defName>VSIE_VentedOnMe</defName>
-    <thoughtClass>Thought_MemorySocial</thoughtClass>
-    <stackLimitForSameOtherPawn>10</stackLimitForSameOtherPawn>
-    <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
-	<durationDays>3</durationDays>
-    <stages>
-      <li>
-        <label>my friend vented to me</label>
-		<description>My friend unbottled their feelings to me.</description>
-        <baseOpinionOffset>-5</baseOpinionOffset>
-		<baseMoodEffect>-5</baseMoodEffect>
-      </li>
-    </stages>
-  </ThoughtDef>
+	<ThoughtDef>
+		<defName>VSIE_VentedOnMe</defName>
+		<thoughtClass>Thought_MemorySocial</thoughtClass>
+		<stackLimitForSameOtherPawn>10</stackLimitForSameOtherPawn>
+		<stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+		<durationDays>3</durationDays>
+		<stages>
+			<li>
+				<label>my friend vented to me</label>
+				<description>My friend unbottled their feelings to me.</description>
+				<baseOpinionOffset>-5</baseOpinionOffset>
+				<baseMoodEffect>-5</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
 
-  <ThoughtDef>
-    <defName>VSIE_JealouslyMyPartnerWalkedWithSomeoneElse</defName>
-    <thoughtClass>VanillaSocialInteractionsExpanded.Thought_JealouslyPartner</thoughtClass>
-    <stackLimitForSameOtherPawn>10</stackLimitForSameOtherPawn>
-    <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
-	<durationDays>3</durationDays>
-    <stages>
-      <li>
-        <label>Jealously {0} </label>
-		<description>ddd.</description>
-        <baseOpinionOffset>-5</baseOpinionOffset>
-		<baseMoodEffect>-5</baseMoodEffect>
-      </li>
-    </stages>
-  </ThoughtDef>
-  
-  <ThoughtDef>
-    <defName>VSIE_JealouslyMyPartnerSkygazedWithSomeoneElse</defName>
-    <thoughtClass>VanillaSocialInteractionsExpanded.Thought_JealouslyPartner</thoughtClass>
-    <stackLimitForSameOtherPawn>10</stackLimitForSameOtherPawn>
-    <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
-	<durationDays>3</durationDays>
-    <stages>
-      <li>
-        <label>Jealously {0} </label>
-		<description>ddd.</description>
-        <baseOpinionOffset>-5</baseOpinionOffset>
-		<baseMoodEffect>-5</baseMoodEffect>
-      </li>
-    </stages>
-  </ThoughtDef>
-  
-  <ThoughtDef>
-    <defName>VSIE_JealouslyMyPartnerViewedArtWithSomeoneElse</defName>
-    <thoughtClass>VanillaSocialInteractionsExpanded.Thought_JealouslyPartner</thoughtClass>
-    <stackLimitForSameOtherPawn>10</stackLimitForSameOtherPawn>
-    <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
-	<durationDays>3</durationDays>
-    <stages>
-      <li>
-        <label>Jealously {0} </label>
-		<description>ddd.</description>
-        <baseOpinionOffset>-5</baseOpinionOffset>
-		<baseMoodEffect>-5</baseMoodEffect>
-      </li>
-    </stages>
-  </ThoughtDef>
-  
-  <ThoughtDef>
-    <defName>VSIE_JealouslyMyPartnerBuiltSnowmenWithSomeoneElse</defName>
-    <thoughtClass>VanillaSocialInteractionsExpanded.Thought_JealouslyPartner</thoughtClass>
-    <stackLimitForSameOtherPawn>10</stackLimitForSameOtherPawn>
-    <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
-	<durationDays>3</durationDays>
-    <stages>
-      <li>
-        <label>Jealously {0} </label>
-		<description>ddd.</description>
-        <baseOpinionOffset>-5</baseOpinionOffset>
-		<baseMoodEffect>-5</baseMoodEffect>
-      </li>
-    </stages>
-  </ThoughtDef>
-  
-  <ThoughtDef>
-    <defName>VSIE_HostileEnvironment</defName>
-    <thoughtClass>VanillaSocialInteractionsExpanded.Thought_HostileEnvironment</thoughtClass>
-	<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_HostileEnvironment</workerClass>
-	<stages>
-      <li>
-        <label>Bad reputation</label>
-		<description>I'm not having fun here. Nobody seems to respect me!</description>
-      </li>
-    </stages>
-  </ThoughtDef>
-  
-  <ThoughtDef>
-    <defName>VSIE_GoodEnvironment</defName>
-    <thoughtClass>VanillaSocialInteractionsExpanded.Thought_GoodEnvironment</thoughtClass>
-	<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_GoodEnvironment</workerClass>
-	<stages>
-      <li>
-        <label>Good environment</label>
-		<description>I'm not having fun here. Nobody seems to respect me!</description>
-      </li>
-    </stages>
-  </ThoughtDef>
+	<ThoughtDef>
+		<defName>VSIE_JealouslyMyPartnerWalkedWithSomeoneElse</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_JealouslyPartner</thoughtClass>
+		<stackLimitForSameOtherPawn>10</stackLimitForSameOtherPawn>
+		<stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+		<durationDays>3</durationDays>
+		<stages>
+			<li>
+				<label>Jealously {0} </label>
+				<description>ddd.</description>
+				<baseOpinionOffset>-5</baseOpinionOffset>
+				<baseMoodEffect>-5</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<ThoughtDef>
+		<defName>VSIE_JealouslyMyPartnerSkygazedWithSomeoneElse</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_JealouslyPartner</thoughtClass>
+		<stackLimitForSameOtherPawn>10</stackLimitForSameOtherPawn>
+		<stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+		<durationDays>3</durationDays>
+		<stages>
+			<li>
+				<label>Jealously {0} </label>
+				<description>ddd.</description>
+				<baseOpinionOffset>-5</baseOpinionOffset>
+				<baseMoodEffect>-5</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<ThoughtDef>
+		<defName>VSIE_JealouslyMyPartnerViewedArtWithSomeoneElse</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_JealouslyPartner</thoughtClass>
+		<stackLimitForSameOtherPawn>10</stackLimitForSameOtherPawn>
+		<stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+		<durationDays>3</durationDays>
+		<stages>
+			<li>
+				<label>Jealously {0} </label>
+				<description>ddd.</description>
+				<baseOpinionOffset>-5</baseOpinionOffset>
+				<baseMoodEffect>-5</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<ThoughtDef>
+		<defName>VSIE_JealouslyMyPartnerBuiltSnowmenWithSomeoneElse</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_JealouslyPartner</thoughtClass>
+		<stackLimitForSameOtherPawn>10</stackLimitForSameOtherPawn>
+		<stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+		<durationDays>3</durationDays>
+		<stages>
+			<li>
+				<label>Jealously {0} </label>
+				<description>ddd.</description>
+				<baseOpinionOffset>-5</baseOpinionOffset>
+				<baseMoodEffect>-5</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<ThoughtDef>
+		<defName>VSIE_SocialEnvironment</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_SocialEnvironment</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_SocialEnvironment</workerClass>
+		<stages>
+			<li>
+				<label>Good environment</label>
+				<description>I'm not having fun here. Nobody seems to respect me!</description>
+			</li>
+			<li>
+				<label>Bad reputation</label>
+				<description>I'm not having fun here. Nobody seems to respect me!</description>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+
 </Defs>

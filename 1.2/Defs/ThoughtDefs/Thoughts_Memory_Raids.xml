@@ -56,7 +56,7 @@
   <ThoughtDef>
     <defName>VSIE_DecisiveVictory</defName>
     <durationDays>10</durationDays>
-    <stackLimit>10</stackLimit>
+    <stackLimit>1</stackLimit>
     <stages>
       <li>
         <label>decisive victory</label>

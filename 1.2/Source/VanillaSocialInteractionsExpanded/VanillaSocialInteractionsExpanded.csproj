@@ -111,8 +111,7 @@
     <Compile Include="Lords\LordJob_Joinable_DoublePawn.cs" />
     <Compile Include="PawnRelationWorkers\PawnRelationWorker_BestFriend.cs" />
     <Compile Include="Tales\Tale_TriplePawn.cs" />
-    <Compile Include="Thoughts\ThoughtWorker_GoodEnvironment.cs" />
-    <Compile Include="Thoughts\ThoughtWorker_HostileEnvironment.cs" />
+    <Compile Include="Thoughts\ThoughtWorker_SocialEnvironment.cs" />
     <Compile Include="Thoughts\ThoughtWorker_OpinionOfMyBestFriend.cs" />
     <Compile Include="Thoughts\ThoughtWorker_IsRoyalty.cs" />
     <Compile Include="Thoughts\ThoughtWorker_StoleMyLover.cs" />
@@ -121,8 +120,7 @@
     <Compile Include="Thoughts\ThoughtWorker_DoublePawn_Situation.cs" />
     <Compile Include="Thoughts\ThoughtWorker_OnePawn_Situation.cs" />
     <Compile Include="Thoughts\ThoughtWorker_IngestedHumanFlesh.cs" />
-    <Compile Include="Thoughts\Thought_GoodEnvironment.cs" />
-    <Compile Include="Thoughts\Thought_HostileEnvironment.cs" />
+    <Compile Include="Thoughts\Thought_SocialEnvironment.cs" />
     <Compile Include="Thoughts\Thought_JealouslyRival.cs" />
     <Compile Include="Thoughts\Thought_OpinionOfMyBestFriend.cs" />
     <Compile Include="Thoughts\Thought_IsRoyalty.cs" />

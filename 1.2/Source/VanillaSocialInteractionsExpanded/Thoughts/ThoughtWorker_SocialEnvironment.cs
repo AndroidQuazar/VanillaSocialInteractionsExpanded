@@ -8,13 +8,18 @@ using Verse;
 
 namespace VanillaSocialInteractionsExpanded
 {
-	public class ThoughtWorker_HostileEnvironment : ThoughtWorker
+	public class ThoughtWorker_SocialEnvironment : ThoughtWorker
 	{
 		protected override ThoughtState CurrentStateInternal(Pawn p)
 		{
-			if (VSIE_Utils.AverageOpinionOf(p) < 0)
+			var averageOpinionOf = VSIE_Utils.GetAverageOpinionOf(p);
+			if (averageOpinionOf >= 10)
 			{
-				return ThoughtState.ActiveDefault;
+				return ThoughtState.ActiveAtStage(0);
+			}
+			if (averageOpinionOf < 0)
+			{
+				return ThoughtState.ActiveAtStage(1);
 			}
 			return ThoughtState.Inactive;
 		}

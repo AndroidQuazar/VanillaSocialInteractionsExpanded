@@ -59,7 +59,7 @@
 		<validWhileDespawned>true</validWhileDespawned>
 		<stages>
 			<li>
-				<label>{OTHERPAWN_nameDef} ate human flesh, I will always be afraid of {OTHERPAWN_objective}</label>
+				<label>{OTHERPAWN_nameDef} ate human flesh, I will always be afraid of {OTHERPAWN_possessive}</label>
 				<baseOpinionOffset>-25</baseOpinionOffset>
 			</li>
 		</stages>
@@ -619,7 +619,7 @@
 		<validWhileDespawned>true</validWhileDespawned>
 		<stages>
 			<li>
-				<label>{OTHERPAWN_nameDef} saved me from my wounds. I will always be in {OTHERPAWN_objective} debt</label>
+				<label>{OTHERPAWN_nameDef} saved me from my wounds. I will always be in {OTHERPAWN_possessive} debt</label>
 				<baseOpinionOffset>10</baseOpinionOffset>
 			</li>
 		</stages>
@@ -659,7 +659,7 @@
 		<validWhileDespawned>true</validWhileDespawned>
 		<stages>
 			<li>
-				<label>{SECONDPAWN_nameDef} saved me from {THIRDPAWN_kindDef}, I will always be in {SECONDPAWN_objective} debt</label>
+				<label>{SECONDPAWN_nameDef} saved me from {THIRDPAWN_kindDef}, I will always be in {SECONDPAWN_possessive} debt</label>
 				<baseOpinionOffset>25</baseOpinionOffset>
 			</li>
 		</stages>

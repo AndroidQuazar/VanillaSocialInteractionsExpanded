@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
 
-  <VSIE.WorkFrenzyBeginLetterContinue>\n\n[PAWN_pronoun] would like to do some work.</VSIE.WorkFrenzyBeginLetterContinue>
-  <VSIE.GoFrenzyBeginLetterContinue>\n\n[PAWN_pronoun] would like to join a caravan and venture into the world.</VSIE.GoFrenzyBeginLetterContinue>
-  <VSIE.ShootingFrenzyBeginLetterContinue>\n\n[PAWN_pronoun] would like to go on a hunt.</VSIE.ShootingFrenzyBeginLetterContinue>
-  <VSIE.InspiredTradeBeginLetterContinue>\n\n[PAWN_pronoun] would like to close a trade.</VSIE.InspiredTradeBeginLetterContinue>
-  <VSIE.InspiredRecruitmentBeginLetterContinue>\n\n[PAWN_pronoun] would like to recruit a prisoner.</VSIE.InspiredRecruitmentBeginLetterContinue>
-  <VSIE.InspiredTamingBeginLetterContinue>\n\n[PAWN_pronoun] would like to try and tame an animal.</VSIE.InspiredTamingBeginLetterContinue>
-  <VSIE.InspiredSurgeryBeginLetterContinue>\n\n[PAWN_pronoun] would like to perform a surgery.</VSIE.InspiredSurgeryBeginLetterContinue>
-  <VSIE.InspiredCreativityBeginLetterContinue>\n\n[PAWN_pronoun] would like to create a masterwork or legendary item.</VSIE.InspiredCreativityBeginLetterContinue>
+  <VSIE.WorkFrenzyBeginLetterContinue>\n\n{PAWN_pronoun} would like to do some work.</VSIE.WorkFrenzyBeginLetterContinue>
+  <VSIE.GoFrenzyBeginLetterContinue>\n\n{PAWN_pronoun} would like to join a caravan and venture into the world.</VSIE.GoFrenzyBeginLetterContinue>
+  <VSIE.ShootingFrenzyBeginLetterContinue>\n\n{PAWN_pronoun} would like to go on a hunt.</VSIE.ShootingFrenzyBeginLetterContinue>
+  <VSIE.InspiredTradeBeginLetterContinue>\n\n{PAWN_pronoun} would like to close a trade.</VSIE.InspiredTradeBeginLetterContinue>
+  <VSIE.InspiredRecruitmentBeginLetterContinue>\n\n{PAWN_pronoun} would like to recruit a prisoner.</VSIE.InspiredRecruitmentBeginLetterContinue>
+  <VSIE.InspiredTamingBeginLetterContinue>\n\n{PAWN_pronoun} would like to try and tame an animal.</VSIE.InspiredTamingBeginLetterContinue>
+  <VSIE.InspiredSurgeryBeginLetterContinue>\n\n{PAWN_pronoun} would like to perform a surgery.</VSIE.InspiredSurgeryBeginLetterContinue>
+  <VSIE.InspiredCreativityBeginLetterContinue>\n\n{PAWN_pronoun} would like to create a masterwork or legendary item.</VSIE.InspiredCreativityBeginLetterContinue>
 
   <VSIE.TraitChangeTitle>{PAWN_nameDef} obtained {0} trait</VSIE.TraitChangeTitle>
   <VSIE.TraitChangePrisonerRecruited>When you recruited {PAWN_nameDef}, it turned out that {PAWN_pronoun} has the {0} trait.\n\n{1}</VSIE.TraitChangePrisonerRecruited>
-  <VSIE.TraitChangePawnResurrected>When {PAWN_nameDef} died and got brought back to life, [PAWN_pronoun] noticed that they now have the {0} trait.\n\n{1}</VSIE.TraitChangePawnResurrected>
-  <VSIE.TraitChangePawnHasCatatonicBreakdown>When {PAWN_nameDef} succumbed to the catatonic mental breakdown, [PAWN_pronoun] has developed the {0} trait.\n\n{1}</VSIE.TraitChangePawnHasCatatonicBreakdown>
-  <VSIE.TraitChangeFamilyMemberDied>When {PAWN_nameDef}’s family member died, [PAWN_pronoun] has developed the {0} trait.\n\n{1}</VSIE.TraitChangeFamilyMemberDied>
-  <VSIE.CatarhisAfterMentalBreak>{PAWN_nameDef}’s extreme mental break caused a permanent character change, as [PAWN_pronoun] has developed the {0} trait.\n\n{1}</VSIE.CatarhisAfterMentalBreak>
-  <VSIE.RecoveredAfterDeadlyDisease>The time {PAWN_nameDef} spent fighting the deadly illness was enough time for a self-reflection, as [PAWN_pronoun] has developed the {0} trait.\n\n{1}</VSIE.RecoveredAfterDeadlyDisease>
+  <VSIE.TraitChangePawnResurrected>When {PAWN_nameDef} died and got brought back to life,  noticed that they now have the {0} trait.\n\n{1}</VSIE.TraitChangePawnResurrected>
+  <VSIE.TraitChangePawnHasCatatonicBreakdown>When {PAWN_nameDef} succumbed to the catatonic mental breakdown, {PAWN_pronoun} has developed the {0} trait.\n\n{1}</VSIE.TraitChangePawnHasCatatonicBreakdown>
+  <VSIE.TraitChangeFamilyMemberDied>When {PAWN_nameDef}’s family member died, {PAWN_pronoun} has developed the {0} trait.\n\n{1}</VSIE.TraitChangeFamilyMemberDied>
+  <VSIE.CatarhisAfterMentalBreak>{PAWN_nameDef}’s extreme mental break caused a permanent character change, as {PAWN_pronoun} has developed the {0} trait.\n\n{1}</VSIE.CatarhisAfterMentalBreak>
+  <VSIE.RecoveredAfterDeadlyDisease>The time {PAWN_nameDef} spent fighting the deadly illness was enough time for a self-reflection, as {PAWN_pronoun} has developed the {0} trait.\n\n{1}</VSIE.RecoveredAfterDeadlyDisease>
   <VSIE.BirthdayEvent>{PAWN_nameDef} took a moment to reflect upon themself on their birthday, which resulted in developing the {0} trait.\n\n{1}</VSIE.BirthdayEvent>
   <VSIE.BestowingCeremony>Possibly the greatest moment in {PAWN_nameDef}’s life, a bestowing ceremony, allowed them to develop the {0} trait.\n\n{1}</VSIE.BestowingCeremony>
   <VSIE.ToughtRaidEvent>After recent events and the difficult raid the colony faced, {PAWN_nameDef} reflected upon themself and developed the {0} trait.\n\n{1}</VSIE.ToughtRaidEvent>
