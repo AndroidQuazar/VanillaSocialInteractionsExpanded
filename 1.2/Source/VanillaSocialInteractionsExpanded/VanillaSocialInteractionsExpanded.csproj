@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Defs\AspirationDef.cs" />
+    <Compile Include="GatheringWorkers\GatheringWorker_MealTogether.cs" />
+    <Compile Include="GatheringWorkers\GatheringWorker_Meal.cs" />
     <Compile Include="GatheringWorkers\GatheringWorker_MovieNight.cs" />
     <Compile Include="GatheringWorkers\GatheringWorker_BuildingSnowmen.cs" />
     <Compile Include="HarmonyPatches\FoodPatches.cs" />
@@ -70,6 +72,7 @@
     <Compile Include="JobDrivers\JobDriver_BuildSnowmanTogether.cs" />
     <Compile Include="JobDrivers\JobDriver_GoToTalkToSecondPawn.cs" />
     <Compile Include="JobDrivers\JobDriver_LovinOneNightStand.cs" />
+    <Compile Include="JobDrivers\JobDriver_HaveMealTogether.cs" />
     <Compile Include="JobDrivers\JobDriver_WatchTelevisionTogether.cs" />
     <Compile Include="JobDrivers\JobDriver_ViewArtTogether.cs" />
     <Compile Include="JobDrivers\JobDriver_SkygazeTalking.cs" />
@@ -80,6 +83,7 @@
     <Compile Include="JobDrivers\JobDriver_FollowTalking.cs" />
     <Compile Include="JobGivers\JobGiver_BuildSnowmanTogether.cs" />
     <Compile Include="JobGivers\JobGiver_GotoTalkToSecondPawn.cs" />
+    <Compile Include="JobGivers\JobGiver_HaveMealTogether.cs" />
     <Compile Include="JobGivers\JobGiver_WatchTelevisionTogether.cs" />
     <Compile Include="JobGivers\JobGiver_ViewingArtTogether.cs" />
     <Compile Include="JobGivers\JobGiver_Skygaze.cs" />
@@ -102,6 +106,7 @@
     <Compile Include="GatheringWorkers\GatheringWorker_OutdoorParty.cs" />
     <Compile Include="GatheringWorkers\GatheringWorker_BingeParty.cs" />
     <Compile Include="GatheringWorkers\GatheringWorker_GrabbingBeer.cs" />
+    <Compile Include="Lords\LordJob_Joinable_MealTogether.cs" />
     <Compile Include="Lords\LordJob_Joinable_MovieNight.cs" />
     <Compile Include="Lords\LordJob_Joinable_BuildingSnowmen.cs" />
     <Compile Include="Lords\LordJob_Joinable_ViewingArtTogether.cs" />

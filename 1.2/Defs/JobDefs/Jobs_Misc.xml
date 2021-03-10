@@ -93,5 +93,11 @@
 		<joyKind>Television</joyKind>
 		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
 	</JobDef>
-	
+
+	<JobDef>
+		<defName>VSIE_HaveMealTogether</defName>
+		<driverClass>VanillaSocialInteractionsExpanded.JobDriver_HaveMealTogether</driverClass>
+		<reportString>dating.</reportString>
+		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+	</JobDef>
 </Defs>

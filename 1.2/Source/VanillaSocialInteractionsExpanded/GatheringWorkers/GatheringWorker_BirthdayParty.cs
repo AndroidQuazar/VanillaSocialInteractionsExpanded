@@ -25,6 +25,7 @@ namespace VanillaSocialInteractionsExpanded
         }
         protected override bool TryFindGatherSpot(Pawn organizer, out IntVec3 spot)
 		{
+			Log.Message("organizer: " + organizer);
 			return RCellFinder.TryFindGatheringSpot_NewTemp(organizer, def, ignoreRequiredColonistCount: false, out spot);
 		}
 	}

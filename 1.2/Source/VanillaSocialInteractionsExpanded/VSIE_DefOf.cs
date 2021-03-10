@@ -99,23 +99,23 @@ namespace VanillaSocialInteractionsExpanded
         public static JobDef VSIE_GotoWith;
         public static JobDef VSIE_Follow;
 
-        public static ThoughtDef VSIE_JealouslyMyPartnerWalkedWithSomeoneElse;
+        public static ThoughtDef VSIE_JealouslyMyPartnerDatedSomeoneElse;
+
         public static GatheringDef VSIE_Skygazing;
-        public static ThoughtDef VSIE_JealouslyMyPartnerSkygazedWithSomeoneElse;
         public static JobDef VSIE_Skygaze;
 
         public static GatheringDef VSIE_ViewingArtTogether;
-        public static ThoughtDef VSIE_JealouslyMyPartnerViewedArtWithSomeoneElse;
         public static JobDef VSIE_ViewArtTogether;
 
 
         public static GatheringDef VSIE_BuildingSnowmen;
-        public static ThoughtDef VSIE_JealouslyMyPartnerBuiltSnowmenWithSomeoneElse;
         public static JobDef VSIE_BuildSnowmanTogether;
 
         public static GatheringDef VSIE_MovieNight;
-        public static ThoughtDef VSIE_JealouslyMyPartnerWatchedTVWithSomeoneElse;
         public static JobDef VSIE_WatchTelevisionTogether;
+
+        public static GatheringDef VSIE_MealTogether;
+        public static JobDef VSIE_HaveMealTogether;
 
         public static JobDef VSIE_GotoTalkToSecondPawn;
 

@@ -25,18 +25,7 @@ namespace VanillaSocialInteractionsExpanded
         protected override void ApplyOutcome(LordToil_Party toil)
         {
             base.ApplyOutcome(toil);
-            var organizerPartner = organizer.GetSpouseOrLoverOrFiance();
-            if (organizerPartner != null && secondPawn != organizerPartner)
-            {
-                Thought_Memory thought_Memory = (Thought_Memory)ThoughtMaker.MakeThought(VSIE_DefOf.VSIE_JealouslyMyPartnerViewedArtWithSomeoneElse);
-                organizerPartner.needs.mood.thoughts.memories.TryGainMemory(thought_Memory, organizer);
-            }
-            var secondPawnPartner = secondPawn.GetSpouseOrLoverOrFiance();
-            if (secondPawnPartner != null && organizer != secondPawnPartner)
-            {
-                Thought_Memory thought_Memory = (Thought_Memory)ThoughtMaker.MakeThought(VSIE_DefOf.VSIE_JealouslyMyPartnerViewedArtWithSomeoneElse);
-                secondPawnPartner.needs.mood.thoughts.memories.TryGainMemory(thought_Memory, secondPawn);
-            }
+
         }
         public override void ExposeData()
         {
