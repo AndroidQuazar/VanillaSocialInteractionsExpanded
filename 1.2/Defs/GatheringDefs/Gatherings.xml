@@ -1,5 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
+
+	<GatheringDef>
+		<defName>VSIE_MovieNight</defName>
+		<label>movie night</label>
+		<randomSelectionWeight>1</randomSelectionWeight>
+		<duty>VSIE_MovieNight</duty>
+		<workerClass>VanillaSocialInteractionsExpanded.GatheringWorker_MovieNight</workerClass>
+		<letterTitle>Movie night</letterTitle>
+		<letterText>{ORGANIZER_labelShort} is building snowmen with {COMPANION_labelShort}.</letterText>
+		<calledOffMessage>The party has been called off.</calledOffMessage>
+		<finishedMessage>The party has finished.</finishedMessage>
+		<gatherSpotDefs>
+		</gatherSpotDefs>
+	</GatheringDef>
+	
 	<GatheringDef>
 		<defName>VSIE_BuildingSnowmen</defName>
 		<label>building snowmen</label>

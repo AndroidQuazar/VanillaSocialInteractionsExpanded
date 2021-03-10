@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Defs\AspirationDef.cs" />
+    <Compile Include="GatheringWorkers\GatheringWorker_MovieNight.cs" />
     <Compile Include="GatheringWorkers\GatheringWorker_BuildingSnowmen.cs" />
     <Compile Include="HarmonyPatches\FoodPatches.cs" />
     <Compile Include="HarmonyPatches\Inspiration_Patches.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="JobDrivers\JobDriver_BuildSnowmanTogether.cs" />
     <Compile Include="JobDrivers\JobDriver_GoToTalkToSecondPawn.cs" />
     <Compile Include="JobDrivers\JobDriver_LovinOneNightStand.cs" />
+    <Compile Include="JobDrivers\JobDriver_WatchTelevisionTogether.cs" />
     <Compile Include="JobDrivers\JobDriver_ViewArtTogether.cs" />
     <Compile Include="JobDrivers\JobDriver_SkygazeTalking.cs" />
     <Compile Include="JobDrivers\JobDriver_GotoTalking.cs" />
@@ -78,6 +80,7 @@
     <Compile Include="JobDrivers\JobDriver_FollowTalking.cs" />
     <Compile Include="JobGivers\JobGiver_BuildSnowmanTogether.cs" />
     <Compile Include="JobGivers\JobGiver_GotoTalkToSecondPawn.cs" />
+    <Compile Include="JobGivers\JobGiver_WatchTelevisionTogether.cs" />
     <Compile Include="JobGivers\JobGiver_ViewingArtTogether.cs" />
     <Compile Include="JobGivers\JobGiver_Skygaze.cs" />
     <Compile Include="JobGivers\JobGiver_Campfire.cs" />
@@ -99,6 +102,7 @@
     <Compile Include="GatheringWorkers\GatheringWorker_OutdoorParty.cs" />
     <Compile Include="GatheringWorkers\GatheringWorker_BingeParty.cs" />
     <Compile Include="GatheringWorkers\GatheringWorker_GrabbingBeer.cs" />
+    <Compile Include="Lords\LordJob_Joinable_MovieNight.cs" />
     <Compile Include="Lords\LordJob_Joinable_BuildingSnowmen.cs" />
     <Compile Include="Lords\LordJob_Joinable_ViewingArtTogether.cs" />
     <Compile Include="Lords\LordJob_Joinable_Skygazing.cs" />
@@ -135,6 +139,7 @@
     <Compile Include="Thoughts\ThoughtWorker_ExposedCorpseOfMyFriend.cs" />
     <Compile Include="Thoughts\ThoughtWorker_ButheredMyBondedPet.cs" />
     <Compile Include="SocialInteractionsManager.cs" />
+    <Compile Include="Utils\WatchBuildingUtilityDoublePawn.cs" />
     <Compile Include="Utils\VSIE_Utils.cs" />
     <Compile Include="VSIE_DefOf.cs" />
     <Compile Include="HarmonyPatches\HarmonyInit.cs" />
