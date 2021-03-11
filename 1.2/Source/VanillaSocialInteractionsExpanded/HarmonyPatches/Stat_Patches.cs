@@ -17,7 +17,7 @@ namespace VanillaSocialInteractionsExpanded
         {
 			if (stat == StatDefOf.ResearchSpeed && thing is Pawn pawn && pawn.InspirationDef == VSIE_DefOf.VSIE_Inspired_Research)
             {
-				__result *= 5;
+				__result *= 2f;
             }
             else if (stat == StatDefOf.WorkSpeedGlobal && thing is Pawn pawn2)
             {

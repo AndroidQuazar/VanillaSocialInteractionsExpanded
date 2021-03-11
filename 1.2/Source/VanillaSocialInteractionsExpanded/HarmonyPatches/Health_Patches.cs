@@ -15,7 +15,7 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Prefix(Pawn ___pawn, DamageInfo? dinfo, Hediff hediff)
 		{
-			if (InCombat(___pawn))
+			if (InCombat(___pawn) && GenAI.EnemyIsNear(___pawn, 25f))
 			{
 				if (Rand.Chance(0.1f))
                 {

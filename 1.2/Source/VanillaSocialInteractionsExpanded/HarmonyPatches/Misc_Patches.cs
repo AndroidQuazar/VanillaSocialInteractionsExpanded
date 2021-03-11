@@ -76,6 +76,7 @@ namespace VanillaSocialInteractionsExpanded
             if (researcher != null && researcher.InspirationDef == VSIE_DefOf.VSIE_Inspired_Research)
             {
                 VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(researcher);
+                researcher.mindState.inspirationHandler.EndInspiration(VSIE_DefOf.VSIE_Inspired_Research);
             }
         }
     }
