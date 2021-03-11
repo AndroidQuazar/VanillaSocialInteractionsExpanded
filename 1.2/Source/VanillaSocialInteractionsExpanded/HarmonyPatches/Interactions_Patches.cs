@@ -135,7 +135,6 @@ namespace VanillaSocialInteractionsExpanded
 				if (!found && codes[i].OperandIs(mindStateInfo) && codes[i + 1].OperandIs(inspirationHandlerInfo) && codes[i + 2].OperandIs(inspired_TamingInfo))
 				{
 					found = true;
-					Log.Message($"{i} - codes[i]: {codes[i]}, codes[i + 1]: {codes[i + 1]}, codes[i + 2]: {codes[i + 2]}, codes[i + 3]: {codes[i + 3]}");
 					yield return new CodeInstruction(OpCodes.Ldarg_1, null);
 					yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(InteractionWorker_RecruitAttempt_Interacted_Patch), "Notify_Progress", null, null));
 					yield return codes[i];

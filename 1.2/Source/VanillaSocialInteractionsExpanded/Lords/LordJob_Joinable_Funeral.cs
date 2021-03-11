@@ -24,7 +24,7 @@ namespace VanillaSocialInteractionsExpanded
 		public LordJob_Joinable_Funeral(IntVec3 spot, Pawn organizer, Building_Grave grave, GatheringDef gatheringDef)
 			: base(spot, organizer, gatheringDef)
 		{
-			durationTicks = Rand.RangeInclusive(5000, 10000);
+			durationTicks = Rand.RangeInclusive(10000, 15000);
 			this.grave = grave;
 			Log.Message("1 this.grave: " + this.grave);
 		}
