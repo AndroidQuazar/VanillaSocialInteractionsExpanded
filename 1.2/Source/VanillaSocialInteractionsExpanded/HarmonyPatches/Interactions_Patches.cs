@@ -61,7 +61,41 @@ namespace VanillaSocialInteractionsExpanded
 		}
 	}
 
+	[HarmonyPatch(typeof(InteractionWorker_RomanceAttempt), "RandomSelectionWeight")]
+	public class InteractionWorker_RomanceAttempt_RandomSelectionWeight_Patch
+	{
+		private static void Postfix(ref float __result, Pawn initiator, Pawn recipient)
+		{
+			if (VSIE_Utils.GetCompanion(initiator) == recipient)
+			{
+				__result *= 1.2f;
+			}
+		}
+	}
 
+	[HarmonyPatch(typeof(InteractionWorker_KindWords), "RandomSelectionWeight")]
+	public class InteractionWorker_KindWords_RandomSelectionWeight_Patch
+	{
+		private static void Postfix(ref float __result, Pawn initiator, Pawn recipient)
+		{
+			if (VSIE_Utils.GetCompanion(initiator) == recipient)
+			{
+				__result = 0.1f * 1.2f;
+			}
+		}
+	}
+
+	[HarmonyPatch(typeof(InteractionWorker_DeepTalk), "RandomSelectionWeight")]
+	public class InteractionWorker_DeepTalk_RandomSelectionWeight_Patch
+	{
+		private static void Postfix(ref float __result, Pawn initiator, Pawn recipient)
+		{
+			if (VSIE_Utils.GetCompanion(initiator) == recipient)
+			{
+				__result *= 1.2f;
+			}
+		}
+	}
 	[HarmonyPatch(typeof(Pawn_InteractionsTracker), "TryInteractRandomly")]
 	public class TryInteractRandomly_Patch
 	{
