@@ -3,6 +3,8 @@ using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using Verse;
@@ -37,17 +39,40 @@ namespace VanillaSocialInteractionsExpanded
 	[HarmonyPatch(typeof(Pawn_AgeTracker), "BirthdayBiological")]
 	public static class BirthdayBiological_Patch
 	{
-		private static void Postfix(Pawn ___pawn)
+		private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
 		{
-			if (___pawn.RaceProps.Humanlike)
+			var codes = instructions.ToList();
+			bool found = false;
+			for (var i = 0; i < codes.Count; i++)
+			{
+				if (!found && codes[i].Is(OpCodes.Ldstr, "BirthdayBiologicalAgeInjuries"))
+				{
+					found = true;
+					yield return new CodeInstruction(OpCodes.Ldarg_0, null);
+					yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(BirthdayBiological_Patch), "OldAgeBirthday", null, null));
+					yield return codes[i];
+				}
+				else
+				{
+					yield return codes[i];
+				}
+			}
+			yield break;
+		}
+
+		private static void OldAgeBirthday(Pawn_AgeTracker __instance)
+		{
+			var pawn = Traverse.Create(__instance).Field("pawn").GetValue<Pawn>();
+			Log.Message(pawn + " is celebrating birthday! " + pawn.ageTracker.AgeBiologicalYears);
+			if (pawn.RaceProps.Humanlike)
             {
 				if (Rand.Chance(0.1f))
 				{
-					VSIE_Utils.TryDevelopNewTrait(___pawn, "VSIE.BirthdayEvent");
+					VSIE_Utils.TryDevelopNewTrait(pawn, "VSIE.BirthdayEvent");
 				}
-				if (___pawn.Faction.IsPlayer)
+				if (pawn.Faction.IsPlayer)
                 {
-					VSIE_Utils.SocialInteractionsManager.birthdays[___pawn] = Find.TickManager.TicksGame;
+					VSIE_Utils.SocialInteractionsManager.birthdays[pawn] = Find.TickManager.TicksGame;
 				}
 			}
 		}
