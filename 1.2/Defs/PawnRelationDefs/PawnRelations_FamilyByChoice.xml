@@ -15,7 +15,7 @@
     <soldThoughts>
       <li>SoldMyLovedOne</li>
     </soldThoughts>
-    <opinionOffset>0</opinionOffset>
+    <opinionOffset>10</opinionOffset>
     <implied>false</implied>
     <reflexive>true</reflexive>
     <generationChanceFactor>1.0</generationChanceFactor>

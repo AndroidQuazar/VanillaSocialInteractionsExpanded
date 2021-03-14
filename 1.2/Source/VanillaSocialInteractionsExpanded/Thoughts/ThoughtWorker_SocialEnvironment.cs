@@ -12,14 +12,17 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		protected override ThoughtState CurrentStateInternal(Pawn p)
 		{
-			var averageOpinionOf = VSIE_Utils.GetAverageOpinionOf(p);
-			if (averageOpinionOf >= 10)
-			{
-				return ThoughtState.ActiveAtStage(0);
-			}
-			if (averageOpinionOf < 0)
-			{
-				return ThoughtState.ActiveAtStage(1);
+			if (p.Faction != Faction.OfPlayer)
+            {
+				var averageOpinionOf = VSIE_Utils.GetAverageOpinionOf(p);
+				if (averageOpinionOf >= 10)
+				{
+					return ThoughtState.ActiveAtStage(0);
+				}
+				if (averageOpinionOf < 0)
+				{
+					return ThoughtState.ActiveAtStage(1);
+				}
 			}
 			return ThoughtState.Inactive;
 		}
