@@ -7,9 +7,9 @@
 		<duty>VSIE_MealTogether</duty>
 		<workerClass>VanillaSocialInteractionsExpanded.GatheringWorker_MealTogether</workerClass>
 		<letterTitle>Meal together</letterTitle>
-		<letterText>{ORGANIZER_labelShort} is building snowmen with {COMPANION_labelShort}.</letterText>
-		<calledOffMessage>The party has been called off.</calledOffMessage>
-		<finishedMessage>The party has finished.</finishedMessage>
+		<letterText>{ORGANIZER_labelShort} having a romantic meal with {COMPANION_labelShort}.</letterText>
+		<calledOffMessage>The date has been called off.</calledOffMessage>
+		<finishedMessage>The date has finished.</finishedMessage>
 		<gatherSpotDefs>
 		</gatherSpotDefs>
 	</GatheringDef>
@@ -21,9 +21,9 @@
 		<duty>VSIE_MovieNight</duty>
 		<workerClass>VanillaSocialInteractionsExpanded.GatheringWorker_MovieNight</workerClass>
 		<letterTitle>Movie night</letterTitle>
-		<letterText>{ORGANIZER_labelShort} is building snowmen with {COMPANION_labelShort}.</letterText>
-		<calledOffMessage>The party has been called off.</calledOffMessage>
-		<finishedMessage>The party has finished.</finishedMessage>
+		<letterText>{ORGANIZER_labelShort} is having a movie night with {COMPANION_labelShort}.</letterText>
+		<calledOffMessage>The date has been called off.</calledOffMessage>
+		<finishedMessage>The date has finished.</finishedMessage>
 		<gatherSpotDefs>
 		</gatherSpotDefs>
 	</GatheringDef>
@@ -36,8 +36,8 @@
 		<workerClass>VanillaSocialInteractionsExpanded.GatheringWorker_BuildingSnowmen</workerClass>
 		<letterTitle>Building snowmen</letterTitle>
 		<letterText>{ORGANIZER_labelShort} is building snowmen with {COMPANION_labelShort}.</letterText>
-		<calledOffMessage>The party has been called off.</calledOffMessage>
-		<finishedMessage>The party has finished.</finishedMessage>
+		<calledOffMessage>The date has been called off.</calledOffMessage>
+		<finishedMessage>The date has finished.</finishedMessage>
 		<gatherSpotDefs>
 		</gatherSpotDefs>
 	</GatheringDef>
@@ -50,8 +50,8 @@
 		<workerClass>VanillaSocialInteractionsExpanded.GatheringWorker_ViewingArtTogether</workerClass>
 		<letterTitle>Viewing art</letterTitle>
 		<letterText>{ORGANIZER_labelShort} is viewing art with {COMPANION_labelShort}.</letterText>
-		<calledOffMessage>The party has been called off.</calledOffMessage>
-		<finishedMessage>The party has finished.</finishedMessage>
+		<calledOffMessage>The date has been called off.</calledOffMessage>
+		<finishedMessage>The date has finished.</finishedMessage>
 		<gatherSpotDefs>
 		</gatherSpotDefs>
 	</GatheringDef>
@@ -64,8 +64,8 @@
 		<workerClass>VanillaSocialInteractionsExpanded.GatheringWorker_Skygazing</workerClass>
 		<letterTitle>Skygazing</letterTitle>
 		<letterText>{ORGANIZER_labelShort} is skygazing with {COMPANION_labelShort}.</letterText>
-		<calledOffMessage>The party has been called off.</calledOffMessage>
-		<finishedMessage>The party has finished.</finishedMessage>
+		<calledOffMessage>The date has been called off.</calledOffMessage>
+		<finishedMessage>The date has finished.</finishedMessage>
 		<gatherSpotDefs>
 		</gatherSpotDefs>
 	</GatheringDef>
@@ -78,8 +78,8 @@
 		<workerClass>VanillaSocialInteractionsExpanded.GatheringWorker_GoingForAWalk</workerClass>
 		<letterTitle>Going for a walk</letterTitle>
 		<letterText>{ORGANIZER_labelShort} is going for a walk with {COMPANION_labelShort}.</letterText>
-		<calledOffMessage>The party has been called off.</calledOffMessage>
-		<finishedMessage>The party has finished.</finishedMessage>
+		<calledOffMessage>The date has been called off.</calledOffMessage>
+		<finishedMessage>The date has finished.</finishedMessage>
 		<gatherSpotDefs>
 		</gatherSpotDefs>
 	</GatheringDef>
@@ -92,8 +92,8 @@
 		<workerClass>VanillaSocialInteractionsExpanded.GatheringWorker_GrabbingBeer</workerClass>
 		<letterTitle>Beer party</letterTitle>
 		<letterText>{ORGANIZER_labelShort} is grabbing a beer with {COMPANION_labelShort}.</letterText>
-		<calledOffMessage>The party has been called off.</calledOffMessage>
-		<finishedMessage>The party has finished.</finishedMessage>
+		<calledOffMessage>The beer party has been called off.</calledOffMessage>
+		<finishedMessage>The beer party has finished.</finishedMessage>
 		<gatherSpotDefs>
 		</gatherSpotDefs>
 	</GatheringDef>
@@ -103,7 +103,7 @@
 		<label>binge party</label>
 		<randomSelectionWeight>1</randomSelectionWeight>
 		<letterTitle>Binge party</letterTitle>
-		<letterText>{ORGANIZER_labelShort} suggests throwing a feast after the last stockpile check to boost morale. Be warned - Feasts can last up to 48h. Colonists will binge on food and drugs until it is over. Simply draft your colonists to stop them taking part in the feast.</letterText>
+		<letterText>{ORGANIZER_labelShort} suggests doing a little binge party. Be warned - Binge parties can last up to a few hours. Colonists will binge on food and drugs until it is over. Simply draft your colonists to stop them taking part in the binge party.</letterText>
 		<calledOffMessage>The feast has been called off.</calledOffMessage>
 		<finishedMessage>The feast has finished.</finishedMessage>
 		<duty>VSIE_BingeParty</duty>
@@ -118,9 +118,9 @@
 		<label>outdoor party</label>
 		<randomSelectionWeight>1</randomSelectionWeight>
 		<letterTitle>Outdoor party</letterTitle>
-		<letterText>{ORGANIZER_labelShort} suggests throwing a feast after the last stockpile check to boost morale. Be warned - Feasts can last up to 48h. Colonists will binge on food and drugs until it is over. Simply draft your colonists to stop them taking part in the feast.</letterText>
-		<calledOffMessage>The feast has been called off.</calledOffMessage>
-		<finishedMessage>The feast has finished.</finishedMessage>
+		<letterText>{ORGANIZER_labelShort} suggests having an outdoors party. Colonists will go outdoors and have a campfire, and then sit around it and talk.</letterText>
+		<calledOffMessage>The outdoor party has been called off.</calledOffMessage>
+		<finishedMessage>The outdoor party has finished.</finishedMessage>
 		<duty>VSIE_OutdoorParty</duty>
 		<workerClass>VanillaSocialInteractionsExpanded.GatheringWorker_OutdoorParty</workerClass>
 		<gatherSpotDefs>
@@ -133,8 +133,8 @@
 		<randomSelectionWeight>1</randomSelectionWeight>
 		<letterTitle>Funeral</letterTitle>
 		<letterText>Colonists gather over the {DEADPAWN_labelShort}'s grave to honor {DEADPAWN_possessive} memory.</letterText>
-		<calledOffMessage>The feast has been called off.</calledOffMessage>
-		<finishedMessage>The feast has finished.</finishedMessage>
+		<calledOffMessage>The funeral has been called off.</calledOffMessage>
+		<finishedMessage>The funeral has finished.</finishedMessage>
 		<duty>VSIE_Funeral</duty>
 		<workerClass>VanillaSocialInteractionsExpanded.GatheringWorker_Funeral</workerClass>
 		<gatherSpotDefs>
@@ -146,9 +146,9 @@
 		<label>birthday</label>
 		<randomSelectionWeight>10</randomSelectionWeight>
 		<letterTitle>Birthday party</letterTitle>
-		<letterText>{ORGANIZER_labelShort} is throwing a party! Everyone who goes will gain recreation and social energy, and a lasting positive mood boost.</letterText>
-		<calledOffMessage>The party has been called off.</calledOffMessage>
-		<finishedMessage>The party has finished.</finishedMessage>
+		<letterText>{ORGANIZER_labelShort} is throwing a birthday party! Everyone who goes will gain recreation and social energy, and a lasting positive mood boost.</letterText>
+		<calledOffMessage>The birthday party has been called off.</calledOffMessage>
+		<finishedMessage>The birthday party has finished.</finishedMessage>
 		<duty>Party</duty>
 		<workerClass>VanillaSocialInteractionsExpanded.GatheringWorker_BirthdayParty</workerClass>
 		<gatherSpotDefs>
