@@ -20,7 +20,10 @@ namespace VanillaSocialInteractionsExpanded
 		}
 		protected override bool PawnsCanGatherTogether(Pawn organizer, Pawn companion)
 		{
-			return BasicLovePartnerRelationGenerationChance(organizer, companion) != 0f && companion.relations.OpinionOf(organizer) >= 0 && organizer.relations.OpinionOf(companion) >= 0 && organizer.relations.CompatibilityWith(companion) >= 1f && companion.relations.CompatibilityWith(organizer) >= 1f;
+			return BasicLovePartnerRelationGenerationChance(organizer, companion) != 0f 
+				&& companion.relations.OpinionOf(organizer) >= 0 && organizer.relations.OpinionOf(companion) >= 0 
+				&& organizer.relations.CompatibilityWith(companion) >= 1f && companion.relations.CompatibilityWith(organizer) >= 1f 
+				&& (organizer.GetSpouse() != companion || Rand.Chance(0.7f)); // we reduce the chance of married couples a bit
 		}
 
 		public float BasicLovePartnerRelationGenerationChance(Pawn generated, Pawn other)

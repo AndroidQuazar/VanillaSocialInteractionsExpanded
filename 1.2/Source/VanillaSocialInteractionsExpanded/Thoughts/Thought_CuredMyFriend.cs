@@ -36,7 +36,15 @@ namespace VanillaSocialInteractionsExpanded
 			}
 			Predicate<Tale_TriplePawn> validator = delegate (Tale_TriplePawn tale)
 			{
-				return otherPawn == tale.secondPawnData.pawn && OpinionOf(tale.thirdPawnData.pawn) >= 20;
+				try
+                {
+					return otherPawn == tale.secondPawnData.pawn && OpinionOf(tale.thirdPawnData.pawn) >= 20;
+				}
+				catch (Exception ex)
+                {
+					Log.Error("Error: " + ex);
+					return false;
+                }
 			};
 			Tale latestTale = VSIE_Utils.GetLatestTriplePawnTale(def.taleDef, validator);
 			if (latestTale != null)

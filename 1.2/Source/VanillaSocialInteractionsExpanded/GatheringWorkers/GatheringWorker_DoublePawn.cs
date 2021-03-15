@@ -14,7 +14,6 @@ namespace VanillaSocialInteractionsExpanded
 {
     public class GatheringWorker_DoublePawn : GatheringWorker
     {
-
         public override bool CanExecute(Map map, Pawn organizer = null)
         {
             if (organizer == null)
@@ -104,7 +103,7 @@ namespace VanillaSocialInteractionsExpanded
         }
         public Pawn FindRandomGatheringOrganizer(Faction faction, Map map, GatheringDef gatheringDef, out Pawn companion)
         {
-            Predicate<Pawn> v = (Pawn organizer) => BasePawnValidator(organizer, gatheringDef) && MemberValidator(organizer);// && FindCompanion(organizer, gatheringDef) != null;
+            Predicate<Pawn> v = (Pawn organizer) => BasePawnValidator(organizer, gatheringDef) && MemberValidator(organizer) && FindCompanion(organizer, gatheringDef) != null;
             if (map.mapPawns.SpawnedPawnsInFaction(faction).Where(x => v(x)).TryRandomElement(out Pawn result))
             {
                 companion = FindCompanion(result, gatheringDef);

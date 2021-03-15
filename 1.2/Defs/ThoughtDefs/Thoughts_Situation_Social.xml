@@ -319,7 +319,7 @@
 		<validWhileDespawned>true</validWhileDespawned>
 		<stages>
 			<li>
-				<label>{OTHERPAWN_nameDef} rebuffed me. I thought {OTHERPAWN_objective} were the one</label>
+				<label>{OTHERPAWN_nameDef} rebuffed me. I thought {OTHERPAWN_pronoun} was the one</label>
 				<baseOpinionOffset>-10</baseOpinionOffset>
 			</li>
 		</stages>
