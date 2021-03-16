@@ -83,8 +83,11 @@ namespace VanillaSocialInteractionsExpanded
 		private static float AverageOpinionOf(Pawn pawn)
 		{
 			var allOpinions = new List<float>();
-			var pawns = pawn.Map.mapPawns.SpawnedPawnsInFaction(pawn.Faction).Where(x => x != pawn && pawn.RaceProps.Humanlike).ToHashSet();
-			pawns.AddRange(pawn.relations.PotentiallyRelatedPawns);
+			var pawns = PawnsFinder.AllMaps_SpawnedPawnsInFaction(pawn.Faction).ToHashSet();
+			if (pawn.relations != null)
+            {
+				pawns.AddRange(pawn.relations.PotentiallyRelatedPawns);
+            }
 			foreach (var otherPawn in pawns)
 			{
 				if (pawn.relations != null)
