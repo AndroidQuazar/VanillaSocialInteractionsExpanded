@@ -116,6 +116,13 @@ namespace VanillaSocialInteractionsExpanded
             }
         }
 
-        private static int InspiredYieldRate(int num, Pawn pawn) => pawn.InspirationDef == VSIE_DefOf.VSIE_Inspired_Mining ? num * 2 : num;
+        private static int InspiredYieldRate(int num, Pawn pawn)
+        {
+            if (pawn?.InspirationDef == VSIE_DefOf.VSIE_Inspired_Mining)
+            {
+                return num * 2;
+            }
+            return num;
+        }
     }
 }
