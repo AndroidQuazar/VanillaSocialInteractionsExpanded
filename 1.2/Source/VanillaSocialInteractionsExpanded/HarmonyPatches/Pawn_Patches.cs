@@ -83,18 +83,21 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Prefix(Pawn __instance, Faction newFaction, Pawn recruiter = null)
 		{
-			if (newFaction != __instance.Faction && __instance.Faction.HostileTo(newFaction))
-			{
-				if (Rand.Chance(0.1f))
+			if (GenTicks.TicksAbs > 0)
+            {
+				if (newFaction != __instance.Faction && __instance.Faction.HostileTo(newFaction))
 				{
-					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WasPreviouslyOurEnemy, __instance);
+					if (Rand.Chance(0.1f))
+					{
+						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WasPreviouslyOurEnemy, __instance);
+					}
 				}
-			}
-			if (__instance.IsWildMan() && recruiter != null)
-			{
-				if (Rand.Chance(0.1f))
+				if (__instance.IsWildMan() && recruiter != null)
 				{
-					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_TamedMe, __instance, recruiter);
+					if (Rand.Chance(0.1f))
+					{
+						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_TamedMe, __instance, recruiter);
+					}
 				}
 			}
 		}
@@ -155,6 +158,15 @@ namespace VanillaSocialInteractionsExpanded
             {
 				VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(assaulter);
             }
+		}
+	}
+
+	[HarmonyPatch(typeof(Pawn), "Destroy")]
+	public static class Destroy_Patch
+	{
+		private static void Prefix(Pawn __instance)
+		{
+			VSIE_Utils.SocialInteractionsManager.RemoveDestroyedPawn(__instance);
 		}
 	}
 }

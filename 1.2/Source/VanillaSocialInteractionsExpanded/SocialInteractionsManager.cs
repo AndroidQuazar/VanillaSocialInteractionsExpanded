@@ -114,7 +114,12 @@ namespace VanillaSocialInteractionsExpanded
                 {
                     return false;
                 }
-                var candidates = workersWithWorkingTicks.Where(x => x.Key != null && x.Key.needs.mood.CurInstantLevelPercentage < 0.3f && x.Value.workTick > 3000 && initiator.relations.OpinionOf(x.Key) < 0).Select(x => x.Key).ToList();
+                if (workersWithWorkingTicks is null)
+                {
+                    workersWithWorkingTicks = new Dictionary<Pawn, WorkTime>();
+                }
+                var candidates = workersWithWorkingTicks.Where(x => x.Key != null && x.Key.needs.mood.CurInstantLevelPercentage < 0.3f && x.Value.workTick > 3000 
+                && initiator.relations.OpinionOf(x.Key) < 0).Select(x => x.Key).ToList();
                 if (candidates.Any())
                 {
                     var manager = VSIE_Utils.SocialInteractionsManager;
@@ -554,6 +559,16 @@ namespace VanillaSocialInteractionsExpanded
             return true;
         }
 
+        public void RemoveDestroyedPawn(Pawn key)
+        {
+            activeAspirations.RemoveAll(x => x.Key == key);
+            teachersWithPupils.RemoveAll(x => x.Key == key);
+            pawnsWithWorkers.RemoveAll(x => x.Key == key);
+            angryWorkers.RemoveAll(x => x.Key == key);
+            birthdays.RemoveAll(x => x.Key == key);
+            pawnsWithAdditionalTrait.Remove(key);
+            honoredDeadPawns.Remove(key);
+        }
         public override void ExposeData()
         {
             base.ExposeData();
@@ -564,6 +579,7 @@ namespace VanillaSocialInteractionsExpanded
             Scribe_Collections.Look(ref angryWorkers, "angryWorkers", LookMode.Reference, LookMode.Value, ref pawnKeys4, ref intValues);
             Scribe_Collections.Look(ref birthdays, "birthdays", LookMode.Reference, LookMode.Value, ref pawnKeys5, ref intValues2);
             Scribe_Collections.Look(ref raidGroups, "raidGroups", LookMode.Deep);
+            Scribe_Collections.Look(ref honoredDeadPawns, "honoredDeadPawns", LookMode.Reference);
         }
 
         private List<Pawn> pawnKeys;
