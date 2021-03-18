@@ -31,6 +31,10 @@ namespace VanillaSocialInteractionsExpanded
 		}
         public override bool CanExecute(Map map, Pawn organizer = null)
         {
+			if (!VanillaSocialInteractionsExpandedSettings.EnableGroupActivities)
+            {
+				return false;
+            }
 			if (GenLocalDate.HourInteger(map) >= 20 || GenLocalDate.HourInteger(map) <= 5)
             {
 				return false;

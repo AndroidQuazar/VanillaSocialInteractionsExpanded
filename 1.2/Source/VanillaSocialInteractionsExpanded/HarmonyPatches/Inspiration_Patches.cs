@@ -15,10 +15,14 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Postfix(bool __result, InspirationHandler __instance, InspirationDef def, string reason = null)
 		{
-			if (__result)
+			if (VanillaSocialInteractionsExpandedSettings.EnableAspirations)
             {
-				VSIE_Utils.SocialInteractionsManager.TryRegisterNewIspiration(__instance.pawn, def);
+				if (__result)
+				{
+					VSIE_Utils.SocialInteractionsManager.TryRegisterNewIspiration(__instance.pawn, def);
+				}
 			}
+
 		}
 	}
 
@@ -27,7 +31,10 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Postfix(InspirationHandler __instance, Inspiration inspiration)
 		{
-			VSIE_Utils.SocialInteractionsManager.Notify_InspirationExpired(__instance.pawn, inspiration.def);
+			if (VanillaSocialInteractionsExpandedSettings.EnableAspirations)
+			{
+				VSIE_Utils.SocialInteractionsManager.Notify_InspirationExpired(__instance.pawn, inspiration.def);
+			}
 		}
 	}
 }

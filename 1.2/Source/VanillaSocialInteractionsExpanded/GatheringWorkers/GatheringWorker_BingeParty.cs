@@ -6,6 +6,7 @@ using Verse.AI.Group;
 
 namespace VanillaSocialInteractionsExpanded
 {
+
 	public class GatheringWorker_BingeParty : GatheringWorker
 	{
 		protected override LordJob CreateLordJob(IntVec3 spot, Pawn organizer)
@@ -28,6 +29,10 @@ namespace VanillaSocialInteractionsExpanded
 		}
         public override bool CanExecute(Map map, Pawn organizer = null)
         {
+			if (!VanillaSocialInteractionsExpandedSettings.EnableGroupActivities)
+			{
+				return false;
+			}
 			if (organizer == null)
 			{
 				organizer = FindOrganizer(map);

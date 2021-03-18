@@ -14,7 +14,15 @@ namespace VanillaSocialInteractionsExpanded
 {
 	public class GatheringWorker_Dating : GatheringWorker_DoublePawn
     {
-		protected override bool MemberValidator(Pawn pawn)
+        public override bool CanExecute(Map map, Pawn organizer = null)
+        {
+			if (!VanillaSocialInteractionsExpandedSettings.EnableDating)
+            {
+				return false;
+            }
+            return base.CanExecute(map, organizer);
+        }
+        protected override bool MemberValidator(Pawn pawn)
 		{
 			return !VSIE_Utils.workTags.Contains(pawn.mindState.lastJobTag);
 		}

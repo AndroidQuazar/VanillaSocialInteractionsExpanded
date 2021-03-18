@@ -16,6 +16,10 @@ namespace VanillaSocialInteractionsExpanded
     {
         protected override bool ConditionsMeet(Pawn organizer)
         {
+            if (!VanillaSocialInteractionsExpandedSettings.EnableGroupActivities)
+            {
+                return false;
+            }
             if (organizer.Map.listerThings.ThingsInGroup(ThingRequestGroup.Drug).Any(x => VSIE_Utils.DrugValidator(organizer, x)))
             {
                 return true;

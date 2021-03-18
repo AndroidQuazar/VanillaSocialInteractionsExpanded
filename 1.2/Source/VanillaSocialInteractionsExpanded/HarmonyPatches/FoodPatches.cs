@@ -15,32 +15,35 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Postfix(Thing __instance, Pawn ingester, float nutritionWanted)
 		{
-			if (ingester.RaceProps.Humanlike)
+			if (VanillaSocialInteractionsExpandedSettings.EnableMemories)
             {
-				if (IsHumanlikeMeat(__instance.def))
+				if (ingester.RaceProps.Humanlike)
 				{
-					if (Rand.Chance(0.1f))
+					if (IsHumanlikeMeat(__instance.def))
 					{
-						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_IngestedHumanFlesh, ingester);
+						if (Rand.Chance(0.1f))
+						{
+							TaleRecorder.RecordTale(VSIE_DefOf.VSIE_IngestedHumanFlesh, ingester);
+						}
+						return;
 					}
-					return;
-				}
-				else
-				{
-					CompIngredients compIngredients = __instance.TryGetComp<CompIngredients>();
-					if (compIngredients != null)
+					else
 					{
-						for (int i = 0; i < compIngredients.ingredients.Count; i++)
-                        {
-							if (IsHumanlikeMeat(compIngredients.ingredients[i]))
-                            {
-								if (Rand.Chance(0.1f))
+						CompIngredients compIngredients = __instance.TryGetComp<CompIngredients>();
+						if (compIngredients != null)
+						{
+							for (int i = 0; i < compIngredients.ingredients.Count; i++)
+							{
+								if (IsHumanlikeMeat(compIngredients.ingredients[i]))
 								{
-									TaleRecorder.RecordTale(VSIE_DefOf.VSIE_IngestedHumanFlesh, ingester);
+									if (Rand.Chance(0.1f))
+									{
+										TaleRecorder.RecordTale(VSIE_DefOf.VSIE_IngestedHumanFlesh, ingester);
+									}
+									return;
 								}
-								return;
 							}
-                        }
+						}
 					}
 				}
 			}

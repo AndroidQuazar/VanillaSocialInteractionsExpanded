@@ -19,11 +19,14 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Postfix(MemoryThoughtHandler __instance, Thought_Memory newThought, Pawn otherPawn)
 		{
-			if (newThought.def == ThoughtDefOf.RebuffedMyRomanceAttempt)
-            {
-				if (Rand.Chance(0.1f))
+			if (VanillaSocialInteractionsExpandedSettings.EnableMemories)
+			{
+				if (newThought.def == ThoughtDefOf.RebuffedMyRomanceAttempt)
 				{
-					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_RebuffedMe, __instance.pawn, otherPawn);
+					if (Rand.Chance(0.1f))
+					{
+						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_RebuffedMe, __instance.pawn, otherPawn);
+					}
 				}
 			}
 		}
@@ -34,17 +37,20 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		public static void Postfix(IndividualThoughtToAdd __instance)
 		{
-			foreach (var relation in DefDatabase<PawnRelationDef>.AllDefs)
-            {
-				if (relation.opinionOffset >= 20)
-                {
-					if (relation.diedThought == __instance.thought.def || relation.diedThoughtFemale == __instance.thought.def)
-                    {
-						if (Rand.Chance(0.1f))
-                        {
-							VSIE_Utils.TryDevelopNewTrait(__instance.addTo, "VSIE.TraitChangeFamilyMemberDied");
-                        }
-                    }
+			if (VanillaSocialInteractionsExpandedSettings.EnableObtainingNewTraits)
+			{
+				foreach (var relation in DefDatabase<PawnRelationDef>.AllDefs)
+				{
+					if (relation.opinionOffset >= 20)
+					{
+						if (relation.diedThought == __instance.thought.def || relation.diedThoughtFemale == __instance.thought.def)
+						{
+							if (Rand.Chance(0.1f))
+							{
+								VSIE_Utils.TryDevelopNewTrait(__instance.addTo, "VSIE.TraitChangeFamilyMemberDied");
+							}
+						}
+					}
 				}
 			}
         }

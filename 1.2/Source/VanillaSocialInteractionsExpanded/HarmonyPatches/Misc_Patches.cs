@@ -39,9 +39,12 @@ namespace VanillaSocialInteractionsExpanded
 
         public static void Notify_Progress()
         {
-            if (TradeSession.playerNegotiator.InspirationDef == VSIE_DefOf.Inspired_Trade)
+            if (VanillaSocialInteractionsExpandedSettings.EnableAspirations)
             {
-                VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(TradeSession.playerNegotiator);
+                if (TradeSession.playerNegotiator.InspirationDef == VSIE_DefOf.Inspired_Trade)
+                {
+                    VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(TradeSession.playerNegotiator);
+                }
             }
         }
     }
@@ -58,11 +61,14 @@ namespace VanillaSocialInteractionsExpanded
     {
         private static void Postfix(Caravan __result, IEnumerable<Pawn> pawns, Faction faction, int exitFromTile, int directionTile, int destinationTile, bool sendMessage = true)
         {
-            foreach (var pawn in __result.PawnsListForReading)
+            if (VanillaSocialInteractionsExpandedSettings.EnableAspirations)
             {
-                if (pawn.InspirationDef == VSIE_DefOf.Frenzy_Go)
+                foreach (var pawn in __result.PawnsListForReading)
                 {
-                    VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(pawn);
+                    if (pawn.InspirationDef == VSIE_DefOf.Frenzy_Go)
+                    {
+                        VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(pawn);
+                    }
                 }
             }
         }
@@ -75,7 +81,10 @@ namespace VanillaSocialInteractionsExpanded
         {
             if (researcher != null && researcher.InspirationDef == VSIE_DefOf.VSIE_Inspired_Research)
             {
-                VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(researcher);
+                if (VanillaSocialInteractionsExpandedSettings.EnableAspirations)
+                {
+                    VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(researcher);
+                }
                 researcher.mindState.inspirationHandler.EndInspiration(VSIE_DefOf.VSIE_Inspired_Research);
             }
         }
@@ -87,9 +96,12 @@ namespace VanillaSocialInteractionsExpanded
     {
         private static void Postfix(Pawn pawn)
         {
-            if (pawn != null && pawn.InspirationDef == VSIE_DefOf.VSIE_Inspired_Mining)
+            if (VanillaSocialInteractionsExpandedSettings.EnableAspirations)
             {
-                VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(pawn);
+                if (pawn != null && pawn.InspirationDef == VSIE_DefOf.VSIE_Inspired_Mining)
+                {
+                    VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(pawn);
+                }
             }
         }
     }

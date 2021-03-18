@@ -15,18 +15,21 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Postfix(ref IEnumerable<Toil> __result)
 		{
-			List<Toil> toils = __result.ToList();
-			var toil = new Toil();
-			toil.initAction = delegate ()
+			if (VanillaSocialInteractionsExpandedSettings.EnableMemories)
 			{
-				var actor = toil.actor;
-				if (Rand.Chance(0.1f))
+				List<Toil> toils = __result.ToList();
+				var toil = new Toil();
+				toil.initAction = delegate ()
 				{
-					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_ExposedCorpseOfMyFriend, (actor.CurJob.GetTarget(TargetIndex.A).Thing as Corpse).InnerPawn, actor);
-				}
-			};
-			toils.Add(toil);
-			__result = toils;
+					var actor = toil.actor;
+					if (Rand.Chance(0.1f))
+					{
+						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_ExposedCorpseOfMyFriend, (actor.CurJob.GetTarget(TargetIndex.A).Thing as Corpse).InnerPawn, actor);
+					}
+				};
+				toils.Add(toil);
+				__result = toils;
+			}
 		}
 	}
 
@@ -35,31 +38,34 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Postfix(ref IEnumerable<Toil> __result)
 		{
-			List<Toil> toils = __result.ToList();
-			var toil = new Toil();
-			toil.initAction = delegate ()
+			if (VanillaSocialInteractionsExpandedSettings.EnableMemories)
 			{
-				var actor = toil.actor;
-				if (actor.CurJob.overeat)
-                {
-					if (actor.CurJob.GetTarget(TargetIndex.A).Thing.def.IsDrug)
-                    {
-						if (Rand.Chance(0.1f))
+				List<Toil> toils = __result.ToList();
+				var toil = new Toil();
+				toil.initAction = delegate ()
+				{
+					var actor = toil.actor;
+					if (actor.CurJob.overeat)
+					{
+						if (actor.CurJob.GetTarget(TargetIndex.A).Thing.def.IsDrug)
 						{
-							TaleRecorder.RecordTale(VSIE_DefOf.VSIE_BingedDrug, actor);
+							if (Rand.Chance(0.1f))
+							{
+								TaleRecorder.RecordTale(VSIE_DefOf.VSIE_BingedDrug, actor);
+							}
+						}
+						else
+						{
+							if (Rand.Chance(0.1f))
+							{
+								TaleRecorder.RecordTale(VSIE_DefOf.VSIE_BingedFood, actor);
+							}
 						}
 					}
-					else
-                    {
-						if (Rand.Chance(0.1f))
-						{
-							TaleRecorder.RecordTale(VSIE_DefOf.VSIE_BingedFood, actor);
-						}
-					}
-				}
-			};
-			toils.Add(toil);
-			__result = toils;
+				};
+				toils.Add(toil);
+				__result = toils;
+			}
 		}
 	}
 
@@ -68,22 +74,25 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Postfix(ref IEnumerable<Toil> __result)
 		{
-			List<Toil> toils = __result.ToList();
-			var toil = new Toil();
-			toil.initAction = delegate ()
+			if (VanillaSocialInteractionsExpandedSettings.EnableMemories)
 			{
-				var actor = toil.actor;
-				var takee = actor.CurJob.targetA.Thing as Pawn;
-				if (actor.CurJobDef.makeTargetPrisoner && takee.IsPrisonerOfColony)
+				List<Toil> toils = __result.ToList();
+				var toil = new Toil();
+				toil.initAction = delegate ()
 				{
-					if (Rand.Chance(0.1f))
+					var actor = toil.actor;
+					var takee = actor.CurJob.targetA.Thing as Pawn;
+					if (actor.CurJobDef.makeTargetPrisoner && takee.IsPrisonerOfColony)
 					{
-						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_ArrestedMe, takee, actor);
+						if (Rand.Chance(0.1f))
+						{
+							TaleRecorder.RecordTale(VSIE_DefOf.VSIE_ArrestedMe, takee, actor);
+						}
 					}
-				}
-			};
-			toils.Add(toil);
-			__result = toils;
+				};
+				toils.Add(toil);
+				__result = toils;
+			}
 		}
 	}
 
@@ -98,14 +107,19 @@ namespace VanillaSocialInteractionsExpanded
 			{
 				var actor = toil.actor;
 				var resurrected = (actor.CurJob.targetA.Thing as Corpse).InnerPawn;
-				if (Rand.Chance(0.1f))
+				if (VanillaSocialInteractionsExpandedSettings.EnableMemories)
 				{
-					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_ResurrectedMe, resurrected, actor);
+					if (Rand.Chance(0.1f))
+					{
+						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_ResurrectedMe, resurrected, actor);
+					}
 				}
-
-				if (Rand.Chance(0.1f))
-                {
-					VSIE_Utils.TryDevelopNewTrait(resurrected, "VSIE.TraitChangePawnResurrected");
+				if (VanillaSocialInteractionsExpandedSettings.EnableObtainingNewTraits)
+				{
+					if (Rand.Chance(0.1f))
+					{
+						VSIE_Utils.TryDevelopNewTrait(resurrected, "VSIE.TraitChangePawnResurrected");
+					}
 				}
 			};
 			toils.Insert(toils.Count - 1, toil);
@@ -118,18 +132,21 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Postfix(ref IEnumerable<Toil> __result)
 		{
-			List<Toil> toils = __result.ToList();
-			var toil = new Toil();
-			toil.initAction = delegate ()
+			if (VanillaSocialInteractionsExpandedSettings.EnableAspirations)
 			{
-				var actor = toil.actor;
-				if (actor.InspirationDef == VSIE_DefOf.VSIE_Flirting_Frenzy)
-                {
-					VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(actor);
-                }
-			};
-			toils.Insert(toils.Count - 1, toil);
-			__result = toils;
+				List<Toil> toils = __result.ToList();
+				var toil = new Toil();
+				toil.initAction = delegate ()
+				{
+					var actor = toil.actor;
+					if (actor.InspirationDef == VSIE_DefOf.VSIE_Flirting_Frenzy)
+					{
+						VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(actor);
+					}
+				};
+				toils.Insert(toils.Count - 1, toil);
+				__result = toils;
+			}
 		}
 	}
 
@@ -138,18 +155,21 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Postfix(ref IEnumerable<Toil> __result)
 		{
-			List<Toil> toils = __result.ToList();
-			var toil = new Toil();
-			toil.initAction = delegate ()
+			if (VanillaSocialInteractionsExpandedSettings.EnableObtainingNewTraits)
 			{
-				var actor = toil.actor;
-				if (Rand.Chance(0.1f))
-                {
-					VSIE_Utils.TryDevelopNewTrait(actor, "VSIE.BestowingCeremony");
-                }
-			};
-			toils.Insert(toils.Count - 1, toil);
-			__result = toils;
+				List<Toil> toils = __result.ToList();
+				var toil = new Toil();
+				toil.initAction = delegate ()
+				{
+					var actor = toil.actor;
+					if (Rand.Chance(0.1f))
+					{
+						VSIE_Utils.TryDevelopNewTrait(actor, "VSIE.BestowingCeremony");
+					}
+				};
+				toils.Insert(toils.Count - 1, toil);
+				__result = toils;
+			}
 		}
 	}
 
@@ -173,22 +193,28 @@ namespace VanillaSocialInteractionsExpanded
 		private static void Postfix(this Toil __result)
 		{
 			var socialManager = VSIE_Utils.SocialInteractionsManager;
-			__result.AddPreTickAction(delegate
+			if (VanillaSocialInteractionsExpandedSettings.EnableDiscord)
 			{
-				var actor = __result.actor;
-				if (actor.RaceProps.Humanlike && actor.Faction != null)
+				__result.AddPreTickAction(delegate
 				{
-					socialManager.WorkerTick(actor);
-				}
-			});
-			__result.AddFinishAction(delegate
+					var actor = __result.actor;
+					if (actor.RaceProps.Humanlike && actor.Faction != null)
+					{
+						socialManager.WorkerTick(actor);
+					}
+				});
+			}
+			if (VanillaSocialInteractionsExpandedSettings.EnableAspirations)
 			{
-				var actor = __result.actor;
-				if (actor.InspirationDef == VSIE_DefOf.Frenzy_Work && actor.mindState.lastJobTag == JobTag.MiscWork)
-                {
-					socialManager.Notify_AspirationProgress(actor);
-                }
-			});
+				__result.AddFinishAction(delegate
+				{
+					var actor = __result.actor;
+					if (actor.InspirationDef == VSIE_DefOf.Frenzy_Work && actor.mindState.lastJobTag == JobTag.MiscWork)
+					{
+						socialManager.Notify_AspirationProgress(actor);
+					}
+				});
+			}
 		}
 	}
 	[HarmonyPatch(typeof(ToilEffects))]
@@ -198,22 +224,28 @@ namespace VanillaSocialInteractionsExpanded
 		private static void Postfix(this Toil __result)
 		{
 			var socialManager = VSIE_Utils.SocialInteractionsManager;
-			__result.AddPreTickAction(delegate
+			if (VanillaSocialInteractionsExpandedSettings.EnableDiscord)
 			{
-				var actor = __result.actor;
-				if (actor.RaceProps.Humanlike && actor.Faction != null)
-                {
-					socialManager.WorkerTick(actor);
-				}
-			});
-			__result.AddFinishAction(delegate
-			{
-				var actor = __result.actor;
-				if (actor.InspirationDef == VSIE_DefOf.Frenzy_Work && actor.mindState.lastJobTag == JobTag.MiscWork)
+				__result.AddPreTickAction(delegate
 				{
-					socialManager.Notify_AspirationProgress(actor);
-				}
-			});
+					var actor = __result.actor;
+					if (actor.RaceProps.Humanlike && actor.Faction != null)
+					{
+						socialManager.WorkerTick(actor);
+					}
+				});
+			}
+			if (VanillaSocialInteractionsExpandedSettings.EnableAspirations)
+			{
+				__result.AddFinishAction(delegate
+				{
+					var actor = __result.actor;
+					if (actor.InspirationDef == VSIE_DefOf.Frenzy_Work && actor.mindState.lastJobTag == JobTag.MiscWork)
+					{
+						socialManager.Notify_AspirationProgress(actor);
+					}
+				});
+			}
 		}
 	}
 }

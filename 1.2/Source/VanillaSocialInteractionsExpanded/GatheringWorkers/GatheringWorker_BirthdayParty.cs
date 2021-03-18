@@ -13,6 +13,10 @@ namespace VanillaSocialInteractionsExpanded
 
         protected override Pawn FindOrganizer(Map map)
         {
+			if (!VanillaSocialInteractionsExpandedSettings.EnableGroupActivities)
+			{
+				return null;
+			}
 			var socialManager = VSIE_Utils.SocialInteractionsManager;
 			foreach (var data in socialManager.birthdays)
             {

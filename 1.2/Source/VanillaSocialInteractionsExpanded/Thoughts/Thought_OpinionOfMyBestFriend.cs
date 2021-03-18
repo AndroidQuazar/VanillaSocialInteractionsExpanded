@@ -31,7 +31,7 @@ namespace VanillaSocialInteractionsExpanded
 			get
 			{
 				DirectPawnRelation directPawnRelation = pawn.relations.DirectRelations.FirstOrDefault(x => x.def == VSIE_DefOf.VSIE_BestFriend);
-				float num = 0.1f * (float)pawn.relations.OpinionOf(directPawnRelation.otherPawn);
+				float num = 0.05f * (float)pawn.relations.OpinionOf(directPawnRelation.otherPawn);
 				if (num < 0f)
 				{
 					return Mathf.Min(num, -1f);

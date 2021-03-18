@@ -15,6 +15,10 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		protected override bool CanFireNowSub(IncidentParms parms)
 		{
+			if (!VanillaSocialInteractionsExpandedSettings.EnableOneNightStand)
+			{
+				return false;
+			}
 			if (!base.CanFireNowSub(parms))
 			{
 				return false;
@@ -79,6 +83,10 @@ namespace VanillaSocialInteractionsExpanded
 		}
 		protected override bool TryExecuteWorker(IncidentParms parms)
 		{
+			if (!VanillaSocialInteractionsExpandedSettings.EnableOneNightStand)
+			{
+				return false;
+			}
 			Map map = (Map)parms.target;
 			if (TryFindNewLovers(map, out Pawn initiator, out Pawn partner))
 			{

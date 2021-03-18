@@ -29,19 +29,25 @@ namespace VanillaSocialInteractionsExpanded
 				}
 				else if (intDef == InteractionDefOf.Chitchat || intDef == InteractionDefOf.DeepTalk)
                 {
-					if (Rand.Chance(0.1f))
-					{
-						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WeHadNiceChat, recipient, ___pawn);
-						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WeHadNiceChat, ___pawn, recipient);
-					}
-					if (___pawn.relations.GetFirstDirectRelationPawn(VSIE_DefOf.VSIE_BestFriend) is null && recipient.relations.GetFirstDirectRelationPawn(VSIE_DefOf.VSIE_BestFriend) is null)
+					if (VanillaSocialInteractionsExpandedSettings.EnableMemories)
                     {
-						var recipientOpinionOf = recipient.relations.OpinionOf(___pawn);
-						var ___pawnOpinionOf = ___pawn.relations.OpinionOf(recipient);
-
-						if (recipientOpinionOf >= 80 && ___pawnOpinionOf >= 80 && !recipient.relations.DirectRelationExists(VSIE_DefOf.VSIE_BestFriend, ___pawn))
+						if (Rand.Chance(0.1f))
 						{
-							recipient.relations.AddDirectRelation(VSIE_DefOf.VSIE_BestFriend, ___pawn);
+							TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WeHadNiceChat, recipient, ___pawn);
+							TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WeHadNiceChat, ___pawn, recipient);
+						}
+					}
+					if (VanillaSocialInteractionsExpandedSettings.EnableBestFriend)
+                    {
+						if (___pawn.relations.GetFirstDirectRelationPawn(VSIE_DefOf.VSIE_BestFriend) is null && recipient.relations.GetFirstDirectRelationPawn(VSIE_DefOf.VSIE_BestFriend) is null)
+						{
+							var recipientOpinionOf = recipient.relations.OpinionOf(___pawn);
+							var ___pawnOpinionOf = ___pawn.relations.OpinionOf(recipient);
+
+							if (recipientOpinionOf >= 80 && ___pawnOpinionOf >= 80 && !recipient.relations.DirectRelationExists(VSIE_DefOf.VSIE_BestFriend, ___pawn))
+							{
+								recipient.relations.AddDirectRelation(VSIE_DefOf.VSIE_BestFriend, ___pawn);
+							}
 						}
 					}
 				}
@@ -66,10 +72,14 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Postfix(ref float __result, Pawn initiator, Pawn recipient)
 		{
-			if (VSIE_Utils.GetCompanion(initiator) == recipient)
-			{
-				__result *= 1.2f;
+			if (VanillaSocialInteractionsExpandedSettings.EnableDating)
+            {
+				if (VSIE_Utils.GetCompanion(initiator) == recipient)
+				{
+					__result *= 1.2f;
+				}
 			}
+
 		}
 	}
 
@@ -78,9 +88,12 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Postfix(ref float __result, Pawn initiator, Pawn recipient)
 		{
-			if (VSIE_Utils.GetCompanion(initiator) == recipient)
+			if (VanillaSocialInteractionsExpandedSettings.EnableDating)
 			{
-				__result = 0.1f * 1.2f;
+				if (VSIE_Utils.GetCompanion(initiator) == recipient)
+				{
+					__result = 0.1f * 1.2f;
+				}
 			}
 		}
 	}
@@ -90,9 +103,12 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Postfix(ref float __result, Pawn initiator, Pawn recipient)
 		{
-			if (VSIE_Utils.GetCompanion(initiator) == recipient)
+			if (VanillaSocialInteractionsExpandedSettings.EnableDating)
 			{
-				__result *= 1.2f;
+				if (VSIE_Utils.GetCompanion(initiator) == recipient)
+				{
+					__result *= 1.2f;
+				}
 			}
 		}
 	}
@@ -183,9 +199,12 @@ namespace VanillaSocialInteractionsExpanded
 
 		public static void Notify_Progress(Pawn pawn)
 		{
-			if (pawn.InspirationDef == VSIE_DefOf.Inspired_Taming)
+			if (VanillaSocialInteractionsExpandedSettings.EnableAspirations)
 			{
-				VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(pawn);
+				if (pawn.InspirationDef == VSIE_DefOf.Inspired_Taming)
+				{
+					VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(pawn);
+				}
 			}
 		}
 	}
@@ -202,26 +221,35 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Prefix(Pawn recruiter, Pawn recruitee)
         {
-			if (recruitee.IsPrisoner && recruiter != null)
+			if (VanillaSocialInteractionsExpandedSettings.EnableObtainingNewTraits)
 			{
-				if (Rand.Chance(0.1f))
+				if (recruitee.IsPrisoner && recruiter != null)
 				{
-					VSIE_Utils.TryDevelopNewTrait(recruitee, "VSIE.TraitChangePrisonerRecruitedText");
+					if (Rand.Chance(0.1f))
+					{
+						VSIE_Utils.TryDevelopNewTrait(recruitee, "VSIE.TraitChangePrisonerRecruitedText");
+					}
 				}
 			}
 
-			if (recruitee.IsPrisoner && recruiter?.InspirationDef == VSIE_DefOf.Inspired_Recruitment)
-            {
-				VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(recruiter);
-            }
+			if (VanillaSocialInteractionsExpandedSettings.EnableAspirations)
+			{
+				if (recruitee.IsPrisoner && recruiter?.InspirationDef == VSIE_DefOf.Inspired_Recruitment)
+				{
+					VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(recruiter);
+				}
+			}
         }
 		private static void Postfix(Pawn recruiter, Pawn recruitee)
 		{
-			if (recruitee.def == ThingDefOf.Thrumbo)
+			if (VanillaSocialInteractionsExpandedSettings.EnableMemories)
 			{
-				if (Rand.Chance(0.1f))
+				if (recruitee.def == ThingDefOf.Thrumbo)
 				{
-					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_TamedThrumbo, recruiter);
+					if (Rand.Chance(0.1f))
+					{
+						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_TamedThrumbo, recruiter);
+					}
 				}
 			}
 		}
@@ -232,9 +260,12 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Postfix(Pawn initiator, Pawn recipient)
 		{
-			if (Rand.Chance(0.1f))
+			if (VanillaSocialInteractionsExpandedSettings.EnableMemories)
 			{
-				TaleRecorder.RecordTale(VSIE_DefOf.VSIE_BrokeUpWithMe, recipient, initiator);
+				if (Rand.Chance(0.1f))
+				{
+					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_BrokeUpWithMe, recipient, initiator);
+				}
 			}
 		}
 	}

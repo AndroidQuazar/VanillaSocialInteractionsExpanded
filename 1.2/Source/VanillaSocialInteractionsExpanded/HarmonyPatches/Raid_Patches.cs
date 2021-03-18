@@ -17,45 +17,50 @@ namespace VanillaSocialInteractionsExpanded
     {
         static RaidPatches()
         {
-            var postfix = typeof(RaidPatches).GetMethod("RaidGroupChecker");
-            var baseType = typeof(PawnsArrivalModeWorker);
-            var types = baseType.AllSubclassesNonAbstract();
-            foreach (Type cur in types)
+            if (VanillaSocialInteractionsExpandedSettings.EnableUnitedWeStand)
             {
-                var method = cur.GetMethod("Arrive");
-                //Log.Message("Patching " + cur + " - " + method);
-                try
+                var postfix = typeof(RaidPatches).GetMethod("RaidGroupChecker");
+                var baseType = typeof(PawnsArrivalModeWorker);
+                var types = baseType.AllSubclassesNonAbstract();
+                foreach (Type cur in types)
                 {
-                    HarmonyInit.harmony.Patch(method, null, new HarmonyMethod(postfix));
-                }
-                catch (Exception ex)
-                {
-                    Log.Error("Error patching " + cur + " - " + method);
+                    var method = cur.GetMethod("Arrive");
+                    //Log.Message("Patching " + cur + " - " + method);
+                    try
+                    {
+                        HarmonyInit.harmony.Patch(method, null, new HarmonyMethod(postfix));
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error("Error patching " + cur + " - " + method);
+                    }
                 }
             }
         }
 
         public static void RaidGroupChecker(List<Pawn> pawns, IncidentParms parms)
         {
-            if (pawns != null && parms.target is Map map)
+            if (VanillaSocialInteractionsExpandedSettings.EnableUnitedWeStand)
             {
-                var gameComp = Current.Game.GetComponent<SocialInteractionsManager>();
-                var raidGroup = new RaidGroup();
-                if (parms.faction != null)
+                if (pawns != null && parms.target is Map map)
                 {
-                    raidGroup.faction = parms.faction;
-                }
-                else
-                {
-                    raidGroup.faction = pawns.First().Faction;
-                }
-                raidGroup.raiders = pawns.ToHashSet();
-                raidGroup.defenders = map.mapPawns.AllPawnsSpawned.Where(x => x.RaceProps.Humanlike && !x.Dead && !x.Fogged() && !x.IsPrisoner && x.Faction != null
-                    && (x.Faction == Faction.OfPlayer || !x.HostileTo(Faction.OfPlayer)) && x.HostileTo(raidGroup.faction)).ToHashSet();
+                    var gameComp = Current.Game.GetComponent<SocialInteractionsManager>();
+                    var raidGroup = new RaidGroup();
+                    if (parms.faction != null)
+                    {
+                        raidGroup.faction = parms.faction;
+                    }
+                    else
+                    {
+                        raidGroup.faction = pawns.First().Faction;
+                    }
+                    raidGroup.raiders = pawns.ToHashSet();
+                    raidGroup.defenders = map.mapPawns.AllPawnsSpawned.Where(x => x.RaceProps.Humanlike && !x.Dead && !x.Fogged() && !x.IsPrisoner && x.Faction != null
+                        && (x.Faction == Faction.OfPlayer || !x.HostileTo(Faction.OfPlayer)) && x.HostileTo(raidGroup.faction)).ToHashSet();
 
-                raidGroup.initTime = Find.TickManager.TicksGame;
-                Log.Message($"New raid group: raiders {raidGroup.raiders.Count}, defenders {raidGroup.defenders.Count}");
-                gameComp.raidGroups.Add(raidGroup);
+                    raidGroup.initTime = Find.TickManager.TicksGame;
+                    gameComp.raidGroups.Add(raidGroup);
+                }
             }
         }
     }
@@ -65,14 +70,17 @@ namespace VanillaSocialInteractionsExpanded
     {
         public static void Postfix(Lord __instance, Pawn p)
         {
-            var gameComp = Current.Game.GetComponent<SocialInteractionsManager>();
-            if (gameComp.raidGroups != null)
+            if (VanillaSocialInteractionsExpandedSettings.EnableUnitedWeStand)
             {
-                foreach (var rg in gameComp.raidGroups)
+                var gameComp = Current.Game.GetComponent<SocialInteractionsManager>();
+                if (gameComp.raidGroups != null)
                 {
-                    if (rg.raiders.Contains(p))
+                    foreach (var rg in gameComp.raidGroups)
                     {
-                        rg.raiderLords.Add(__instance);
+                        if (rg.raiders.Contains(p))
+                        {
+                            rg.raiderLords.Add(__instance);
+                        }
                     }
                 }
             }
@@ -85,7 +93,10 @@ namespace VanillaSocialInteractionsExpanded
     {
         public static void Prefix(Lord __instance)
         {
-            VSIE_Utils.SocialInteractionsManager.TryAssignThoughtsAfterRaid(__instance);
+            if (VanillaSocialInteractionsExpandedSettings.EnableUnitedWeStand)
+            {
+                VSIE_Utils.SocialInteractionsManager.TryAssignThoughtsAfterRaid(__instance);
+            }
         }
     }
 
@@ -95,16 +106,19 @@ namespace VanillaSocialInteractionsExpanded
     {
         public static void Prefix(Transition __instance, Lord lord)
         {
-            if (__instance.canMoveToSameState || __instance.target != lord.CurLordToil)
+            if (VanillaSocialInteractionsExpandedSettings.EnableUnitedWeStand)
             {
-                for (int i = 0; i < __instance.preActions.Count; i++)
+                if (__instance.canMoveToSameState || __instance.target != lord.CurLordToil)
                 {
-                    if (__instance.preActions[i] is TransitionAction_Message transitionAction)
+                    for (int i = 0; i < __instance.preActions.Count; i++)
                     {
-                        if (transitionAction.message == "MessageRaidersGivenUpLeaving".Translate(lord.faction.def.pawnsPlural.CapitalizeFirst(), lord.faction.Name)
-                            || transitionAction.message == "MessageFightersFleeing".Translate(lord.faction.def.pawnsPlural.CapitalizeFirst(), lord.faction.Name))
+                        if (__instance.preActions[i] is TransitionAction_Message transitionAction)
                         {
-                            VSIE_Utils.SocialInteractionsManager.TryAssignThoughtsAfterRaid(lord, true);
+                            if (transitionAction.message == "MessageRaidersGivenUpLeaving".Translate(lord.faction.def.pawnsPlural.CapitalizeFirst(), lord.faction.Name)
+                                || transitionAction.message == "MessageFightersFleeing".Translate(lord.faction.def.pawnsPlural.CapitalizeFirst(), lord.faction.Name))
+                            {
+                                VSIE_Utils.SocialInteractionsManager.TryAssignThoughtsAfterRaid(lord, true);
+                            }
                         }
                     }
                 }

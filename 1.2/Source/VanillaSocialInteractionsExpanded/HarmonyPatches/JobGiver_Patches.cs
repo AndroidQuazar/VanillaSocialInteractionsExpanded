@@ -15,10 +15,13 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Postfix(JoyGiverDef def, Pawn pawn)
 		{
-			if (pawn.InspirationDef == VSIE_DefOf.VSIE_Party_Frenzy)
-            {
-				VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(pawn);
-            }
+			if (VanillaSocialInteractionsExpandedSettings.EnableAspirations)
+			{
+				if (pawn.InspirationDef == VSIE_DefOf.VSIE_Party_Frenzy)
+				{
+					VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(pawn);
+				}
+			}
 		}
 	}
 
@@ -27,9 +30,12 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Postfix(Pawn pawn)
 		{
-			if (pawn.InspirationDef == VSIE_DefOf.VSIE_Party_Frenzy)
+			if (VanillaSocialInteractionsExpandedSettings.EnableAspirations)
 			{
-				VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(pawn);
+				if (pawn.InspirationDef == VSIE_DefOf.VSIE_Party_Frenzy)
+				{
+					VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(pawn);
+				}
 			}
 		}
 	}
@@ -39,9 +45,12 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Postfix(Pawn pawn)
 		{
-			if (pawn.InspirationDef == VSIE_DefOf.VSIE_Party_Frenzy)
+			if (VanillaSocialInteractionsExpandedSettings.EnableAspirations)
 			{
-				VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(pawn);
+				if (pawn.InspirationDef == VSIE_DefOf.VSIE_Party_Frenzy)
+				{
+					VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(pawn);
+				}
 			}
 		}
 	}

@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="Defs\AspirationDef.cs" />
     <Compile Include="GatheringWorkers\GatheringWorker_MealTogether.cs" />
-    <Compile Include="GatheringWorkers\GatheringWorker_Meal.cs" />
     <Compile Include="GatheringWorkers\GatheringWorker_MovieNight.cs" />
     <Compile Include="GatheringWorkers\GatheringWorker_BuildingSnowmen.cs" />
     <Compile Include="HarmonyPatches\FoodPatches.cs" />
@@ -149,6 +148,8 @@
     <Compile Include="VSIE_DefOf.cs" />
     <Compile Include="HarmonyPatches\HarmonyInit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VanillaSocialInteractionsExpandedMod.cs" />
+    <Compile Include="VanillaSocialInteractionsExpandedSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Krafs.Rimworld.Ref">

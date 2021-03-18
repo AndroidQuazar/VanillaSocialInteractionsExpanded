@@ -46,9 +46,12 @@ namespace VanillaSocialInteractionsExpanded
 		{
 			if (victim != null && victim == Recipe_Patch._pawn)
             {
-				if (Rand.Chance(0.1f))
+				if (VanillaSocialInteractionsExpandedSettings.EnableMemories)
 				{
-					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_RemovedPrisonersOrgans, Recipe_Patch._billDoer);
+					if (Rand.Chance(0.1f))
+					{
+						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_RemovedPrisonersOrgans, Recipe_Patch._billDoer);
+					}
 				}
 				Recipe_Patch._pawn = null;
 				Recipe_Patch._billDoer = null;
@@ -67,10 +70,13 @@ namespace VanillaSocialInteractionsExpanded
 		{
 			_patient = patient;
 			_surgeon = surgeon;
-			if (surgeon.InspirationDef == VSIE_DefOf.Inspired_Surgery)
-            {
-				VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(surgeon);
-            }
+			if (VanillaSocialInteractionsExpandedSettings.EnableAspirations)
+			{
+				if (surgeon.InspirationDef == VSIE_DefOf.Inspired_Surgery)
+				{
+					VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(surgeon);
+				}
+			}
 		}
 
 		private static void Postfix(Pawn surgeon, Pawn patient, List<Thing> ingredients, BodyPartRecord part, Bill bill)
@@ -85,16 +91,19 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Postfix(IEnumerable<Thing> __result, RecipeDef recipeDef, Pawn worker, List<Thing> ingredients, Thing dominantIngredient, IBillGiver billGiver)
 		{
-			if (worker.InspirationDef == VSIE_DefOf.VSIE_Inspired_Cooking)
-            {
-				foreach (var thing in __result)
-                {
-					if (thing.def.ingestible?.ingestEffect == EffecterDefOf.EatMeat)
-                    {
-						VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(worker);
-                    }
-                }
-            }
+			if (VanillaSocialInteractionsExpandedSettings.EnableAspirations)
+			{
+				if (worker.InspirationDef == VSIE_DefOf.VSIE_Inspired_Cooking)
+				{
+					foreach (var thing in __result)
+					{
+						if (thing.def.ingestible?.ingestEffect == EffecterDefOf.EatMeat)
+						{
+							VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(worker);
+						}
+					}
+				}
+			}
 		}
 	}
 
@@ -124,10 +133,13 @@ namespace VanillaSocialInteractionsExpanded
 
         public static void Notify_Progress(QualityCategory level, Pawn pawn)
         {
-            if (pawn.InspirationDef == VSIE_DefOf.Inspired_Creativity && (level == QualityCategory.Masterwork || level == QualityCategory.Legendary))
-            {
-                VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(pawn);
-            }
+			if (VanillaSocialInteractionsExpandedSettings.EnableAspirations)
+			{
+				if (pawn.InspirationDef == VSIE_DefOf.Inspired_Creativity && (level == QualityCategory.Masterwork || level == QualityCategory.Legendary))
+				{
+					VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(pawn);
+				}
+			}
         }
     }
 }

@@ -15,17 +15,21 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		public override float RandomSelectionWeight(Pawn initiator, Pawn recipient)
 		{
-            var socialManager = VSIE_Utils.SocialInteractionsManager;
-            if (socialManager.angryWorkers != null && socialManager.angryWorkers.TryGetValue(initiator, out int lastTick))
+            if (VanillaSocialInteractionsExpandedSettings.EnableDiscord)
             {
-                if (lastTick + (GenDate.TicksPerHour * 12) > Find.TickManager.TicksGame)
+                var socialManager = VSIE_Utils.SocialInteractionsManager;
+                if (socialManager.angryWorkers != null && socialManager.angryWorkers.TryGetValue(initiator, out int lastTick))
                 {
-                    var value = 1f * NegativeInteractionUtility.NegativeInteractionChanceFactor(initiator, recipient);
-                    Log.Message($"Discord chance for {initiator} and {recipient} is {value}");
-                    return value;
+                    if (lastTick + (GenDate.TicksPerHour * 12) > Find.TickManager.TicksGame)
+                    {
+                        var value = 1f * NegativeInteractionUtility.NegativeInteractionChanceFactor(initiator, recipient);
+                        Log.Message($"Discord chance for {initiator} and {recipient} is {value}");
+                        return value;
+                    }
+                    Log.Message($"Discord chance for {initiator} and {recipient} is null (fail)");
                 }
-                Log.Message($"Discord chance for {initiator} and {recipient} is null (fail)");
             }
+
             return 0f;
 		}
 	}

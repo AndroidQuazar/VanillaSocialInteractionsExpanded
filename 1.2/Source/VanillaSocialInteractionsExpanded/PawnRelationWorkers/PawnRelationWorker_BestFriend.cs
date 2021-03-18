@@ -14,10 +14,13 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		public override float GenerationChance(Pawn generated, Pawn other, PawnGenerationRequest request)
 		{
-			if (generated.relations.OpinionOf(other) >= 80 && other.relations.OpinionOf(generated) >= 80)
-            {
-				return 1f;
-            }
+			if (VanillaSocialInteractionsExpandedSettings.EnableBestFriend)
+			{
+				if (generated.relations.OpinionOf(other) >= 80 && other.relations.OpinionOf(generated) >= 80)
+				{
+					return 1f;
+				}
+			}
 			return 0f;
 		}
 

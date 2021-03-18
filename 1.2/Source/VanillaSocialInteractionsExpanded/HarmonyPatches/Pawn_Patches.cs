@@ -17,18 +17,21 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Postfix(Pawn __instance, Map map, bool respawningAfterLoad)
 		{
-			if (!respawningAfterLoad && __instance.ageTracker != null && __instance.relations != null)
-            {
-				var pawnAge = __instance.ageTracker.AgeChronologicalYearsFloat;
-				foreach (var relPawn in __instance.relations.PotentiallyRelatedPawns)
+			if (VanillaSocialInteractionsExpandedSettings.EnableMemories)
+			{
+				if (!respawningAfterLoad && __instance.ageTracker != null && __instance.relations != null)
 				{
-					var relPawnAge = relPawn.ageTracker.AgeChronologicalYearsFloat;
-					if (__instance.relations.OpinionOf(relPawn) >= 30 && relPawn.relations.OpinionOf(__instance) >= 30 && new FloatRange(-5f, 5f).Includes(pawnAge - relPawnAge))
+					var pawnAge = __instance.ageTracker.AgeChronologicalYearsFloat;
+					foreach (var relPawn in __instance.relations.PotentiallyRelatedPawns)
 					{
-						if (Rand.ChanceSeeded(0.1f, __instance.thingIDNumber))
+						var relPawnAge = relPawn.ageTracker.AgeChronologicalYearsFloat;
+						if (__instance.relations.OpinionOf(relPawn) >= 30 && relPawn.relations.OpinionOf(__instance) >= 30 && new FloatRange(-5f, 5f).Includes(pawnAge - relPawnAge))
 						{
-							TaleRecorder.RecordTale(VSIE_DefOf.VSIE_HasBeenMyFriendSinceChildhood, __instance, relPawn);
-							TaleRecorder.RecordTale(VSIE_DefOf.VSIE_HasBeenMyFriendSinceChildhood, relPawn, __instance);
+							if (Rand.ChanceSeeded(0.1f, __instance.thingIDNumber))
+							{
+								TaleRecorder.RecordTale(VSIE_DefOf.VSIE_HasBeenMyFriendSinceChildhood, __instance, relPawn);
+								TaleRecorder.RecordTale(VSIE_DefOf.VSIE_HasBeenMyFriendSinceChildhood, relPawn, __instance);
+							}
 						}
 					}
 				}
@@ -68,7 +71,10 @@ namespace VanillaSocialInteractionsExpanded
             {
 				if (Rand.Chance(0.1f))
 				{
-					VSIE_Utils.TryDevelopNewTrait(pawn, "VSIE.BirthdayEvent");
+					if (VanillaSocialInteractionsExpandedSettings.EnableObtainingNewTraits)
+					{
+						VSIE_Utils.TryDevelopNewTrait(pawn, "VSIE.BirthdayEvent");
+					}
 				}
 				if (pawn.Faction.IsPlayer)
                 {
@@ -83,20 +89,23 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Prefix(Pawn __instance, Faction newFaction, Pawn recruiter = null)
 		{
-			if (GenTicks.TicksAbs > 0)
-            {
-				if (newFaction != __instance.Faction && __instance.Faction.HostileTo(newFaction))
+			if (VanillaSocialInteractionsExpandedSettings.EnableMemories)
+			{
+				if (GenTicks.TicksAbs > 0)
 				{
-					if (Rand.Chance(0.1f))
+					if (newFaction != __instance.Faction && __instance.Faction.HostileTo(newFaction))
 					{
-						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WasPreviouslyOurEnemy, __instance);
+						if (Rand.Chance(0.1f))
+						{
+							TaleRecorder.RecordTale(VSIE_DefOf.VSIE_WasPreviouslyOurEnemy, __instance);
+						}
 					}
-				}
-				if (__instance.IsWildMan() && recruiter != null)
-				{
-					if (Rand.Chance(0.1f))
+					if (__instance.IsWildMan() && recruiter != null)
 					{
-						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_TamedMe, __instance, recruiter);
+						if (Rand.Chance(0.1f))
+						{
+							TaleRecorder.RecordTale(VSIE_DefOf.VSIE_TamedMe, __instance, recruiter);
+						}
 					}
 				}
 			}
@@ -108,20 +117,14 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Prefix(Pawn __instance, DamageInfo? dinfo, Hediff exactCulprit = null)
 		{
-			//if (CheckSurgeryFail_Patch._patient != null)
-            //{
-			//	Log.Message($"{CheckSurgeryFail_Patch._patient}, {CheckSurgeryFail_Patch._surgeon}, __instance == CheckSurgeryFail_Patch._patient: {__instance == CheckSurgeryFail_Patch._patient} " +
-			//	$"&& CheckSurgeryFail_Patch._surgeon.IsColonist: {CheckSurgeryFail_Patch._surgeon.IsColonist} && __instance.IsColonist: {__instance.IsColonist}");
-			//}
-			//else
-            //{
-			//	Log.Message("Killing: " + __instance);
-            //}
 			if (__instance == CheckSurgeryFail_Patch._patient && CheckSurgeryFail_Patch._surgeon.IsColonist && __instance.IsColonist)
 			{
-				if (Rand.Chance(0.1f))
+				if (VanillaSocialInteractionsExpandedSettings.EnableMemories)
 				{
-					TaleRecorder.RecordTale(VSIE_DefOf.VSIE_FailedMedicalOperationAndKilled, CheckSurgeryFail_Patch._surgeon);
+					if (Rand.Chance(0.1f))
+					{
+						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_FailedMedicalOperationAndKilled, CheckSurgeryFail_Patch._surgeon);
+					}
 				}
 				CheckSurgeryFail_Patch._patient = null;
 				CheckSurgeryFail_Patch._surgeon = null;
@@ -129,13 +132,22 @@ namespace VanillaSocialInteractionsExpanded
 
 			if (dinfo.HasValue)
 			{
-				TryRecordSavedMeFromRaiders(__instance, dinfo);
-				TryRecordMeleeAspiration(dinfo);
+				if (VanillaSocialInteractionsExpandedSettings.EnableMemories)
+				{
+					TryRecordSavedMeFromRaiders(__instance, dinfo);
+				}
+				if (VanillaSocialInteractionsExpandedSettings.EnableAspirations)
+				{
+					TryRecordMeleeAspiration(dinfo);
+				}
 			}
 
-			if (dinfo.HasValue && __instance.RaceProps.Animal && __instance.Faction is null && dinfo.Value.Instigator is Pawn killer && killer.InspirationDef == VSIE_DefOf.Frenzy_Shoot)
-            {
-				VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(killer);
+			if (VanillaSocialInteractionsExpandedSettings.EnableAspirations)
+			{
+				if (dinfo.HasValue && __instance.RaceProps.Animal && __instance.Faction is null && dinfo.Value.Instigator is Pawn killer && killer.InspirationDef == VSIE_DefOf.Frenzy_Shoot)
+				{
+					VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(killer);
+				}
 			}
 		}
 

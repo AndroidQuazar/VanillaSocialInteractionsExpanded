@@ -118,7 +118,7 @@ namespace VanillaSocialInteractionsExpanded
                 {
                     workersWithWorkingTicks = new Dictionary<Pawn, WorkTime>();
                 }
-                var candidates = workersWithWorkingTicks.Where(x => x.Key != null && x.Key.needs.mood.CurInstantLevelPercentage < 0.3f && x.Value.workTick > 3000 
+                var candidates = workersWithWorkingTicks.Where(x => x.Key != null && x.Key.needs.mood.CurInstantLevelPercentage < 0.3f && x.Value.workTick > 3000
                 && initiator.relations.OpinionOf(x.Key) < 0).Select(x => x.Key).ToList();
                 if (candidates.Any())
                 {
@@ -130,11 +130,9 @@ namespace VanillaSocialInteractionsExpanded
                     manager.angryWorkers[initiator] = Find.TickManager.TicksGame;
                     foreach (var worker in candidates)
                     {
-                        Log.Message("TEst1");
                         manager.angryWorkers[worker] = Find.TickManager.TicksGame;
                     }
 
-                    Log.Message("TEst2");
 
                     var nearestWorkers = initiator.Map.mapPawns.SpawnedPawnsInFaction(initiator.Faction).Where(x => x != initiator && x != null && x.RaceProps.Humanlike
                         && x.mindState != null && VSIE_Utils.workTags.Contains(x.mindState.lastJobTag) && x.needs?.mood?.CurLevelPercentage < 0.3f && !x.WorkTagIsDisabled(WorkTags.Violent)
@@ -153,7 +151,6 @@ namespace VanillaSocialInteractionsExpanded
                     initiator.interactions.StartSocialFight(firstPawn);
                     fighters.Add(initiator);
                     fighters.Add(firstPawn);
-                    Log.Message($"{initiator} is starting a group fight with candidates of {nearestWorkers.Count}");
                     foreach (var pawn in nearestWorkers)
                     {
                         if (!pawn.InMentalState)
@@ -167,12 +164,10 @@ namespace VanillaSocialInteractionsExpanded
                             }
                             else
                             {
-                                Log.Message($"{pawn} doesn't have any candidates to fight");
                             }
                         }
                         else
                         {
-                            Log.Message($"{pawn} is taking part in a group fight");
                         }
                     }
 
@@ -280,20 +275,23 @@ namespace VanillaSocialInteractionsExpanded
         public override void GameComponentTick()
         {
             base.GameComponentTick();
-            if (pawnsWithWorkers != null)
+            if (VanillaSocialInteractionsExpandedSettings.EnableDiscord)
             {
-                var keysToRemove = new List<Pawn>();
-                foreach (var worker in pawnsWithWorkers)
+                if (pawnsWithWorkers != null)
                 {
-                    if (worker.Key.IsHashIntervalTick(300) && Rand.Chance(0.1f) && worker.Value.TryCauseGroupFights(worker.Key))
+                    var keysToRemove = new List<Pawn>();
+                    foreach (var worker in pawnsWithWorkers)
                     {
-                        keysToRemove.Add(worker.Key);
+                        if (worker.Key.IsHashIntervalTick(300) && Rand.Chance(0.1f) && worker.Value.TryCauseGroupFights(worker.Key))
+                        {
+                            keysToRemove.Add(worker.Key);
+                        }
                     }
-                }
 
-                foreach (var pawn in keysToRemove)
-                {
-                    pawnsWithWorkers.Remove(pawn);
+                    foreach (var pawn in keysToRemove)
+                    {
+                        pawnsWithWorkers.Remove(pawn);
+                    }
                 }
             }
         }
@@ -311,80 +309,56 @@ namespace VanillaSocialInteractionsExpanded
                     }
                 }
                 var raidGroup = this.raidGroups.Where(x => x.raiderLords?.Contains(lord) ?? false).FirstOrDefault();
-                Log.Message(" - TryAssignThoughtsAfterRaid - if (raidGroup != null) - 10", true);
                 if (raidGroup != null)
                 {
-                    Log.Message(" - TryAssignThoughtsAfterRaid - var remainedRaidersCount = raidGroup.raiders.Where(x => !x.Dead && !x.Downed).Count(); - 11", true);
                     var remainedRaidersCount = raidGroup.raiders.Where(x => !x.Dead && !x.Downed).Count();
-                    Log.Message(" - TryAssignThoughtsAfterRaid - var remainedRaidersPercentFromTotal = (float)remainedRaidersCount / (float)raidGroup.raiders.Count(); - 12", true);
                     var remainedRaidersPercentFromTotal = (float)remainedRaidersCount / (float)raidGroup.raiders.Count();
 
                     var remainedDefenders = raidGroup.defenders.Where(x => !x.Dead && !x.Downed && x.Map == lord.Map).ToHashSet();
                     remainedDefenders.AddRange(lord.Map.mapPawns.AllPawnsSpawned.Where(x => x.RaceProps.Humanlike && !x.Downed && !x.Dead && !x.Fogged() && !x.IsPrisoner && x.Faction != null
                         && (x.Faction == Faction.OfPlayer || !x.HostileTo(Faction.OfPlayer)) && x.HostileTo(raidGroup.faction)));
-                    Log.Message(" - TryAssignThoughtsAfterRaid - var remainedDefendersPercentFromTotal = (float)remainedDefenders.Count() / (float)raidGroup.defenders.Count(); - 15", true);
                     var remainedDefendersPercentFromTotal = (float)remainedDefenders.Count() / (float)raidGroup.defenders.Count();
 
-                    Log.Message("remainedDefendersPercentFromTotal: " + remainedDefendersPercentFromTotal);
-                    Log.Message(" - TryAssignThoughtsAfterRaid - if (!raidersIsLosing && RaidersWon(raidGroup, lord.Map)) - 17", true);
                     if (!raidersIsLosing && RaidersWon(raidGroup, lord.Map))
                     {
-                        Log.Message("Raiders won");
-                        Log.Message(" - TryAssignThoughtsAfterRaid - if (remainedDefendersPercentFromTotal < 0.1f) - 19", true);
                         if (remainedDefendersPercentFromTotal < 0.1f)
                         {
-                            Log.Message(" - TryAssignThoughtsAfterRaid - foreach (var pawn in remainedDefenders) - 20", true);
                             foreach (var pawn in remainedDefenders)
                             {
-                                Log.Message(" - TryAssignThoughtsAfterRaid - pawn.needs.mood.thoughts.memories.TryGainMemory(VSIE_DefOf.VSIE_CrushingDefeat); - 21", true);
                                 pawn.needs.mood.thoughts.memories.TryGainMemory(VSIE_DefOf.VSIE_CrushingDefeat);
                             }
                         }
                         else if (remainedDefendersPercentFromTotal < 0.7f)
                         {
-                            Log.Message(" - TryAssignThoughtsAfterRaid - foreach (var pawn in remainedDefenders) - 23", true);
                             foreach (var pawn in remainedDefenders)
                             {
-                                Log.Message(" - TryAssignThoughtsAfterRaid - pawn.needs.mood.thoughts.memories.TryGainMemory(VSIE_DefOf.VSIE_CloseDefeat); - 24", true);
                                 pawn.needs.mood.thoughts.memories.TryGainMemory(VSIE_DefOf.VSIE_CloseDefeat);
                             }
                         }
                     }
                     else
                     {
-                        Log.Message("Defenders won");
-                        Log.Message(" - TryAssignThoughtsAfterRaid - if (remainedDefendersPercentFromTotal < 0.2f) - 26", true);
                         if (remainedDefendersPercentFromTotal < 0.2f)
                         {
-                            Log.Message(" - TryAssignThoughtsAfterRaid - foreach (var pawn in remainedDefenders) - 27", true);
                             foreach (var pawn in remainedDefenders)
                             {
-                                Log.Message(" - TryAssignThoughtsAfterRaid - pawn.needs.mood.thoughts.memories.TryGainMemory(VSIE_DefOf.VSIE_PyrrhicVictory); - 28", true);
                                 pawn.needs.mood.thoughts.memories.TryGainMemory(VSIE_DefOf.VSIE_PyrrhicVictory);
                             }
                         }
                         else if (remainedDefendersPercentFromTotal > 0.95f)
                         {
-                            Log.Message(" - TryAssignThoughtsAfterRaid - foreach (var pawn in remainedDefenders) - 30", true);
                             foreach (var pawn in remainedDefenders)
                             {
-                                Log.Message(" - TryAssignThoughtsAfterRaid - pawn.needs.mood.thoughts.memories.TryGainMemory(VSIE_DefOf.VSIE_DecisiveVictory); - 31", true);
                                 pawn.needs.mood.thoughts.memories.TryGainMemory(VSIE_DefOf.VSIE_DecisiveVictory);
                             }
                         }
                     }
 
-                    Log.Message($"Raiders total: {raidGroup.raiders.Count}, remained raiders: {remainedRaidersCount}, percent of living: {remainedRaidersPercentFromTotal}");
-                    Log.Message(" - TryAssignThoughtsAfterRaid - foreach (var pawn in raidGroup.raiders) - 33", true);
                     foreach (var pawn in raidGroup.raiders)
                     {
-                        Log.Message("Remained raider: " + pawn + " - " + pawn.Faction);
                     }
-                    Log.Message($"Defenders total: {raidGroup.defenders.Count}, remained defenders: {remainedDefenders.Count}, percent of living: {remainedDefendersPercentFromTotal}");
-                    Log.Message(" - TryAssignThoughtsAfterRaid - foreach (var pawn in remainedDefenders) - 36", true);
                     foreach (var pawn in remainedDefenders)
                     {
-                        Log.Message("Remained defender: " + pawn + " - " + pawn.Faction);
                     }
 
                     if ((Find.TickManager.TicksGame - raidGroup.initTime) >= GenDate.TicksPerDay / 2 // if raid lasted over 12 in-game hours
@@ -392,12 +366,9 @@ namespace VanillaSocialInteractionsExpanded
                         && remainedDefenders.Any() // if there are survivors to give them a trait
                         && Rand.Chance(0.1f))
                     {
-                        Log.Message(" - TryAssignThoughtsAfterRaid - var candidates = remainedDefenders.Where(x => !pawnsWithAdditionalTrait?.Contains(x) ?? false); - 39", true);
                         var candidates = remainedDefenders.Where(x => !pawnsWithAdditionalTrait?.Contains(x) ?? false);
-                        Log.Message(" - TryAssignThoughtsAfterRaid - if (candidates.Any() && candidates.TryRandomElement(out Pawn pawn)) - 40", true);
                         if (candidates.Any() && candidates.TryRandomElement(out Pawn pawn))
                         {
-                            Log.Message(" - TryAssignThoughtsAfterRaid - TryDevelopNewTrait(pawn, \"VSIE.ToughtRaidEvent\".Translate()); - 41", true);
                             TryDevelopNewTrait(pawn, "VSIE.ToughtRaidEvent".Translate());
                         }
                     }
@@ -410,13 +381,9 @@ namespace VanillaSocialInteractionsExpanded
         {
             foreach (var pawn in raidGroup.raiders)
             {
-                if (!pawn.Dead && !pawn.Downed && pawn.CurJobDef != JobDefOf.Flee && pawn.MentalStateDef != MentalStateDefOf.PanicFlee 
+                if (!pawn.Dead && !pawn.Downed && pawn.CurJobDef != JobDefOf.Flee && pawn.MentalStateDef != MentalStateDefOf.PanicFlee
                     && !(pawn.GetLord()?.CurLordToil is LordToil_PanicFlee) && pawn.Map == map)
                 {
-                    Log.Message(pawn + " - " + pawn.Position + " - MentalState: " + pawn.MentalState);
-                    Log.Message(pawn + " - " + pawn.Position + " - mindState.duty: " + pawn.mindState.duty);
-                    Log.Message(pawn + " - " + pawn.Position + " - GetLord()?.CurLordToil: " + pawn.GetLord()?.CurLordToil);
-                    Log.Message(pawn + " - " + pawn.Position + " - CurJob: " + pawn.CurJob);
                     return true;
                 }
             }
@@ -437,12 +404,10 @@ namespace VanillaSocialInteractionsExpanded
                 var nearestWorkers = pawn.Map.mapPawns.SpawnedPawnsInFaction(pawn.Faction).Where(x => x != pawn && VSIE_Utils.workTags.Contains(x.mindState.lastJobTag) && x.RaceProps.Humanlike && x.Position.DistanceTo(pawn.Position) < 10);
                 foreach (var worker in nearestWorkers)
                 {
-                    //Log.Message($"Nearest worker: {worker}, {worker.CurJob}, {worker.CurJobDef}, {worker.mindState.lastJobTag}");
                     if (workers.workersWithWorkingTicks.ContainsKey(worker))
                     {
                         if (Find.TickManager.TicksGame > workers.workersWithWorkingTicks[worker].lastTick + 10000)
                         {
-                            Log.Message("Resetting work time count for " + worker + ", workers.workersWithWorkingTicks[worker].lastTick: " + workers.workersWithWorkingTicks[worker].lastTick + " - Find.TickManager.TicksGame: " + Find.TickManager.TicksGame);
                             workers.workersWithWorkingTicks[worker].workTick = 0;
                         }
                         else

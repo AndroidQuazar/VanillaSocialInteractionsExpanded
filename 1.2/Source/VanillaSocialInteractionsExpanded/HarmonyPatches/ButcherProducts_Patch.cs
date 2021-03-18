@@ -14,18 +14,21 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Prefix(Corpse __instance, Pawn butcher, float efficiency)
 		{
-			Pawn p = __instance.InnerPawn;
-			List<DirectPawnRelation> directRelations = p.relations.DirectRelations;
-			for (int i = 0; i < directRelations.Count; i++)
-			{
-				DirectPawnRelation directPawnRelation = directRelations[i];
-				Pawn otherPawn = directPawnRelation.otherPawn;
-				if (directPawnRelation.def == PawnRelationDefOf.Bond && !otherPawn.Dead && otherPawn.Spawned && otherPawn.Faction == Faction.OfPlayer)
+			if (VanillaSocialInteractionsExpandedSettings.EnableMemories)
+            {
+				Pawn p = __instance.InnerPawn;
+				List<DirectPawnRelation> directRelations = p.relations.DirectRelations;
+				for (int i = 0; i < directRelations.Count; i++)
 				{
-					if (Rand.Chance(0.1f))
-                    {
-						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_BondedPetButchered, p, butcher);
-                    }
+					DirectPawnRelation directPawnRelation = directRelations[i];
+					Pawn otherPawn = directPawnRelation.otherPawn;
+					if (directPawnRelation.def == PawnRelationDefOf.Bond && !otherPawn.Dead && otherPawn.Spawned && otherPawn.Faction == Faction.OfPlayer)
+					{
+						if (Rand.Chance(0.1f))
+						{
+							TaleRecorder.RecordTale(VSIE_DefOf.VSIE_BondedPetButchered, p, butcher);
+						}
+					}
 				}
 			}
 		}

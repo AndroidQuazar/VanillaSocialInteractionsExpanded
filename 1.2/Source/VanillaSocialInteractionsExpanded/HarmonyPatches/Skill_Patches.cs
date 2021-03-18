@@ -27,9 +27,12 @@ namespace VanillaSocialInteractionsExpanded
 
 		private static void Postfix(Pawn ___pawn, int ___levelInt, int __state, float xp, bool direct = false)
         {
-			if (___pawn.InspirationDef == VSIE_DefOf.VSIE_Learning_Frenzy && __state < 10 && ___levelInt >= 10)
+			if (VanillaSocialInteractionsExpandedSettings.EnableAspirations)
 			{
-				VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(___pawn);
+				if (___pawn.InspirationDef == VSIE_DefOf.VSIE_Learning_Frenzy && __state < 10 && ___levelInt >= 10)
+				{
+					VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(___pawn);
+				}
 			}
 		}
 	}

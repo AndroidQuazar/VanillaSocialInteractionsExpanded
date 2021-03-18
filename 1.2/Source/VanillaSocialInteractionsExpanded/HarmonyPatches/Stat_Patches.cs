@@ -19,7 +19,7 @@ namespace VanillaSocialInteractionsExpanded
             {
 				__result *= 2f;
             }
-            else if (stat == StatDefOf.GlobalLearningFactor && thing is Pawn pawn2 && VSIE_Utils.workTags.Contains(pawn2.mindState.lastJobTag))
+            else if (VanillaSocialInteractionsExpandedSettings.EnableManyHandsMakeLightWork && stat == StatDefOf.GlobalLearningFactor && thing is Pawn pawn2 && VSIE_Utils.workTags.Contains(pawn2.mindState.lastJobTag))
             {
                 var pawnCurJob = pawn2.jobs?.curJob?.def;
                 if (pawn2.Map != null && pawnCurJob != null && pawn2.Faction != null)

@@ -27,16 +27,19 @@ namespace VanillaSocialInteractionsExpanded
 		};
 		public override float RandomSelectionWeight(Pawn initiator, Pawn recipient)
 		{
-			if (initiator.relations.OpinionOf(recipient) < 0 || initiator.IsPrisoner && initiator.RecruitDifficulty(recipient.Faction) > 10)
-            {
-				return 0f;
-            }
-			var skillDef = GetSkillDefToTeach(initiator, recipient);
-			if (skillDef != null)
-            {
-				VSIE_Utils.SocialInteractionsManager.teachersWithPupils[initiator] = new TeachingTopic(recipient, skillDef);
-				return 0.1f * OpinionFactorCurve.Evaluate(initiator.relations.OpinionOf(recipient));
-            }
+			if (VanillaSocialInteractionsExpandedSettings.EnableTeaching)
+			{
+				if (initiator.relations.OpinionOf(recipient) < 0 || initiator.IsPrisoner && initiator.RecruitDifficulty(recipient.Faction) > 10)
+				{
+					return 0f;
+				}
+				var skillDef = GetSkillDefToTeach(initiator, recipient);
+				if (skillDef != null)
+				{
+					VSIE_Utils.SocialInteractionsManager.teachersWithPupils[initiator] = new TeachingTopic(recipient, skillDef);
+					return 0.1f * OpinionFactorCurve.Evaluate(initiator.relations.OpinionOf(recipient));
+				}
+			}
 			return 0f;
 		}
 		

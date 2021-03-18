@@ -25,4 +25,18 @@
   <VSIE.OneNightStandTitle>One night stand</VSIE.OneNightStandTitle>
   <VSIE.OneNightStandText>{INITIATOR_nameDef} engages in a one night stand with {PARTNER_nameDef}. Whilst both pawns receive all the benefits of regular lovin’, they are not a couple.</VSIE.OneNightStandText>
 
+  <VSIE.EnableMemories>Enable memories</VSIE.EnableMemories>
+  <VSIE.EnableAspirations>Enable aspirations</VSIE.EnableAspirations>
+  <VSIE.EnableObtainingNewTraits>Enable obtaining new traits</VSIE.EnableObtainingNewTraits>
+  <VSIE.EnableVenting>Enable venting</VSIE.EnableVenting>
+  <VSIE.EnableBestFriend>Enable best friend</VSIE.EnableBestFriend>
+  <VSIE.EnableTeaching>Enable teaching</VSIE.EnableTeaching>
+  <VSIE.EnableManyHandsMakeLightWork>Enable many hands make light work</VSIE.EnableManyHandsMakeLightWork>
+  <VSIE.EnableDiscord>Enable discord</VSIE.EnableDiscord>
+  <VSIE.EnableGroupActivities>Enable group activities</VSIE.EnableGroupActivities>
+  <VSIE.EnableDating>Enable dating</VSIE.EnableDating>
+  <VSIE.EnableUnitedWeStand>Enable united we stand</VSIE.EnableUnitedWeStand>
+  <VSIE.EnableSocialEnvironmentThoughts>Enable social environment thoughts</VSIE.EnableSocialEnvironmentThoughts>
+  <VSIE.EnableOneNightStand>Enable one night stand</VSIE.EnableOneNightStand>
+
 </LanguageData>
