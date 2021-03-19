@@ -162,12 +162,6 @@ namespace VanillaSocialInteractionsExpanded
                                 fighters.Add(victim);
                                 pawn.interactions.StartSocialFight(victim);
                             }
-                            else
-                            {
-                            }
-                        }
-                        else
-                        {
                         }
                     }
 
@@ -352,13 +346,6 @@ namespace VanillaSocialInteractionsExpanded
                                 pawn.needs.mood.thoughts.memories.TryGainMemory(VSIE_DefOf.VSIE_DecisiveVictory);
                             }
                         }
-                    }
-
-                    foreach (var pawn in raidGroup.raiders)
-                    {
-                    }
-                    foreach (var pawn in remainedDefenders)
-                    {
                     }
 
                     if ((Find.TickManager.TicksGame - raidGroup.initTime) >= GenDate.TicksPerDay / 2 // if raid lasted over 12 in-game hours

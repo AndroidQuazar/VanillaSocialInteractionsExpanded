@@ -15,7 +15,7 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Postfix(LordJob_Joinable_MarriageCeremony __instance)
         {
-			if (VanillaSocialInteractionsExpandedSettings.EnableObtainingNewTraits)
+			if (VanillaSocialInteractionsExpandedSettings.EnableMemories)
 			{
 				List<Pawn> attendedWedding = new List<Pawn>();
 				List<Pawn> ownedPawns = __instance.lord.ownedPawns;
