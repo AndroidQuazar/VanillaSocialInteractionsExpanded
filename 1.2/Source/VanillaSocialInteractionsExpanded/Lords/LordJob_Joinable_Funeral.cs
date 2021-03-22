@@ -26,7 +26,6 @@ namespace VanillaSocialInteractionsExpanded
 		{
 			durationTicks = Rand.RangeInclusive(10000, 15000);
 			this.grave = grave;
-			Log.Message("1 this.grave: " + this.grave);
 		}
 
 		public override string GetReport(Pawn pawn)
@@ -41,8 +40,6 @@ namespace VanillaSocialInteractionsExpanded
 
 		public override StateGraph CreateGraph()
 		{
-			Log.Message("2 this.grave: " + this.grave);
-
 			StateGraph stateGraph = new StateGraph();
 			LordToil party = CreateGatheringToil(spot, organizer, gatheringDef);
 			stateGraph.AddToil(party);
@@ -77,8 +74,6 @@ namespace VanillaSocialInteractionsExpanded
 
 		private void ApplyOutcome(LordToil_Party toil)
 		{
-			Log.Message("3 this.grave: " + this.grave);
-
 			VSIE_Utils.SocialInteractionsManager.honoredDeadPawns.Add(this.grave.Corpse.InnerPawn);
 			List<Pawn> ownedPawns = lord.ownedPawns;
 			LordToilData_Party lordToilData_Party = (LordToilData_Party)toil.data;
@@ -99,11 +94,9 @@ namespace VanillaSocialInteractionsExpanded
 						List<PawnRelationDef> allDefsListForReading = DefDatabase<PawnRelationDef>.AllDefsListForReading;
 						for (int j = 0; j < allDefsListForReading.Count; j++)
 						{
-							Log.Message("grave: " + grave);
 							ThoughtDef genderSpecificDiedThought = allDefsListForReading[j].GetGenderSpecificDiedThought(this.grave.Corpse.InnerPawn);
 							if (genderSpecificDiedThought != null)
 							{
-								Log.Message(ownedPawns[i] + " - genderSpecificDiedThought: " + genderSpecificDiedThought);
 								memories.RemoveMemoriesOfDefWhereOtherPawnIs(genderSpecificDiedThought, this.grave.Corpse.InnerPawn);
 							}
 						}
@@ -115,12 +108,8 @@ namespace VanillaSocialInteractionsExpanded
 		public override void ExposeData()
 		{
 			base.ExposeData();
-			Log.Message("4 this.grave: " + this.grave);
-
 			Scribe_Values.Look(ref durationTicks, "durationTicks", 0);
 			Scribe_References.Look(ref grave, "grave");
-			Log.Message("5 this.grave: " + this.grave);
-
 			if (Scribe.mode == LoadSaveMode.PostLoadInit && gatheringDef == null)
 			{
 				gatheringDef = VSIE_DefOf.VSIE_Funeral;

@@ -22,7 +22,6 @@ namespace VanillaSocialInteractionsExpanded
 				if (target.Position.DistanceTo(pawn.Position) > 10)
                 {
 					var job = JobMaker.MakeJob(VSIE_DefOf.VSIE_GotoTalkToSecondPawn, target); 
-					Log.Message($"{pawn} gets {job}");
 					return job;
 				}
 			}

@@ -42,7 +42,6 @@ namespace VanillaSocialInteractionsExpanded
                         var bonus = nearestPawnCount * 0.05f;
                         var oldResult = __result;
                         __result += bonus;
-                        //Log.Message($"{pawn2} gets bonus to work due to other pawns in the same room: {pawns.Count()}, bonus: {bonus}, old result: {oldResult}, new result: {__result}");
                     }
                 }
             }

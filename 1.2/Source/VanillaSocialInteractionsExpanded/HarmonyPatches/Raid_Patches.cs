@@ -25,7 +25,6 @@ namespace VanillaSocialInteractionsExpanded
                 foreach (Type cur in types)
                 {
                     var method = cur.GetMethod("Arrive");
-                    //Log.Message("Patching " + cur + " - " + method);
                     try
                     {
                         HarmonyInit.harmony.Patch(method, null, new HarmonyMethod(postfix));

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Verse;
 using Verse.AI;
+using Verse.AI.Group;
 using Verse.Grammar;
 
 namespace VanillaSocialInteractionsExpanded
@@ -15,6 +16,11 @@ namespace VanillaSocialInteractionsExpanded
     {
 		protected override Job TryGiveJob(Pawn pawn)
 		{
+			var lordJob = pawn.GetLord()?.LordJob as LordJob_Joinable_MealTogether;
+			if (lordJob?.mealsEated != null && lordJob.mealsEated.TryGetValue(pawn, out var value) && value >= 1)
+            {
+				return null;
+            }
 			var companion = VSIE_Utils.GetCompanion(pawn);
 			if (companion.CurJobDef == VSIE_DefOf.VSIE_HaveMealTogether)
 			{
@@ -25,7 +31,6 @@ namespace VanillaSocialInteractionsExpanded
 					var job = JobMaker.MakeJob(VSIE_DefOf.VSIE_HaveMealTogether, foodSource, null, chair);
 					float nutrition = FoodUtility.GetNutrition(foodSource, foodDef);
 					job.count = FoodUtility.WillIngestStackCountOf(pawn, foodDef, nutrition);
-					Log.Message("1: chair" + chair + " - " + chair.Position);
 					return job;
 				}
 			}
@@ -33,7 +38,6 @@ namespace VanillaSocialInteractionsExpanded
 						allowForbidden: false, false, allowSociallyImproper: false, pawn.IsWildMan(), false, false, minPrefOverride: FoodPreferability.MealSimple))
 			{
 				var chair = GatheringWorker_MealTogether.GetChairFor(pawn, foodSource);
-				Log.Message("2: chair" + chair + " - " + chair.Position);
 				var job = JobMaker.MakeJob(VSIE_DefOf.VSIE_HaveMealTogether, foodSource, null, chair);
 				float nutrition = FoodUtility.GetNutrition(foodSource, foodDef);
 				job.count = FoodUtility.WillIngestStackCountOf(pawn, foodDef, nutrition);

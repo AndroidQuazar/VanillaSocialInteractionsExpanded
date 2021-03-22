@@ -52,7 +52,6 @@ namespace VanillaSocialInteractionsExpanded
 			job2.locomotionUrgency = locomotionUrgency;
 			job2.expiryInterval = expiryInterval;
 			job2.checkOverrideOnExpire = true;
-			Log.Message($"{pawn} gets {job2}");
 			return job2;
 		}
 		protected override IntVec3 GetWanderRoot(Pawn pawn)

@@ -30,14 +30,12 @@ namespace VanillaSocialInteractionsExpanded
 				if (target.Position.DistanceTo(pawn.Position) > 5)
                 {
 					var job = JobMaker.MakeJob(VSIE_DefOf.VSIE_GotoTalkToSecondPawn, target); 
-					Log.Message($"{pawn} gets {job}");
 					return job;
 				}
                 else
                 {
 					Job job = JobMaker.MakeJob(VSIE_DefOf.VSIE_TalkToSecondPawn, target);
 					job.expiryInterval = ticksRange.RandomInRange;
-					Log.Message($"{pawn} gets {job}");
 					return job;
 				}
 			}

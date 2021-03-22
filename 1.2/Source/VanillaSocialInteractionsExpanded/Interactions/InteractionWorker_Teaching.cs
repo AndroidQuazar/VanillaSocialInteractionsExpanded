@@ -64,14 +64,9 @@ namespace VanillaSocialInteractionsExpanded
 				var pupilSkill = recipient.skills.GetSkill(teachingTopic.skillDef);
 				var levelDiff = teacherSkill.Level - pupilSkill.Level;
 				var newExpToLearnPupil = GetExpNeededToLearn(teacherSkill, pupilSkill, levelDiff) / Mathf.Max(10 - levelDiff, 1f);
-				Log.Message($"before: teacherSkill: {teacherSkill.def} - {teacherSkill.Level}");
-				Log.Message($"before: pupilSkill: {pupilSkill.def} - {pupilSkill.Level}");
 				pupilSkill.Learn(newExpToLearnPupil);
 				var newExpToLearnTeacher = newExpToLearnPupil / 3f;
 				teacherSkill.Learn(newExpToLearnTeacher);
-				Log.Message($"after: teacherSkill: {teacherSkill.def} - {teacherSkill.Level}");
-				Log.Message($"after: pupilSkill: {pupilSkill.def} - {pupilSkill.Level}");
-				Log.Message($"Teacher {initiator} get new {teachingTopic.skillDef} exp: {newExpToLearnTeacher}, pupil {recipient} get new {teachingTopic.skillDef} exp: {newExpToLearnPupil}");
 				extraSentencePacks.Add(RulePackDef.Named("VSIE_Teaching_" + teachingTopic.skillDef.defName));
 			}
 			base.Interacted(initiator, recipient, extraSentencePacks, out letterText, out letterLabel, out letterDef, out lookTargets);

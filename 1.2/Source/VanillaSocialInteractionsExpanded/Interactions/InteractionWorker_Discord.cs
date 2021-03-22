@@ -20,13 +20,11 @@ namespace VanillaSocialInteractionsExpanded
                 var socialManager = VSIE_Utils.SocialInteractionsManager;
                 if (socialManager.angryWorkers != null && socialManager.angryWorkers.TryGetValue(initiator, out int lastTick))
                 {
-                    if (lastTick + (GenDate.TicksPerHour * 12) > Find.TickManager.TicksGame)
+                    if (lastTick + (GenDate.TicksPerHour * 4) > Find.TickManager.TicksGame)
                     {
                         var value = 1f * NegativeInteractionUtility.NegativeInteractionChanceFactor(initiator, recipient);
-                        Log.Message($"Discord chance for {initiator} and {recipient} is {value}");
                         return value;
                     }
-                    Log.Message($"Discord chance for {initiator} and {recipient} is null (fail)");
                 }
             }
 

@@ -64,7 +64,6 @@ namespace VanillaSocialInteractionsExpanded
                 {
                     target.CurJob.locomotionUrgency = LocomotionUrgency.Walk;
                 }
-                Log.Message("Follower: " + this.job.locomotionUrgency + " - target: " + target.CurJob.locomotionUrgency);
             };
             toil.socialMode = RandomSocialMode.SuperActive;
 			toil.defaultCompleteMode = ToilCompleteMode.Never;

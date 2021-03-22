@@ -66,7 +66,6 @@ namespace VanillaSocialInteractionsExpanded
 		private static void OldAgeBirthday(Pawn_AgeTracker __instance)
 		{
 			var pawn = Traverse.Create(__instance).Field("pawn").GetValue<Pawn>();
-			Log.Message(pawn + " is celebrating birthday! " + pawn.ageTracker.AgeBiologicalYears);
 			if (pawn.RaceProps.Humanlike)
             {
 				if (Rand.Chance(0.1f))

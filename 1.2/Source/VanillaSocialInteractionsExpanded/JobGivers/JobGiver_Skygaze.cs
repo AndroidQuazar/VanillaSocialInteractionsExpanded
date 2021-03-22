@@ -17,16 +17,13 @@ namespace VanillaSocialInteractionsExpanded
 		{
 			if (!JoyUtility.EnjoyableOutsideNow(pawn) || pawn.Map.weatherManager.curWeather.rainRate > 0.1f)
 			{
-				Log.Message(pawn + " fails 1");
 				return null;
 			}
 			if (!TryFindSkygazeCell(pawn.Position, pawn, out IntVec3 result))
 			{
-				Log.Message(pawn + " fails 2");
 				return null;
 			}
 			var job = JobMaker.MakeJob(VSIE_DefOf.VSIE_Skygaze, result, VSIE_Utils.GetCompanion(pawn));
-			Log.Message(pawn + " gets " + job);
 			return job;
 		}
 

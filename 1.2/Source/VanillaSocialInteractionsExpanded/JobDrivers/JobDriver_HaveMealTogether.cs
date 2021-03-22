@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Verse;
 using Verse.AI;
+using Verse.AI.Group;
 using Verse.Grammar;
 
 namespace VanillaSocialInteractionsExpanded
@@ -67,6 +68,27 @@ namespace VanillaSocialInteractionsExpanded
             yield return chew;
             yield return Toils_Ingest.FinalizeIngest(pawn, TargetIndex.A);
             yield return Toils_Jump.JumpIf(chew, () => job.GetTarget(TargetIndex.A).Thing is Corpse && pawn.needs.food.CurLevelPercentage < 0.9f);
+            Toil saveState = new Toil();
+            saveState.initAction = delegate
+            {
+                Pawn actor = saveState.actor;
+                if (actor.GetLord()?.LordJob is LordJob_Joinable_MealTogether lordJob_Joinable_MealTogether)
+                {
+                    if (lordJob_Joinable_MealTogether.mealsEated is null)
+                    {
+                        lordJob_Joinable_MealTogether.mealsEated = new Dictionary<Pawn, int>();
+                    }
+                    if (lordJob_Joinable_MealTogether.mealsEated.ContainsKey(actor))
+                    {
+                        lordJob_Joinable_MealTogether.mealsEated[actor]++;
+                    }
+                    else
+                    {
+                        lordJob_Joinable_MealTogether.mealsEated[actor] = 1;
+                    }
+                }
+            };
+            yield return saveState;
         }
 
         public static Toil ChewIngestibleWithTalking(Pawn chewer, float durationMultiplier, TargetIndex ingestibleInd, TargetIndex eatSurfaceInd = TargetIndex.None)
@@ -217,48 +239,6 @@ namespace VanillaSocialInteractionsExpanded
                 {
                     thing = actor.CurJob.GetTarget(TargetIndex.C).Thing;
                 }
-                else
-                {
-                    throw new NotImplementedException();
-
-                    //var companion = VSIE_Utils.GetCompanion(pawn);
-                    //if (companion.CurJobDef == VSIE_DefOf.VSIE_HaveMealTogether && companion.CurJob.targetC.Thing != null)
-                    //{
-                    //    thing = GenClosest.ClosestThingReachable(actor.CurJob.GetTarget(cellGoto).Cell, actor.Map, ThingRequest.ForGroup(ThingRequestGroup.BuildingArtificial),
-                    //            PathEndMode.OnCell, TraverseParms.For(actor), thing2.def.ingestible.chairSearchRadius, (Thing t) => baseChairValidator(t)
-                    //            && t.Position.GetDangerFor(pawn, t.Map) == Danger.None && t.Position.DistanceTo(companion.CurJob.targetC.Thing.Position) <= 3f);
-                    //    if (thing == null)
-                    //    {
-                    //        intVec = RCellFinder.SpotToChewStandingNear(actor, actor.CurJob.GetTarget(ingestibleInd).Thing);
-                    //        Danger chewSpotDanger = intVec.GetDangerFor(pawn, actor.Map);
-                    //        if (chewSpotDanger != Danger.None)
-                    //        {
-                    //            thing = GenClosest.ClosestThingReachable(actor.CurJob.GetTarget(cellGoto).Cell, actor.Map,
-                    //                    ThingRequest.ForGroup(ThingRequestGroup.BuildingArtificial), PathEndMode.OnCell, TraverseParms.For(actor),
-                    //                    thing2.def.ingestible.chairSearchRadius, (Thing t) => baseChairValidator(t) && (int)t.Position.GetDangerFor(pawn, t.Map) <= (int)chewSpotDanger
-                    //                    && t.Position.DistanceTo(companion.CurJob.targetC.Thing.Position) <= 3f);
-                    //        }
-                    //    }
-                    //}
-                    //
-                    //else
-                    //{
-                    //    if (thing2.def.ingestible.chairSearchRadius > 0f)
-                    //    {
-                    //        thing = GenClosest.ClosestThingReachable(actor.CurJob.GetTarget(cellGoto).Cell, actor.Map, ThingRequest.ForGroup(ThingRequestGroup.BuildingArtificial), PathEndMode.OnCell, TraverseParms.For(actor), thing2.def.ingestible.chairSearchRadius, (Thing t) => baseChairValidator(t) && t.Position.GetDangerFor(pawn, t.Map) == Danger.None);
-                    //    }
-                    //    if (thing == null)
-                    //    {
-                    //        intVec = RCellFinder.SpotToChewStandingNear(actor, actor.CurJob.GetTarget(ingestibleInd).Thing);
-                    //        Danger chewSpotDanger = intVec.GetDangerFor(pawn, actor.Map);
-                    //        if (chewSpotDanger != Danger.None)
-                    //        {
-                    //            thing = GenClosest.ClosestThingReachable(actor.CurJob.GetTarget(cellGoto).Cell, actor.Map, ThingRequest.ForGroup(ThingRequestGroup.BuildingArtificial), PathEndMode.OnCell, TraverseParms.For(actor), thing2.def.ingestible.chairSearchRadius, (Thing t) => baseChairValidator(t) && (int)t.Position.GetDangerFor(pawn, t.Map) <= (int)chewSpotDanger);
-                    //        }
-                    //    }
-                    //}
-                }
-
 
                 if (thing != null)
                 {

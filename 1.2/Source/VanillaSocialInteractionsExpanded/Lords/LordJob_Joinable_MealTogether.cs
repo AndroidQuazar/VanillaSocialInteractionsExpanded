@@ -13,6 +13,7 @@ namespace VanillaSocialInteractionsExpanded
 {
     public class LordJob_Joinable_MealTogether : LordJob_Joinable_DoublePawn
     {
+        public Dictionary<Pawn, int> mealsEated = new Dictionary<Pawn, int>();
         public LordJob_Joinable_MealTogether()
         {
 
@@ -26,10 +27,14 @@ namespace VanillaSocialInteractionsExpanded
         public override void ExposeData()
         {
             base.ExposeData();
+            Scribe_Collections.Look(ref mealsEated, "mealsEated", LookMode.Reference, LookMode.Value, ref pawnKeys, ref intValues);
             if (Scribe.mode == LoadSaveMode.PostLoadInit && gatheringDef == null)
             {
                 gatheringDef = VSIE_DefOf.VSIE_MealTogether;
             }
         }
+
+        private List<Pawn> pawnKeys;
+        private List<int> intValues;
     }
 }

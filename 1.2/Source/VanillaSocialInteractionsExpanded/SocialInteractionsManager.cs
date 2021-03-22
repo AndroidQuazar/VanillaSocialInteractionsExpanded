@@ -133,7 +133,6 @@ namespace VanillaSocialInteractionsExpanded
                         manager.angryWorkers[worker] = Find.TickManager.TicksGame;
                     }
 
-
                     var nearestWorkers = initiator.Map.mapPawns.SpawnedPawnsInFaction(initiator.Faction).Where(x => x != initiator && x != null && x.RaceProps.Humanlike
                         && x.mindState != null && VSIE_Utils.workTags.Contains(x.mindState.lastJobTag) && x.needs?.mood?.CurLevelPercentage < 0.3f && !x.WorkTagIsDisabled(WorkTags.Violent)
                         && x.Position.DistanceTo(initiator.Position) < 10).ToHashSet();
@@ -276,7 +275,7 @@ namespace VanillaSocialInteractionsExpanded
                     var keysToRemove = new List<Pawn>();
                     foreach (var worker in pawnsWithWorkers)
                     {
-                        if (worker.Key.IsHashIntervalTick(300) && Rand.Chance(0.1f) && worker.Value.TryCauseGroupFights(worker.Key))
+                        if (worker.Key.IsHashIntervalTick(300) && Rand.Chance(0.01f) && worker.Value.TryCauseGroupFights(worker.Key))
                         {
                             keysToRemove.Add(worker.Key);
                         }

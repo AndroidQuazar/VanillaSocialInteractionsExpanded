@@ -12,7 +12,7 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		protected override ThoughtState CurrentStateInternal(Pawn p)
 		{
-			if (p.Faction != Faction.OfPlayer)
+			if (p.Faction != null && p.Faction != Faction.OfPlayer)
             {
 				var averageOpinionOf = VSIE_Utils.GetAverageOpinionOf(p);
 				if (averageOpinionOf >= 10)
