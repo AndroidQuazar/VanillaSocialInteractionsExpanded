@@ -119,11 +119,9 @@ namespace VanillaSocialInteractionsExpanded
 
         public static JobDef VSIE_GotoTalkToSecondPawn;
 
-        public static ThoughtDef VSIE_CrushingDefeat;
-        public static ThoughtDef VSIE_CloseDefeat;
-        public static ThoughtDef VSIE_PyrrhicVictory;
-        public static ThoughtDef VSIE_CloseVictory;
-        public static ThoughtDef VSIE_DecisiveVictory;
+        public static ThoughtDef VSIE_SufferedLossPositive;
+        public static ThoughtDef VSIE_SufferedLossNegative;
+
         public static ThoughtDef VSIE_GotSomeLovin;
         public static JobDef VSIE_OneStandLovin;
 

@@ -1,67 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
-
   <ThoughtDef>
-    <defName>VSIE_CrushingDefeat</defName>
-    <durationDays>10</durationDays>
-    <stackLimit>10</stackLimit>
-    <stages>
-      <li>
-        <label>crushing defeat</label>
-        <description>We have lost. There is no hope.</description>
-        <baseMoodEffect>-20</baseMoodEffect>
-      </li>
-    </stages>
-  </ThoughtDef>
-
-  <ThoughtDef>
-    <defName>VSIE_CloseDefeat</defName>
-    <durationDays>10</durationDays>
+    <defName>VSIE_SufferedLossPositive</defName>
+    <durationDays>5</durationDays>
     <stackLimit>1</stackLimit>
     <stages>
       <li>
-        <label>Close defeat</label>
-        <description>We have lost, but at least some of us are still standing.</description>
-        <baseMoodEffect>-10</baseMoodEffect>
-      </li>
-    </stages>
-  </ThoughtDef>
-
-  <ThoughtDef>
-    <defName>VSIE_PyrrhicVictory</defName>
-    <durationDays>5</durationDays>
-    <stackLimit>10</stackLimit>
-    <stages>
-      <li>
-        <label>pyrrhic victory</label>
-        <description>We have suffered heavy losses, but we have prevailed.</description>
+        <label>Suffered a loss</label>
+        <description>We lost, but we can persevere!</description>
         <baseMoodEffect>5</baseMoodEffect>
       </li>
     </stages>
   </ThoughtDef>
   
   <ThoughtDef>
-    <defName>VSIE_CloseVictory</defName>
-    <durationDays>10</durationDays>
-    <stackLimit>10</stackLimit>
-    <stages>
-      <li>
-        <label>close victory</label>
-        <description>Some of us have fallen so that we can stand strong.</description>
-        <baseMoodEffect>10</baseMoodEffect>
-      </li>
-    </stages>
-  </ThoughtDef>
-  
-  <ThoughtDef>
-    <defName>VSIE_DecisiveVictory</defName>
-    <durationDays>10</durationDays>
+    <defName>VSIE_SufferedLossNegative</defName>
+    <durationDays>5</durationDays>
     <stackLimit>1</stackLimit>
     <stages>
       <li>
-        <label>decisive victory</label>
-        <description>Together, we are unbreakable.</description>
-        <baseMoodEffect>20</baseMoodEffect>
+        <label>Suffered a loss</label>
+        <description>Such a devastating loss!</description>
+        <baseMoodEffect>-2</baseMoodEffect>
       </li>
     </stages>
   </ThoughtDef>

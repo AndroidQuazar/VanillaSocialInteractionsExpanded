@@ -148,6 +148,11 @@ namespace VanillaSocialInteractionsExpanded
 						}
 					}
 				}
+				if (VSIE_Utils.SocialInteractionsManager.postRaidPeriodTicks > Find.TickManager.TicksGame)
+                {
+					__result = false;
+					return false;
+				}
 			}
 			return true;
         }

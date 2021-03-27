@@ -233,6 +233,7 @@ namespace VanillaSocialInteractionsExpanded
         public Dictionary<Pawn, int> angryWorkers = new Dictionary<Pawn, int>();
         public HashSet<Pawn> honoredDeadPawns = new HashSet<Pawn>();
         public Dictionary<Pawn, int> birthdays = new Dictionary<Pawn, int>();
+        public int postRaidPeriodTicks;
         public SocialInteractionsManager()
         {
         }
@@ -314,40 +315,31 @@ namespace VanillaSocialInteractionsExpanded
 
                     if (!raidersIsLosing && RaidersWon(raidGroup, lord.Map))
                     {
-                        if (remainedDefendersPercentFromTotal < 0.1f)
+                        foreach (var pawn in remainedDefenders)
                         {
-                            foreach (var pawn in remainedDefenders)
+                            var traits = pawn.story?.traits;
+                            if (traits != null)
                             {
-                                pawn.needs.mood.thoughts.memories.TryGainMemory(VSIE_DefOf.VSIE_CrushingDefeat);
+                                var nerves = traits.GetTrait(TraitDefOf.Nerves);
+                                var naturalMood = traits.GetTrait(TraitDefOf.NaturalMood);
+                                if (nerves != null && (nerves.Degree == 2 || nerves.Degree == 1) ||
+                                    traits.HasTrait(TraitDefOf.Kind) ||
+                                    naturalMood != null && (naturalMood.Degree == 2 || naturalMood.Degree == 1))
+                                {
+                                    pawn.needs?.mood?.thoughts?.memories?.TryGainMemory(VSIE_DefOf.VSIE_SufferedLossPositive);
+                                }
+                                else if (traits.HasTrait(TraitDefOf.Greedy) || 
+                                    nerves != null && (nerves.Degree == -2 || nerves.Degree == -1) ||
+                                    naturalMood != null && (naturalMood.Degree == -2 || naturalMood.Degree == -1))
+                                {
+                                    pawn.needs?.mood?.thoughts?.memories?.TryGainMemory(VSIE_DefOf.VSIE_SufferedLossNegative);
+                                }
                             }
                         }
-                        else if (remainedDefendersPercentFromTotal < 0.7f)
-                        {
-                            foreach (var pawn in remainedDefenders)
-                            {
-                                pawn.needs.mood.thoughts.memories.TryGainMemory(VSIE_DefOf.VSIE_CloseDefeat);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        if (remainedDefendersPercentFromTotal < 0.2f)
-                        {
-                            foreach (var pawn in remainedDefenders)
-                            {
-                                pawn.needs.mood.thoughts.memories.TryGainMemory(VSIE_DefOf.VSIE_PyrrhicVictory);
-                            }
-                        }
-                        else if (remainedDefendersPercentFromTotal > 0.95f)
-                        {
-                            foreach (var pawn in remainedDefenders)
-                            {
-                                pawn.needs.mood.thoughts.memories.TryGainMemory(VSIE_DefOf.VSIE_DecisiveVictory);
-                            }
-                        }
+                        postRaidPeriodTicks = Find.TickManager.TicksGame + (GenDate.TicksPerDay * 3);
                     }
 
-                    if ((Find.TickManager.TicksGame - raidGroup.initTime) >= GenDate.TicksPerDay / 2 // if raid lasted over 12 in-game hours
+                    if ((Find.TickManager.TicksGame - raidGroup.initTime) >= (GenDate.TicksPerDay / 2) // if raid lasted over 12 in-game hours
                         && raidGroup.raiders.Sum(x => x.kindDef.combatPower) > 500 // if raid is big enough
                         && remainedDefenders.Any() // if there are survivors to give them a trait
                         && Rand.Chance(0.1f))
@@ -531,6 +523,7 @@ namespace VanillaSocialInteractionsExpanded
             Scribe_Collections.Look(ref birthdays, "birthdays", LookMode.Reference, LookMode.Value, ref pawnKeys5, ref intValues2);
             Scribe_Collections.Look(ref raidGroups, "raidGroups", LookMode.Deep);
             Scribe_Collections.Look(ref honoredDeadPawns, "honoredDeadPawns", LookMode.Reference);
+            Scribe_Values.Look(ref postRaidPeriodTicks, "postRaidPeriodTicks");
         }
 
         private List<Pawn> pawnKeys;

@@ -40,10 +40,13 @@ namespace VanillaSocialInteractionsExpanded
                     if (nearestPawnCount > 0)
                     {
                         var bonus = nearestPawnCount * 0.05f;
-                        var oldResult = __result;
                         __result += bonus;
                     }
                 }
+            }
+            else if (VanillaSocialInteractionsExpandedSettings.EnableUnitedWeStand && stat == StatDefOf.WorkSpeedGlobal && thing is Pawn pawn3 && VSIE_Utils.SocialInteractionsManager.postRaidPeriodTicks > Find.TickManager.TicksGame)
+            {
+                __result *= 1.05f;
             }
         }
     }
