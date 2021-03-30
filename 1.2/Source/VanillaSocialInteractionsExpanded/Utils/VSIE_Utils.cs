@@ -90,7 +90,7 @@ namespace VanillaSocialInteractionsExpanded
             }
 			foreach (var otherPawn in pawns)
 			{
-				if (pawn.relations != null)
+				if (otherPawn.relations != null)
 				{
 					allOpinions.Add(otherPawn.relations.OpinionOf(pawn));
 				}

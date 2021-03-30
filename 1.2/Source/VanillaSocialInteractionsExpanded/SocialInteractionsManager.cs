@@ -107,8 +107,9 @@ namespace VanillaSocialInteractionsExpanded
 
         public bool TryCauseGroupFights(Pawn initiator)
         {
-            if (initiator.Map != null && initiator.CurJobDef != JobDefOf.SocialFight && VSIE_Utils.workTags.Contains(initiator.mindState.lastJobTag)
-                && initiator.needs.mood.CurLevelPercentage < 0.3f && !initiator.WorkTagIsDisabled(WorkTags.Violent))
+            if (initiator.Map != null && initiator.Faction != null && initiator.mindState != null && initiator.interactions != null && initiator.CurJobDef != JobDefOf.SocialFight 
+                && VSIE_Utils.workTags.Contains(initiator.mindState.lastJobTag)
+                && initiator.needs?.mood?.CurLevelPercentage < 0.3f && !initiator.WorkTagIsDisabled(WorkTags.Violent))
             {
                 if (!InteractionUtility.TryGetRandomVerbForSocialFight(initiator, out Verb verb))
                 {
@@ -118,8 +119,8 @@ namespace VanillaSocialInteractionsExpanded
                 {
                     workersWithWorkingTicks = new Dictionary<Pawn, WorkTime>();
                 }
-                var candidates = workersWithWorkingTicks.Where(x => x.Key != null && x.Key.needs.mood.CurInstantLevelPercentage < 0.3f && x.Value.workTick > 3000
-                && initiator.relations.OpinionOf(x.Key) < 0).Select(x => x.Key).ToList();
+                var candidates = workersWithWorkingTicks.Where(x => x.Key != null && x.Key.needs?.mood?.CurInstantLevelPercentage < 0.3f && x.Value.workTick > 3000 
+                    && initiator.relations?.OpinionOf(x.Key) < 0).Select(x => x.Key).ToList();
                 if (candidates.Any())
                 {
                     var manager = VSIE_Utils.SocialInteractionsManager;
@@ -152,7 +153,7 @@ namespace VanillaSocialInteractionsExpanded
                     fighters.Add(firstPawn);
                     foreach (var pawn in nearestWorkers)
                     {
-                        if (!pawn.InMentalState)
+                        if (!pawn.InMentalState && pawn.interactions != null)
                         {
                             var candidatesToFight = angryWorkers.Where(x => x != pawn);
                             if (candidatesToFight.Any() && candidatesToFight.TryRandomElementByWeight(x => DistanceScore(x.Position.DistanceTo(pawn.Position)), out Pawn victim))
