@@ -11,15 +11,16 @@ using Verse.Grammar;
 
 namespace VanillaSocialInteractionsExpanded
 {
+
     public class LordJob_Joinable_DoublePawn : LordJob_Joinable_Gathering
     {
         public Pawn secondPawn;
 
         private int durationTicks;
+        private int startTicks;
         public override bool AllowStartNewGatherings => false;
         protected virtual ThoughtDef AttendeeThought => null;
         protected virtual TaleDef AttendeeTale => TaleDefOf.AttendedParty;
-
         protected virtual ThoughtDef OrganizerThought => null;
 
         protected virtual TaleDef OrganizerTale => TaleDefOf.AttendedParty;
@@ -49,6 +50,7 @@ namespace VanillaSocialInteractionsExpanded
             this.spot = spot;
             this.gatheringDef = gatheringDef;
             this.durationTicks = durationTicks;
+            this.startTicks = Find.TickManager.TicksGame;
         }
 
         protected override LordToil CreateGatheringToil(IntVec3 spot, Pawn organizer, GatheringDef gatheringDef)
@@ -91,43 +93,64 @@ namespace VanillaSocialInteractionsExpanded
             return new Trigger_TicksPassed(durationTicks);
         }
 
+        public override void LordJobTick()
+        {
+            base.LordJobTick();
+            if (Find.TickManager.TicksGame > this.startTicks + this.durationTicks + 100 && this.lord.CurLordToil is LordToil_Party toil) // in order to end infinite dates
+            {
+                ApplyOutcome(toil);
+                this.Map.lordManager.RemoveLord(this.lord);
+            }
+        }
         protected virtual void ApplyOutcome(LordToil_Party toil)
         {
             List<Pawn> ownedPawns = lord.ownedPawns;
             LordToilData_Party lordToilData_Party = (LordToilData_Party)toil.data;
             for (int i = 0; i < ownedPawns.Count; i++)
             {
-                Pawn pawn = ownedPawns[i];
-                bool flag = pawn == base.organizer;
-                if (lordToilData_Party.presentForTicks.TryGetValue(pawn, out int value) && value > 0)
+                try
                 {
-                    if (ownedPawns[i].needs.mood != null)
+                    Pawn pawn = ownedPawns[i];
+                    bool flag = pawn == base.organizer;
+                    if (lordToilData_Party.presentForTicks.TryGetValue(pawn, out int value) && value > 0)
                     {
-                        ThoughtDef thoughtDef = flag ? OrganizerThought : AttendeeThought;
-                        if (thoughtDef != null)
+                        if (ownedPawns[i].needs?.mood != null)
                         {
-                            float num = 0.5f / thoughtDef.stages[0].baseMoodEffect;
-                            float moodPowerFactor = Mathf.Min((float)value / (float)durationTicks + num, 1f);
-                            Thought_Memory thought_Memory = (Thought_Memory)ThoughtMaker.MakeThought(thoughtDef);
-                            thought_Memory.moodPowerFactor = moodPowerFactor;
-                            ownedPawns[i].needs.mood.thoughts.memories.TryGainMemory(thought_Memory);
+                            try
+                            {
+                                ThoughtDef thoughtDef = flag ? OrganizerThought : AttendeeThought;
+                                if (thoughtDef != null)
+                                {
+                                    float num = 0.5f / thoughtDef.stages[0].baseMoodEffect;
+                                    float moodPowerFactor = Mathf.Min((float)value / (float)durationTicks + num, 1f);
+                                    Thought_Memory thought_Memory = (Thought_Memory)ThoughtMaker.MakeThought(thoughtDef);
+                                    thought_Memory.moodPowerFactor = moodPowerFactor;
+                                    ownedPawns[i].needs.mood.thoughts.memories.TryGainMemory(thought_Memory);
+                                }
+                            }
+                            catch { }
                         }
                     }
                 }
+                catch { }
             }
 
-            var organizerPartner = organizer.GetSpouseOrLoverOrFiance();
-            if (organizerPartner != null && secondPawn != organizerPartner)
+            try
             {
-                Thought_Memory thought_Memory = (Thought_Memory)ThoughtMaker.MakeThought(VSIE_DefOf.VSIE_JealouslyMyPartnerDatedSomeoneElse);
-                organizerPartner.needs.mood.thoughts.memories.TryGainMemory(thought_Memory, organizer);
+                var organizerPartner = organizer.GetSpouseOrLoverOrFiance();
+                if (organizerPartner != null && secondPawn != organizerPartner)
+                {
+                    Thought_Memory thought_Memory = (Thought_Memory)ThoughtMaker.MakeThought(VSIE_DefOf.VSIE_JealouslyMyPartnerDatedSomeoneElse);
+                    organizerPartner.needs.mood.thoughts.memories.TryGainMemory(thought_Memory, organizer);
+                }
+                var secondPawnPartner = secondPawn.GetSpouseOrLoverOrFiance();
+                if (secondPawnPartner != null && organizer != secondPawnPartner)
+                {
+                    Thought_Memory thought_Memory = (Thought_Memory)ThoughtMaker.MakeThought(VSIE_DefOf.VSIE_JealouslyMyPartnerDatedSomeoneElse);
+                    secondPawnPartner.needs.mood.thoughts.memories.TryGainMemory(thought_Memory, secondPawn);
+                }
             }
-            var secondPawnPartner = secondPawn.GetSpouseOrLoverOrFiance();
-            if (secondPawnPartner != null && organizer != secondPawnPartner)
-            {
-                Thought_Memory thought_Memory = (Thought_Memory)ThoughtMaker.MakeThought(VSIE_DefOf.VSIE_JealouslyMyPartnerDatedSomeoneElse);
-                secondPawnPartner.needs.mood.thoughts.memories.TryGainMemory(thought_Memory, secondPawn);
-            }
+            catch { };
         }
         public override float VoluntaryJoinPriorityFor(Pawn p)
         {
@@ -144,6 +167,7 @@ namespace VanillaSocialInteractionsExpanded
             Scribe_References.Look(ref secondPawn, "secondPawn");
             Scribe_Values.Look(ref spot, "spot");
             Scribe_Values.Look(ref durationTicks, "durationTicks", 0);
+            Scribe_Values.Look(ref startTicks, "startTicks", 0);
         }
     }
 }

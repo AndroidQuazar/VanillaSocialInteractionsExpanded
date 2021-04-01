@@ -40,7 +40,8 @@ namespace VanillaSocialInteractionsExpanded
         }
         private Pawn FindPawnToHonor(Map map, out Building_Grave grave)
         {
-            var graves = map.listerThings.AllThings.OfType<Building_Grave>().Where(g => g.Corpse != null
+            var graves = map.listerThings.AllThings.OfType<Building_Grave>().Where(g => g.Corpse != null && (g.Corpse.InnerPawn?.RaceProps.Humanlike ?? false) 
+                && g.Corpse.InnerPawn.Faction == Faction.OfPlayer
                 && !VSIE_Utils.SocialInteractionsManager.honoredDeadPawns.Contains(g.Corpse.InnerPawn)
                 && g.Corpse.Age > GenDate.TicksPerDay && g.Corpse.Age < GenDate.TicksPerDay * 7);
             if (graves.Any())

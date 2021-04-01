@@ -11,6 +11,7 @@ namespace VanillaSocialInteractionsExpanded
     class VanillaSocialInteractionsExpandedSettings : ModSettings
     {
         public static bool EnableMemories = true;
+        public static bool EnableInspirations = true;
         public static bool EnableAspirations = true;
         public static bool EnableObtainingNewTraits = true;
         public static bool EnableVenting = true;
@@ -26,6 +27,7 @@ namespace VanillaSocialInteractionsExpanded
         public override void ExposeData()
         {
             Scribe_Values.Look<bool>(ref EnableMemories, "EnableMemories", true);
+            Scribe_Values.Look<bool>(ref EnableInspirations, "EnableInspirations", true);
             Scribe_Values.Look<bool>(ref EnableAspirations, "EnableAspirations", true);
             Scribe_Values.Look<bool>(ref EnableObtainingNewTraits, "EnableObtainingNewTraits", true);
             Scribe_Values.Look<bool>(ref EnableVenting, "EnableVenting", true);
@@ -46,6 +48,7 @@ namespace VanillaSocialInteractionsExpanded
             Listing_Standard listingStandard = new Listing_Standard();
             listingStandard.Begin(inRect);
             listingStandard.CheckboxLabeled("VSIE.EnableMemories".Translate(), ref EnableMemories);
+            listingStandard.CheckboxLabeled("VSIE.EnableInspirations".Translate(), ref EnableInspirations);
             listingStandard.CheckboxLabeled("VSIE.EnableAspirations".Translate(), ref EnableAspirations);
             listingStandard.CheckboxLabeled("VSIE.EnableObtainingNewTraits".Translate(), ref EnableObtainingNewTraits);
             listingStandard.CheckboxLabeled("VSIE.EnableVenting".Translate(), ref EnableVenting);
@@ -59,6 +62,7 @@ namespace VanillaSocialInteractionsExpanded
             listingStandard.CheckboxLabeled("VSIE.EnableSocialEnvironmentThoughts".Translate(), ref EnableSocialEnvironmentThoughts);
             listingStandard.CheckboxLabeled("VSIE.EnableOneNightStand".Translate(), ref EnableOneNightStand);
             listingStandard.End();
+            base.Write();
         }
     }
 }

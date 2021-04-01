@@ -97,10 +97,14 @@ namespace VanillaSocialInteractionsExpanded
 				{
 					foreach (var thing in __result)
 					{
-						if (thing.def.ingestible?.ingestEffect == EffecterDefOf.EatMeat)
+						for (var i = 0; i < thing.stackCount; i++)
 						{
-							VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(worker);
+							if (thing.def.ingestible?.ingestEffect == EffecterDefOf.EatMeat || thing.def.ingestible?.ingestEffect == DefDatabase< EffecterDef>.GetNamed("EatVegetarian"))
+							{
+								VSIE_Utils.SocialInteractionsManager.Notify_AspirationProgress(worker);
+							}
 						}
+
 					}
 				}
 			}

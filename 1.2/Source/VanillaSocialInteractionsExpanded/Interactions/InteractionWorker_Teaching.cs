@@ -78,7 +78,7 @@ namespace VanillaSocialInteractionsExpanded
 			if (levelDiff > 5) levelDiff = 5;
 			for (int i = 0; i < levelDiff; i++)
 			{
-				num += SkillRecord.XpRequiredToLevelUpFrom(i);
+				num += SkillRecord.XpRequiredToLevelUpFrom(i) / 4f;
 			}
 			return num;
 		}

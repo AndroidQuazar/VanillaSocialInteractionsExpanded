@@ -39,15 +39,22 @@ namespace VanillaSocialInteractionsExpanded
 					}
 					if (VanillaSocialInteractionsExpandedSettings.EnableBestFriend)
                     {
-						if (___pawn.relations.GetFirstDirectRelationPawn(VSIE_DefOf.VSIE_BestFriend) is null && recipient.relations.GetFirstDirectRelationPawn(VSIE_DefOf.VSIE_BestFriend) is null)
-						{
-							var recipientOpinionOf = recipient.relations.OpinionOf(___pawn);
-							var ___pawnOpinionOf = ___pawn.relations.OpinionOf(recipient);
+						var pawnBestFriend = ___pawn.relations.GetFirstDirectRelationPawn(VSIE_DefOf.VSIE_BestFriend);
+						var recipientBestFriend = recipient.relations.GetFirstDirectRelationPawn(VSIE_DefOf.VSIE_BestFriend);
+						var recipientOpinionOf = recipient.relations.OpinionOf(___pawn);
+						var ___pawnOpinionOf = ___pawn.relations.OpinionOf(recipient);
 
+						if (pawnBestFriend is null && recipient.relations.GetFirstDirectRelationPawn(VSIE_DefOf.VSIE_BestFriend) is null)
+						{
 							if (recipientOpinionOf >= 80 && ___pawnOpinionOf >= 80 && !recipient.relations.DirectRelationExists(VSIE_DefOf.VSIE_BestFriend, ___pawn))
 							{
 								recipient.relations.AddDirectRelation(VSIE_DefOf.VSIE_BestFriend, ___pawn);
 							}
+						}
+						else if (pawnBestFriend != null && recipientBestFriend != null && (___pawnOpinionOf < 80 || recipientOpinionOf < 80)) 
+						{
+							recipient.relations.TryRemoveDirectRelation(VSIE_DefOf.VSIE_BestFriend, ___pawn);
+							___pawn.relations.TryRemoveDirectRelation(VSIE_DefOf.VSIE_BestFriend, recipient);
 						}
 					}
 				}
