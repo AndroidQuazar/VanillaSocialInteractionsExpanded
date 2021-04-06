@@ -277,7 +277,7 @@ namespace VanillaSocialInteractionsExpanded
                     var keysToRemove = new List<Pawn>();
                     foreach (var worker in pawnsWithWorkers)
                     {
-                        if (worker.Key.IsHashIntervalTick(300) && Rand.Chance(0.01f) && worker.Value.TryCauseGroupFights(worker.Key))
+                        if (worker.Key.IsHashIntervalTick(300) && Rand.Chance(0.001f) && worker.Value.TryCauseGroupFights(worker.Key))
                         {
                             keysToRemove.Add(worker.Key);
                         }

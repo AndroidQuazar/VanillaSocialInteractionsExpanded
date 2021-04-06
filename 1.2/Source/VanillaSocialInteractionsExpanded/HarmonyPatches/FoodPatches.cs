@@ -17,7 +17,7 @@ namespace VanillaSocialInteractionsExpanded
 		{
 			if (VanillaSocialInteractionsExpandedSettings.EnableMemories)
             {
-				if (ingester.RaceProps.Humanlike)
+				if (ingester.RaceProps.Humanlike && ingester.Faction == Faction.OfPlayer)
 				{
 					if (IsHumanlikeMeat(__instance.def))
 					{

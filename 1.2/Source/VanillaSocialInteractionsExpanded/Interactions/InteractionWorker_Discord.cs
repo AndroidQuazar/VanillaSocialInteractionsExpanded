@@ -20,7 +20,7 @@ namespace VanillaSocialInteractionsExpanded
                 var socialManager = VSIE_Utils.SocialInteractionsManager;
                 if (socialManager.angryWorkers != null && socialManager.angryWorkers.TryGetValue(initiator, out int lastTick))
                 {
-                    if (lastTick + (GenDate.TicksPerHour * 4) > Find.TickManager.TicksGame)
+                    if (lastTick + (GenDate.TicksPerHour * 2) > Find.TickManager.TicksGame)
                     {
                         var value = 1f * NegativeInteractionUtility.NegativeInteractionChanceFactor(initiator, recipient);
                         return value;

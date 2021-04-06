@@ -26,6 +26,7 @@
   <VSIE.OneNightStandText>{INITIATOR_nameDef} engages in a one night stand with {PARTNER_nameDef}. Whilst both pawns receive all the benefits of regular lovin’, they are not a couple.</VSIE.OneNightStandText>
 
   <VSIE.EnableMemories>Enable memories</VSIE.EnableMemories>
+  <VSIE.EnableInspirations>Enable inspirations</VSIE.EnableInspirations>
   <VSIE.EnableAspirations>Enable aspirations</VSIE.EnableAspirations>
   <VSIE.EnableObtainingNewTraits>Enable obtaining new traits</VSIE.EnableObtainingNewTraits>
   <VSIE.EnableVenting>Enable venting</VSIE.EnableVenting>
