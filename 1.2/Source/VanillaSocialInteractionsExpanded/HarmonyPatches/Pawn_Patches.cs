@@ -35,6 +35,10 @@ namespace VanillaSocialInteractionsExpanded
 						}
 					}
 				}
+				if (__instance.Faction == Faction.OfPlayer)
+				{
+					VSIE_Utils.TryRegisterNewColonist(__instance, __instance.Faction);
+				}
 			}
 		}
 	}
@@ -106,6 +110,10 @@ namespace VanillaSocialInteractionsExpanded
 							TaleRecorder.RecordTale(VSIE_DefOf.VSIE_TamedMe, __instance, recruiter);
 						}
 					}
+					if (newFaction == Faction.OfPlayer)
+                    {
+						VSIE_Utils.TryRegisterNewColonist(__instance, newFaction);
+                    }
 				}
 			}
 		}

@@ -19,7 +19,11 @@ namespace VanillaSocialInteractionsExpanded
             }
             Predicate<Tale_DoublePawn> validator = delegate (Tale_DoublePawn tale)
             {
-                return otherPawn == tale.secondPawnData?.pawn && OpinionOf(tale.firstPawnData.pawn) >= 20;
+				if (!VSIE_Utils.HaveNoticedTale(pawn, tale))
+				{
+					return false;
+				}
+				return otherPawn == tale.secondPawnData?.pawn && OpinionOf(tale.firstPawnData.pawn) >= 20;
             };
             Tale latestTale = VSIE_Utils.GetLatestDoublePawnTale(def.taleDef, validator);
             if (latestTale != null)

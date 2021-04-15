@@ -27,6 +27,10 @@ namespace VanillaSocialInteractionsExpanded
 
 			Predicate<Tale> validator = delegate (Tale t)
 			{
+				if (!VSIE_Utils.HaveNoticedTale(p, t))
+				{
+					return false;
+				}
 				return other == t.DominantPawn;
 			};
 			var tale = VSIE_Utils.GetLatestTale(this.def.taleDef, validator);

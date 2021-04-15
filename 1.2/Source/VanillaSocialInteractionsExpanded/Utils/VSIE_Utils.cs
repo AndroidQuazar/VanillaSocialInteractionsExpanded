@@ -177,8 +177,7 @@ namespace VanillaSocialInteractionsExpanded
 					yield return otherPawn;
                 }
             }
-			
-        }
+		}
 		public static void TryDevelopNewTrait(Pawn pawn, string letterText)
         {
 			var manager = VSIE_Utils.SocialInteractionsManager;
@@ -188,41 +187,65 @@ namespace VanillaSocialInteractionsExpanded
 			}
 		}
 
-		public static List<TaleDef> blacklistedTales = new List<TaleDef>
-		{
-			VSIE_DefOf.VSIE_ExposedCorpseOfMyFriend
-		};
-
-		[DebugAction("General", null, allowedGameStates = AllowedGameStates.PlayingOnMap)]
-		private static void DebugAllRelations()
-		{
-			var tales = DefDatabase<TaleDef>.AllDefs.Where(x => x.defName.StartsWith("VSIE") && !blacklistedTales.Contains(x));
-			var testeers = Find.CurrentMap.mapPawns.AllPawns.Where(x => x.IsColonist && x.Spawned && x.RaceProps.Humanlike);
-			var triplePawnsTale = tales.Where(x => x.taleClass == typeof(Tale_TriplePawn));
-			var doublePawnsTale = tales.Where(x => x.taleClass == typeof(Tale_DoublePawn));
-			var onePawnTale = tales.Where(x => x.taleClass == typeof(Tale_SinglePawn));
-
-			foreach (var tale in triplePawnsTale)
+		public static bool HaveNoticedTale(Pawn pawn, Tale tale)
+        {
+			if (!SocialInteractionsManager.joinedColonists.TryGetValue(pawn, out int date))
+			{
+				//Log.Message(pawn + " haven't joined the colony " + tale);
+				return false;
+			}
+			else if (tale.date < date)
             {
-				var threePawns = testeers.InRandomOrder().Take(3).ToList();
-				TaleRecorder.RecordTale(tale, threePawns[0], threePawns[1], threePawns[2]);
-				Find.LetterStack.ReceiveLetter(tale.defName, tale.label, LetterDefOf.NeutralEvent, threePawns);
-            }
-
-			//foreach (var tale in doublePawnsTale)
-			//{
-			//	var twoPawns = testeers.InRandomOrder().Take(2).ToList();
-			//	TaleRecorder.RecordTale(tale, twoPawns[0], twoPawns[1]);
-			//	Find.LetterStack.ReceiveLetter(tale.defName, tale.label, LetterDefOf.NeutralEvent, twoPawns);
-			//}
-			//
-			//foreach (var tale in onePawnTale)
-			//{
-			//	var onePawns = testeers.InRandomOrder().Take(1).ToList();
-			//	TaleRecorder.RecordTale(tale, onePawns[0]);
-			//	Find.LetterStack.ReceiveLetter(tale.defName, tale.label, LetterDefOf.NeutralEvent, onePawns);
-			//}
+				//Log.Message(pawn + " haven't noticed " + tale + " - " + tale.date + " - " + date);
+				return false;
+			}
+			//Log.Message(pawn + " noticed " + tale);
+			return true;
 		}
+
+		public static void TryRegisterNewColonist(Pawn pawn, Faction faction)
+        {
+			if (faction == Faction.OfPlayer && pawn.RaceProps.Humanlike && !SocialInteractionsManager.joinedColonists.ContainsKey(pawn))
+			{
+				SocialInteractionsManager.joinedColonists[pawn] = Find.TickManager.TicksAbs;
+			}
+		}
+
+		//public static List<TaleDef> blacklistedTales = new List<TaleDef>
+		//{
+		//	VSIE_DefOf.VSIE_ExposedCorpseOfMyFriend
+		//};
+		//
+		//[DebugAction("General", null, allowedGameStates = AllowedGameStates.PlayingOnMap)]
+		//private static void DebugAllRelations()
+		//{
+		//	var tales = DefDatabase<TaleDef>.AllDefs.Where(x => x.defName.StartsWith("VSIE") && !blacklistedTales.Contains(x));
+		//	var testeers = Find.CurrentMap.mapPawns.AllPawns.Where(x => x.IsColonist && x.Spawned && x.RaceProps.Humanlike);
+		//	var triplePawnsTale = tales.Where(x => x.taleClass == typeof(Tale_TriplePawn));
+		//	var doublePawnsTale = tales.Where(x => x.taleClass == typeof(Tale_DoublePawn));
+		//	var onePawnTale = tales.Where(x => x.taleClass == typeof(Tale_SinglePawn));
+		//
+		//	foreach (var tale in triplePawnsTale)
+        //    {
+		//		var threePawns = testeers.InRandomOrder().Take(3).ToList();
+		//		TaleRecorder.RecordTale(tale, threePawns[0], threePawns[1], threePawns[2]);
+		//		Find.LetterStack.ReceiveLetter(tale.defName, tale.label, LetterDefOf.NeutralEvent, threePawns);
+        //    }
+		//
+		//	foreach (var tale in doublePawnsTale)
+		//	{
+		//		var twoPawns = testeers.InRandomOrder().Take(2).ToList();
+		//		TaleRecorder.RecordTale(tale, twoPawns[0], twoPawns[1]);
+		//		Find.LetterStack.ReceiveLetter(tale.defName, tale.label, LetterDefOf.NeutralEvent, twoPawns);
+		//	}
+		//	
+		//	foreach (var tale in onePawnTale)
+		//	{
+		//		var onePawns = testeers.InRandomOrder().Take(1).ToList();
+		//		TaleRecorder.RecordTale(tale, onePawns[0]);
+		//		Find.LetterStack.ReceiveLetter(tale.defName, tale.label, LetterDefOf.NeutralEvent, onePawns);
+		//	}
+		//}
 
 		public static Pawn GetSpouseOrLoverOrFiance(this Pawn pawn)
 		{
@@ -246,6 +269,7 @@ namespace VanillaSocialInteractionsExpanded
 			}
 			return spouse;
 		}
+
 		public static Tale_TriplePawn GetLatestTriplePawnTale(TaleDef def, Predicate<Tale_TriplePawn> predicate)
 		{
 			Tale_TriplePawn tale = null;
@@ -276,7 +300,7 @@ namespace VanillaSocialInteractionsExpanded
 			}
 			return tale;
 		}
-
+		
 		public static Tale GetLatestTale(TaleDef def, Predicate<Tale> predicate)
 		{
 			Tale tale = null;

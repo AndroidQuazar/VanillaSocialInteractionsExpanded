@@ -22,7 +22,7 @@ namespace VanillaSocialInteractionsExpanded
 					var exLover1 = ___pawn.GetSpouseOrLoverOrFiance();
 					if (exLover1 != null && !exLover1.Dead && exLover1 != otherPawn)
 					{
-						if (Rand.Chance(0.1f))
+						if (Rand.Chance(10.1f))
 						{
 							TaleRecorder.RecordTale(VSIE_DefOf.VSIE_StoleMyLover, exLover1, ___pawn, otherPawn);
 						}
@@ -30,7 +30,7 @@ namespace VanillaSocialInteractionsExpanded
 					var exLover2 = otherPawn.GetSpouseOrLoverOrFiance();
 					if (exLover2 != null && !exLover2.Dead && exLover2 != ___pawn)
 					{
-						if (Rand.Chance(0.1f))
+						if (Rand.Chance(10.1f))
 						{
 							TaleRecorder.RecordTale(VSIE_DefOf.VSIE_StoleMyLover, exLover2, ___pawn, otherPawn);
 						}

@@ -17,6 +17,10 @@ namespace VanillaSocialInteractionsExpanded
 			{
 				Predicate<Tale_TriplePawn> validator = delegate (Tale_TriplePawn t)
 				{
+					if (!VSIE_Utils.HaveNoticedTale(pawn, t))
+					{
+						return false;
+					}
 					return pawn == t.firstPawnData.pawn && otherPawn == t.secondPawnData.pawn;
 				};
 				Tale_TriplePawn latestTale = VSIE_Utils.GetLatestTriplePawnTale(def.taleDef, validator);

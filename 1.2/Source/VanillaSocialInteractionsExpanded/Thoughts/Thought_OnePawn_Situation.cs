@@ -17,6 +17,10 @@ namespace VanillaSocialInteractionsExpanded
 			{
 				Predicate<Tale> validator = delegate (Tale tale)
 				{
+					if (!VSIE_Utils.HaveNoticedTale(pawn, tale))
+					{
+						return false;
+					}
 					return tale.DominantPawn == otherPawn;
 				};
 				Tale latestTale = VSIE_Utils.GetLatestTale(def.taleDef, validator);
@@ -35,6 +39,10 @@ namespace VanillaSocialInteractionsExpanded
 			}
 			Predicate<Tale> validator = delegate (Tale tale)
 			{
+				if (!VSIE_Utils.HaveNoticedTale(pawn, tale))
+				{
+					return false;
+				}
 				return tale.DominantPawn == otherPawn;
 			};
 			Tale latestTale = VSIE_Utils.GetLatestTale(def.taleDef, validator);

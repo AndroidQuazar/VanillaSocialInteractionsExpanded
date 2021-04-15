@@ -15,16 +15,19 @@ namespace VanillaSocialInteractionsExpanded
 		{
 			get
 			{
-
 				Predicate<Tale_TriplePawn> validator = delegate (Tale_TriplePawn t)
 				{
-					return pawn == t.firstPawnData.pawn && otherPawn == t.secondPawnData.pawn;
+					if (!VSIE_Utils.HaveNoticedTale(pawn, t))
+					{
+						return false;
+					}
+					return pawn == t.firstPawnData.pawn && otherPawn == t.thirdPawnData.pawn;
 				};
 				Tale_TriplePawn latestTale = VSIE_Utils.GetLatestTriplePawnTale(def.taleDef, validator);
 				if (latestTale != null)
 				{
-					return base.CurStage.label.Formatted(pawn.relations.DirectRelations.Where(x => x.otherPawn == latestTale.thirdPawnData.pawn).OrderBy(y => y.def.importance).FirstOrDefault()
-						.def.GetGenderSpecificLabel(latestTale.firstPawnData.pawn), latestTale.secondPawnData.pawn.Named("SECONDPAWN"), latestTale.thirdPawnData.pawn.Named("THIRDPAWN"), pawn.Named("PAWN"));
+
+					return base.CurStage.label.Formatted(latestTale.secondPawnData.pawn.Named("SECONDPAWN"), latestTale.thirdPawnData.pawn.Named("THIRDPAWN"), pawn.Named("PAWN"));
 				}
 				return base.LabelCap;
 			}
@@ -37,7 +40,11 @@ namespace VanillaSocialInteractionsExpanded
 			}
 			Predicate<Tale_TriplePawn> validator = delegate (Tale_TriplePawn tale)
 			{
-				return pawn == tale.firstPawnData.pawn && otherPawn == tale.secondPawnData.pawn;
+				if (!VSIE_Utils.HaveNoticedTale(pawn, tale))
+				{
+					return false;
+				}
+				return pawn == tale.firstPawnData.pawn && otherPawn == tale.thirdPawnData.pawn;
 			};
 			Tale latestTale = VSIE_Utils.GetLatestTriplePawnTale(def.taleDef, validator);
 			if (latestTale != null)

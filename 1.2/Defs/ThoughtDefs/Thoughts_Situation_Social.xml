@@ -699,7 +699,7 @@
 		<validWhileDespawned>true</validWhileDespawned>
 		<stages>
 			<li>
-				<label>{SECONDPAWN_nameDef} stole my {0} {THIRDPAWN_nameDef} away from me. What makes {SECONDPAWN_objective} so much better?</label>
+				<label>{THIRDPAWN_nameDef} stole {SECONDPAWN_nameDef} away from me. What makes {THIRDPAWN_objective} so much better?</label>
 				<baseOpinionOffset>-10</baseOpinionOffset>
 			</li>
 		</stages>

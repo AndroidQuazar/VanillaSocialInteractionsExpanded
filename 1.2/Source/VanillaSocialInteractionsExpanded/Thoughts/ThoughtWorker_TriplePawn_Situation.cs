@@ -23,6 +23,10 @@ namespace VanillaSocialInteractionsExpanded
 
             Predicate<Tale_TriplePawn> validator = delegate (Tale_TriplePawn t)
             {
+                if (!VSIE_Utils.HaveNoticedTale(p, t))
+                {
+                    return false;
+                }
                 if (t.firstPawnData is null) Log.Error(t + " hasn't firstPawnData, this shouldn't happen.");
                 if (t.secondPawnData is null) Log.Error(t + " hasn't secondPawnData, this shouldn't happen.");
                 return p == t.firstPawnData.pawn && other == t.secondPawnData.pawn;

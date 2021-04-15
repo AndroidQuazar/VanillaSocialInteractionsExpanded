@@ -17,13 +17,22 @@ namespace VanillaSocialInteractionsExpanded
 			{
 				Predicate<Tale_TriplePawn> validator = delegate (Tale_TriplePawn t)
 				{
+					if (!VSIE_Utils.HaveNoticedTale(pawn, t))
+					{
+						return false;
+					}
 					return pawn == t.firstPawnData.pawn && otherPawn == t.secondPawnData.pawn;
 				};
 				Tale_TriplePawn latestTale = VSIE_Utils.GetLatestTriplePawnTale(def.taleDef, validator);
 				if (latestTale != null)
 				{
-					return base.CurStage.label.Formatted(pawn.relations.DirectRelations.Where(x => x.otherPawn == latestTale.thirdPawnData.pawn).OrderBy(y => y.def.opinionOffset).FirstOrDefault()
-						.def.GetGenderSpecificLabel(latestTale.firstPawnData.pawn), latestTale.secondPawnData.pawn.Named("SECONDPAWN"), latestTale.thirdPawnData.pawn.Named("THIRDPAWN"), pawn.Named("PAWN"));
+					var relatedPawns = pawn.relations.DirectRelations.Where(x => x.otherPawn == latestTale.thirdPawnData.pawn);
+					if (relatedPawns.Any())
+                    {
+						var firstRelation = relatedPawns.OrderBy(y => y.def.opinionOffset).FirstOrDefault();
+						var genderSpecificLabel = firstRelation.def.GetGenderSpecificLabel(latestTale.firstPawnData.pawn);
+						return base.CurStage.label.Formatted(genderSpecificLabel, latestTale.secondPawnData.pawn.Named("SECONDPAWN"), latestTale.thirdPawnData.pawn.Named("THIRDPAWN"), pawn.Named("PAWN"));
+					}
 				}
 				return base.LabelCap;
 			}
@@ -38,6 +47,10 @@ namespace VanillaSocialInteractionsExpanded
 			{
 				try
                 {
+					if (!VSIE_Utils.HaveNoticedTale(pawn, tale))
+					{
+						return false;
+					}
 					return otherPawn == tale.secondPawnData.pawn && OpinionOf(tale.thirdPawnData.pawn) >= 20;
 				}
 				catch (Exception ex)

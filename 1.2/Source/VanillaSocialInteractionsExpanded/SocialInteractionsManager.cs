@@ -234,6 +234,8 @@ namespace VanillaSocialInteractionsExpanded
         public Dictionary<Pawn, int> angryWorkers = new Dictionary<Pawn, int>();
         public HashSet<Pawn> honoredDeadPawns = new HashSet<Pawn>();
         public Dictionary<Pawn, int> birthdays = new Dictionary<Pawn, int>();
+        public Dictionary<Pawn, int> joinedColonists = new Dictionary<Pawn, int>();
+
         public int postRaidPeriodTicks;
         public SocialInteractionsManager()
         {
@@ -252,7 +254,8 @@ namespace VanillaSocialInteractionsExpanded
             if (angryWorkers is null) angryWorkers = new Dictionary<Pawn, int>();
             if (honoredDeadPawns is null) honoredDeadPawns = new HashSet<Pawn>();
             if (birthdays is null) birthdays = new Dictionary<Pawn, int>();
-            if (this.raidGroups == null) this.raidGroups = new List<RaidGroup>();
+            if (raidGroups == null) raidGroups = new List<RaidGroup>();
+            if (joinedColonists == null) joinedColonists = new Dictionary<Pawn, int>();
 
         }
         public override void StartedNewGame()
@@ -512,6 +515,7 @@ namespace VanillaSocialInteractionsExpanded
             birthdays.RemoveAll(x => x.Key == key);
             pawnsWithAdditionalTrait.Remove(key);
             honoredDeadPawns.Remove(key);
+            joinedColonists.Remove(key);
         }
         public override void ExposeData()
         {
@@ -522,6 +526,7 @@ namespace VanillaSocialInteractionsExpanded
             Scribe_Collections.Look(ref pawnsWithWorkers, "pawnsWithWorkers", LookMode.Reference, LookMode.Deep, ref pawnKeys3, ref workerValues);
             Scribe_Collections.Look(ref angryWorkers, "angryWorkers", LookMode.Reference, LookMode.Value, ref pawnKeys4, ref intValues);
             Scribe_Collections.Look(ref birthdays, "birthdays", LookMode.Reference, LookMode.Value, ref pawnKeys5, ref intValues2);
+            Scribe_Collections.Look(ref joinedColonists, "joinedColonists", LookMode.Reference, LookMode.Value, ref pawnKeys6, ref intValues3);
             Scribe_Collections.Look(ref raidGroups, "raidGroups", LookMode.Deep);
             Scribe_Collections.Look(ref honoredDeadPawns, "honoredDeadPawns", LookMode.Reference);
             Scribe_Values.Look(ref postRaidPeriodTicks, "postRaidPeriodTicks");
@@ -541,5 +546,8 @@ namespace VanillaSocialInteractionsExpanded
 
         private List<Pawn> pawnKeys5;
         private List<int> intValues2;
+
+        private List<Pawn> pawnKeys6;
+        private List<int> intValues3;
     }
 }
