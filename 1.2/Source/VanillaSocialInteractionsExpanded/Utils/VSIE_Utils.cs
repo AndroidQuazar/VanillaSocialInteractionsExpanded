@@ -226,11 +226,11 @@ namespace VanillaSocialInteractionsExpanded
 		//	var onePawnTale = tales.Where(x => x.taleClass == typeof(Tale_SinglePawn));
 		//
 		//	foreach (var tale in triplePawnsTale)
-        //    {
+		//    {
 		//		var threePawns = testeers.InRandomOrder().Take(3).ToList();
 		//		TaleRecorder.RecordTale(tale, threePawns[0], threePawns[1], threePawns[2]);
 		//		Find.LetterStack.ReceiveLetter(tale.defName, tale.label, LetterDefOf.NeutralEvent, threePawns);
-        //    }
+		//    }
 		//
 		//	foreach (var tale in doublePawnsTale)
 		//	{
@@ -246,6 +246,29 @@ namespace VanillaSocialInteractionsExpanded
 		//		Find.LetterStack.ReceiveLetter(tale.defName, tale.label, LetterDefOf.NeutralEvent, onePawns);
 		//	}
 		//}
+
+
+		[DebugAction("Pawns", "Remove Memory", actionType = DebugActionType.ToolMapForPawns, allowedGameStates = AllowedGameStates.PlayingOnMap)]
+		private static void RemoveMemory(Pawn p)
+		{
+			if (Find.TaleManager.AllTalesListForReading.Where(x => x.def.defName.StartsWith("VSIE_") && x.Concerns(p)).Any())
+            {
+				Find.WindowStack.Add(new Dialog_DebugOptionListLister(Options_RemoveMemory(p)));
+            }
+		}
+		public static List<DebugMenuOption> Options_RemoveMemory(Pawn pawn)
+		{
+			List<DebugMenuOption> list = new List<DebugMenuOption>();
+			foreach (Tale tale in Find.TaleManager.AllTalesListForReading.Where(x => x.def.defName.StartsWith("VSIE_") && x.Concerns(pawn)))
+			{
+				Tale taleH = tale;
+				list.Add(new DebugMenuOption(taleH.def.LabelCap, DebugMenuOptionMode.Action, delegate
+				{
+					Find.TaleManager.AllTalesListForReading.Remove(taleH);
+				}));
+			}
+			return list;
+		}
 
 		public static Pawn GetSpouseOrLoverOrFiance(this Pawn pawn)
 		{
