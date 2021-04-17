@@ -205,7 +205,11 @@ namespace VanillaSocialInteractionsExpanded
 
 		public static void TryRegisterNewColonist(Pawn pawn, Faction faction)
         {
-			if (faction == Faction.OfPlayer && pawn.RaceProps.Humanlike && !SocialInteractionsManager.joinedColonists.ContainsKey(pawn))
+			if (SocialInteractionsManager.joinedColonists is null)
+            {
+				SocialInteractionsManager.joinedColonists = new Dictionary<Pawn, int>();
+			}
+			if (pawn != null && faction == Faction.OfPlayer && (pawn.RaceProps?.Humanlike ?? false) && !SocialInteractionsManager.joinedColonists.ContainsKey(pawn))
 			{
 				SocialInteractionsManager.joinedColonists[pawn] = Find.TickManager.TicksAbs;
 			}
