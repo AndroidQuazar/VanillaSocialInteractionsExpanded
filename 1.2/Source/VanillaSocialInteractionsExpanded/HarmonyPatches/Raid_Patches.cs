@@ -43,7 +43,7 @@ namespace VanillaSocialInteractionsExpanded
             {
                 if (VanillaSocialInteractionsExpandedSettings.EnableUnitedWeStand)
                 {
-                    if (pawns != null && parms != null && parms.target is Map map)
+                    if (pawns != null && pawns.Any() && parms != null && parms.target is Map map)
                     {
                         var gameComp = Current.Game.GetComponent<SocialInteractionsManager>();
                         var raidGroup = new RaidGroup();
