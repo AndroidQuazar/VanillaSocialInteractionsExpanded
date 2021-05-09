@@ -39,27 +39,38 @@ namespace VanillaSocialInteractionsExpanded
 
         public static void RaidGroupChecker(List<Pawn> pawns, IncidentParms parms)
         {
-            if (VanillaSocialInteractionsExpandedSettings.EnableUnitedWeStand)
+            try
             {
-                if (pawns != null && parms.target is Map map)
+                if (VanillaSocialInteractionsExpandedSettings.EnableUnitedWeStand)
                 {
-                    var gameComp = Current.Game.GetComponent<SocialInteractionsManager>();
-                    var raidGroup = new RaidGroup();
-                    if (parms.faction != null)
+                    if (pawns != null && parms != null && parms.target is Map map)
                     {
-                        raidGroup.faction = parms.faction;
-                    }
-                    else
-                    {
-                        raidGroup.faction = pawns.First().Faction;
-                    }
-                    raidGroup.raiders = pawns.ToHashSet();
-                    raidGroup.defenders = map.mapPawns.AllPawnsSpawned.Where(x => x.RaceProps.Humanlike && !x.Dead && !x.Fogged() && !x.IsPrisoner && x.Faction != null
-                        && (x.Faction == Faction.OfPlayer || !x.HostileTo(Faction.OfPlayer)) && x.HostileTo(raidGroup.faction)).ToHashSet();
+                        var gameComp = Current.Game.GetComponent<SocialInteractionsManager>();
+                        var raidGroup = new RaidGroup();
+                        if (parms.faction != null)
+                        {
+                            raidGroup.faction = parms.faction;
+                        }
+                        else
+                        {
+                            raidGroup.faction = pawns.First().Faction;
+                        }
+                        raidGroup.raiders = pawns.ToHashSet();
+                        raidGroup.defenders = map.mapPawns.AllPawnsSpawned.Where(x => x != null && x.RaceProps.Humanlike && !x.Dead && !x.Fogged() && !x.IsPrisoner && x.Faction != null
+                            && (x.Faction == Faction.OfPlayer || !x.HostileTo(Faction.OfPlayer)) && x.HostileTo(raidGroup.faction)).ToHashSet();
 
-                    raidGroup.initTime = Find.TickManager.TicksGame;
-                    gameComp.raidGroups.Add(raidGroup);
+                        raidGroup.initTime = Find.TickManager.TicksGame;
+                        if (gameComp.raidGroups is null)
+                        {
+                            gameComp.raidGroups = new List<RaidGroup>();
+                        }
+                        gameComp.raidGroups.Add(raidGroup);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error in VSIE: " + ex);
             }
         }
     }
