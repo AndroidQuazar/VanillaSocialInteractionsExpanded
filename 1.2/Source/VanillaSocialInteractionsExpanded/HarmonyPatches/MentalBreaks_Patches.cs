@@ -137,14 +137,16 @@ namespace VanillaSocialInteractionsExpanded
 					var friendsToVent = VSIE_Utils.GetFriendsFor(___pawn);
 					if (friendsToVent.Any())
 					{
-						friendsToVent = friendsToVent.Where(x => x.Map == ___pawn.Map && x.Position.DistanceTo(___pawn.Position) <= 30);
+						friendsToVent = friendsToVent.Where(x => x.relations != null && x.Map == ___pawn.Map && x.Position.DistanceTo(___pawn.Position) <= 30);
 						if (friendsToVent.Any())
 						{
 							var friendToVent = friendsToVent.RandomElementByWeight(x => x.relations.OpinionOf(___pawn));
 							var job = JobMaker.MakeJob(VSIE_DefOf.VSIE_VentToFriend, friendToVent);
-							___pawn.jobs.TryTakeOrderedJob(job);
-							__result = false;
-							return false;
+							if (___pawn.jobs?.TryTakeOrderedJob(job) ?? false)
+                            {
+								__result = false;
+								return false;
+							}
 						}
 					}
 				}
