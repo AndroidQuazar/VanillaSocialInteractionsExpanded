@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <VanillaSocialInteractionsExpanded.AspirationDef>
+    <defName>Frenzy_Work</defName>
+    <label>work frenzy</label>
+	<inspirationDef>Frenzy_Work</inspirationDef>
+	<beginLetterContinue>\n\n[PAWN_pronoun] would like to do some work.</beginLetterContinue>
+	<workCount>1</workCount>
+	<thoughtDefSuccess>VSIE_InspirationSatisfied</thoughtDefSuccess>
+	<thoughtDefFail>VSIE_InspirationNotSatisfied</thoughtDefFail>
+  </VanillaSocialInteractionsExpanded.AspirationDef>
+
+  <VanillaSocialInteractionsExpanded.AspirationDef>
+    <defName>Frenzy_Go</defName>
+    <label>go frenzy</label>
+	<inspirationDef>Frenzy_Go</inspirationDef>
+	<beginLetterContinue>\n\n[PAWN_pronoun] would like to join a caravan and venture into the world.</beginLetterContinue>
+	<workCount>1</workCount>
+	<thoughtDefSuccess>VSIE_InspirationSatisfied</thoughtDefSuccess>
+	<thoughtDefFail>VSIE_InspirationNotSatisfied</thoughtDefFail>
+  </VanillaSocialInteractionsExpanded.AspirationDef>
+
+  <VanillaSocialInteractionsExpanded.AspirationDef>
+    <defName>Frenzy_Shoot</defName>
+    <label>shoot frenzy</label>
+	<inspirationDef>Frenzy_Shoot</inspirationDef>
+	<beginLetterContinue>\n\n[PAWN_pronoun] would like to go on a hunt.</beginLetterContinue>
+	<workCount>1</workCount>
+	<thoughtDefSuccess>VSIE_InspirationSatisfied</thoughtDefSuccess>
+	<thoughtDefFail>VSIE_InspirationNotSatisfied</thoughtDefFail>
+  </VanillaSocialInteractionsExpanded.AspirationDef>
+
+  <VanillaSocialInteractionsExpanded.AspirationDef>
+    <defName>Inspired_Trade</defName>
+    <label>inspired trade</label>
+	<inspirationDef>Inspired_Trade</inspirationDef>
+	<beginLetterContinue>\n\n[PAWN_pronoun] would like to close a trade.</beginLetterContinue>
+	<workCount>1</workCount>
+	<thoughtDefSuccess>VSIE_InspirationSatisfied</thoughtDefSuccess>
+	<thoughtDefFail>VSIE_InspirationNotSatisfied</thoughtDefFail>
+  </VanillaSocialInteractionsExpanded.AspirationDef>
+
+  <VanillaSocialInteractionsExpanded.AspirationDef>
+    <defName>Inspired_Recruitment</defName>
+    <label>inspired recruitment</label>
+	<inspirationDef>Inspired_Recruitment</inspirationDef>
+	<beginLetterContinue>\n\n[PAWN_pronoun] would like to recruit a prisoner.</beginLetterContinue>
+	<workCount>1</workCount>
+	<thoughtDefSuccess>VSIE_InspirationSatisfied</thoughtDefSuccess>
+	<thoughtDefFail>VSIE_InspirationNotSatisfied</thoughtDefFail>
+  </VanillaSocialInteractionsExpanded.AspirationDef>
+
+  <VanillaSocialInteractionsExpanded.AspirationDef>
+    <defName>Inspired_Taming</defName>
+    <label>inspired taming</label>
+	<inspirationDef>Inspired_Taming</inspirationDef>
+	<beginLetterContinue>\n\n[PAWN_pronoun] would like to try and tame an animal.</beginLetterContinue>
+	<workCount>1</workCount>
+	<thoughtDefSuccess>VSIE_InspirationSatisfied</thoughtDefSuccess>
+	<thoughtDefFail>VSIE_InspirationNotSatisfied</thoughtDefFail>
+  </VanillaSocialInteractionsExpanded.AspirationDef>
+
+  <VanillaSocialInteractionsExpanded.AspirationDef>
+    <defName>Inspired_Surgery</defName>
+    <label>inspired surgery</label>
+	<inspirationDef>Inspired_Surgery</inspirationDef>
+	<beginLetterContinue>\n\n[PAWN_pronoun] would like to perform a surgery.</beginLetterContinue>
+	<workCount>1</workCount>
+	<thoughtDefSuccess>VSIE_InspirationSatisfied</thoughtDefSuccess>
+	<thoughtDefFail>VSIE_InspirationNotSatisfied</thoughtDefFail>
+  </VanillaSocialInteractionsExpanded.AspirationDef>
+
+  <VanillaSocialInteractionsExpanded.AspirationDef>
+    <defName>Inspired_Creativity</defName>
+    <label>inspired creativity</label>
+	<inspirationDef>Inspired_Creativity</inspirationDef>
+	<beginLetterContinue>\n\n[PAWN_pronoun] would like to create a masterwork or legendary item.</beginLetterContinue>
+	<workCount>1</workCount>
+	<thoughtDefSuccess>VSIE_InspirationSatisfied</thoughtDefSuccess>
+	<thoughtDefFail>VSIE_InspirationNotSatisfied</thoughtDefFail>
+  </VanillaSocialInteractionsExpanded.AspirationDef>
+  
+  <InspirationDef>
+    <defName>VSIE_Inspired_Planting</defName>
+    <label>inspired planting</label>
+    <baseDurationDays>8</baseDurationDays>
+    <beginLetter>[PAWN_pronoun] will be able to sow any plants regardless of their Plants skill level for the next 8 days.\n\n[PAWN_pronoun] would like to sow at least 50 plants.</beginLetter>
+    <beginLetterDef>PositiveEvent</beginLetterDef>
+    <endMessage>{0} is no longer inspired (inspired planting).</endMessage>
+    <baseInspectLine>Inspired: Inspired planting</baseInspectLine>
+    <requiredNonDisabledStats>
+      <li>PlantWorkSpeed</li>
+    </requiredNonDisabledStats>
+    <requiredNonDisabledWorkTypes>
+      <li>Growing</li>
+    </requiredNonDisabledWorkTypes>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <statFactors>
+      <PlantWorkSpeed>1.1</PlantWorkSpeed>
+    </statFactors>
+  </InspirationDef>
+  
+  <VanillaSocialInteractionsExpanded.AspirationDef>
+    <defName>VSIE_Inspired_Planting</defName>
+    <label>inspired planting</label>
+	<inspirationDef>VSIE_Inspired_Planting</inspirationDef>
+	<workCount>50</workCount>
+	<thoughtDefSuccess>VSIE_InspirationSatisfied</thoughtDefSuccess>
+	<thoughtDefFail>VSIE_InspirationNotSatisfied</thoughtDefFail>
+  </VanillaSocialInteractionsExpanded.AspirationDef>
+  
+  <InspirationDef>
+    <defName>VSIE_Party_Frenzy</defName>
+    <label>party frenzy</label>
+    <baseDurationDays>8</baseDurationDays>
+    <beginLetter>[PAWN_pronoun] will gain recreation twice as fast for the next 8 days.\n\n[PAWN_pronoun] would like to attend a party.</beginLetter>
+    <beginLetterDef>PositiveEvent</beginLetterDef>
+    <endMessage>{0} is no longer inspired (work frenzy).</endMessage>
+    <baseInspectLine>Inspired: Party frenzy</baseInspectLine>
+    <requiredCapacities>
+      <li>Moving</li>
+      <li>Talking</li>
+    </requiredCapacities>
+  </InspirationDef>
+  
+  <VanillaSocialInteractionsExpanded.AspirationDef>
+    <defName>VSIE_Party_Frenzy</defName>
+    <label>party frenzy</label>
+	<inspirationDef>VSIE_Party_Frenzy</inspirationDef>
+	<workCount>1</workCount>
+	<thoughtDefSuccess>VSIE_InspirationSatisfied</thoughtDefSuccess>
+	<thoughtDefFail>VSIE_InspirationNotSatisfied</thoughtDefFail>
+  </VanillaSocialInteractionsExpanded.AspirationDef>
+
+  <InspirationDef>
+    <defName>VSIE_Inspired_Research</defName>
+    <label>inspired research</label>
+    <baseDurationDays>8</baseDurationDays>
+    <beginLetter>[PAWN_pronoun] will conduct research 5x as fast for the next 8 days or when the research project is completed.\n\n[PAWN_pronoun] would like to complete a research project.</beginLetter>
+    <beginLetterDef>PositiveEvent</beginLetterDef>
+    <endMessage>{0} is no longer inspired (inspired research).</endMessage>
+    <baseInspectLine>Inspired: Inspired research</baseInspectLine>
+    <requiredNonDisabledWorkTypes>
+      <li>Research</li>
+    </requiredNonDisabledWorkTypes>
+  </InspirationDef>
+  
+  <VanillaSocialInteractionsExpanded.AspirationDef>
+    <defName>VSIE_Inspired_Research</defName>
+    <label>inspired research</label>
+	<inspirationDef>VSIE_Inspired_Research</inspirationDef>
+	<workCount>1</workCount>
+	<thoughtDefSuccess>VSIE_InspirationSatisfied</thoughtDefSuccess>
+	<thoughtDefFail>VSIE_InspirationNotSatisfied</thoughtDefFail>
+  </VanillaSocialInteractionsExpanded.AspirationDef>
+
+  <InspirationDef>
+    <defName>VSIE_Inspired_Mining</defName>
+    <label>inspired mining</label>
+    <baseDurationDays>8</baseDurationDays>
+    <beginLetter>[PAWN_pronoun] will gain twice the yield of any rocks or ore mined for the next 8 days.\n\n[PAWN_pronoun] would like to mine at least 50 rocks.</beginLetter>
+    <beginLetterDef>PositiveEvent</beginLetterDef>
+    <endMessage>{0} is no longer inspired (inspired mining).</endMessage>
+    <baseInspectLine>Inspired: Inspired mining</baseInspectLine>
+    <requiredNonDisabledWorkTypes>
+      <li>Mining</li>
+    </requiredNonDisabledWorkTypes>
+  </InspirationDef>
+  
+  <VanillaSocialInteractionsExpanded.AspirationDef>
+    <defName>VSIE_Inspired_Mining</defName>
+    <label>inspired mining</label>
+	<inspirationDef>VSIE_Inspired_Mining</inspirationDef>
+	<workCount>50</workCount>
+	<thoughtDefSuccess>VSIE_InspirationSatisfied</thoughtDefSuccess>
+	<thoughtDefFail>VSIE_InspirationNotSatisfied</thoughtDefFail>
+  </VanillaSocialInteractionsExpanded.AspirationDef>
+  
+  <InspirationDef>
+    <defName>VSIE_Learning_Frenzy</defName>
+    <label>learning frenzy</label>
+    <baseDurationDays>8</baseDurationDays>
+    <beginLetter>[PAWN_pronoun] will gain experience in skill at twice the normal rate for the next 8 days.\n\n[PAWN_pronoun] would like to level up any skill to level 10.</beginLetter>
+    <beginLetterDef>PositiveEvent</beginLetterDef>
+    <endMessage>{0} is no longer inspired (learning frenzy).</endMessage>
+    <baseInspectLine>Inspired: Learning frenzy</baseInspectLine>
+    <requiredCapacities>
+      <li>Moving</li>
+      <li>Talking</li>
+    </requiredCapacities>
+  </InspirationDef>
+  
+  <VanillaSocialInteractionsExpanded.AspirationDef>
+    <defName>VSIE_Learning_Frenzy</defName>
+    <label>learning frenzy</label>
+	<inspirationDef>VSIE_Learning_Frenzy</inspirationDef>
+	<workCount>1</workCount>
+	<thoughtDefSuccess>VSIE_InspirationSatisfied</thoughtDefSuccess>
+	<thoughtDefFail>VSIE_InspirationNotSatisfied</thoughtDefFail>
+  </VanillaSocialInteractionsExpanded.AspirationDef>
+
+  <InspirationDef>
+    <defName>VSIE_Inspired_Cooking</defName>
+    <label>inspired cooking</label>
+    <baseDurationDays>8</baseDurationDays>
+    <beginLetter>[PAWN_pronoun] will cook twice as fast for the next 8 days.\n\n[PAWN_pronoun] would like to cook at least 50 meals.</beginLetter>
+    <beginLetterDef>PositiveEvent</beginLetterDef>
+    <endMessage>{0} is no longer inspired (inspired cooking).</endMessage>
+    <baseInspectLine>Inspired: Inspired cooking</baseInspectLine>
+    <requiredNonDisabledWorkTypes>
+      <li>Cooking</li>
+    </requiredNonDisabledWorkTypes>
+  </InspirationDef>
+  
+  <VanillaSocialInteractionsExpanded.AspirationDef>
+    <defName>VSIE_Inspired_Cooking</defName>
+    <label>inspired cooking</label>
+	<inspirationDef>VSIE_Inspired_Cooking</inspirationDef>
+	<workCount>50</workCount>
+	<thoughtDefSuccess>VSIE_InspirationSatisfied</thoughtDefSuccess>
+	<thoughtDefFail>VSIE_InspirationNotSatisfied</thoughtDefFail>
+  </VanillaSocialInteractionsExpanded.AspirationDef>
+
+  <InspirationDef>
+    <defName>VSIE_Flirting_Frenzy</defName>
+    <label>flirting frenzy</label>
+    <baseDurationDays>8</baseDurationDays>
+    <beginLetter>[PAWN_pronoun] will be much nicer to others in social interactions, as well as much more sophisticated in romantic interactions, resulting in lower chances of being rebuffed for the next 8 days.\n\n[PAWN_pronoun] would like to engage in some lovin’.</beginLetter>
+    <beginLetterDef>PositiveEvent</beginLetterDef>
+    <endMessage>{0} is no longer inspired (flirting frenzy).</endMessage>
+    <baseInspectLine>Inspired: Flirting frenzy</baseInspectLine>
+    <requiredCapacities>
+      <li>Moving</li>
+      <li>Talking</li>
+    </requiredCapacities>
+  </InspirationDef>
+  
+  <VanillaSocialInteractionsExpanded.AspirationDef>
+    <defName>VSIE_Flirting_Frenzy</defName>
+    <label>flirting frenzy</label>
+	<inspirationDef>VSIE_Flirting_Frenzy</inspirationDef>
+	<workCount>1</workCount>
+	<thoughtDefSuccess>VSIE_InspirationSatisfied</thoughtDefSuccess>
+	<thoughtDefFail>VSIE_InspirationNotSatisfied</thoughtDefFail>
+  </VanillaSocialInteractionsExpanded.AspirationDef>
+
+  <InspirationDef>
+    <defName>VSIE_Melee_Frenzy</defName>
+    <label>melee frenzy</label>
+    <baseDurationDays>8</baseDurationDays>
+    <beginLetter>[PAWN_pronoun] will land all their melee hits for the next 8 days.\n\n[PAWN_pronoun] would like to go defeat an enemy in melee combat.</beginLetter>
+    <beginLetterDef>PositiveEvent</beginLetterDef>
+    <endMessage>{0} is no longer inspired (melee frenzy).</endMessage>
+    <baseInspectLine>Inspired: Melee frenzy</baseInspectLine>
+    <requiredCapacities>
+      <li>Moving</li>
+      <li>Talking</li>
+    </requiredCapacities>
+  </InspirationDef>
+  
+  <VanillaSocialInteractionsExpanded.AspirationDef>
+    <defName>VSIE_Melee_Frenzy</defName>
+    <label>Melee frenzy</label>
+	<inspirationDef>VSIE_Melee_Frenzy</inspirationDef>
+	<workCount>1</workCount>
+	<thoughtDefSuccess>VSIE_InspirationSatisfied</thoughtDefSuccess>
+	<thoughtDefFail>VSIE_InspirationNotSatisfied</thoughtDefFail>
+  </VanillaSocialInteractionsExpanded.AspirationDef>
+  
+</Defs>

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <ThoughtDef>
+    <defName>VSIE_SufferedLossPositive</defName>
+    <durationDays>5</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>Suffered a loss</label>
+        <description>We lost, but we can persevere!</description>
+        <baseMoodEffect>5</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+  <ThoughtDef>
+    <defName>VSIE_SufferedLossNegative</defName>
+    <durationDays>5</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>Suffered a loss</label>
+        <description>Such a devastating loss!</description>
+        <baseMoodEffect>-2</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+</Defs>

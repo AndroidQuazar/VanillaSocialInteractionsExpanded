@@ -1,0 +1,352 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<InteractionDef>
+		<defName>VSIE_Teaching</defName>
+		<label>teaching</label>
+		<workerClass>VanillaSocialInteractionsExpanded.InteractionWorker_Teaching</workerClass>
+		<symbol>Things/Mote/TeachingIcon</symbol>
+		<logRulesInitiator>
+			<rulesStrings>
+				<li>r_logentry-&gt;</li>
+			</rulesStrings>
+		</logRulesInitiator>
+	</InteractionDef>
+
+	<RulePackDef>
+		<defName>VSIE_Teaching_Shooting</defName>
+    <include>
+      <li>VSIE_TeachingUtility</li>
+    </include>
+		<rulePack>
+			<rulesStrings>
+				<li>r_logentry->[INITIATOR_nameDef] and [RECIPIENT_nameDef] [talkedabout] [ShootingTopic].</li>
+				<li>r_logentry->[INITIATOR_nameDef] [talkedabout] [ShootingTopic] with [RECIPIENT_nameDef].</li>
+				<li>r_logentry(p=0.8)->[INITIATOR_nameDef] [commentedabout] [ShootingTopic] to [RECIPIENT_nameDef].</li>
+
+				<li>talkedabout(p=4)->chatted about</li>
+				<li>talkedabout->shared a word about</li>
+				<li>talkedabout->spoke about</li>
+				<li>talkedabout->gabbed about</li>
+				<li>talkedabout->talked about</li>
+				<li>talkedabout->joked about</li>
+				<li>talkedabout->quipped about</li>
+
+				<li>commentedabout->said something about</li>
+				<li>commentedabout->said a word about</li>
+				<li>commentedabout->made a comment about</li>
+				<li>commentedabout->commented about</li>
+				<li>commentedabout->told a joke about</li>
+			</rulesStrings>
+		</rulePack>
+	</RulePackDef>
+
+
+	<RulePackDef>
+		<defName>VSIE_Teaching_Melee</defName>
+    <include>
+      <li>VSIE_TeachingUtility</li>
+    </include>
+		<rulePack>
+			<rulesStrings>
+				<li>r_logentry->[INITIATOR_nameDef] and [RECIPIENT_nameDef] [talkedabout] [MeleeTopic].</li>
+				<li>r_logentry->[INITIATOR_nameDef] [talkedabout] [MeleeTopic] with [RECIPIENT_nameDef].</li>
+				<li>r_logentry(p=0.8)->[INITIATOR_nameDef] [commentedabout] [MeleeTopic] to [RECIPIENT_nameDef].</li>
+
+				<li>talkedabout(p=4)->chatted about</li>
+				<li>talkedabout->shared a word about</li>
+				<li>talkedabout->spoke about</li>
+				<li>talkedabout->gabbed about</li>
+				<li>talkedabout->talked about</li>
+				<li>talkedabout->joked about</li>
+				<li>talkedabout->quipped about</li>
+
+				<li>commentedabout->said something about</li>
+				<li>commentedabout->said a word about</li>
+				<li>commentedabout->made a comment about</li>
+				<li>commentedabout->commented about</li>
+				<li>commentedabout->told a joke about</li>
+			</rulesStrings>
+		</rulePack>
+	</RulePackDef>
+
+	<RulePackDef>
+		<defName>VSIE_Teaching_Construction</defName>
+    <include>
+      <li>VSIE_TeachingUtility</li>
+    </include>
+		<rulePack>
+			<rulesStrings>
+				<li>r_logentry->[INITIATOR_nameDef] and [RECIPIENT_nameDef] [talkedabout] [ConstructionTopic].</li>
+				<li>r_logentry->[INITIATOR_nameDef] [talkedabout] [ConstructionTopic] with [RECIPIENT_nameDef].</li>
+				<li>r_logentry(p=0.8)->[INITIATOR_nameDef] [commentedabout] [ConstructionTopic] to [RECIPIENT_nameDef].</li>
+
+				<li>talkedabout(p=4)->chatted about</li>
+				<li>talkedabout->shared a word about</li>
+				<li>talkedabout->spoke about</li>
+				<li>talkedabout->gabbed about</li>
+				<li>talkedabout->talked about</li>
+				<li>talkedabout->joked about</li>
+				<li>talkedabout->quipped about</li>
+
+				<li>commentedabout->said something about</li>
+				<li>commentedabout->said a word about</li>
+				<li>commentedabout->made a comment about</li>
+				<li>commentedabout->commented about</li>
+				<li>commentedabout->told a joke about</li>
+			</rulesStrings>
+		</rulePack>
+	</RulePackDef>
+
+	<RulePackDef>
+		<defName>VSIE_Teaching_Mining</defName>
+    <include>
+      <li>VSIE_TeachingUtility</li>
+    </include>
+		<rulePack>
+			<rulesStrings>
+				<li>r_logentry->[INITIATOR_nameDef] and [RECIPIENT_nameDef] [talkedabout] [MiningTopic].</li>
+				<li>r_logentry->[INITIATOR_nameDef] [talkedabout] [MiningTopic] with [RECIPIENT_nameDef].</li>
+				<li>r_logentry(p=0.8)->[INITIATOR_nameDef] [commentedabout] [MiningTopic] to [RECIPIENT_nameDef].</li>
+
+				<li>talkedabout(p=4)->chatted about</li>
+				<li>talkedabout->shared a word about</li>
+				<li>talkedabout->spoke about</li>
+				<li>talkedabout->gabbed about</li>
+				<li>talkedabout->talked about</li>
+				<li>talkedabout->joked about</li>
+				<li>talkedabout->quipped about</li>
+
+				<li>commentedabout->said something about</li>
+				<li>commentedabout->said a word about</li>
+				<li>commentedabout->made a comment about</li>
+				<li>commentedabout->commented about</li>
+				<li>commentedabout->told a joke about</li>
+			</rulesStrings>
+		</rulePack>
+	</RulePackDef>
+
+	<RulePackDef>
+		<defName>VSIE_Teaching_Cooking</defName>
+    <include>
+      <li>VSIE_TeachingUtility</li>
+    </include>
+		<rulePack>
+			<rulesStrings>
+				<li>r_logentry->[INITIATOR_nameDef] and [RECIPIENT_nameDef] [CookingTopic] [TalkTopicLight].</li>
+				<li>r_logentry->[INITIATOR_nameDef] [talkedabout] [CookingTopic] with [RECIPIENT_nameDef].</li>
+				<li>r_logentry(p=0.8)->[INITIATOR_nameDef] [commentedabout] [CookingTopic] to [RECIPIENT_nameDef].</li>
+
+				<li>talkedabout(p=4)->chatted about</li>
+				<li>talkedabout->shared a word about</li>
+				<li>talkedabout->spoke about</li>
+				<li>talkedabout->gabbed about</li>
+				<li>talkedabout->talked about</li>
+				<li>talkedabout->joked about</li>
+				<li>talkedabout->quipped about</li>
+
+				<li>commentedabout->said something about</li>
+				<li>commentedabout->said a word about</li>
+				<li>commentedabout->made a comment about</li>
+				<li>commentedabout->commented about</li>
+				<li>commentedabout->told a joke about</li>
+			</rulesStrings>
+		</rulePack>
+	</RulePackDef>
+	
+	<RulePackDef>
+		<defName>VSIE_Teaching_Animals</defName>
+    <include>
+      <li>VSIE_TeachingUtility</li>
+    </include>
+		<rulePack>
+			<rulesStrings>
+				<li>r_logentry->[INITIATOR_nameDef] and [RECIPIENT_nameDef] [talkedabout] [AnimalsTopic].</li>
+				<li>r_logentry->[INITIATOR_nameDef] [talkedabout] [AnimalsTopic] with [RECIPIENT_nameDef].</li>
+				<li>r_logentry(p=0.8)->[INITIATOR_nameDef] [commentedabout] [AnimalsTopic] to [RECIPIENT_nameDef].</li>
+
+				<li>talkedabout(p=4)->chatted about</li>
+				<li>talkedabout->shared a word about</li>
+				<li>talkedabout->spoke about</li>
+				<li>talkedabout->gabbed about</li>
+				<li>talkedabout->talked about</li>
+				<li>talkedabout->joked about</li>
+				<li>talkedabout->quipped about</li>
+
+				<li>commentedabout->said something about</li>
+				<li>commentedabout->said a word about</li>
+				<li>commentedabout->made a comment about</li>
+				<li>commentedabout->commented about</li>
+				<li>commentedabout->told a joke about</li>
+			</rulesStrings>
+		</rulePack>
+	</RulePackDef>
+	
+	<RulePackDef>
+		<defName>VSIE_Teaching_Plants</defName>
+    <include>
+      <li>VSIE_TeachingUtility</li>
+    </include>
+		<rulePack>
+			<rulesStrings>
+				<li>r_logentry->[INITIATOR_nameDef] and [RECIPIENT_nameDef] [talkedabout] [GrowingTopic].</li>
+				<li>r_logentry->[INITIATOR_nameDef] [talkedabout] [GrowingTopic] with [RECIPIENT_nameDef].</li>
+				<li>r_logentry(p=0.8)->[INITIATOR_nameDef] [commentedabout] [GrowingTopic] to [RECIPIENT_nameDef].</li>
+
+				<li>talkedabout(p=4)->chatted about</li>
+				<li>talkedabout->shared a word about</li>
+				<li>talkedabout->spoke about</li>
+				<li>talkedabout->gabbed about</li>
+				<li>talkedabout->talked about</li>
+				<li>talkedabout->joked about</li>
+				<li>talkedabout->quipped about</li>
+
+				<li>commentedabout->said something about</li>
+				<li>commentedabout->said a word about</li>
+				<li>commentedabout->made a comment about</li>
+				<li>commentedabout->commented about</li>
+				<li>commentedabout->told a joke about</li>
+			</rulesStrings>
+		</rulePack>
+	</RulePackDef>
+
+	<RulePackDef>
+		<defName>VSIE_Teaching_Crafting</defName>
+    <include>
+      <li>VSIE_TeachingUtility</li>
+    </include>
+		<rulePack>
+			<rulesStrings>
+				<li>r_logentry->[INITIATOR_nameDef] and [RECIPIENT_nameDef] [talkedabout] [CraftingTopic].</li>
+				<li>r_logentry->[INITIATOR_nameDef] [talkedabout] [CraftingTopic] with [RECIPIENT_nameDef].</li>
+				<li>r_logentry(p=0.8)->[INITIATOR_nameDef] [commentedabout] [CraftingTopic] to [RECIPIENT_nameDef].</li>
+
+				<li>talkedabout(p=4)->chatted about</li>
+				<li>talkedabout->shared a word about</li>
+				<li>talkedabout->spoke about</li>
+				<li>talkedabout->gabbed about</li>
+				<li>talkedabout->talked about</li>
+				<li>talkedabout->joked about</li>
+				<li>talkedabout->quipped about</li>
+
+				<li>commentedabout->said something about</li>
+				<li>commentedabout->said a word about</li>
+				<li>commentedabout->made a comment about</li>
+				<li>commentedabout->commented about</li>
+				<li>commentedabout->told a joke about</li>
+			</rulesStrings>
+		</rulePack>
+	</RulePackDef>
+
+	<RulePackDef>
+		<defName>VSIE_Teaching_Medicine</defName>
+    <include>
+      <li>VSIE_TeachingUtility</li>
+    </include>
+		<rulePack>
+			<rulesStrings>
+				<li>r_logentry->[INITIATOR_nameDef] and [RECIPIENT_nameDef] [talkedabout] [MedicalTopic].</li>
+				<li>r_logentry->[INITIATOR_nameDef] [talkedabout] [MedicalTopic] with [RECIPIENT_nameDef].</li>
+				<li>r_logentry(p=0.8)->[INITIATOR_nameDef] [commentedabout] [MedicalTopic] to [RECIPIENT_nameDef].</li>
+
+				<li>talkedabout(p=4)->chatted about</li>
+				<li>talkedabout->shared a word about</li>
+				<li>talkedabout->spoke about</li>
+				<li>talkedabout->gabbed about</li>
+				<li>talkedabout->talked about</li>
+				<li>talkedabout->joked about</li>
+				<li>talkedabout->quipped about</li>
+
+				<li>commentedabout->said something about</li>
+				<li>commentedabout->said a word about</li>
+				<li>commentedabout->made a comment about</li>
+				<li>commentedabout->commented about</li>
+				<li>commentedabout->told a joke about</li>
+			</rulesStrings>
+		</rulePack>
+	</RulePackDef>
+
+	<RulePackDef>
+		<defName>VSIE_Teaching_Artistic</defName>
+    <include>
+      <li>VSIE_TeachingUtility</li>
+    </include>
+		<rulePack>
+			<rulesStrings>
+				<li>r_logentry->[INITIATOR_nameDef] and [RECIPIENT_nameDef] [talkedabout] [ArtTopic].</li>
+				<li>r_logentry->[INITIATOR_nameDef] [talkedabout] [ArtTopic] with [RECIPIENT_nameDef].</li>
+				<li>r_logentry(p=0.8)->[INITIATOR_nameDef] [commentedabout] [ArtTopic] to [RECIPIENT_nameDef].</li>
+
+				<li>talkedabout(p=4)->chatted about</li>
+				<li>talkedabout->shared a word about</li>
+				<li>talkedabout->spoke about</li>
+				<li>talkedabout->gabbed about</li>
+				<li>talkedabout->talked about</li>
+				<li>talkedabout->joked about</li>
+				<li>talkedabout->quipped about</li>
+
+				<li>commentedabout->said something about</li>
+				<li>commentedabout->said a word about</li>
+				<li>commentedabout->made a comment about</li>
+				<li>commentedabout->commented about</li>
+				<li>commentedabout->told a joke about</li>
+			</rulesStrings>
+		</rulePack>
+	</RulePackDef>
+
+	<RulePackDef>
+		<defName>VSIE_Teaching_Social</defName>
+    <include>
+      <li>VSIE_TeachingUtility</li>
+    </include>
+		<rulePack>
+			<rulesStrings>
+				<li>r_logentry->[INITIATOR_nameDef] and [RECIPIENT_nameDef] [talkedabout] [SocialTopic].</li>
+				<li>r_logentry->[INITIATOR_nameDef] [talkedabout] [SocialTopic] with [RECIPIENT_nameDef].</li>
+				<li>r_logentry(p=0.8)->[INITIATOR_nameDef] [commentedabout] [SocialTopic] to [RECIPIENT_nameDef].</li>
+
+				<li>talkedabout(p=4)->chatted about</li>
+				<li>talkedabout->shared a word about</li>
+				<li>talkedabout->spoke about</li>
+				<li>talkedabout->gabbed about</li>
+				<li>talkedabout->talked about</li>
+				<li>talkedabout->joked about</li>
+				<li>talkedabout->quipped about</li>
+
+				<li>commentedabout->said something about</li>
+				<li>commentedabout->said a word about</li>
+				<li>commentedabout->made a comment about</li>
+				<li>commentedabout->commented about</li>
+				<li>commentedabout->told a joke about</li>
+			</rulesStrings>
+		</rulePack>
+	</RulePackDef>
+
+	<RulePackDef>
+		<defName>VSIE_Teaching_Intellectual</defName>
+    <include>
+      <li>VSIE_TeachingUtility</li>
+    </include>
+		<rulePack>
+			<rulesStrings>
+				<li>r_logentry->[INITIATOR_nameDef] and [RECIPIENT_nameDef] [talkedabout] [IntellectualTopic].</li>
+				<li>r_logentry->[INITIATOR_nameDef] [talkedabout] [IntellectualTopic] with [RECIPIENT_nameDef].</li>
+				<li>r_logentry(p=0.8)->[INITIATOR_nameDef] [commentedabout] [IntellectualTopic] to [RECIPIENT_nameDef].</li>
+
+				<li>talkedabout(p=4)->chatted about</li>
+				<li>talkedabout->shared a word about</li>
+				<li>talkedabout->spoke about</li>
+				<li>talkedabout->gabbed about</li>
+				<li>talkedabout->talked about</li>
+				<li>talkedabout->joked about</li>
+				<li>talkedabout->quipped about</li>
+
+				<li>commentedabout->said something about</li>
+				<li>commentedabout->said a word about</li>
+				<li>commentedabout->made a comment about</li>
+				<li>commentedabout->commented about</li>
+				<li>commentedabout->told a joke about</li>
+			</rulesStrings>
+		</rulePack>
+	</RulePackDef>
+</Defs>

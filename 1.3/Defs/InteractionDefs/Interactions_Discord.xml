@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <InteractionDef>
+    <defName>VSIE_Discord</defName>
+    <label>discord</label>
+    <workerClass>VanillaSocialInteractionsExpanded.InteractionWorker_Discord</workerClass>
+    <symbol>Things/Mote/SpeechSymbols/Insult</symbol>
+    <socialFightBaseChance>100</socialFightBaseChance>
+    <recipientThought>Insulted</recipientThought>
+    <logRulesInitiator>
+      <rulesStrings>
+        <li>r_logentry(p=3)->[INITIATOR_nameDef] [insulted] [target]'s [PersonalCharacteristic].</li>
+        <li>r_logentry->[INITIATOR_nameDef] compared [target] to a [insultcomparison].</li>
+        <li>r_logentry->[INITIATOR_nameDef] called [target] a [insultcomparison].</li>
+        
+        <li>target(p=4)->[RECIPIENT_nameDef]</li>
+        <li>target->[RECIPIENT_nameDef]'s [PersonFamily]</li>
+
+        <li>insulted(p=3)->insulted</li>
+        <li>insulted->openly insulted</li>
+        <li>insulted->loudly insulted</li>
+        <li>insulted->flagrantly insulted</li>
+        <li>insulted->directly insulted</li>
+        <li>insulted->viciously insulted</li>
+        <li>insulted->flagrantly disrespected</li>
+        <li>insulted->slandered</li>
+        <li>insulted->hurled invective about</li>
+        <li>insulted->derided</li>
+
+        <li>insultcomparison(p=2)->[Animal]</li>
+        <li>insultcomparison->[Enemy]</li>
+      </rulesStrings>
+    </logRulesInitiator>
+  </InteractionDef>
+  
+</Defs>

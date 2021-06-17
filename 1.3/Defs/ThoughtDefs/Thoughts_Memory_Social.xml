@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThoughtDef>
+		<defName>VSIE_SharingBurden</defName>
+		<thoughtClass>Thought_MemorySocial</thoughtClass>
+		<stackLimitForSameOtherPawn>10</stackLimitForSameOtherPawn>
+		<stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+		<durationDays>3</durationDays>
+		<stages>
+			<li>
+				<label>sharing the burden</label>
+				<description>It felt good to finally unbottle my feelings to a friend.</description>
+				<baseOpinionOffset>5</baseOpinionOffset>
+				<baseMoodEffect>20</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<ThoughtDef>
+		<defName>VSIE_VentedOnMe</defName>
+		<thoughtClass>Thought_MemorySocial</thoughtClass>
+		<stackLimitForSameOtherPawn>10</stackLimitForSameOtherPawn>
+		<stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+		<durationDays>3</durationDays>
+		<stages>
+			<li>
+				<label>my friend vented to me</label>
+				<description>My friend unbottled their feelings to me.</description>
+				<baseOpinionOffset>-5</baseOpinionOffset>
+				<baseMoodEffect>-5</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<ThoughtDef>
+		<defName>VSIE_JealouslyMyPartnerDatedSomeoneElse</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_JealouslyPartner</thoughtClass>
+		<stackLimitForSameOtherPawn>10</stackLimitForSameOtherPawn>
+		<stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+		<durationDays>3</durationDays>
+		<stages>
+			<li>
+				<label>Jealously</label>
+				<description>I'm jealous. My {0} went on a date with someone else!</description>
+				<baseOpinionOffset>-5</baseOpinionOffset>
+				<baseMoodEffect>-5</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_SocialEnvironment</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_SocialEnvironment</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_SocialEnvironment</workerClass>
+		<stages>
+			<li>
+				<label>Good reputation</label>
+				<description>I am liked and respected here. These people need me.</description>
+			</li>
+			<li>
+				<label>Bad reputation</label>
+				<description>I'm not having fun here. Nobody seems to respect me!</description>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+
+</Defs>

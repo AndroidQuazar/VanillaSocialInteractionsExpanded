@@ -1,0 +1,742 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<TaleDef Name="VSIE_SocialTaleBase" Abstract="True">
+		<type>Expirable</type>
+		<usableForArt>false</usableForArt>
+		<maxPerPawn>1</maxPerPawn>
+		<expireDays>200</expireDays>
+		<colonistOnly>False</colonistOnly>
+	</TaleDef>
+
+
+	<ThoughtDef>
+		<defName>VSIE_BondedPetButcheredOpinion</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_ButheredMyBondedPet</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_ButheredMyBondedPet</workerClass>
+		<taleDef>VSIE_BondedPetButchered</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{BUTCHER_nameDef} butchered my bonded pet {VICTIM_nameDef}, I will never forgive {BUTCHER_objective}</label>
+				<baseOpinionOffset>-35</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef ParentName="VSIE_SocialTaleBase">
+		<defName>VSIE_BondedPetButchered</defName>
+		<label>bonded pet butchered</label>
+		<taleClass>Tale_DoublePawn</taleClass>
+	</TaleDef>
+
+	<ThoughtDef>
+		<defName>VSIE_ExposedCorpseOfMyFriendOpinion</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_ExposedCorpseOfMyFriend</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_ExposedCorpseOfMyFriend</workerClass>
+		<taleDef>VSIE_ExposedCorpseOfMyFriend</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stackedEffectMultiplier>1</stackedEffectMultiplier>
+		<stages>
+			<li>
+				<label>{OTHERPAWN_nameDef} dug up and exposed the corpse of my {0} {VICTIM_nameDef}, I will always despise {OTHERPAWN_objective} for this</label>
+				<baseOpinionOffset>-45</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef ParentName="VSIE_SocialTaleBase">
+		<defName>VSIE_ExposedCorpseOfMyFriend</defName>
+		<label>exposed corpse of my friend</label>
+		<taleClass>Tale_DoublePawn</taleClass>
+	</TaleDef>
+
+	<ThoughtDef>
+		<defName>VSIE_IngestedHumanFlesh</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_IngestedHumanFlesh</workerClass>
+		<taleDef>VSIE_IngestedHumanFlesh</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{OTHERPAWN_nameDef} ate human flesh, I will always be afraid of {OTHERPAWN_possessive}</label>
+				<baseOpinionOffset>-25</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef ParentName="VSIE_SocialTaleBase">
+		<defName>VSIE_IngestedHumanFlesh</defName>
+		<label>ingested human flesh</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+	</TaleDef>
+
+	<ThoughtDef>
+		<defName>VSIE_BingedFood</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_OnePawn_Situation</workerClass>
+		<taleDef>VSIE_BingedFood</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{OTHERPAWN_nameDef} binged on food. How wasteful</label>
+				<baseOpinionOffset>-10</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef ParentName="VSIE_SocialTaleBase">
+		<defName>VSIE_BingedFood</defName>
+		<label>binged food</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+	</TaleDef>
+
+	<ThoughtDef>
+		<defName>VSIE_BingedDrug</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_OnePawn_Situation</workerClass>
+		<taleDef>VSIE_BingedDrug</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{OTHERPAWN_nameDef} binged on drugs. I don’t need a junkie in my life</label>
+				<baseOpinionOffset>-10</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef ParentName="VSIE_SocialTaleBase">
+		<defName>VSIE_BingedDrug</defName>
+		<label>binged drug</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_HideInRoom</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_OnePawn_Situation</workerClass>
+		<taleDef>VSIE_HideInRoom</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{OTHERPAWN_nameDef} was hiding in {OTHERPAWN_possessive} room. Weirdo</label>
+				<baseOpinionOffset>-5</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef ParentName="VSIE_SocialTaleBase">
+		<defName>VSIE_HideInRoom</defName>
+		<label>was hiding in their room</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+	</TaleDef>
+
+	<ThoughtDef>
+		<defName>VSIE_WanderedInSaddness</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_OnePawn_Situation</workerClass>
+		<taleDef>VSIE_WanderedInSaddness</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{OTHERPAWN_nameDef} wandered in sadness. I feel pity for {OTHERPAWN_objective}</label>
+				<baseOpinionOffset>-5</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+	
+	<TaleDef ParentName="VSIE_SocialTaleBase">
+		<defName>VSIE_WanderedInSaddness</defName>
+		<label>wandered in sadness</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+	</TaleDef>
+
+	<ThoughtDef>
+		<defName>VSIE_WentIntoSadisticRage</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_OnePawn_Situation</workerClass>
+		<taleDef>VSIE_WentIntoSadisticRage</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{OTHERPAWN_nameDef} went into sadistic rage. It’s absolutely disgusting</label>
+				<baseOpinionOffset>-20</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef ParentName="VSIE_SocialTaleBase">
+		<defName>VSIE_WentIntoSadisticRage</defName>
+		<label>went into sadistic rage</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+	</TaleDef>
+
+	<ThoughtDef>
+		<defName>VSIE_ThrewTantrum</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_OnePawn_Situation</workerClass>
+		<taleDef>VSIE_ThrewTantrum</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{OTHERPAWN_nameDef} threw a tantrum. {OTHERPAWN_objective} need to be taught some self control</label>
+				<baseOpinionOffset>-10</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef ParentName="VSIE_SocialTaleBase">
+		<defName>VSIE_ThrewTantrum</defName>
+		<label>threw a tantrum</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_WentBerserk</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_OnePawn_Situation</workerClass>
+		<taleDef>VSIE_WentBerserk</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{OTHERPAWN_nameDef} went berserk. I can never feel safe around {OTHERPAWN_objective}</label>
+				<baseOpinionOffset>-20</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef ParentName="VSIE_SocialTaleBase">
+		<defName>VSIE_WentBerserk</defName>
+		<label>went berserk</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_WentOnFireStartingSpree</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_OnePawn_Situation</workerClass>
+		<taleDef>VSIE_WentOnFireStartingSpree</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{OTHERPAWN_nameDef} went on a fire starting spree. It was so close and everything we know would have turned to ash. How can I forgive that?</label>
+				<baseOpinionOffset>-20</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef ParentName="VSIE_SocialTaleBase">
+		<defName>VSIE_WentOnFireStartingSpree</defName>
+		<label>went on a fire starting spree</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_WentOnMurderousRage</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_OnePawn_Situation</workerClass>
+		<taleDef>VSIE_WentOnMurderousRage</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{OTHERPAWN_nameDef} went on a murderous rage. What if I’m {OTHERPAWN_possessive} next target?</label>
+				<baseOpinionOffset>-85</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef ParentName="VSIE_SocialTaleBase">
+		<defName>VSIE_WentOnMurderousRage</defName>
+		<label>went on murderous rage</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_RanWild</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_OnePawn_Situation</workerClass>
+		<taleDef>VSIE_RanWild</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{OTHERPAWN_nameDef} ran wild. Weirdo</label>
+				<baseOpinionOffset>-10</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef ParentName="VSIE_SocialTaleBase">
+		<defName>VSIE_RanWild</defName>
+		<label>ran wild</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_InsultedMe</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_DoublePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_DoublePawn_Situation</workerClass>
+		<taleDef>VSIE_InsultedMe</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{OTHERPAWN_nameDef} insulted me. Words cut deeper than daggers</label>
+				<baseOpinionOffset>-10</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef ParentName="VSIE_SocialTaleBase">
+		<defName>VSIE_InsultedMe</defName>
+		<label>insulted me</label>
+		<taleClass>Tale_DoublePawn</taleClass>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_SlaughteredAnimalInRage</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_OnePawn_Situation</workerClass>
+		<taleDef>VSIE_SlaughteredAnimalInRage</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{OTHERPAWN_nameDef} slaughtered our animal in a blind rage. I despise {OTHERPAWN_objective}</label>
+				<baseOpinionOffset>-10</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef ParentName="VSIE_SocialTaleBase">
+		<defName>VSIE_SlaughteredAnimalInRage</defName>
+		<label>slaughtered an animal in a rage</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_RebuffedMe</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_DoublePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_DoublePawn_Situation</workerClass>
+		<taleDef>VSIE_RebuffedMe</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{OTHERPAWN_nameDef} rebuffed me. I thought {OTHERPAWN_pronoun} was the one</label>
+				<baseOpinionOffset>-10</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef ParentName="VSIE_SocialTaleBase">
+		<defName>VSIE_RebuffedMe</defName>
+		<label>rebuffed me</label>
+		<taleClass>Tale_DoublePawn</taleClass>
+	</TaleDef>
+
+	<ThoughtDef>
+		<defName>VSIE_InducedPrisonerToEscape</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_OnePawn_Situation</workerClass>
+		<taleDef>VSIE_InducedPrisonerToEscape</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{OTHERPAWN_nameDef} broke our prisoners free. It could have ended very badly!</label>
+				<baseOpinionOffset>-10</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef ParentName="VSIE_SocialTaleBase">
+		<defName>VSIE_InducedPrisonerToEscape</defName>
+		<label>induced prisoner to escape</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_TamedThrumbo</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_OnePawn_Situation</workerClass>
+		<taleDef>VSIE_TamedThrumbo</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{OTHERPAWN_nameDef} tamed a thrumbo. What a legendary feat!</label>
+				<baseOpinionOffset>15</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef ParentName="VSIE_SocialTaleBase">
+		<defName>VSIE_TamedThrumbo</defName>
+		<label>tamed a thrumbo</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_WasPreviouslyOurEnemy</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_OnePawn_Situation</workerClass>
+		<taleDef>VSIE_WasPreviouslyOurEnemy</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{OTHERPAWN_nameDef} was previously our enemy. I don't trust {OTHERPAWN_objective}</label>
+				<baseOpinionOffset>-25</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef ParentName="VSIE_SocialTaleBase">
+		<defName>VSIE_WasPreviouslyOurEnemy</defName>
+		<label>was previously our enemy</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_WasBadlyInjured</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_OnePawn_Situation</workerClass>
+		<taleDef>VSIE_WasBadlyInjured</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{OTHERPAWN_nameDef} was badly injured in battle. I admire {OTHERPAWN_possessive} courage</label>
+				<baseOpinionOffset>5</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef ParentName="VSIE_SocialTaleBase">
+		<defName>VSIE_WasBadlyInjured</defName>
+		<label>was badly injured</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_DidNotAttendWedding</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_DoublePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_DoublePawn_Situation</workerClass>
+		<taleDef>VSIE_DidNotAttendWedding</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{OTHERPAWN_nameDef} didn't attend our wedding ceremony! Was it so hard to come and just be with me on that day?</label>
+				<baseOpinionOffset>-5</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef ParentName="VSIE_SocialTaleBase">
+		<defName>VSIE_DidNotAttendWedding</defName>
+		<label>didn't attend our wedding ceremony</label>
+		<taleClass>Tale_DoublePawn</taleClass>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_AttendedMyWedding</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_DoublePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_DoublePawn_Situation</workerClass>
+		<taleDef>VSIE_AttendedMyWedding</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{OTHERPAWN_nameDef} attended my wedding</label>
+				<baseOpinionOffset>5</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef ParentName="VSIE_SocialTaleBase">
+		<defName>VSIE_AttendedMyWedding</defName>
+		<label>attended my wedding</label>
+		<taleClass>Tale_DoublePawn</taleClass>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_RemovedPrisonersOrgans</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_OnePawn_Situation</workerClass>
+		<taleDef>VSIE_RemovedPrisonersOrgans</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{OTHERPAWN_nameDef} removed the prisoner's organs! How can a person be capable of such a thing?</label>
+				<baseOpinionOffset>-10</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef ParentName="VSIE_SocialTaleBase">
+		<defName>VSIE_RemovedPrisonersOrgans</defName>
+		<label>removed the prisoner's organs</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_FailedMedicalOperationAndKilled</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_OnePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_OnePawn_Situation</workerClass>
+		<taleDef>VSIE_FailedMedicalOperationAndKilled</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{OTHERPAWN_nameDef} failed a medical operation and killed one of us</label>
+				<baseOpinionOffset>-10</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef ParentName="VSIE_SocialTaleBase">
+		<defName>VSIE_FailedMedicalOperationAndKilled</defName>
+		<label>failed a medical operation and killed one of us</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_TamedMe</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_DoublePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_DoublePawn_Situation</workerClass>
+		<taleDef>VSIE_TamedMe</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{OTHERPAWN_nameDef} tamed me, I will always be glad of the wonders they've shown me</label>
+				<baseOpinionOffset>25</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef ParentName="VSIE_SocialTaleBase">
+		<defName>VSIE_TamedMe</defName>
+		<label>tamed me</label>
+		<taleClass>Tale_DoublePawn</taleClass>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_ArrestedMe</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_DoublePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_DoublePawn_Situation</workerClass>
+		<taleDef>VSIE_ArrestedMe</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{OTHERPAWN_nameDef} arrested me</label>
+				<baseOpinionOffset>-10</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef ParentName="VSIE_SocialTaleBase">
+		<defName>VSIE_ArrestedMe</defName>
+		<label>arrested me</label>
+		<taleClass>Tale_DoublePawn</taleClass>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_ResurrectedMe</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_DoublePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_DoublePawn_Situation</workerClass>
+		<taleDef>VSIE_ResurrectedMe</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{OTHERPAWN_nameDef} resurrected me</label>
+				<baseOpinionOffset>25</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef ParentName="VSIE_SocialTaleBase">
+		<defName>VSIE_ResurrectedMe</defName>
+		<label>resurrected me</label>
+		<taleClass>Tale_DoublePawn</taleClass>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_BrokeUpWithMe</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_DoublePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_DoublePawn_Situation</workerClass>
+		<taleDef>VSIE_BrokeUpWithMe</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{OTHERPAWN_nameDef} broke up with me. Will I ever find someone else?</label>
+				<baseOpinionOffset>-10</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef ParentName="VSIE_SocialTaleBase">
+		<defName>VSIE_BrokeUpWithMe</defName>
+		<label>broke up with me</label>
+		<taleClass>Tale_DoublePawn</taleClass>
+	</TaleDef>
+
+	<ThoughtDef>
+		<defName>VSIE_WeHadNiceChat</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_DoublePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_DoublePawn_Situation</workerClass>
+		<taleDef>VSIE_WeHadNiceChat</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{OTHERPAWN_nameDef} and I had a nice chat. It feels like we can talk about anything</label>
+				<baseOpinionOffset>10</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef ParentName="VSIE_SocialTaleBase">
+		<defName>VSIE_WeHadNiceChat</defName>
+		<label>we had a nice chat</label>
+		<taleClass>Tale_DoublePawn</taleClass>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_WeHadSocialFight</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_DoublePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_DoublePawn_Situation</workerClass>
+		<taleDef>VSIE_WeHadSocialFight</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{OTHERPAWN_nameDef} and I had a social fight</label>
+				<baseOpinionOffset>-10</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef ParentName="VSIE_SocialTaleBase">
+		<defName>VSIE_WeHadSocialFight</defName>
+		<label>we had a social fight</label>
+		<taleClass>Tale_DoublePawn</taleClass>
+	</TaleDef>
+
+	<ThoughtDef>
+		<defName>VSIE_SavedMeFromMyWounds</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_DoublePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_DoublePawn_Situation</workerClass>
+		<taleDef>VSIE_SavedMeFromMyWounds</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{OTHERPAWN_nameDef} saved me from my wounds. I will always be in {OTHERPAWN_possessive} debt</label>
+				<baseOpinionOffset>10</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef ParentName="VSIE_SocialTaleBase">
+		<defName>VSIE_SavedMeFromMyWounds</defName>
+		<label>saved me from my wounds</label>
+		<taleClass>Tale_DoublePawn</taleClass>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_HasBeenMyFriendSinceChildhood</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_DoublePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_DoublePawn_Situation</workerClass>
+		<taleDef>VSIE_HasBeenMyFriendSinceChildhood</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{OTHERPAWN_nameDef} has been my friend since childhood, we have so much in common that no one can separate us</label>
+				<baseOpinionOffset>25</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef ParentName="VSIE_SocialTaleBase">
+		<defName>VSIE_HasBeenMyFriendSinceChildhood</defName>
+		<label>has been my friend since childhood</label>
+		<taleClass>Tale_DoublePawn</taleClass>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_SavedMeFromRaiders</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_TriplePawn_Situation</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_TriplePawn_Situation</workerClass>
+		<taleDef>VSIE_SavedMeFromRaiders</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{SECONDPAWN_nameDef} saved me from {THIRDPAWN_kindDef}, I will always be in {SECONDPAWN_possessive} debt</label>
+				<baseOpinionOffset>25</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef ParentName="VSIE_SocialTaleBase">
+		<defName>VSIE_SavedMeFromRaiders</defName>
+		<label>saved me from the raiders</label>
+		<taleClass>VanillaSocialInteractionsExpanded.Tale_TriplePawn</taleClass>
+	</TaleDef>
+	
+	<ThoughtDef>
+		<defName>VSIE_CuredMyFriend</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_CuredMyFriend</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_CuredMyFriend</workerClass>
+		<taleDef>VSIE_CuredMyFriend</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{SECONDPAWN_nameDef} cured my {0} {THIRDPAWN_nameDef}, I will always be grateful to {SECONDPAWN_objective}</label>
+				<baseOpinionOffset>10</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef ParentName="VSIE_SocialTaleBase">
+		<defName>VSIE_CuredMyFriend</defName>
+		<label>cured my friend</label>
+		<taleClass>VanillaSocialInteractionsExpanded.Tale_TriplePawn</taleClass>
+	</TaleDef>
+
+	<ThoughtDef>
+		<defName>VSIE_StoleMyLover</defName>
+		<thoughtClass>VanillaSocialInteractionsExpanded.Thought_StoleMyLover</thoughtClass>
+		<workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_StoleMyLover</workerClass>
+		<taleDef>VSIE_StoleMyLover</taleDef>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages>
+			<li>
+				<label>{THIRDPAWN_nameDef} stole {SECONDPAWN_nameDef} away from me. What makes {THIRDPAWN_objective} so much better?</label>
+				<baseOpinionOffset>-10</baseOpinionOffset>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<TaleDef ParentName="VSIE_SocialTaleBase">
+		<defName>VSIE_StoleMyLover</defName>
+		<label>stole my lover</label>
+		<taleClass>VanillaSocialInteractionsExpanded.Tale_TriplePawn</taleClass>
+	</TaleDef>
+	
+  <ThoughtDef>
+    <defName>VSIE_IsRoyalty</defName>
+	<thoughtClass>VanillaSocialInteractionsExpanded.Thought_IsRoyalty</thoughtClass>
+    <workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_IsRoyalty</workerClass>
+    <validWhileDespawned>true</validWhileDespawned>
+    <stages>
+      <li>
+        <label>{OTHERPAWN_nameDef} is royalty. I’m impressed</label>
+        <baseOpinionOffset>10</baseOpinionOffset>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+  <ThoughtDef>
+    <defName>VSIE_GotSomeLovin</defName>
+    <thoughtClass>Thought_MemorySocial</thoughtClass>
+    <durationDays>3</durationDays>
+    <stackLimit>10</stackLimit>
+    <stackedEffectMultiplier>0.75</stackedEffectMultiplier>
+    <stages>
+      <li>
+        <label>got some lovin'</label>
+        <description>There's nothing like a tumble between the sheets to lift the mood.</description>
+        <baseMoodEffect>8</baseMoodEffect>
+        <baseOpinionOffset>20</baseOpinionOffset>
+      </li>
+    </stages>
+  </ThoughtDef>
+</Defs>

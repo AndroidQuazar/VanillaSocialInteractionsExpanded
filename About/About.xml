@@ -2,7 +2,10 @@
 <ModMetaData>
 	<name>Vanilla Social Interactions Expanded</name>
 	<author>Oskar Potocki, Taranchuk</author>
-	<supportedVersions><li>1.2</li></supportedVersions>
+	<supportedVersions>
+	<li>1.3</li>
+	<li>1.2</li>
+	</supportedVersions>
 	<packageId>VanillaExpanded.VanillaSocialInteractionsExpanded</packageId>
 	<description>Vanilla Social Interactions Expanded means to bring much more needed life to your pawns as well as the overall world map. This mod alters what pawns do in their spare time, adds some much needed content in regards to interactions that breathes fresh air into otherwise boring and stale game. Pawns now also have aspirations that can be fulfilled to gain powerful mood buffs, and the whole inspiration system is also changed.
 	

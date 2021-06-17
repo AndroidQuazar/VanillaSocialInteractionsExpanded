@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThoughtDef>
+    <defName>VSIE_InspirationSatisfied</defName>
+    <durationDays>10</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>inspiration satisfied</label>
+        <description>I have completed my aspiration!</description>
+        <baseMoodEffect>10</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>VSIE_InspirationNotSatisfied</defName>
+    <durationDays>5</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>inspiration not satisfied</label>
+        <description>I have failed to complete my aspiration.</description>
+        <baseMoodEffect>-5</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>VSIE_HadNiceChatWithBeer</defName>
+    <durationDays>3</durationDays>
+    <stackLimit>10</stackLimit>
+    <stages>
+      <li>
+        <label>had a nice chat with a beer</label>
+        <description>I enjoyed the little chit chat and a cold one in my hand.</description>
+        <baseMoodEffect>5</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+  <ThoughtDef>
+    <defName>VSIE_AttendedBingeParty</defName>
+    <durationDays>10</durationDays>
+    <stackLimit>10</stackLimit>
+    <stages>
+      <li>
+        <label>Attended binge party</label>
+        <description>I had a great time at the binge party.</description>
+        <baseMoodEffect>12</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+  <ThoughtDef>
+    <defName>VSIE_AttendedOutdoorParty</defName>
+    <durationDays>10</durationDays>
+    <stackLimit>10</stackLimit>
+    <stages>
+      <li>
+        <label>Attended outdoor party</label>
+        <description>I had a great time outside!</description>
+        <baseMoodEffect>8</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+  <ThoughtDef>
+    <defName>VSIE_GotSomeClosure</defName>
+    <durationDays>15</durationDays>
+    <stackLimit>10</stackLimit>
+    <stages>
+      <li>
+        <label>Got some closure</label>
+        <description>I will cherish every memory.</description>
+        <baseMoodEffect>-5</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+  <ThoughtDef>
+    <defName>VSIE_AttendedBirthdayParty</defName>
+    <durationDays>10</durationDays>
+    <stackLimit>10</stackLimit>
+    <stages>
+      <li>
+        <label>Attended birthday party</label>
+        <description>I had a great time at the birthday party.</description>
+        <baseMoodEffect>8</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+  <ThoughtDef>
+    <defName>VSIE_HadBirthdayParty</defName>
+    <durationDays>15</durationDays>
+    <stackLimit>10</stackLimit>
+    <stages>
+      <li>
+        <label>Had a birthday party</label>
+        <description>They threw me a birthday party!</description>
+        <baseMoodEffect>10</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+</Defs>

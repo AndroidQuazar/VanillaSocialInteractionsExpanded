@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <PawnRelationDef>
+    <workerClass>VanillaSocialInteractionsExpanded.PawnRelationWorker_BestFriend</workerClass>
+    <defName>VSIE_BestFriend</defName>
+    <label>best friend</label>
+    <labelFemale>best friend</labelFemale>
+    <importance>205</importance>
+    <diedThought>MyFianceDied</diedThought>
+    <diedThoughtFemale>MyFianceeDied</diedThoughtFemale>
+    <killedThought>KilledMyFiance</killedThought>
+    <lostThought>MyFianceLost</lostThought>
+    <lostThoughtFemale>MyFianceeLost</lostThoughtFemale>
+    <soldThoughts>
+      <li>SoldMyLovedOne</li>
+    </soldThoughts>
+    <opinionOffset>10</opinionOffset>
+    <implied>false</implied>
+    <reflexive>true</reflexive>
+    <generationChanceFactor>1.0</generationChanceFactor>
+  </PawnRelationDef>
+ 
+  
+    <ThoughtDef>
+    <defName>VSIE_OpinionOfMyBestFriend</defName>
+    <thoughtClass>VanillaSocialInteractionsExpanded.Thought_OpinionOfMyBestFriend</thoughtClass>
+    <workerClass>VanillaSocialInteractionsExpanded.ThoughtWorker_OpinionOfMyBestFriend</workerClass>
+    <validWhileDespawned>true</validWhileDespawned>
+    <stages>
+      <li>
+        <label>opinion of my {0} {1}</label>
+        <description>Being with my best friend makes me feel this way.</description>
+      </li>
+    </stages>
+  </ThoughtDef>
+</Defs>
