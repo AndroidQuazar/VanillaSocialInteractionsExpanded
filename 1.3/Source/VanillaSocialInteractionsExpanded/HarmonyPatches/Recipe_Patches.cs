@@ -124,10 +124,11 @@ namespace VanillaSocialInteractionsExpanded
 				CodeInstruction instruction = instructionList[i];
 				if (instruction.opcode == OpCodes.Ldfld && instruction.LoadsField(AccessTools.Field(typeof(Pawn), nameof(Pawn.mindState))))
 				{
-					yield return new CodeInstruction(opcode: OpCodes.Ldloc_2);
+					yield return new CodeInstruction(opcode: OpCodes.Ldloc_1);
 					yield return new CodeInstruction(opcode: OpCodes.Ldarg_0);
 					yield return new CodeInstruction(opcode: OpCodes.Call, operand: AccessTools.Method(typeof(GenerateQualityCreatedByPawn_Patch), nameof(GenerateQualityCreatedByPawn_Patch.Notify_Progress)));
 				}
+
 				yield return instruction;
             }
         }
