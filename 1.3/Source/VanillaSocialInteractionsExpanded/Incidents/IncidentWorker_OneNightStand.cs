@@ -78,6 +78,10 @@ namespace VanillaSocialInteractionsExpanded
 				{
 					continue;
 				}
+				if (pawn.ageTracker.AgeBiologicalYearsFloat < 16)
+                {
+					continue;
+                }
 				yield return pawn;
 			}
 		}
