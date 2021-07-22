@@ -24,7 +24,7 @@ namespace VanillaSocialInteractionsExpanded
             {
 				return false;
             }
-			if (ModsConfig.IdeologyActive && p.Ideo.HasHumanMeatEatingRequiredPrecept())
+			if (ModsConfig.IdeologyActive && (p.Ideo?.HasHumanMeatEatingRequiredPrecept() ?? false))
             {
 				return false;
             }
