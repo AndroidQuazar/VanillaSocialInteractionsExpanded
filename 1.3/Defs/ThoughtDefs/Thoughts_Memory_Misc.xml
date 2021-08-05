@@ -74,7 +74,7 @@
       <li>
         <label>Got some closure</label>
         <description>I will cherish every memory.</description>
-        <baseMoodEffect>-5</baseMoodEffect>
+        <baseMoodEffect>+5</baseMoodEffect>
       </li>
     </stages>
   </ThoughtDef>
