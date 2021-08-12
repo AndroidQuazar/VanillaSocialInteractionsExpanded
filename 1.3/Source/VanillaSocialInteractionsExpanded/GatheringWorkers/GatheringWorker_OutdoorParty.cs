@@ -13,9 +13,18 @@ namespace VanillaSocialInteractionsExpanded
 			return new LordJob_Joinable_OutdoorParty(spot, organizer, VSIE_DefOf.VSIE_OutdoorParty);
 		}
 
+
 		private bool BasePawnValidator(Pawn pawn, GatheringDef gatheringDef)
 		{
-			var value = pawn.RaceProps.Humanlike && !pawn.InBed() && !pawn.InMentalState && pawn.GetLord() == null
+			Predicate<Pawn> ideoChecker = (Pawn p) =>
+			{
+				if (p.ideo != null && p.Ideo != null && p.Ideo.HasMeme(DefDatabase<MemeDef>.GetNamedSilentFail("Tunneler")))
+                {
+					return false;
+                }
+				return true;
+            };
+			var value = pawn.RaceProps.Humanlike && !pawn.InBed() && !(ModsConfig.IdeologyActive || ideoChecker(pawn)) && !pawn.InMentalState && pawn.GetLord() == null
 			&& GatheringsUtility.ShouldPawnKeepGathering(pawn, gatheringDef) && !pawn.Drafted && (gatheringDef.requiredTitleAny == null || gatheringDef.requiredTitleAny.Count == 0
 			|| (pawn.royalty != null && pawn.royalty.AllTitlesInEffectForReading.Any((RoyalTitle t) => gatheringDef.requiredTitleAny.Contains(t.def)))) && JoyUtility.EnjoyableOutsideNow(pawn);
 			return value;
