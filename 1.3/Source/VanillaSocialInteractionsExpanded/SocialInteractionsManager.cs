@@ -505,21 +505,36 @@ namespace VanillaSocialInteractionsExpanded
             }
             return true;
         }
-
         public void RemoveDestroyedPawn(Pawn key)
         {
-            activeAspirations.RemoveAll(x => x.Key == key);
-            teachersWithPupils.RemoveAll(x => x.Key == key);
-            pawnsWithWorkers.RemoveAll(x => x.Key == key);
-            angryWorkers.RemoveAll(x => x.Key == key);
-            birthdays.RemoveAll(x => x.Key == key);
+            activeAspirations.Remove(key);
+            teachersWithPupils.Remove(key);
+            pawnsWithWorkers.Remove(key);
+            angryWorkers.Remove(key);
+            birthdays.Remove(key);
             pawnsWithAdditionalTrait.Remove(key);
             honoredDeadPawns.Remove(key);
             joinedColonists.Remove(key);
+            pawnsWithWorkers.Remove(key);
+        }
+
+        public void RemoveNullOrDestroyedPawns()
+        {
+            activeAspirations.RemoveAll(x => x.Key is null || x.Key.Destroyed);
+            teachersWithPupils.RemoveAll(x => x.Key is null || x.Key.Destroyed);
+            pawnsWithWorkers.RemoveAll(x => x.Key is null || x.Key.Destroyed);
+            angryWorkers.RemoveAll(x => x.Key is null || x.Key.Destroyed);
+            birthdays.RemoveAll(x => x.Key is null || x.Key.Destroyed);
+            joinedColonists.RemoveAll(x => x.Key is null || x.Key.Destroyed);
+            pawnsWithWorkers.RemoveAll(x => x.Key is null || x.Key.Destroyed);
+            pawnsWithAdditionalTrait.RemoveWhere(x => x is null || x.Destroyed);
+            honoredDeadPawns.RemoveWhere(x => x is null || x.Destroyed);
+
         }
         public override void ExposeData()
         {
             base.ExposeData();
+            RemoveNullOrDestroyedPawns();
             Scribe_Collections.Look(ref activeAspirations, "activeAspirations", LookMode.Reference, LookMode.Deep, ref pawnKeys, ref aspirationValues);
             Scribe_Collections.Look(ref pawnsWithAdditionalTrait, "pawnsWithAdditionalTrait", LookMode.Reference);
             Scribe_Collections.Look(ref teachersWithPupils, "teachersWithPupils", LookMode.Reference, LookMode.Deep, ref pawnKeys2, ref teachingValues);

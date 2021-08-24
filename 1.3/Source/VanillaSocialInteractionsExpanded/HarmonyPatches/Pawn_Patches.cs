@@ -94,7 +94,7 @@ namespace VanillaSocialInteractionsExpanded
 		{
 			if (VanillaSocialInteractionsExpandedSettings.EnableMemories)
 			{
-				if (GenTicks.TicksAbs > 0)
+				if (Find.TickManager.gameStartAbsTick > 0)
 				{
 					if (newFaction != __instance.Faction && __instance.Faction.HostileTo(newFaction))
 					{
