@@ -416,6 +416,7 @@ namespace VanillaSocialInteractionsExpanded
             {
                 if (aspiration.inspirationDef == pawn.InspirationDef)
                 {
+                    Log.Message("Aspiration progress: " + aspiration.inspirationDef);
                     aspiration.Notify_Progress(out bool finished);
                     if (finished)
                     {

@@ -22,19 +22,15 @@ namespace VanillaSocialInteractionsExpanded
         private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
         {
             FieldInfo playerNegotiatorInfo = AccessTools.Field(typeof(TradeSession), "playerNegotiator");
-            foreach (var ins in instructions)
+            var codes = instructions.ToList();
+            for (var i = 0; i < codes.Count; i++)
             {
-                if (ins.OperandIs(playerNegotiatorInfo))
+                if (i > 0 && codes[i].opcode == OpCodes.Ldsfld && codes[i].OperandIs(playerNegotiatorInfo) && codes[i - 1].opcode == OpCodes.Brfalse_S)
                 {
                     yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(TryExecute_Patch), "Notify_Progress", null, null));
-                    yield return ins;
                 }
-                else
-                {
-                    yield return ins;
-                }
+                yield return codes[i];
             }
-            yield break;
         }
 
         public static void Notify_Progress()

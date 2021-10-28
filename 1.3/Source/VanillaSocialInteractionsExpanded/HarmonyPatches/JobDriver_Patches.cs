@@ -14,11 +14,14 @@ namespace VanillaSocialInteractionsExpanded
 	[HarmonyPatch(typeof(JobDriver_HaulCorpseToPublicPlace), "MakeNewToils")]
 	public class JobDriver_HaulCorpseToPublicPlace_MakeNewToils
 	{
-		private static void Postfix(ref IEnumerable<Toil> __result)
+		private static IEnumerable<Toil> Postfix(IEnumerable<Toil> __result)
 		{
+			foreach (var r in __result)
+			{
+				yield return r;
+			}
 			if (VanillaSocialInteractionsExpandedSettings.EnableMemories)
 			{
-				List<Toil> toils = __result.ToList();
 				var toil = new Toil();
 				toil.initAction = delegate ()
 				{
@@ -28,8 +31,7 @@ namespace VanillaSocialInteractionsExpanded
 						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_ExposedCorpseOfMyFriend, (actor.CurJob.GetTarget(TargetIndex.A).Thing as Corpse).InnerPawn, actor);
 					}
 				};
-				toils.Add(toil);
-				__result = toils;
+				yield return toil;
 			}
 		}
 	}
@@ -37,11 +39,14 @@ namespace VanillaSocialInteractionsExpanded
 	[HarmonyPatch(typeof(JobDriver_Ingest), "MakeNewToils")]
 	public class JobDriver_Ingest_MakeNewToils
 	{
-		private static void Postfix(ref IEnumerable<Toil> __result)
+		private static IEnumerable<Toil> Postfix(IEnumerable<Toil> __result)
 		{
+			foreach (var r in __result)
+			{
+				yield return r;
+			}
 			if (VanillaSocialInteractionsExpandedSettings.EnableMemories)
 			{
-				List<Toil> toils = __result.ToList();
 				var toil = new Toil();
 				toil.initAction = delegate ()
 				{
@@ -64,8 +69,7 @@ namespace VanillaSocialInteractionsExpanded
 						}
 					}
 				};
-				toils.Add(toil);
-				__result = toils;
+				yield return toil;
 			}
 		}
 	}
@@ -73,11 +77,14 @@ namespace VanillaSocialInteractionsExpanded
 	[HarmonyPatch(typeof(JobDriver_TakeToBed), "MakeNewToils")]
 	public class JobDriver_TakeToBed_MakeNewToils
 	{
-		private static void Postfix(ref IEnumerable<Toil> __result)
+		private static IEnumerable<Toil> Postfix(IEnumerable<Toil> __result)
 		{
+			foreach (var r in __result)
+			{
+				yield return r;
+			}
 			if (VanillaSocialInteractionsExpandedSettings.EnableMemories)
 			{
-				List<Toil> toils = __result.ToList();
 				var toil = new Toil();
 				toil.initAction = delegate ()
 				{
@@ -91,8 +98,7 @@ namespace VanillaSocialInteractionsExpanded
 						}
 					}
 				};
-				toils.Add(toil);
-				__result = toils;
+				yield return toil;
 			}
 		}
 	}
@@ -247,6 +253,33 @@ namespace VanillaSocialInteractionsExpanded
 						socialManager.Notify_AspirationProgress(actor);
 					}
 				});
+			}
+		}
+	}
+
+	[HarmonyPatch(typeof(JobDriver_PlantSow), "MakeNewToils")]
+	public class JobDriver_PlantSow_MakeNewToils
+	{
+		private static IEnumerable<Toil> Postfix(IEnumerable<Toil> __result)
+		{
+			foreach (var r in __result)
+            {
+				yield return r;
+            }
+			if (VanillaSocialInteractionsExpandedSettings.EnableAspirations)
+			{
+				var toil = new Toil();
+				toil.initAction = delegate ()
+				{
+					var actor = toil.actor;
+					var socialManager = VSIE_Utils.SocialInteractionsManager;
+					if (actor.InspirationDef == VSIE_DefOf.VSIE_Inspired_Planting)
+					{
+						socialManager.Notify_AspirationProgress(actor);
+					}
+				};
+
+				yield return toil;
 			}
 		}
 	}
