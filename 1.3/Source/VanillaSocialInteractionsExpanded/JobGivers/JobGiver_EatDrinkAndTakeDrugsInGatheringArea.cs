@@ -33,7 +33,6 @@ namespace VanillaSocialInteractionsExpanded
             }
             catch (Exception ex)
             {
-                Log.Error("Excention in Binge Party: " + ex, true);
                 return null;
             }
 		}
@@ -85,9 +84,13 @@ namespace VanillaSocialInteractionsExpanded
                 {
                     return false;
                 }
-                if (x.def.IsDrug && !pawn.drugs.CurrentPolicy[x.def].allowedForJoy)
+                if (x.def.IsDrug)
                 {
-                    return false;
+                    if (!pawn.drugs.CurrentPolicy[x.def].allowedForJoy 
+                        || pawn.ideo != null && pawn.Ideo.PreceptsListForReading.Any(precept => precept.def.defName == "DrugUse_Prohibited" || precept.def.defName == "DrugUse_MedicalOnly"))
+                    {
+                        return false;
+                    }
                 }
                 if ((int)x.def.ingestible.preferability <= 4 && !x.def.IsDrug)
                 {

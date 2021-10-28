@@ -51,7 +51,7 @@ namespace VanillaSocialInteractionsExpanded
 					{
 						return false;
 					}
-					return otherPawn == tale.secondPawnData.pawn && OpinionOf(tale.thirdPawnData.pawn) >= 20;
+					return otherPawn == tale.secondPawnData.pawn && tale.thirdPawnData.pawn != null && OpinionOf(tale.thirdPawnData.pawn) >= 20;
 				}
 				catch (Exception ex)
                 {

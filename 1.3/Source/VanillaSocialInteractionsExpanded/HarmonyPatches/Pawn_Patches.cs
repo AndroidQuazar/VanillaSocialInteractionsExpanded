@@ -24,15 +24,19 @@ namespace VanillaSocialInteractionsExpanded
 					var pawnAge = __instance.ageTracker.AgeChronologicalYearsFloat;
 					foreach (var relPawn in __instance.relations.PotentiallyRelatedPawns)
 					{
-						var relPawnAge = relPawn.ageTracker.AgeChronologicalYearsFloat;
-						if (__instance.relations.OpinionOf(relPawn) >= 30 && relPawn.relations.OpinionOf(__instance) >= 30 && new FloatRange(-5f, 5f).Includes(pawnAge - relPawnAge))
-						{
-							if (Rand.ChanceSeeded(0.1f, __instance.thingIDNumber))
+						if (relPawn?.ageTracker != null)
+                        {
+							var relPawnAge = relPawn.ageTracker.AgeChronologicalYearsFloat;
+							if (__instance.relations.OpinionOf(relPawn) >= 30 && relPawn.relations.OpinionOf(__instance) >= 30 && new FloatRange(-5f, 5f).Includes(pawnAge - relPawnAge))
 							{
-								TaleRecorder.RecordTale(VSIE_DefOf.VSIE_HasBeenMyFriendSinceChildhood, __instance, relPawn);
-								TaleRecorder.RecordTale(VSIE_DefOf.VSIE_HasBeenMyFriendSinceChildhood, relPawn, __instance);
+								if (Rand.ChanceSeeded(0.1f, __instance.thingIDNumber))
+								{
+									TaleRecorder.RecordTale(VSIE_DefOf.VSIE_HasBeenMyFriendSinceChildhood, __instance, relPawn);
+									TaleRecorder.RecordTale(VSIE_DefOf.VSIE_HasBeenMyFriendSinceChildhood, relPawn, __instance);
+								}
 							}
 						}
+
 					}
 				}
 				if (__instance.Faction == Faction.OfPlayer)

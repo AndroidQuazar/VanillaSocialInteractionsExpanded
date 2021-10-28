@@ -121,6 +121,7 @@ namespace VanillaSocialInteractionsExpanded
                 }
                 var candidates = workersWithWorkingTicks.Where(x => x.Key != null && x.Key.needs?.mood?.CurInstantLevelPercentage < 0.3f && x.Value.workTick > 3000 
                     && initiator.relations?.OpinionOf(x.Key) < 0).Select(x => x.Key).ToList();
+
                 if (candidates.Any())
                 {
                     var manager = VSIE_Utils.SocialInteractionsManager;
@@ -145,6 +146,8 @@ namespace VanillaSocialInteractionsExpanded
                     var angryWorkers = manager.angryWorkers.Keys.Where(x => x != initiator && x.Position.DistanceTo(initiator.Position) <= 10);
                     nearestWorkers.AddRange(candidates);
                     nearestWorkers.AddRange(angryWorkers);
+
+                    nearestWorkers = nearestWorkers.Where(x => x.Map == initiator.Map).ToHashSet();
 
                     var fighters = new HashSet<Pawn>();
                     var firstPawn = candidates.OrderBy(x => x.Position.DistanceTo(initiator.Position)).First();

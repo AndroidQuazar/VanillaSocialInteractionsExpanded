@@ -28,8 +28,12 @@ namespace VanillaSocialInteractionsExpanded
         }
         protected override bool MemberValidator(Pawn pawn)
         {
-            var value = !pawn.health.hediffSet.hediffs.Any(y => y is Hediff_Alcohol x && x.Severity > 0.1f) && !VSIE_Utils.workTags.Contains(pawn.mindState.lastJobTag);
-            return value;
+            var result = !pawn.health.hediffSet.hediffs.Any(y => y is Hediff_Alcohol x && x.Severity > 0.1f) && !VSIE_Utils.workTags.Contains(pawn.mindState.lastJobTag);
+            if (result && ModsConfig.IdeologyActive && pawn.ideo != null && pawn.Ideo.PreceptsListForReading.Any(x => x.def.defName == "DrugUse_Prohibited" || x.def.defName == "DrugUse_MedicalOnly"))
+            {
+                result = false;
+            }
+            return result;
         }
         protected override bool PawnsCanGatherTogether(Pawn organizer, Pawn companion)
         {

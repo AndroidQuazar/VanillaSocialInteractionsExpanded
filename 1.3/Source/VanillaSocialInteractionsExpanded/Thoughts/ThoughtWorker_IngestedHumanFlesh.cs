@@ -24,10 +24,12 @@ namespace VanillaSocialInteractionsExpanded
             {
 				return false;
             }
+
 			if (ModsConfig.IdeologyActive && (p.Ideo?.HasHumanMeatEatingRequiredPrecept() ?? false))
             {
 				return false;
             }
+
 			Predicate<Tale> validator = delegate (Tale t)
 			{
 				if (!VSIE_Utils.HaveNoticedTale(p, t))

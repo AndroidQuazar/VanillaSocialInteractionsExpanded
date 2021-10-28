@@ -51,7 +51,7 @@ namespace VanillaSocialInteractionsExpanded
 
 		public static bool IsHumanlikeMeat(ThingDef def)
 		{
-			if (def.ingestible.sourceDef != null && def.ingestible.sourceDef.race != null && def.ingestible.sourceDef.race.Humanlike)
+			if (def.ingestible?.sourceDef != null && def.ingestible.sourceDef.race != null && def.ingestible.sourceDef.race.Humanlike)
 			{
 				return true;
 			}
