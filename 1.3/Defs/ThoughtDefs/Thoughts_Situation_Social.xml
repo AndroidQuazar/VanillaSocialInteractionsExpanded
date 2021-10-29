@@ -189,7 +189,7 @@
 		<validWhileDespawned>true</validWhileDespawned>
 		<stages>
 			<li>
-				<label>{OTHERPAWN_nameDef} threw a tantrum. {OTHERPAWN_objective} need to be taught some self control</label>
+				<label>{OTHERPAWN_nameDef} threw a tantrum. {OTHERPAWN_pronoun} needs to be taught some self control</label>
 				<baseOpinionOffset>-10</baseOpinionOffset>
 			</li>
 		</stages>
