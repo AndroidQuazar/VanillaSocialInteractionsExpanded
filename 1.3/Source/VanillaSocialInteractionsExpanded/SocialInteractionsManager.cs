@@ -348,13 +348,12 @@ namespace VanillaSocialInteractionsExpanded
 
                     if ((Find.TickManager.TicksGame - raidGroup.initTime) >= (GenDate.TicksPerDay / 2) // if raid lasted over 12 in-game hours
                         && raidGroup.raiders.Sum(x => x.kindDef.combatPower) > 500 // if raid is big enough
-                        && remainedDefenders.Any() // if there are survivors to give them a trait
-                        && Rand.Chance(0.1f))
+                        && remainedDefenders.Any()) // if there are survivors to give them a trait)
                     {
                         var candidates = remainedDefenders.Where(x => !pawnsWithAdditionalTrait?.Contains(x) ?? false);
                         if (candidates.Any() && candidates.TryRandomElement(out Pawn pawn))
                         {
-                            TryDevelopNewTrait(pawn, "VSIE.ToughtRaidEvent".Translate());
+                            VSIE_Utils.TryDevelopNewTrait(pawn, "VSIE.ToughtRaidEvent".Translate(), 0.1f);
                         }
                     }
                     this.raidGroups.Remove(raidGroup);

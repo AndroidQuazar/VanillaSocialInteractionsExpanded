@@ -178,12 +178,16 @@ namespace VanillaSocialInteractionsExpanded
                 }
             }
 		}
-		public static void TryDevelopNewTrait(Pawn pawn, string letterText)
-        {
-			var manager = VSIE_Utils.SocialInteractionsManager;
-			if (!manager.pawnsWithAdditionalTrait.Contains(pawn))
+
+		public static void TryDevelopNewTrait(Pawn pawn, string letterText, float chance)
+		{
+			if (VanillaSocialInteractionsExpandedSettings.EnableObtainingNewTraits && Rand.Chance(chance))
 			{
-				manager.TryDevelopNewTrait(pawn, letterText);
+				var manager = VSIE_Utils.SocialInteractionsManager;
+				if (!manager.pawnsWithAdditionalTrait.Contains(pawn))
+				{
+					manager.TryDevelopNewTrait(pawn, letterText);
+				}
 			}
 		}
 

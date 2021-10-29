@@ -226,16 +226,14 @@ namespace VanillaSocialInteractionsExpanded
 	})]
 	public class DoRecruit_Patch
 	{
-		private static void Prefix(Pawn recruiter, Pawn recruitee)
+		private static void Prefix(Pawn recruiter, Pawn recruitee, out bool __state)
         {
+			__state = false;
 			if (VanillaSocialInteractionsExpandedSettings.EnableObtainingNewTraits)
 			{
 				if (recruitee.IsPrisoner && recruiter != null)
 				{
-					if (Rand.Chance(0.1f))
-					{
-						VSIE_Utils.TryDevelopNewTrait(recruitee, "VSIE.TraitChangePrisonerRecruitedText");
-					}
+					__state = true;
 				}
 			}
 
@@ -247,7 +245,7 @@ namespace VanillaSocialInteractionsExpanded
 				}
 			}
         }
-		private static void Postfix(Pawn recruiter, Pawn recruitee)
+		private static void Postfix(Pawn recruiter, Pawn recruitee, bool __state)
 		{
 			if (VanillaSocialInteractionsExpandedSettings.EnableMemories)
 			{
@@ -258,6 +256,11 @@ namespace VanillaSocialInteractionsExpanded
 						TaleRecorder.RecordTale(VSIE_DefOf.VSIE_TamedThrumbo, recruiter);
 					}
 				}
+			}
+
+			if (__state && VanillaSocialInteractionsExpandedSettings.EnableObtainingNewTraits)
+            {
+				VSIE_Utils.TryDevelopNewTrait(recruitee, "VSIE.TraitChangePrisonerRecruited", 0.1f);
 			}
 		}
 	}

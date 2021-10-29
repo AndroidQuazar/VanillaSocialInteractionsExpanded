@@ -39,6 +39,7 @@ namespace VanillaSocialInteractionsExpanded
 
 					}
 				}
+
 				if (__instance.Faction == Faction.OfPlayer)
 				{
 					VSIE_Utils.TryRegisterNewColonist(__instance, __instance.Faction);
@@ -75,14 +76,8 @@ namespace VanillaSocialInteractionsExpanded
 		{
 			var pawn = Traverse.Create(__instance).Field("pawn").GetValue<Pawn>();
 			if (pawn.RaceProps.Humanlike)
-            {
-				if (Rand.Chance(0.1f))
-				{
-					if (VanillaSocialInteractionsExpandedSettings.EnableObtainingNewTraits)
-					{
-						VSIE_Utils.TryDevelopNewTrait(pawn, "VSIE.BirthdayEvent");
-					}
-				}
+			{
+				VSIE_Utils.TryDevelopNewTrait(pawn, "VSIE.BirthdayEvent", 0.1f);
 				if (pawn.Faction.IsPlayer)
                 {
 					VSIE_Utils.SocialInteractionsManager.birthdays[pawn] = Find.TickManager.TicksGame;
@@ -121,6 +116,8 @@ namespace VanillaSocialInteractionsExpanded
 				}
 			}
 		}
+
+
 	}
 
 	[HarmonyPatch(typeof(Pawn), "Kill")]

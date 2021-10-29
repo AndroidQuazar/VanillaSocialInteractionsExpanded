@@ -45,10 +45,7 @@ namespace VanillaSocialInteractionsExpanded
 					{
 						if (relation.diedThought == __instance.thought.def || relation.diedThoughtFemale == __instance.thought.def)
 						{
-							if (Rand.Chance(0.1f))
-							{
-								VSIE_Utils.TryDevelopNewTrait(__instance.addTo, "VSIE.TraitChangeFamilyMemberDied");
-							}
+							VSIE_Utils.TryDevelopNewTrait(__instance.addTo, "VSIE.TraitChangeFamilyMemberDied", 0.1f);
 						}
 					}
 				}

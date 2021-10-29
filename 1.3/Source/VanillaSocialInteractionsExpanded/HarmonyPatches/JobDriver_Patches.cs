@@ -123,10 +123,7 @@ namespace VanillaSocialInteractionsExpanded
 				}
 				if (VanillaSocialInteractionsExpandedSettings.EnableObtainingNewTraits)
 				{
-					if (Rand.Chance(0.1f))
-					{
-						VSIE_Utils.TryDevelopNewTrait(resurrected, "VSIE.TraitChangePawnResurrected");
-					}
+					VSIE_Utils.TryDevelopNewTrait(resurrected, "VSIE.TraitChangePawnResurrected", 0.1f);
 				}
 			};
 			toils.Insert(toils.Count - 1, toil);
@@ -169,10 +166,7 @@ namespace VanillaSocialInteractionsExpanded
 				toil.initAction = delegate ()
 				{
 					var actor = toil.actor;
-					if (Rand.Chance(0.1f))
-					{
-						VSIE_Utils.TryDevelopNewTrait(actor, "VSIE.BestowingCeremony");
-					}
+					VSIE_Utils.TryDevelopNewTrait(actor, "VSIE.BestowingCeremony", 0.1f);
 				};
 				toils.Insert(toils.Count - 1, toil);
 				__result = toils;

@@ -32,10 +32,7 @@ namespace VanillaSocialInteractionsExpanded
 		{
 			if (VanillaSocialInteractionsExpandedSettings.EnableObtainingNewTraits)
 			{
-				if (Rand.Chance(0.1f))
-				{
-					VSIE_Utils.TryDevelopNewTrait(pawn, "VSIE.TraitChangePawnHasCatatonicBreakdown");
-				}
+				VSIE_Utils.TryDevelopNewTrait(pawn, "VSIE.TraitChangePawnHasCatatonicBreakdown", 0.1f);
 			}
 		}
 	}
@@ -49,10 +46,7 @@ namespace VanillaSocialInteractionsExpanded
 			{
 				if (__instance.def.IsExtreme)
 				{
-					if (Rand.Chance(0.1f))
-					{
-						VSIE_Utils.TryDevelopNewTrait(__instance.pawn, "VSIE.CatarhisAfterMentalBreak");
-					}
+					VSIE_Utils.TryDevelopNewTrait(__instance.pawn, "VSIE.CatarhisAfterMentalBreak", 0.1f);
 				}
 			}
 		}
