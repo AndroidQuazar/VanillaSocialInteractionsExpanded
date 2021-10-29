@@ -12,13 +12,11 @@ namespace VanillaSocialInteractionsExpanded
 		{
 			return new LordJob_Joinable_OutdoorParty(spot, organizer, VSIE_DefOf.VSIE_OutdoorParty);
 		}
-
-
 		private bool BasePawnValidator(Pawn pawn, GatheringDef gatheringDef)
 		{
 			Predicate<Pawn> ideoChecker = (Pawn p) =>
 			{
-				if (p.ideo != null && p.Ideo != null && p.Ideo.HasMeme(DefDatabase<MemeDef>.GetNamedSilentFail("Tunneler")))
+				if (p.Ideo != null && p.Ideo.HasMeme(DefDatabase<MemeDef>.GetNamedSilentFail("Tunneler")))
                 {
 					return false;
                 }

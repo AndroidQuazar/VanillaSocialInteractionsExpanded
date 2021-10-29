@@ -63,6 +63,16 @@
 				<baseOpinionOffset>-25</baseOpinionOffset>
 			</li>
 		</stages>
+		<nullifyingTraits>
+			<li>Psychopath</li>
+			<li>Cannibal</li>
+		</nullifyingTraits>
+		<nullifyingPrecepts>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_Acceptable</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_Preferred</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_RequiredStrong</li>
+			<li MayRequire="Ludeon.RimWorld.Ideology">Cannibalism_RequiredRavenous</li>
+		</nullifyingPrecepts>
 	</ThoughtDef>
 
 	<TaleDef ParentName="VSIE_SocialTaleBase">

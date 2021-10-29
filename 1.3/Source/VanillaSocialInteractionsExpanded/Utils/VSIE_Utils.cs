@@ -191,15 +191,12 @@ namespace VanillaSocialInteractionsExpanded
         {
 			if (!SocialInteractionsManager.joinedColonists.TryGetValue(pawn, out int date))
 			{
-				//Log.Message(pawn + " haven't joined the colony " + tale);
 				return false;
 			}
 			else if (tale.date < date)
             {
-				//Log.Message(pawn + " haven't noticed " + tale + " - " + tale.date + " - " + date);
 				return false;
 			}
-			//Log.Message(pawn + " noticed " + tale);
 			return true;
 		}
 
